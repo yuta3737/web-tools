@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>積立投資シミュレーター | MoneyTools</title>
+  <meta name="description" content="毎月の積立額・年利・運用期間を入力して将来の資産額を無料でシミュレーション。複利効果をグラフで可視化します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    /* ===== Sim Page Specific ===== */
+    .sim-layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* --- Input Panel --- */
+    .sim-panel {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      position: sticky;
+      top: 80px;
+      box-shadow: var(--shadow);
+    }
+
+    .sim-panel h2 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .form-label span:first-child {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-700);
+    }
+
+    .form-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 2px 10px;
+      border-radius: 20px;
+      min-width: 80px;
+      text-align: right;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--gray-200);
+      border-radius: 10px;
+      outline: none;
+      cursor: pointer;
+      margin-bottom: 6px;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 0 3px rgba(26,86,219,.2);
+      cursor: pointer;
+      transition: box-shadow .15s;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      box-shadow: 0 0 0 6px rgba(26,86,219,.2);
+    }
+
+    .range-hints {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--gray-500);
+    }
+
+    .number-input-wrap {
+      position: relative;
+    }
+
+    .number-input-wrap input[type="number"] {
+      width: 100%;
+      padding: 10px 48px 10px 14px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 700;
+      font-family: var(--font);
+      color: var(--gray-900);
+      outline: none;
+      transition: border-color .15s;
+    }
+
+    .number-input-wrap input[type="number"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(26,86,219,.1);
+    }
+
+    .number-input-wrap .unit {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      color: var(--gray-500);
+      pointer-events: none;
+    }
+
+    .calc-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: background .15s, transform .1s;
+      margin-top: 4px;
+    }
+
+    .calc-btn:hover { background: var(--primary-dark); }
+    .calc-btn:active { transform: scale(.98); }
+
+    /* --- Results --- */
+    .results-area {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Summary Cards */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .summary-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .summary-card.highlight {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-color: transparent;
+      color: var(--white);
+    }
+
+    .summary-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 8px;
+    }
+
+    .summary-card.highlight .summary-label {
+      color: rgba(255,255,255,.7);
+    }
+
+    .summary-value {
+      font-size: clamp(18px, 2.5vw, 24px);
+      font-weight: 900;
+      color: var(--gray-900);
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    .summary-card.highlight .summary-value {
+      color: var(--white);
+    }
+
+    .summary-sub {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+
+    .summary-card.highlight .summary-sub {
+      color: rgba(255,255,255,.65);
+    }
+
+    .gain-rate {
+      display: inline-block;
+      background: #d1fae5;
+      color: var(--success);
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-top: 8px;
+    }
+
+    /* Chart */
+    .chart-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .chart-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--gray-900);
+    }
+
+    .chart-legend {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 280px;
+    }
+
+    /* Table */
+    .table-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .table-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--gray-200);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gray-900);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+      max-height: 340px;
+      overflow-y: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead th {
+      background: var(--gray-50);
+      padding: 10px 16px;
+      text-align: right;
+      font-weight: 700;
+      color: var(--gray-500);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    thead th:first-child { text-align: left; }
+
+    tbody tr {
+      border-top: 1px solid var(--gray-100);
+      transition: background .1s;
+    }
+
+    tbody tr:hover { background: var(--gray-50); }
+
+    tbody td {
+      padding: 11px 16px;
+      text-align: right;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+
+    tbody td:first-child {
+      text-align: left;
+      font-weight: 800;
+      color: var(--gray-900);
+    }
+
+    .td-gain { color: var(--success); }
+    .td-total { font-weight: 900; color: var(--primary); }
+
+    /* Affiliate in sim */
+    .sim-aff-section {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sim-aff-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sim-aff-title::after {
+      content: 'PR';
+      background: var(--gray-200);
+      color: var(--gray-500);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 10px;
+    }
+
+    .sim-aff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .sim-aff-card {
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: border-color .15s;
+    }
+
+    .sim-aff-card:hover {
+      border-color: var(--primary);
+      text-decoration: none;
+    }
+
+    .sim-aff-name {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--gray-900);
+    }
+
+    .sim-aff-desc {
+      font-size: 11px;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+
+    .sim-aff-btn {
+      display: block;
+      background: var(--primary);
+      color: var(--white);
+      text-align: center;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 4px;
+      transition: background .15s;
+    }
+
+    .sim-aff-card:hover .sim-aff-btn {
+      background: var(--primary-dark);
+    }
+
+    /* Placeholder state */
+    .placeholder-msg {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray-500);
+    }
+
+    .placeholder-msg .icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+      opacity: .4;
+    }
+
+    .placeholder-msg p {
+      font-size: 14px;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px 20px 0;
+      font-size: 12px;
+      color: var(--gray-500);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .breadcrumb a { color: var(--gray-500); }
+    .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
+    .breadcrumb span { color: var(--gray-300); }
+
+    @media (max-width: 768px) {
+      .sim-layout {
+        grid-template-columns: 1fr;
+        padding: 20px 16px 60px;
+      }
+      .sim-panel { position: static; }
+      .summary-grid { grid-template-columns: 1fr 1fr; }
+      .summary-grid .summary-card:last-child { grid-column: span 2; }
+      .chart-container { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../index.html">ホーム</a>
+      <a href="index.html" class="active">投資シミュレーション</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+  <a href="../index.html">ホーム</a>
+  <span>/</span>
+  <span>積立投資シミュレーター</span>
+</div>
+
+<!-- Main Layout -->
+<div class="sim-layout">
+
+  <!-- Input Panel -->
+  <aside class="sim-panel">
+    <h2>シミュレーション条件</h2>
+
+    <!-- 初期投資額 -->
+    <div class="form-group">
+      <div class="form-label">
+        <span>初期投資額</span>
+        <span class="form-value" id="val-initial">0円</span>
+      </div>
+      <input type="range" id="range-initial" min="0" max="5000000" step="100000" value="0">
+      <div class="range-hints"><span>0円</span><span>500万円</span></div>
+    </div>
+
+    <!-- 毎月の積立額 -->
+    <div class="form-group">
+      <div class="form-label">
+        <span>毎月の積立額</span>
+        <span class="form-value" id="val-monthly">30,000円</span>
+      </div>
+      <input type="range" id="range-monthly" min="1000" max="200000" step="1000" value="30000">
+      <div class="range-hints"><span>1,000円</span><span>20万円</span></div>
+    </div>
+
+    <!-- 年利 -->
+    <div class="form-group">
+      <div class="form-label">
+        <span>想定年利（税引前）</span>
+        <span class="form-value" id="val-rate">5.0%</span>
+      </div>
+      <input type="range" id="range-rate" min="0.1" max="15" step="0.1" value="5">
+      <div class="range-hints"><span>0.1%</span><span>15%</span></div>
+    </div>
+
+    <!-- 運用期間 -->
+    <div class="form-group">
+      <div class="form-label">
+        <span>運用期間</span>
+        <span class="form-value" id="val-years">20年</span>
+      </div>
+      <input type="range" id="range-years" min="1" max="50" step="1" value="20">
+      <div class="range-hints"><span>1年</span><span>50年</span></div>
+    </div>
+
+    <button class="calc-btn" id="calc-btn">
+      シミュレーションを実行
+    </button>
+
+    <p style="font-size:11px; color:var(--gray-500); margin-top:12px; line-height:1.7;">
+      ※ 税金・手数料は考慮していません。結果は参考値です。
+    </p>
+  </aside>
+
+  <!-- Results Area -->
+  <main class="results-area">
+
+    <!-- Summary -->
+    <div class="summary-grid" id="summary-grid">
+      <div class="summary-card highlight">
+        <div class="summary-label">最終資産額</div>
+        <div class="summary-value" id="res-total">---</div>
+        <div class="summary-sub" id="res-total-sub">計算してください</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">総投資元本</div>
+        <div class="summary-value" id="res-principal">---</div>
+        <div class="summary-sub" id="res-principal-sub">-</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">運用益</div>
+        <div class="summary-value" id="res-gain" style="color:var(--success);">---</div>
+        <div class="summary-sub" id="res-gain-sub">-</div>
+        <div class="gain-rate" id="res-rate" style="display:none;"></div>
+      </div>
+    </div>
+
+    <!-- Chart -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <div class="chart-title">資産推移グラフ</div>
+        <div class="chart-legend">
+          <span><span class="legend-dot" style="background:#1a56db;"></span>資産総額</span>
+          <span><span class="legend-dot" style="background:#e5e7eb;"></span>投資元本</span>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas id="investChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-card">
+      <div class="table-header">
+        <span>年別シミュレーション結果</span>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>経過年数</th>
+              <th>累計投資元本</th>
+              <th>運用益</th>
+              <th>資産総額</th>
+            </tr>
+          </thead>
+          <tbody id="result-tbody">
+            <tr>
+              <td colspan="4">
+                <div class="placeholder-msg">
+                  <div class="icon">📊</div>
+                  <p>左のパネルで条件を設定し、シミュレーションを実行してください</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Affiliate -->
+    <div class="sim-aff-section">
+      <div class="sim-aff-title">おすすめの証券口座</div>
+      <div class="sim-aff-grid">
+        <a href="#" class="sim-aff-card" target="_blank" rel="noopener noreferrer">
+          <div class="sim-aff-name">SBI証券</div>
+          <div class="sim-aff-desc">国内最大級の口座数。投資信託2,600本以上・積立NISAに対応</div>
+          <span class="sim-aff-btn">詳細・口座開設</span>
+        </a>
+        <a href="#" class="sim-aff-card" target="_blank" rel="noopener noreferrer">
+          <div class="sim-aff-name">楽天証券</div>
+          <div class="sim-aff-desc">楽天ポイントで投資可能。使いやすいスマホアプリが人気</div>
+          <span class="sim-aff-btn">詳細・口座開設</span>
+        </a>
+        <a href="#" class="sim-aff-card" target="_blank" rel="noopener noreferrer">
+          <div class="sim-aff-name">eMAXIS Slim</div>
+          <div class="sim-aff-desc">業界最低水準の手数料を目指す人気インデックスファンド</div>
+          <span class="sim-aff-btn">詳細・購入先を見る</span>
+        </a>
+      </div>
+      <p style="font-size:11px; color:var(--gray-500); margin-top:12px;">※ アフィリエイトリンクを含みます</p>
+    </div>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Money<span>Tools</span></div>
+        <p>資産形成に役立つ無料計算ツール</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="index.html">積立投資シミュレーター</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>情報</h4>
+          <ul>
+            <li><a href="#">プライバシーポリシー</a></li>
+            <li><a href="#">免責事項</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      ※ 本シミュレーターは複利計算に基づく参考値を提供するものです。実際の運用成果は市場環境・手数料・税金等により異なります。投資判断はご自身の責任でお願いします。
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MoneyTools. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ===== Range input live update =====
+  const inputs = {
+    initial: { range: document.getElementById('range-initial'), val: document.getElementById('val-initial'), fmt: v => Number(v).toLocaleString() + '円' },
+    monthly: { range: document.getElementById('range-monthly'), val: document.getElementById('val-monthly'), fmt: v => Number(v).toLocaleString() + '円' },
+    rate:    { range: document.getElementById('range-rate'),    val: document.getElementById('val-rate'),    fmt: v => parseFloat(v).toFixed(1) + '%' },
+    years:   { range: document.getElementById('range-years'),   val: document.getElementById('val-years'),   fmt: v => v + '年' },
+  };
+
+  Object.values(inputs).forEach(({ range, val, fmt }) => {
+    range.addEventListener('input', () => {
+      val.textContent = fmt(range.value);
+    });
+  });
+
+  // ===== Simulation logic =====
+  function calcInvestment(monthly, annualRate, years, initial) {
+    const monthlyRate = annualRate / 100 / 12;
+    const months = years * 12;
+    const yearly = [];
+    let balance = initial;
+    let totalPrincipal = initial;
+
+    for (let m = 1; m <= months; m++) {
+      balance = balance * (1 + monthlyRate) + monthly;
+      totalPrincipal += monthly;
+      if (m % 12 === 0) {
+        yearly.push({
+          year: m / 12,
+          balance: Math.round(balance),
+          principal: Math.round(totalPrincipal),
+          gain: Math.round(balance - totalPrincipal),
+        });
+      }
+    }
+    return { yearly, total: Math.round(balance), principal: Math.round(totalPrincipal), gain: Math.round(balance - totalPrincipal) };
+  }
+
+  function formatMan(yen) {
+    if (yen >= 100_000_000) return (yen / 100_000_000).toFixed(1) + '億円';
+    if (yen >= 10_000) return Math.round(yen / 10_000).toLocaleString() + '万円';
+    return yen.toLocaleString() + '円';
+  }
+
+  // ===== Chart setup =====
+  const ctx = document.getElementById('investChart').getContext('2d');
+  let chart = new Chart(ctx, {
+    type: 'bar',
+    data: { labels: [], datasets: [
+      {
+        label: '投資元本',
+        data: [],
+        backgroundColor: '#e5e7eb',
+        borderRadius: 4,
+        stack: 'a',
+      },
+      {
+        label: '運用益',
+        data: [],
+        backgroundColor: '#1a56db',
+        borderRadius: 4,
+        stack: 'a',
+      }
+    ]},
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ' ' + ctx.dataset.label + ': ' + formatMan(ctx.raw),
+            afterBody: items => {
+              const total = items.reduce((s, i) => s + i.raw, 0);
+              return '合計: ' + formatMan(total);
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { font: { size: 11 } }
+        },
+        y: {
+          grid: { color: '#f3f4f6' },
+          ticks: {
+            font: { size: 11 },
+            callback: v => formatMan(v)
+          }
+        }
+      }
+    }
+  });
+
+  // ===== Run simulation =====
+  function runSimulation() {
+    const initial = parseInt(inputs.initial.range.value);
+    const monthly = parseInt(inputs.monthly.range.value);
+    const rate    = parseFloat(inputs.rate.range.value);
+    const years   = parseInt(inputs.years.range.value);
+
+    const result = calcInvestment(monthly, rate, years, initial);
+
+    // Summary
+    document.getElementById('res-total').textContent = formatMan(result.total);
+    document.getElementById('res-total-sub').textContent = result.total.toLocaleString() + '円';
+    document.getElementById('res-principal').textContent = formatMan(result.principal);
+    document.getElementById('res-principal-sub').textContent = result.principal.toLocaleString() + '円';
+    document.getElementById('res-gain').textContent = formatMan(result.gain);
+    document.getElementById('res-gain-sub').textContent = '+' + result.gain.toLocaleString() + '円';
+
+    const gainRate = document.getElementById('res-rate');
+    const pct = result.principal > 0 ? ((result.gain / result.principal) * 100).toFixed(0) : 0;
+    gainRate.style.display = 'inline-block';
+    gainRate.textContent = '+' + pct + '% 増加';
+
+    // Chart update
+    const labels = result.yearly.map(r => r.year + '年');
+    const principals = result.yearly.map(r => r.principal);
+    const gains = result.yearly.map(r => r.gain);
+
+    chart.data.labels = labels;
+    chart.data.datasets[0].data = principals;
+    chart.data.datasets[1].data = gains;
+    chart.update();
+
+    // Table
+    const tbody = document.getElementById('result-tbody');
+    tbody.innerHTML = result.yearly.map(r => `
+      <tr>
+        <td>${r.year}年後</td>
+        <td>${r.principal.toLocaleString()}円</td>
+        <td class="td-gain">+${r.gain.toLocaleString()}円</td>
+        <td class="td-total">${r.balance.toLocaleString()}円</td>
+      </tr>
+    `).join('');
+  }
+
+  document.getElementById('calc-btn').addEventListener('click', runSimulation);
+
+  // Auto-run on load
+  runSimulation();
+</script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoneyTools - お金の無料計算ツール集</title>
+  <meta name="description" content="投資シミュレーション・複利計算・積立計算など、お金に関する無料ツールを提供しています。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .stats-bar {
+      background: var(--primary-dark);
+      color: rgba(255,255,255,.75);
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 20px;
+      letter-spacing: .5px;
+    }
+    .stats-bar span { color: var(--white); margin: 0 6px; }
+  </style>
+</head>
+<body>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  無料で使える<span>お金計算ツール</span>が集まるサイトです
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="index.html" class="active">ホーム</a>
+      <a href="investment-sim/index.html">投資シミュレーション</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Free Tools</div>
+    <h1>資産形成を、<br>数字で考えよう</h1>
+    <p>投資シミュレーション・複利計算・積立計算など<br>お金の意思決定を助ける無料ツールを提供しています。</p>
+    <a href="investment-sim/index.html" class="hero-cta">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      投資シミュレーターを使う
+    </a>
+  </div>
+</section>
+
+<!-- Tools -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">ツール一覧</div>
+    <div class="section-sub">すべて無料・登録不要で利用できます</div>
+
+    <div class="tools-grid">
+
+      <!-- 積立投資シミュレーター -->
+      <div class="tool-card">
+        <div class="tool-icon">📈</div>
+        <div>
+          <span class="tool-tag new">NEW</span>
+        </div>
+        <h3>積立投資シミュレーター</h3>
+        <p>毎月の積立額・年利・運用期間を入力するだけで、将来の資産額を複利計算でシミュレーション。元本と運用益の内訳もグラフで確認できます。</p>
+        <a href="investment-sim/index.html" class="tool-btn">シミュレーターを使う →</a>
+      </div>
+
+      <!-- 複利計算ツール（Coming Soon） -->
+      <div class="tool-card" style="opacity:.6; pointer-events:none;">
+        <div class="tool-icon" style="background:#f3f4f6;">💹</div>
+        <div>
+          <span class="tool-tag">Coming Soon</span>
+        </div>
+        <h3>一括投資シミュレーター</h3>
+        <p>まとまった資金を一度に投資した場合のシミュレーションツール。リターンの違いを比較できます。</p>
+        <button class="tool-btn" style="background:var(--gray-300); cursor:not-allowed;">準備中</button>
+      </div>
+
+      <!-- FIRE計算（Coming Soon） -->
+      <div class="tool-card" style="opacity:.6; pointer-events:none;">
+        <div class="tool-icon" style="background:#f3f4f6;">🔥</div>
+        <div>
+          <span class="tool-tag">Coming Soon</span>
+        </div>
+        <h3>FIRE達成シミュレーター</h3>
+        <p>経済的自立・早期退職（FIRE）の達成時期を計算。月々の支出・貯蓄率・想定利回りから目標額を逆算します。</p>
+        <button class="tool-btn" style="background:var(--gray-300); cursor:not-allowed;">準備中</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Affiliate Section -->
+<section class="affiliate-section">
+  <div class="container">
+    <p class="affiliate-label">PR・おすすめ証券口座</p>
+    <div class="affiliate-grid">
+
+      <a href="#" class="aff-card" rel="noopener noreferrer" target="_blank">
+        <div class="aff-logo">SBI証券</div>
+        <span class="aff-badge">口座数 No.1</span>
+        <div class="aff-name">SBI証券</div>
+        <ul class="aff-points">
+          <li>国内株・米国株手数料が低水準</li>
+          <li>積立NISAに対応</li>
+          <li>ポイント投資も可能</li>
+        </ul>
+        <span class="aff-cta">無料口座開設はこちら</span>
+      </a>
+
+      <a href="#" class="aff-card" rel="noopener noreferrer" target="_blank">
+        <div class="aff-logo">楽天証券</div>
+        <span class="aff-badge">楽天ポイント還元</span>
+        <div class="aff-name">楽天証券</div>
+        <ul class="aff-points">
+          <li>楽天ポイントで投資できる</li>
+          <li>iDeCoに対応</li>
+          <li>使いやすいアプリ</li>
+        </ul>
+        <span class="aff-cta">無料口座開設はこちら</span>
+      </a>
+
+      <a href="#" class="aff-card" rel="noopener noreferrer" target="_blank">
+        <div class="aff-logo">松井証券</div>
+        <span class="aff-badge">25歳以下手数料無料</span>
+        <div class="aff-name">松井証券</div>
+        <ul class="aff-points">
+          <li>25歳以下は国内株無料</li>
+          <li>投資信託1,600本以上</li>
+          <li>サポートが充実</li>
+        </ul>
+        <span class="aff-cta">無料口座開設はこちら</span>
+      </a>
+
+    </div>
+    <p style="text-align:center; font-size:11px; color:var(--gray-500); margin-top:16px;">※上記はアフィリエイトリンクです。口座開設・維持手数料は無料です（各社条件あり）。</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Money<span>Tools</span></div>
+        <p>資産形成に役立つ無料計算ツールを提供するサイトです。</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="investment-sim/index.html">積立投資シミュレーター</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>サイト情報</h4>
+          <ul>
+            <li><a href="#">プライバシーポリシー</a></li>
+            <li><a href="#">免責事項</a></li>
+            <li><a href="#">お問い合わせ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      ※ 本サイトのシミュレーション結果は将来の運用成果を保証するものではありません。投資は元本割れのリスクがあります。投資判断はご自身の責任でお願いします。<br>
+      ※ 本サイトはアフィリエイトプログラムを利用して収益を得ることがあります。
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MoneyTools. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
