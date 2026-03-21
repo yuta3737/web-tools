@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VPXV9BMEY');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIRE達成シミュレーター | MoneyTools</title>
+  <meta name="description" content="経済的自立・早期退職（FIRE）の達成時期を計算。月々の収入・支出・貯蓄率・想定利回りから目標額と達成年数を算出します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    .sim-layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .sim-panel {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      position: sticky;
+      top: 80px;
+      box-shadow: var(--shadow);
+    }
+    .sim-panel h2 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .form-label span:first-child {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-700);
+    }
+    .form-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 2px 10px;
+      border-radius: 20px;
+      min-width: 80px;
+      text-align: right;
+    }
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--gray-200);
+      border-radius: 10px;
+      outline: none;
+      cursor: pointer;
+      margin-bottom: 6px;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 0 3px rgba(26,86,219,.2);
+      cursor: pointer;
+      transition: box-shadow .15s;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      box-shadow: 0 0 0 6px rgba(26,86,219,.2);
+    }
+    .range-hints {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--gray-500);
+    }
+    .calc-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: background .15s, transform .1s;
+      margin-top: 4px;
+    }
+    .calc-btn:hover { background: var(--primary-dark); }
+    .calc-btn:active { transform: scale(.98); }
+    .fire-rule-note {
+      background: var(--primary-light);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 12px;
+      color: var(--primary-dark);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .results-area {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .summary-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .summary-card.highlight {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      border-color: transparent;
+      color: var(--white);
+    }
+    .summary-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 8px;
+    }
+    .summary-card.highlight .summary-label { color: rgba(255,255,255,.8); }
+    .summary-value {
+      font-size: clamp(18px, 2.5vw, 24px);
+      font-weight: 900;
+      color: var(--gray-900);
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+    .summary-card.highlight .summary-value { color: var(--white); }
+    .summary-sub {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+    .summary-card.highlight .summary-sub { color: rgba(255,255,255,.75); }
+    .chart-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .chart-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--gray-900);
+    }
+    .chart-legend {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      display: inline-block;
+      margin-right: 4px;
+    }
+    .chart-container {
+      position: relative;
+      height: 280px;
+    }
+    .table-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .table-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--gray-200);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gray-900);
+    }
+    .table-scroll {
+      overflow-x: auto;
+      max-height: 340px;
+      overflow-y: auto;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead th {
+      background: var(--gray-50);
+      padding: 10px 16px;
+      text-align: right;
+      font-weight: 700;
+      color: var(--gray-500);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    thead th:first-child { text-align: left; }
+    tbody tr { border-top: 1px solid var(--gray-100); transition: background .1s; }
+    tbody tr:hover { background: var(--gray-50); }
+    tbody td {
+      padding: 11px 16px;
+      text-align: right;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+    tbody td:first-child { text-align: left; font-weight: 800; color: var(--gray-900); }
+    .td-fire {
+      background: #fef3c7;
+      color: var(--accent-dark);
+      font-weight: 900;
+    }
+    .td-total { font-weight: 900; color: var(--primary); }
+    .fire-badge {
+      display: inline-block;
+      background: #fef3c7;
+      color: var(--accent-dark);
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .placeholder-msg { text-align: center; padding: 60px 20px; color: var(--gray-500); }
+    .placeholder-msg .icon { font-size: 48px; margin-bottom: 12px; opacity: .4; }
+    .placeholder-msg p { font-size: 14px; }
+    .impossible-msg {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--gray-500);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .breadcrumb {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px 20px 0;
+      font-size: 12px;
+      color: var(--gray-500);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .breadcrumb a { color: var(--gray-500); }
+    .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
+    .breadcrumb span { color: var(--gray-300); }
+    @media (max-width: 768px) {
+      .sim-layout { grid-template-columns: 1fr; padding: 20px 16px 60px; }
+      .sim-panel { position: static; }
+      .summary-grid { grid-template-columns: 1fr 1fr; }
+      .summary-grid .summary-card:last-child { grid-column: span 2; }
+      .chart-container { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../index.html">ホーム</a>
+      <a href="../investment-sim/index.html">積立投資</a>
+      <a href="../lump-sim/index.html">一括投資</a>
+      <a href="index.html" class="active">FIRE計算</a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../index.html">ホーム</a>
+  <span>/</span>
+  <span>FIRE達成シミュレーター</span>
+</div>
+
+<div class="sim-layout">
+
+  <aside class="sim-panel">
+    <h2>シミュレーション条件</h2>
+
+    <div class="fire-rule-note">
+      🔥 <strong>4%ルール</strong>を使用。年間支出の25倍が必要資産額の目安です。
+    </div>
+
+    <div class="form-group">
+      <div class="form-label">
+        <span>現在の資産額</span>
+        <span class="form-value" id="val-assets">0円</span>
+      </div>
+      <input type="range" id="range-assets" min="0" max="50000000" step="500000" value="0">
+      <div class="range-hints"><span>0円</span><span>5,000万円</span></div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-label">
+        <span>月収入（手取り）</span>
+        <span class="form-value" id="val-income">30万円</span>
+      </div>
+      <input type="range" id="range-income" min="100000" max="1000000" step="10000" value="300000">
+      <div class="range-hints"><span>10万円</span><span>100万円</span></div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-label">
+        <span>月の生活費</span>
+        <span class="form-value" id="val-expense">20万円</span>
+      </div>
+      <input type="range" id="range-expense" min="50000" max="500000" step="10000" value="200000">
+      <div class="range-hints"><span>5万円</span><span>50万円</span></div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-label">
+        <span>想定年利（税引前）</span>
+        <span class="form-value" id="val-rate">5.0%</span>
+      </div>
+      <input type="range" id="range-rate" min="0.1" max="10" step="0.1" value="5">
+      <div class="range-hints"><span>0.1%</span><span>10%</span></div>
+    </div>
+
+    <button class="calc-btn" id="calc-btn">シミュレーションを実行</button>
+
+    <p style="font-size:11px; color:var(--gray-500); margin-top:12px; line-height:1.7;">
+      ※ 税金・手数料・インフレは考慮していません。結果は参考値です。
+    </p>
+  </aside>
+
+  <main class="results-area">
+
+    <div class="summary-grid">
+      <div class="summary-card highlight">
+        <div class="summary-label">FIRE達成まで</div>
+        <div class="summary-value" id="res-fire">---</div>
+        <div class="summary-sub" id="res-fire-sub">計算してください</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">必要資産額（目標）</div>
+        <div class="summary-value" id="res-target">---</div>
+        <div class="summary-sub" id="res-target-sub">年間支出 × 25</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">毎月の貯蓄額</div>
+        <div class="summary-value" id="res-savings">---</div>
+        <div class="summary-sub" id="res-savings-sub">収入 − 支出</div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-header">
+        <div class="chart-title">資産推移グラフ</div>
+        <div class="chart-legend">
+          <span><span class="legend-dot" style="background:#1a56db;"></span>資産残高</span>
+          <span><span class="legend-dot" style="background:#f59e0b; border-radius:50%;"></span>FIRE目標</span>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas id="fireChart"></canvas>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <div class="table-header">年別シミュレーション結果</div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>経過年数</th>
+              <th>資産残高</th>
+              <th>目標まで</th>
+              <th>達成率</th>
+            </tr>
+          </thead>
+          <tbody id="result-tbody">
+            <tr>
+              <td colspan="4">
+                <div class="placeholder-msg">
+                  <div class="icon">🔥</div>
+                  <p>左のパネルで条件を設定し、シミュレーションを実行してください</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Money<span>Tools</span></div>
+        <p>資産形成に役立つ無料計算ツール</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="../investment-sim/index.html">積立投資シミュレーター</a></li>
+            <li><a href="../lump-sim/index.html">一括投資シミュレーター</a></li>
+            <li><a href="index.html">FIRE達成シミュレーター</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>情報</h4>
+          <ul>
+            <li><a href="#">プライバシーポリシー</a></li>
+            <li><a href="#">免責事項</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      ※ 本シミュレーターは4%ルールに基づく参考値を提供するものです。実際の運用成果は市場環境・手数料・税金・インフレ等により異なります。投資判断はご自身の責任でお願いします。
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MoneyTools. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const inputs = {
+    assets:  { range: document.getElementById('range-assets'),  val: document.getElementById('val-assets'),  fmt: v => v == 0 ? '0円' : Math.round(v / 10000).toLocaleString() + '万円' },
+    income:  { range: document.getElementById('range-income'),  val: document.getElementById('val-income'),  fmt: v => Math.round(v / 10000).toLocaleString() + '万円' },
+    expense: { range: document.getElementById('range-expense'), val: document.getElementById('val-expense'), fmt: v => Math.round(v / 10000).toLocaleString() + '万円' },
+    rate:    { range: document.getElementById('range-rate'),    val: document.getElementById('val-rate'),    fmt: v => parseFloat(v).toFixed(1) + '%' },
+  };
+
+  Object.values(inputs).forEach(({ range, val, fmt }) => {
+    range.addEventListener('input', () => { val.textContent = fmt(range.value); });
+  });
+
+  function calcFire(currentAssets, monthlyIncome, monthlyExpense, annualRate) {
+    const monthlyRate = annualRate / 100 / 12;
+    const annualExpense = monthlyExpense * 12;
+    const targetAssets = annualExpense * 25;
+    const monthlySavings = monthlyIncome - monthlyExpense;
+
+    const MAX_MONTHS = 80 * 12;
+    const yearly = [];
+    let balance = currentAssets;
+    let fireMonth = null;
+
+    // すでにFIRE達成済みかチェック
+    if (balance >= targetAssets) {
+      return { yearly: [], targetAssets, fireMonth: 0, monthlySavings, annualExpense, alreadyFired: true };
+    }
+
+    for (let m = 1; m <= MAX_MONTHS; m++) {
+      balance = balance * (1 + monthlyRate) + monthlySavings;
+
+      if (fireMonth === null && balance >= targetAssets) {
+        fireMonth = m;
+      }
+
+      if (m % 12 === 0) {
+        const year = m / 12;
+        yearly.push({ year, balance: Math.round(balance) });
+        // FIRE達成後5年まで表示して打ち切り
+        if (fireMonth !== null && year >= Math.ceil(fireMonth / 12) + 5) break;
+      }
+    }
+
+    return { yearly, targetAssets, fireMonth, monthlySavings, annualExpense, alreadyFired: false };
+  }
+
+  function formatMan(yen) {
+    if (yen >= 100_000_000) return (yen / 100_000_000).toFixed(1) + '億円';
+    if (yen >= 10_000) return Math.round(yen / 10_000).toLocaleString() + '万円';
+    return yen.toLocaleString() + '円';
+  }
+
+  const ctx = document.getElementById('fireChart').getContext('2d');
+  let chart = new Chart(ctx, {
+    type: 'line',
+    data: { labels: [], datasets: [
+      {
+        label: '資産残高',
+        data: [],
+        borderColor: '#1a56db',
+        backgroundColor: 'rgba(26,86,219,.1)',
+        borderWidth: 2.5,
+        pointRadius: 3,
+        fill: true,
+        tension: 0.3,
+      },
+      {
+        label: 'FIRE目標',
+        data: [],
+        borderColor: '#f59e0b',
+        borderWidth: 2,
+        borderDash: [6, 4],
+        pointRadius: 0,
+        fill: false,
+        tension: 0,
+      },
+    ]},
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ' ' + ctx.dataset.label + ': ' + formatMan(ctx.raw),
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+        y: { grid: { color: '#f3f4f6' }, ticks: { font: { size: 11 }, callback: v => formatMan(v) } },
+      }
+    }
+  });
+
+  function runSimulation() {
+    const currentAssets  = parseInt(inputs.assets.range.value);
+    const monthlyIncome  = parseInt(inputs.income.range.value);
+    const monthlyExpense = parseInt(inputs.expense.range.value);
+    const annualRate     = parseFloat(inputs.rate.range.value);
+
+    const result = calcFire(currentAssets, monthlyIncome, monthlyExpense, annualRate);
+
+    // 必要資産額・毎月の貯蓄
+    document.getElementById('res-target').textContent = formatMan(result.targetAssets);
+    document.getElementById('res-target-sub').textContent = result.targetAssets.toLocaleString() + '円';
+
+    const savings = result.monthlySavings;
+    const savingsEl = document.getElementById('res-savings');
+    savingsEl.textContent = formatMan(Math.abs(savings));
+    savingsEl.style.color = savings >= 0 ? 'var(--success)' : 'var(--danger)';
+    document.getElementById('res-savings-sub').textContent = savings >= 0 ? '毎月貯蓄' : '毎月赤字';
+
+    // FIRE達成表示
+    const fireEl = document.getElementById('res-fire');
+    const fireSubEl = document.getElementById('res-fire-sub');
+
+    if (result.alreadyFired) {
+      fireEl.textContent = '達成済み';
+      fireSubEl.textContent = '現在の資産で既にFIRE可能です';
+    } else if (result.fireMonth === null) {
+      fireEl.textContent = '80年超';
+      fireSubEl.textContent = '条件を見直してください';
+    } else {
+      const fy = Math.floor(result.fireMonth / 12);
+      const fm = result.fireMonth % 12;
+      fireEl.textContent = fy > 0 ? fy + '年' + (fm > 0 ? fm + 'ヶ月' : '') : fm + 'ヶ月';
+      fireSubEl.textContent = '後にFIRE達成';
+    }
+
+    // Chart
+    if (result.yearly.length > 0) {
+      const labels = result.yearly.map(r => r.year + '年');
+      const balances = result.yearly.map(r => r.balance);
+      const targets = result.yearly.map(() => result.targetAssets);
+
+      chart.data.labels = labels;
+      chart.data.datasets[0].data = balances;
+      chart.data.datasets[1].data = targets;
+      chart.update();
+    }
+
+    // Table
+    const tbody = document.getElementById('result-tbody');
+    if (result.alreadyFired) {
+      tbody.innerHTML = `<tr><td colspan="4"><div class="impossible-msg">現在の資産額（${formatMan(currentAssets)}）が既に必要資産額（${formatMan(result.targetAssets)}）を超えています。<br>今すぐFIREが可能な状態です。</div></td></tr>`;
+      return;
+    }
+    if (result.yearly.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="4"><div class="impossible-msg">80年以内にFIREを達成できませんでした。<br>収入を増やすか、支出を減らすか、年利を高める設定をお試しください。</div></td></tr>`;
+      return;
+    }
+
+    const fireYear = result.fireMonth ? Math.ceil(result.fireMonth / 12) : null;
+    tbody.innerHTML = result.yearly.map(r => {
+      const remaining = result.targetAssets - r.balance;
+      const rate = Math.min((r.balance / result.targetAssets * 100), 100).toFixed(1);
+      const isFire = fireYear !== null && r.year >= fireYear;
+      return `
+        <tr class="${isFire ? 'td-fire' : ''}">
+          <td>${r.year}年後${isFire && r.year === fireYear ? ' <span class="fire-badge">🔥 FIRE達成</span>' : ''}</td>
+          <td class="td-total">${r.balance.toLocaleString()}円</td>
+          <td>${remaining > 0 ? '-' + remaining.toLocaleString() + '円' : '<span style="color:var(--success)">達成</span>'}</td>
+          <td>${rate}%</td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  document.getElementById('calc-btn').addEventListener('click', runSimulation);
+  runSimulation();
+</script>
+</body>
+</html>
