@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VPXV9BMEY');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>デイトレの注文の種類を図解で解説｜成行・指値・逆指値・OCO | MoneyTools</title>
+  <meta name="description" content="デイトレード初心者向けに、成行・指値・逆指値・OCO注文の違いをわかりやすく解説。具体的な数字を使った例で、実際のトレードで迷わない知識が身につきます。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .article-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    /* メタ情報 */
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .article-tag {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .article-date {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .article-level {
+      background: #fef3c7;
+      color: var(--accent-dark);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* タイトル */
+    .article-title {
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 900;
+      color: var(--gray-900);
+      line-height: 1.3;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .article-lead {
+      font-size: 15px;
+      color: var(--gray-500);
+      line-height: 1.8;
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    /* 目次 */
+    .toc {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 40px;
+    }
+
+    .toc-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--gray-700);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .toc ol {
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .toc li { font-size: 13px; }
+    .toc a { color: var(--primary); font-weight: 600; }
+    .toc a:hover { text-decoration: underline; }
+
+    /* 本文 */
+    .article-body h2 {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--gray-900);
+      margin: 48px 0 16px;
+      padding-left: 14px;
+      border-left: 4px solid var(--primary);
+      letter-spacing: -0.5px;
+      scroll-margin-top: 80px;
+    }
+
+    .article-body h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--gray-800);
+      margin: 28px 0 10px;
+      scroll-margin-top: 80px;
+    }
+
+    .article-body p {
+      font-size: 15px;
+      color: var(--gray-700);
+      line-height: 1.9;
+      margin-bottom: 16px;
+    }
+
+    .article-body strong {
+      font-weight: 800;
+      color: var(--gray-900);
+    }
+
+    /* コールアウトボックス */
+    .callout {
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin: 24px 0;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .callout.info {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      color: var(--primary-dark);
+    }
+
+    .callout.warn {
+      background: #fef3c7;
+      border-left: 4px solid var(--accent);
+      color: #92400e;
+    }
+
+    .callout.good {
+      background: #ecfdf5;
+      border-left: 4px solid var(--success);
+      color: #065f46;
+    }
+
+    .callout.bad {
+      background: #fef2f2;
+      border-left: 4px solid var(--danger);
+      color: #991b1b;
+    }
+
+    .callout-title {
+      font-weight: 800;
+      margin-bottom: 4px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    /* 例示ボックス */
+    .example-box {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin: 20px 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .example-box-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 12px;
+    }
+
+    .example-box p {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .example-box p:last-child { margin-bottom: 0; }
+
+    /* 比較テーブル */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 20px 0;
+    }
+
+    .compare-table th {
+      background: var(--primary);
+      color: var(--white);
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 700;
+    }
+
+    .compare-table th:first-child { border-radius: 8px 0 0 0; }
+    .compare-table th:last-child  { border-radius: 0 8px 0 0; }
+
+    .compare-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+      vertical-align: top;
+    }
+
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:nth-child(even) td { background: var(--gray-50); }
+
+    .tag-good { color: var(--success); font-weight: 700; }
+    .tag-bad  { color: var(--danger);  font-weight: 700; }
+
+    /* 注文フロー図 */
+    .order-flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .flow-box {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      text-align: center;
+    }
+
+    .flow-box.trigger {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .flow-box.action {
+      background: #ecfdf5;
+      color: #065f46;
+    }
+
+    .flow-arrow {
+      color: var(--gray-400);
+      font-size: 18px;
+    }
+
+    /* ツールCTA */
+    .tool-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin: 32px 0;
+      text-decoration: none;
+      transition: opacity .15s;
+    }
+
+    .tool-cta:hover { opacity: .9; text-decoration: none; }
+
+    .tool-cta-left { display: flex; flex-direction: column; gap: 4px; }
+
+    .tool-cta-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,.7);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .tool-cta-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .tool-cta-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,.7);
+    }
+
+    .tool-cta-arrow {
+      font-size: 24px;
+      color: var(--white);
+      font-weight: 900;
+    }
+
+    /* まとめ */
+    .summary-box {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin: 40px 0;
+    }
+
+    .summary-box h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin: 0 0 16px;
+    }
+
+    .summary-box ul {
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .summary-box li {
+      font-size: 14px;
+      color: var(--gray-700);
+      line-height: 1.7;
+    }
+
+    /* パンくず */
+    .breadcrumb {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 16px 20px 0;
+      font-size: 12px;
+      color: var(--gray-500);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb a { color: var(--gray-500); }
+    .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
+    .breadcrumb span { color: var(--gray-300); }
+
+    @media (max-width: 640px) {
+      .order-flow { flex-direction: column; align-items: flex-start; }
+      .tool-cta { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a>
+  <span>/</span>
+  <a href="#">記事</a>
+  <span>/</span>
+  <span>デイトレの注文の種類</span>
+</div>
+
+<div class="article-wrap">
+
+  <div class="article-meta">
+    <span class="article-tag">デイトレ基礎</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年4月</span>
+  </div>
+
+  <h1 class="article-title">デイトレの注文の種類を解説｜成行・指値・逆指値・OCOの違いとは？</h1>
+
+  <p class="article-lead">
+    株のトレードを始めると「成行で買う」「指値を入れる」「OCO注文を設定する」といった言葉が飛び交います。最初は何のことかわからなくて当然です。この記事では、デイトレードで使う注文の種類を、具体的な数字を使って一つひとつわかりやすく説明します。
+  </p>
+
+  <!-- 目次 -->
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#what-is-order">「注文」とは何か</a></li>
+      <li><a href="#nariyuki">成行注文 — とにかく今すぐ買いたい・売りたいとき</a></li>
+      <li><a href="#sashine">指値注文 — 価格を指定して買いたい・売りたいとき</a></li>
+      <li><a href="#gyaku-sashine">逆指値注文 — 損切りに使う「防御の注文」</a></li>
+      <li><a href="#oco">OCO注文 — 利確と損切りを同時に設定する</a></li>
+      <li><a href="#summary">まとめ：どの注文をいつ使うか</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <!-- 1. 注文とは -->
+    <h2 id="what-is-order">「注文」とは何か</h2>
+
+    <p>
+      株を買うとき・売るときは、証券会社のアプリやサイトから「いくらで、何株、買う（または売る）」という<strong>指示を出す</strong>必要があります。この指示のことを<strong>「注文」</strong>と呼びます。
+    </p>
+
+    <p>
+      注文には複数の種類があり、使い方によってトレードの結果が大きく変わります。それぞれの特徴を理解して、場面に応じて使い分けるのがデイトレの基本です。
+    </p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 ポイント</div>
+      注文は「証券会社への依頼」です。依頼した通りに取引が成立することを<strong>「約定（やくじょう）」</strong>と言います。
+    </div>
+
+    <!-- 2. 成行 -->
+    <h2 id="nariyuki">成行注文 — とにかく今すぐ買いたい・売りたいとき</h2>
+
+    <p>
+      <strong>成行（なりゆき）注文</strong>とは、「価格はいくらでもいいから、今すぐ買って（売って）」という注文です。
+    </p>
+
+    <p>
+      証券会社に注文を出した瞬間、市場で売り出されている最も安い価格（または買い注文の中で最も高い価格）で即座に約定します。
+    </p>
+
+    <div class="example-box">
+      <div class="example-box-title">具体例</div>
+      <p>A株が今 <strong>1,000円</strong> で取引されている。</p>
+      <p>「成行で100株買う」と注文 → <strong>1,000円（またはその近辺）で即約定</strong></p>
+      <p>急いでいるときや、確実に買いたいときに使う。</p>
+    </div>
+
+    <table class="compare-table">
+      <tr>
+        <th>メリット</th>
+        <th>デメリット</th>
+      </tr>
+      <tr>
+        <td><span class="tag-good">◎</span> ほぼ確実に約定する</td>
+        <td><span class="tag-bad">✕</span> 想定より高い（安い）価格で約定することがある</td>
+      </tr>
+      <tr>
+        <td><span class="tag-good">◎</span> 操作がシンプル</td>
+        <td><span class="tag-bad">✕</span> 価格をコントロールできない</td>
+      </tr>
+    </table>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 注意</div>
+      急激に値動きしている銘柄に成行注文を出すと、思ったより大幅に高い価格で約定する「<strong>スリッページ</strong>」が発生することがあります。特に出来高（1日に取引される株数）が少ない銘柄では注意が必要です。
+    </div>
+
+    <!-- 3. 指値 -->
+    <h2 id="sashine">指値注文 — 価格を指定して買いたい・売りたいとき</h2>
+
+    <p>
+      <strong>指値（さしね）注文</strong>とは、「〇〇円になったら買って（売って）」と価格を指定する注文です。
+    </p>
+
+    <p>
+      指定した価格に達しないと約定しません。そのため「確実に買える」保証はありませんが、<strong>「高くても〇〇円で買いたい」「安くても〇〇円で売りたい」という価格のコントロールができます。</strong>
+    </p>
+
+    <div class="example-box">
+      <div class="example-box-title">具体例</div>
+      <p>A株が今 <strong>1,020円</strong>。少し下がったところを買いたい。</p>
+      <p>「<strong>1,000円の指値で100株買う</strong>」と注文。</p>
+      <p>→ 株価が1,000円まで下がったときに約定。下がらなければ約定しない。</p>
+    </div>
+
+    <table class="compare-table">
+      <tr>
+        <th>メリット</th>
+        <th>デメリット</th>
+      </tr>
+      <tr>
+        <td><span class="tag-good">◎</span> 価格をコントロールできる</td>
+        <td><span class="tag-bad">✕</span> 指定価格にならないと約定しない</td>
+      </tr>
+      <tr>
+        <td><span class="tag-good">◎</span> 想定外の価格で約定しない</td>
+        <td><span class="tag-bad">✕</span> 動きが速い相場だと乗り遅れることがある</td>
+      </tr>
+    </table>
+
+    <!-- 4. 逆指値 -->
+    <h2 id="gyaku-sashine">逆指値注文 — 損切りに使う「防御の注文」</h2>
+
+    <p>
+      <strong>逆指値（ぎゃくさしね）注文</strong>は、指値とは逆の発想で動く注文です。
+    </p>
+
+    <p>
+      指値は「〇〇円以下になったら買う」ですが、逆指値は<strong>「〇〇円以下に下がったら売る」</strong>という使い方をします。デイトレでは主に<strong>損切り（ロスカット）</strong>に使います。
+    </p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 損切りとは？</div>
+      損失が膨らむ前に、意図的に損をしてポジション（保有株）を手放すことです。「傷が浅いうちに撤退する」行為で、資産を守るために非常に重要です。
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">具体例</div>
+      <p>A株を <strong>1,000円</strong> で100株買った。3%下がったら損切りしたいと思っている。</p>
+      <p>「<strong>970円の逆指値で100株売る</strong>」と注文。</p>
+      <p>→ 株価が970円まで下落したとき、自動的に売り注文が出される。</p>
+      <p>→ 損失は最大 <strong>−3,000円（−30円 × 100株）</strong> に抑えられる。</p>
+    </div>
+
+    <div class="callout good">
+      <div class="callout-title">✅ なぜ損切りが大事か</div>
+      「少し待てば戻るかも」という気持ちで損切りできないと、損失がどんどん膨らみます。<strong>逆指値で損切りラインをあらかじめ設定しておくことで、感情に左右されずルール通りにトレードできます。</strong>
+    </div>
+
+    <!-- 5. OCO -->
+    <h2 id="oco">OCO注文 — 利確と損切りを同時に設定する</h2>
+
+    <p>
+      <strong>OCO（One Cancels the Other）注文</strong>とは、「2つの注文を同時に出して、片方が約定したらもう片方を自動でキャンセルする」注文方法です。
+    </p>
+
+    <p>
+      デイトレでは、株を買った後に<strong>「利確（利益確定）ライン」と「損切りライン」を同時に設定する</strong>ために使います。
+    </p>
+
+    <div class="order-flow">
+      <div class="flow-box">株を1,000円で購入</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box trigger">OCO注文を設定</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box action">1,050円（指値）で売り<br>＋<br>970円（逆指値）で売り</div>
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">具体例</div>
+      <p>A株を <strong>1,000円</strong> で100株購入。</p>
+      <p>・利確ライン：<strong>1,050円（+5%）</strong> → 指値売り</p>
+      <p>・損切りライン：<strong>970円（−3%）</strong> → 逆指値売り</p>
+      <p>→ 株価が1,050円に達したら利確で約定し、970円の損切り注文は自動キャンセル。</p>
+      <p>→ 逆に970円まで下落したら損切りが発動し、1,050円の利確注文は自動キャンセル。</p>
+    </div>
+
+    <div class="callout good">
+      <div class="callout-title">✅ OCO注文のメリット</div>
+      一度設定しておけば、<strong>画面を見ていなくても自動で利確・損切りが実行されます。</strong>デイトレ中に他の銘柄を見ているときや、離席するときも安心してポジションを持てます。
+    </div>
+
+    <!-- ツールCTA -->
+    <a class="tool-cta" href="../../oco-calc/index.html">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">無料ツール</div>
+        <div class="tool-cta-title">OCO注文計算ツール</div>
+        <div class="tool-cta-sub">購入株価と株数を入力するだけで、利確・損切り価格を自動計算</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+    <!-- 6. まとめ -->
+    <h2 id="summary">まとめ：どの注文をいつ使うか</h2>
+
+    <table class="compare-table">
+      <tr>
+        <th>注文の種類</th>
+        <th>使う場面</th>
+        <th>特徴</th>
+      </tr>
+      <tr>
+        <td><strong>成行</strong></td>
+        <td>今すぐ確実に買いたい・売りたいとき</td>
+        <td>速いが価格は選べない</td>
+      </tr>
+      <tr>
+        <td><strong>指値</strong></td>
+        <td>この価格まで下がったら買いたいとき</td>
+        <td>価格を指定できるが約定しないことも</td>
+      </tr>
+      <tr>
+        <td><strong>逆指値</strong></td>
+        <td>損切りラインを設定したいとき</td>
+        <td>自動で損切りしてくれる防御の注文</td>
+      </tr>
+      <tr>
+        <td><strong>OCO</strong></td>
+        <td>買った後に利確・損切りを両方設定したいとき</td>
+        <td>2つの注文を同時に管理できる</td>
+      </tr>
+    </table>
+
+    <div class="summary-box">
+      <h3>この記事のまとめ</h3>
+      <ul>
+        <li>注文とは証券会社への「売買の指示」。指示が通ることを<strong>約定</strong>という。</li>
+        <li><strong>成行注文</strong>は価格を問わず即約定。確実性は高いが価格をコントロールできない。</li>
+        <li><strong>指値注文</strong>は価格を指定して買う・売る。価格は守れるが、指定価格にならないと約定しない。</li>
+        <li><strong>逆指値注文</strong>は「〇〇円以下になったら売る」と損切りに使う。感情に左右されず自動で損切りできる。</li>
+        <li><strong>OCO注文</strong>は利確と損切りを同時に設定。片方が約定したらもう一方は自動キャンセルされる。</li>
+      </ul>
+    </div>
+
+    <!-- ツールCTA 2 -->
+    <a class="tool-cta" href="../../position-calc/index.html">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">無料ツール</div>
+        <div class="tool-cta-title">ポジションサイズ計算ツール</div>
+        <div class="tool-cta-sub">口座残高と損切りラインから「何株買うか」を逆算して計算</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Money<span>Tools</span></div>
+        <p>資産形成に役立つ無料計算ツール</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="../../investment-sim/index.html">積立投資シミュレーター</a></li>
+            <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+            <li><a href="../../oco-calc/index.html">OCO注文計算ツール</a></li>
+            <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>情報</h4>
+          <ul>
+            <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+            <li><a href="../../disclaimer/index.html">免責事項</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      ※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MoneyTools. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
