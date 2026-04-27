@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VPXV9BMEY');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株式損益計算ツール | MoneyTools</title>
+  <meta name="description" content="株の売買差益・手数料・税金を自動計算。税引後の実質利益と損益分岐点をすぐに確認できます。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .page-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+      letter-spacing: -0.5px;
+    }
+
+    .page-sub {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 28px;
+    }
+
+    /* カード */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gray-700);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+
+    /* 入力グリッド */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--gray-700);
+    }
+
+    .form-group .hint {
+      font-size: 11px;
+      color: var(--gray-400);
+      line-height: 1.5;
+    }
+
+    .input-inner {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .input-inner input[type="number"] {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius-sm);
+      font-size: 17px;
+      font-weight: 800;
+      font-family: var(--font);
+      color: var(--gray-900);
+      outline: none;
+      transition: border-color .15s;
+      min-width: 0;
+    }
+
+    .input-inner input[type="number"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(26,86,219,.1);
+    }
+
+    .input-unit {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-500);
+      white-space: nowrap;
+    }
+
+    /* 手数料セクション */
+    .fee-section {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--gray-100);
+    }
+
+    .fee-section-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--gray-700);
+      margin-bottom: 4px;
+    }
+
+    .fee-section-hint {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .fee-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* 結果カード */
+    .result-hero {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .result-hero-header {
+      padding: 14px 24px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .result-hero-header.profit { background: linear-gradient(135deg, var(--success), #059669); }
+    .result-hero-header.loss   { background: linear-gradient(135deg, var(--danger), #dc2626); }
+    .result-hero-header.zero   { background: linear-gradient(135deg, var(--gray-500), var(--gray-700)); }
+
+    .result-hero-body {
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .result-main-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 6px;
+    }
+
+    .result-main-value {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .result-main-value.profit { color: var(--success); }
+    .result-main-value.loss   { color: var(--danger); }
+    .result-main-value.zero   { color: var(--gray-500); }
+
+    .result-main-sub {
+      font-size: 12px;
+      color: var(--gray-400);
+      margin-top: 6px;
+    }
+
+    /* 内訳テーブル */
+    .breakdown {
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 13px;
+    }
+
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row.total {
+      background: var(--gray-50);
+      font-weight: 800;
+    }
+
+    .breakdown-label {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .breakdown-label span:first-child {
+      font-weight: 700;
+      color: var(--gray-700);
+    }
+
+    .breakdown-label .bd-hint {
+      font-size: 11px;
+      color: var(--gray-400);
+    }
+
+    .breakdown-value {
+      font-weight: 800;
+      color: var(--gray-900);
+      text-align: right;
+    }
+
+    .breakdown-value.minus { color: var(--danger); }
+    .breakdown-value.profit { color: var(--success); }
+
+    /* 損益分岐点 */
+    .breakeven-card {
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .breakeven-left { display: flex; flex-direction: column; gap: 3px; }
+
+    .breakeven-label {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent-dark);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .breakeven-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gray-900);
+    }
+
+    .breakeven-hint {
+      font-size: 11px;
+      color: var(--gray-500);
+    }
+
+    .breakeven-value {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--accent-dark);
+      letter-spacing: -0.5px;
+      white-space: nowrap;
+    }
+
+    .breadcrumb {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 16px 20px 0;
+      font-size: 12px;
+      color: var(--gray-500);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .breadcrumb a { color: var(--gray-500); }
+    .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
+    .breadcrumb span { color: var(--gray-300); }
+
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .fee-grid  { grid-template-columns: 1fr; }
+      .result-main-value { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../index.html">ホーム</a>
+      <a href="../investment-sim/index.html">積立投資</a>
+      <a href="../position-calc/index.html">ポジション計算</a>
+      <a href="../oco-calc/index.html">OCO計算</a>
+      <a href="index.html" class="active">損益計算</a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../index.html">ホーム</a>
+  <span>/</span>
+  <span>株式損益計算ツール</span>
+</div>
+
+<div class="wrap">
+  <div class="page-title">株式損益計算ツール</div>
+  <div class="page-sub">手数料・税金を含めた実質的な利益・損失を計算します。</div>
+
+  <!-- 入力カード -->
+  <div class="card">
+    <div class="card-title">取引情報を入力</div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>購入株価</label>
+        <div class="input-inner">
+          <input type="number" id="inp-buy" value="1000" min="1" step="1">
+          <span class="input-unit">円</span>
+        </div>
+        <div class="hint">1株あたりの買った値段</div>
+      </div>
+
+      <div class="form-group">
+        <label>売却株価</label>
+        <div class="input-inner">
+          <input type="number" id="inp-sell" value="1050" min="1" step="1">
+          <span class="input-unit">円</span>
+        </div>
+        <div class="hint">1株あたりの売った（または売りたい）値段</div>
+      </div>
+
+      <div class="form-group">
+        <label>株数</label>
+        <div class="input-inner">
+          <input type="number" id="inp-shares" value="100" min="1" step="100">
+          <span class="input-unit">株</span>
+        </div>
+        <div class="hint">日本株は通常100株単位（1単元）で売買します</div>
+      </div>
+    </div>
+
+    <!-- 手数料 -->
+    <div class="fee-section">
+      <div class="fee-section-title">手数料（任意）</div>
+      <div class="fee-section-hint">
+        証券会社に払う取引コストです。SBI・楽天・松井などのネット証券は条件付きで0円のプランもあります。不明な場合は0のままでもOK。
+      </div>
+      <div class="fee-grid">
+        <div class="form-group">
+          <label>購入時手数料</label>
+          <div class="input-inner">
+            <input type="number" id="inp-fee-buy" value="0" min="0" step="1">
+            <span class="input-unit">円</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>売却時手数料</label>
+          <div class="input-inner">
+            <input type="number" id="inp-fee-sell" value="0" min="0" step="1">
+            <span class="input-unit">円</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 結果 -->
+  <div class="result-hero" id="result-hero">
+    <div class="result-hero-header zero" id="result-header">計算結果</div>
+    <div class="result-hero-body">
+      <div>
+        <div class="result-main-label">税引後の実質利益</div>
+        <div class="result-main-value zero" id="res-main">---</div>
+        <div class="result-main-sub" id="res-main-sub">購入株価・売却株価を入力してください</div>
+      </div>
+      <div class="breakdown" style="flex:1; min-width:220px;">
+        <div class="breakdown-row">
+          <div class="breakdown-label">
+            <span>売買差益</span>
+            <span class="bd-hint">（売値 − 買値）× 株数</span>
+          </div>
+          <div class="breakdown-value" id="bd-gain">---</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="breakdown-label">
+            <span>手数料合計</span>
+            <span class="bd-hint">購入時 ＋ 売却時</span>
+          </div>
+          <div class="breakdown-value minus" id="bd-fee">---</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="breakdown-label">
+            <span>税金</span>
+            <span class="bd-hint">利益の20.315%（利益がある場合のみ）</span>
+          </div>
+          <div class="breakdown-value minus" id="bd-tax">---</div>
+        </div>
+        <div class="breakdown-row total">
+          <div class="breakdown-label">
+            <span>税引後実質利益</span>
+          </div>
+          <div class="breakdown-value" id="bd-total">---</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 損益分岐点 -->
+  <div class="breakeven-card">
+    <div class="breakeven-left">
+      <div class="breakeven-label">損益分岐点</div>
+      <div class="breakeven-title">この価格以上で売れば黒字</div>
+      <div class="breakeven-hint">手数料を含めたコストを回収できる最低の売値です</div>
+    </div>
+    <div class="breakeven-value" id="res-breakeven">---</div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Money<span>Tools</span></div>
+        <p>資産形成に役立つ無料計算ツール</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="../investment-sim/index.html">積立投資シミュレーター</a></li>
+            <li><a href="../position-calc/index.html">ポジションサイズ計算</a></li>
+            <li><a href="../oco-calc/index.html">OCO注文計算ツール</a></li>
+            <li><a href="index.html">株式損益計算ツール</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>情報</h4>
+          <ul>
+            <li><a href="../privacy/index.html">プライバシーポリシー</a></li>
+            <li><a href="../disclaimer/index.html">免責事項</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      ※ 本ツールの計算結果は参考値です。実際の損益は手数料・税制等により異なる場合があります。投資判断はご自身の責任でお願いします。
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MoneyTools. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const ids = ['inp-buy', 'inp-sell', 'inp-shares', 'inp-fee-buy', 'inp-fee-sell'];
+
+  function v(id) { return parseFloat(document.getElementById(id).value) || 0; }
+  function fmt(n) { return (n >= 0 ? '+' : '') + Math.round(n).toLocaleString() + '円'; }
+  function fmtAbs(n) { return Math.abs(Math.round(n)).toLocaleString() + '円'; }
+
+  function render() {
+    const buy    = v('inp-buy');
+    const sell   = v('inp-sell');
+    const shares = v('inp-shares');
+    const feeBuy  = v('inp-fee-buy');
+    const feeSell = v('inp-fee-sell');
+
+    if (!buy || !sell || !shares) return;
+
+    const gain     = (sell - buy) * shares;
+    const totalFee = feeBuy + feeSell;
+    const preTax   = gain - totalFee;
+    const tax      = preTax > 0 ? preTax * 0.20315 : 0;
+    const afterTax = preTax - tax;
+    const breakeven = buy + totalFee / shares;
+
+    // メイン表示
+    const mainEl   = document.getElementById('res-main');
+    const headerEl = document.getElementById('result-header');
+    const subEl    = document.getElementById('res-main-sub');
+
+    mainEl.textContent = fmt(afterTax);
+    mainEl.className   = 'result-main-value ' + (afterTax > 0 ? 'profit' : afterTax < 0 ? 'loss' : 'zero');
+    headerEl.className = 'result-hero-header '  + (afterTax > 0 ? 'profit' : afterTax < 0 ? 'loss' : 'zero');
+    headerEl.textContent = afterTax > 0 ? '利益が出ています' : afterTax < 0 ? '損失が出ています' : '±0（損益なし）';
+    subEl.textContent  = `購入金額 ${(buy * shares).toLocaleString()}円 → 売却金額 ${(sell * shares).toLocaleString()}円`;
+
+    // 内訳
+    const gainEl = document.getElementById('bd-gain');
+    gainEl.textContent  = fmt(gain);
+    gainEl.className    = 'breakdown-value ' + (gain >= 0 ? 'profit' : 'minus');
+
+    document.getElementById('bd-fee').textContent   = totalFee > 0 ? '-' + fmtAbs(totalFee) : '0円';
+    document.getElementById('bd-tax').textContent   = tax > 0 ? '-' + fmtAbs(tax) : '0円';
+
+    const totalEl = document.getElementById('bd-total');
+    totalEl.textContent = fmt(afterTax);
+    totalEl.className   = 'breakdown-value ' + (afterTax > 0 ? 'profit' : afterTax < 0 ? 'minus' : '');
+
+    // 損益分岐点
+    document.getElementById('res-breakeven').textContent = Math.ceil(breakeven).toLocaleString() + '円';
+  }
+
+  ids.forEach(id => document.getElementById(id).addEventListener('input', render));
+  render();
+</script>
+</body>
+</html>
