@@ -291,8 +291,7 @@
     <nav class="header-nav">
       <a href="../index.html">ホーム</a>
       <a href="../investment-sim/index.html">積立投資</a>
-      <a href="../lump-sim/index.html">一括投資</a>
-      <a href="../fire-sim/index.html">FIRE計算</a>
+      <a href="../position-calc/index.html">ポジション計算</a>
       <a href="index.html" class="active">OCO計算</a>
     </nav>
   </div>
@@ -503,6 +502,11 @@
     lossPcts.push(Math.round((lossPcts.at(-1) + 2) * 10) / 10);
     renderLoss();
   });
+
+  // URLパラメータから株価・株数を受け取る（ポジション計算ツールからの連携）
+  const params = new URLSearchParams(location.search);
+  if (params.get('price'))  priceEl.value  = params.get('price');
+  if (params.get('shares')) sharesEl.value = params.get('shares');
 
   render();
 </script>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VPXV9BMEY');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ポジションサイズ計算ツール | MoneyTools</title>
+  <meta name="description" content="口座残高・許容損失・損切りラインから最適な株数を自動計算。リスク管理に基づいたポジションサイズを確認できます。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .pos-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .page-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+      letter-spacing: -0.5px;
+    }
+
+    .page-sub {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 28px;
+    }
+
+    .concept-box {
+      background: var(--primary-light);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      font-size: 13px;
+      color: var(--primary-dark);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .concept-box strong { font-weight: 800; }
+
+    /* Input card */
+    .input-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .input-card h2 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gray-700);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .form-group .hint {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-top: 2px;
+    }
+
+    .input-inner {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .input-inner input[type="number"] {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius-sm);
+      font-size: 17px;
+      font-weight: 800;
+      font-family: var(--font);
+      color: var(--gray-900);
+      outline: none;
+      transition: border-color .15s;
+      min-width: 0;
+    }
+
+    .input-inner input[type="number"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(26,86,219,.1);
+    }
+
+    .input-unit {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-500);
+      white-space: nowrap;
+    }
+
+    /* Results card */
+    .result-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .result-card-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      padding: 16px 24px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+
+    .result-item {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--gray-100);
+      border-right: 1px solid var(--gray-100);
+    }
+
+    .result-item:nth-child(even) { border-right: none; }
+    .result-item:nth-last-child(-n+2) { border-bottom: none; }
+
+    .result-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 6px;
+    }
+
+    .result-value {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--gray-900);
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    .result-value.primary { color: var(--primary); }
+    .result-value.danger  { color: var(--danger); }
+
+    .result-sub {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-top: 4px;
+    }
+
+    /* CTA to OCO */
+    .oco-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--white);
+      border: 1.5px solid var(--primary);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      text-decoration: none;
+      transition: background .15s, box-shadow .15s;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .oco-cta:hover {
+      background: var(--primary-light);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+    }
+
+    .oco-cta-left { display: flex; flex-direction: column; gap: 4px; }
+
+    .oco-cta-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .oco-cta-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--gray-900);
+    }
+
+    .oco-cta-sub {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .oco-cta-arrow {
+      font-size: 22px;
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    /* Warning */
+    .warn-box {
+      background: #fef3c7;
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-size: 12px;
+      color: var(--accent-dark);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .breadcrumb {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 16px 20px 0;
+      font-size: 12px;
+      color: var(--gray-500);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .breadcrumb a { color: var(--gray-500); }
+    .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
+    .breadcrumb span { color: var(--gray-300); }
+
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .result-grid { grid-template-columns: 1fr; }
+      .result-item { border-right: none; }
+      .result-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--gray-100); }
+      .result-item:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../index.html">ホーム</a>
+      <a href="../investment-sim/index.html">積立投資</a>
+      <a href="../oco-calc/index.html">OCO計算</a>
+      <a href="index.html" class="active">ポジション計算</a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../index.html">ホーム</a>
+  <span>/</span>
+  <span>ポジションサイズ計算ツール</span>
+</div>
+
+<div class="pos-wrap">
+  <div class="page-title">ポジションサイズ計算ツール</div>
+  <div class="page-sub">口座残高と許容損失から、リスク管理に基づいた株数を自動計算します。</div>
+
+  <div class="concept-box">
+    💡 <strong>ポジションサイズとは？</strong><br>
+    1回のトレードで「何株買うか」を、許容できる損失額から逆算して決めること。感覚で株数を決めると1回のミスで口座を大きく削ります。このツールで「最大でもこれだけしか損しない」株数を確認しましょう。
+  </div>
+
+  <!-- 入力 -->
+  <div class="input-card">
+    <h2>条件を入力</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>口座残高</label>
+        <div class="input-inner">
+          <input type="number" id="inp-balance" value="50000" min="1" step="1000">
+          <span class="input-unit">円</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>許容損失率</label>
+        <div class="input-inner">
+          <input type="number" id="inp-risk" value="2" min="0.1" max="100" step="0.1">
+          <span class="input-unit">%</span>
+        </div>
+        <div class="hint">1回のトレードで失ってもいい割合</div>
+      </div>
+      <div class="form-group">
+        <label>購入株価</label>
+        <div class="input-inner">
+          <input type="number" id="inp-price" value="1000" min="1" step="1">
+          <span class="input-unit">円</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>損切りライン</label>
+        <div class="input-inner">
+          <input type="number" id="inp-stop" value="3" min="0.1" max="100" step="0.1">
+          <span class="input-unit">%</span>
+        </div>
+        <div class="hint">何%下落したら損切りするか</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 警告（購入金額が残高超過時） -->
+  <div class="warn-box" id="warn-box" style="display:none;">
+    ⚠️ 購入金額が口座残高を超えています。信用取引でない場合は実行できません。
+  </div>
+
+  <!-- 結果 -->
+  <div class="result-card">
+    <div class="result-card-header">計算結果</div>
+    <div class="result-grid">
+      <div class="result-item">
+        <div class="result-label">買える株数（単元株）</div>
+        <div class="result-value primary" id="res-shares">---</div>
+        <div class="result-sub" id="res-shares-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">購入金額</div>
+        <div class="result-value" id="res-cost">---</div>
+        <div class="result-sub" id="res-cost-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">許容損失額</div>
+        <div class="result-value" id="res-allowance">---</div>
+        <div class="result-sub">口座残高 × 許容損失率</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">最大損失額（損切り時）</div>
+        <div class="result-value danger" id="res-maxloss">---</div>
+        <div class="result-sub" id="res-maxloss-sub"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OCO連携ボタン -->
+  <a class="oco-cta" id="oco-link" href="../oco-calc/index.html">
+    <div class="oco-cta-left">
+      <div class="oco-cta-label">次のステップ</div>
+      <div class="oco-cta-title">OCO注文計算ツールへ →</div>
+      <div class="oco-cta-sub" id="oco-link-sub">株数と株価を引き継いで利確・損切り価格を確認</div>
+    </div>
+    <div class="oco-cta-arrow">→</div>
+  </a>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Money<span>Tools</span></div>
+        <p>資産形成に役立つ無料計算ツール</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="../investment-sim/index.html">積立投資シミュレーター</a></li>
+            <li><a href="../oco-calc/index.html">OCO注文計算ツール</a></li>
+            <li><a href="index.html">ポジションサイズ計算ツール</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>情報</h4>
+          <ul>
+            <li><a href="../privacy/index.html">プライバシーポリシー</a></li>
+            <li><a href="../disclaimer/index.html">免責事項</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      ※ 本ツールの計算結果は参考値です。実際の損益は手数料・税制等により異なる場合があります。投資判断はご自身の責任でお願いします。
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MoneyTools. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const balanceEl = document.getElementById('inp-balance');
+  const riskEl    = document.getElementById('inp-risk');
+  const priceEl   = document.getElementById('inp-price');
+  const stopEl    = document.getElementById('inp-stop');
+
+  function fmt(v) { return v.toLocaleString() + '円'; }
+
+  function render() {
+    const balance  = parseFloat(balanceEl.value) || 0;
+    const riskPct  = parseFloat(riskEl.value)    || 0;
+    const price    = parseFloat(priceEl.value)   || 0;
+    const stopPct  = parseFloat(stopEl.value)    || 0;
+
+    if (!balance || !riskPct || !price || !stopPct) return;
+
+    const allowance      = balance * riskPct / 100;
+    const lossPerShare   = price * stopPct / 100;
+    const rawShares      = allowance / lossPerShare;
+    const shares         = Math.max(100, Math.floor(rawShares / 100) * 100);
+    const cost           = price * shares;
+    const maxLoss        = lossPerShare * shares;
+    const stopPrice      = Math.round(price * (1 - stopPct / 100));
+
+    document.getElementById('res-shares').textContent    = shares.toLocaleString() + '株';
+    document.getElementById('res-shares-sub').textContent = `端数切り捨て・単元株（100株）単位`;
+    document.getElementById('res-cost').textContent      = fmt(cost);
+    document.getElementById('res-cost-sub').textContent  = `${price.toLocaleString()}円 × ${shares.toLocaleString()}株`;
+    document.getElementById('res-allowance').textContent = fmt(Math.round(allowance));
+    document.getElementById('res-maxloss').textContent   = '-' + fmt(Math.round(maxLoss));
+    document.getElementById('res-maxloss-sub').textContent = `損切り株価 ${stopPrice.toLocaleString()}円 時点`;
+
+    // 残高超過警告
+    document.getElementById('warn-box').style.display = cost > balance ? 'block' : 'none';
+
+    // OCOリンク
+    const ocoUrl = `../oco-calc/index.html?price=${price}&shares=${shares}`;
+    document.getElementById('oco-link').href = ocoUrl;
+    document.getElementById('oco-link-sub').textContent =
+      `株価 ${price.toLocaleString()}円・${shares.toLocaleString()}株 を引き継いで利確・損切り価格を確認`;
+  }
+
+  [balanceEl, riskEl, priceEl, stopEl].forEach(el => el.addEventListener('input', render));
+
+  render();
+</script>
+</body>
+</html>

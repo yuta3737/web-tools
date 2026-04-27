@@ -112,36 +112,37 @@
       color: var(--gray-500);
     }
 
-    .number-input-wrap {
-      position: relative;
+    .num-input-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
     }
 
-    .number-input-wrap input[type="number"] {
-      width: 100%;
-      padding: 10px 48px 10px 14px;
+    .num-input {
+      flex: 1;
+      padding: 8px 12px;
       border: 1.5px solid var(--gray-300);
       border-radius: var(--radius-sm);
-      font-size: 15px;
-      font-weight: 700;
+      font-size: 16px;
+      font-weight: 800;
       font-family: var(--font);
       color: var(--gray-900);
       outline: none;
       transition: border-color .15s;
+      min-width: 0;
     }
 
-    .number-input-wrap input[type="number"]:focus {
+    .num-input:focus {
       border-color: var(--primary);
       box-shadow: 0 0 0 3px rgba(26,86,219,.1);
     }
 
-    .number-input-wrap .unit {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
+    .num-unit {
       font-size: 13px;
+      font-weight: 700;
       color: var(--gray-500);
-      pointer-events: none;
+      white-space: nowrap;
     }
 
     .calc-btn {
@@ -485,6 +486,7 @@
     <nav class="header-nav">
       <a href="../index.html">ホーム</a>
       <a href="index.html" class="active">積立投資</a>
+      <a href="../position-calc/index.html">ポジション計算</a>
       <a href="../oco-calc/index.html">OCO計算</a>
     </nav>
   </div>
@@ -506,9 +508,10 @@
 
     <!-- 初期投資額 -->
     <div class="form-group">
-      <div class="form-label">
-        <span>初期投資額</span>
-        <span class="form-value" id="val-initial">0円</span>
+      <div class="form-label"><span>初期投資額</span></div>
+      <div class="num-input-row">
+        <input type="number" class="num-input" id="num-initial" value="0" min="0" max="5000000" step="10000">
+        <span class="num-unit">円</span>
       </div>
       <input type="range" id="range-initial" min="0" max="5000000" step="100000" value="0">
       <div class="range-hints"><span>0円</span><span>500万円</span></div>
@@ -516,9 +519,10 @@
 
     <!-- 毎月の積立額 -->
     <div class="form-group">
-      <div class="form-label">
-        <span>毎月の積立額</span>
-        <span class="form-value" id="val-monthly">30,000円</span>
+      <div class="form-label"><span>毎月の積立額</span></div>
+      <div class="num-input-row">
+        <input type="number" class="num-input" id="num-monthly" value="30000" min="1000" max="500000" step="1000">
+        <span class="num-unit">円</span>
       </div>
       <input type="range" id="range-monthly" min="1000" max="200000" step="1000" value="30000">
       <div class="range-hints"><span>1,000円</span><span>20万円</span></div>
@@ -526,9 +530,10 @@
 
     <!-- 年利 -->
     <div class="form-group">
-      <div class="form-label">
-        <span>想定年利（税引前）</span>
-        <span class="form-value" id="val-rate">5.0%</span>
+      <div class="form-label"><span>想定年利（税引前）</span></div>
+      <div class="num-input-row">
+        <input type="number" class="num-input" id="num-rate" value="5" min="0.1" max="30" step="0.1">
+        <span class="num-unit">%</span>
       </div>
       <input type="range" id="range-rate" min="0.1" max="15" step="0.1" value="5">
       <div class="range-hints"><span>0.1%</span><span>15%</span></div>
@@ -536,9 +541,10 @@
 
     <!-- 運用期間 -->
     <div class="form-group">
-      <div class="form-label">
-        <span>運用期間</span>
-        <span class="form-value" id="val-years">20年</span>
+      <div class="form-label"><span>運用期間</span></div>
+      <div class="num-input-row">
+        <input type="number" class="num-input" id="num-years" value="20" min="1" max="60" step="1">
+        <span class="num-unit">年</span>
       </div>
       <input type="range" id="range-years" min="1" max="50" step="1" value="20">
       <div class="range-hints"><span>1年</span><span>50年</span></div>
@@ -658,17 +664,20 @@
 </footer>
 
 <script>
-  // ===== Range input live update =====
+  // ===== スライダー ↔ 数値入力 双方向連動 =====
   const inputs = {
-    initial: { range: document.getElementById('range-initial'), val: document.getElementById('val-initial'), fmt: v => Number(v).toLocaleString() + '円' },
-    monthly: { range: document.getElementById('range-monthly'), val: document.getElementById('val-monthly'), fmt: v => Number(v).toLocaleString() + '円' },
-    rate:    { range: document.getElementById('range-rate'),    val: document.getElementById('val-rate'),    fmt: v => parseFloat(v).toFixed(1) + '%' },
-    years:   { range: document.getElementById('range-years'),   val: document.getElementById('val-years'),   fmt: v => v + '年' },
+    initial: { range: document.getElementById('range-initial'), num: document.getElementById('num-initial') },
+    monthly: { range: document.getElementById('range-monthly'), num: document.getElementById('num-monthly') },
+    rate:    { range: document.getElementById('range-rate'),    num: document.getElementById('num-rate')    },
+    years:   { range: document.getElementById('range-years'),   num: document.getElementById('num-years')   },
   };
 
-  Object.values(inputs).forEach(({ range, val, fmt }) => {
-    range.addEventListener('input', () => {
-      val.textContent = fmt(range.value);
+  Object.values(inputs).forEach(({ range, num }) => {
+    range.addEventListener('input', () => { num.value = range.value; });
+    num.addEventListener('input', () => {
+      const v = parseFloat(num.value);
+      if (isNaN(v)) return;
+      range.value = Math.min(Math.max(v, parseFloat(range.min)), parseFloat(range.max));
     });
   });
 
@@ -754,10 +763,10 @@
 
   // ===== Run simulation =====
   function runSimulation() {
-    const initial = parseInt(inputs.initial.range.value);
-    const monthly = parseInt(inputs.monthly.range.value);
-    const rate    = parseFloat(inputs.rate.range.value);
-    const years   = parseInt(inputs.years.range.value);
+    const initial = parseInt(inputs.initial.num.value)    || 0;
+    const monthly = parseInt(inputs.monthly.num.value)    || 0;
+    const rate    = parseFloat(inputs.rate.num.value)     || 0;
+    const years   = parseInt(inputs.years.num.value)      || 0;
 
     const result = calcInvestment(monthly, rate, years, initial);
 
