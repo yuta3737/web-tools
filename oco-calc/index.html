@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VPXV9BMEY');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OCO注文計算ツール | MoneyTools</title>
+  <meta name="description" content="購入株価と株数を入力するだけで利確・損切ラインの株価と損益を自動計算。OCO注文の設定に活用できます。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .oco-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .page-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+      letter-spacing: -0.5px;
+    }
+
+    .page-sub {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 28px;
+    }
+
+    .input-row {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      display: flex;
+      gap: 32px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .input-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .input-field label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .input-field-inner {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .input-field input[type="number"] {
+      padding: 10px 14px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius-sm);
+      font-size: 18px;
+      font-weight: 800;
+      font-family: var(--font);
+      color: var(--gray-900);
+      outline: none;
+      width: 150px;
+      transition: border-color .15s;
+    }
+
+    .input-field input[type="number"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(26,86,219,.1);
+    }
+
+    .input-unit {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-500);
+    }
+
+    .total-cost {
+      margin-left: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .total-cost-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .total-cost-value {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .oco-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .oco-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .oco-card-header {
+      padding: 14px 20px;
+      font-size: 15px;
+      font-weight: 800;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .oco-card.profit .oco-card-header {
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      color: #065f46;
+      border-bottom: 1px solid #a7f3d0;
+    }
+
+    .oco-card.loss .oco-card-header {
+      background: linear-gradient(135deg, #fef2f2, #fee2e2);
+      color: #991b1b;
+      border-bottom: 1px solid #fecaca;
+    }
+
+    .add-line-btn {
+      background: none;
+      border: 1.5px solid currentColor;
+      color: inherit;
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--font);
+      opacity: 0.65;
+      transition: opacity .15s;
+    }
+
+    .add-line-btn:hover { opacity: 1; }
+
+    .oco-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .oco-table thead th {
+      background: var(--gray-50);
+      padding: 8px 14px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      text-align: right;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .oco-table thead th:first-child { text-align: center; }
+    .oco-table thead th:last-child { width: 28px; }
+
+    .oco-table tbody td {
+      padding: 10px 14px;
+      text-align: right;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .oco-table tbody tr:last-child td { border-bottom: none; }
+    .oco-table tbody tr:hover { background: var(--gray-50); }
+
+    .pct-cell { text-align: center; }
+
+    .pct-input-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .pct-sign {
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .profit .pct-sign { color: var(--success); }
+    .loss .pct-sign { color: var(--danger); }
+
+    .pct-input {
+      width: 52px;
+      padding: 5px 4px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 800;
+      font-family: var(--font);
+      text-align: center;
+      color: var(--gray-900);
+      outline: none;
+      transition: border-color .15s;
+    }
+
+    .profit .pct-input:focus { border-color: var(--success); box-shadow: 0 0 0 2px rgba(16,185,129,.15); }
+    .loss   .pct-input:focus { border-color: var(--danger);  box-shadow: 0 0 0 2px rgba(239,68,68,.15); }
+
+    .td-price { font-weight: 800; color: var(--gray-900); }
+    .td-profit { color: var(--success); font-weight: 800; }
+    .td-loss   { color: var(--danger);  font-weight: 800; }
+    .td-aftertax { font-size: 12px; color: var(--gray-500); }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: var(--gray-300);
+      cursor: pointer;
+      font-size: 13px;
+      padding: 2px 4px;
+      border-radius: 4px;
+      transition: color .15s;
+      line-height: 1;
+    }
+
+    .remove-btn:hover { color: var(--danger); }
+
+    .card-note {
+      font-size: 11px;
+      color: var(--gray-500);
+      padding: 10px 16px;
+      border-top: 1px solid var(--gray-100);
+      line-height: 1.6;
+    }
+
+    .breadcrumb {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 16px 20px 0;
+      font-size: 12px;
+      color: var(--gray-500);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .breadcrumb a { color: var(--gray-500); }
+    .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
+    .breadcrumb span { color: var(--gray-300); }
+
+    @media (max-width: 640px) {
+      .oco-grid { grid-template-columns: 1fr; }
+      .input-row { gap: 16px; }
+      .total-cost { margin-left: 0; }
+      .input-field input[type="number"] { width: 130px; font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../index.html">ホーム</a>
+      <a href="../investment-sim/index.html">積立投資</a>
+      <a href="../lump-sim/index.html">一括投資</a>
+      <a href="../fire-sim/index.html">FIRE計算</a>
+      <a href="index.html" class="active">OCO計算</a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../index.html">ホーム</a>
+  <span>/</span>
+  <span>OCO注文計算ツール</span>
+</div>
+
+<div class="oco-wrap">
+  <div class="page-title">OCO注文計算ツール</div>
+  <div class="page-sub">購入株価と株数を入力して、利確・損切ラインの株価と損益を確認しましょう。</div>
+
+  <!-- 入力エリア -->
+  <div class="input-row">
+    <div class="input-field">
+      <label>購入株価</label>
+      <div class="input-field-inner">
+        <input type="number" id="inp-price" value="1000" min="1" step="1">
+        <span class="input-unit">円</span>
+      </div>
+    </div>
+    <div class="input-field">
+      <label>株数</label>
+      <div class="input-field-inner">
+        <input type="number" id="inp-shares" value="100" min="1" step="100">
+        <span class="input-unit">株</span>
+      </div>
+    </div>
+    <div class="total-cost">
+      <div class="total-cost-label">購入金額</div>
+      <div class="total-cost-value" id="total-cost">100,000円</div>
+    </div>
+  </div>
+
+  <!-- OCOライン -->
+  <div class="oco-grid">
+
+    <!-- 利確 -->
+    <div class="oco-card profit">
+      <div class="oco-card-header">
+        <span>📈 利確ライン</span>
+        <button class="add-line-btn" id="add-profit">＋ 追加</button>
+      </div>
+      <table class="oco-table">
+        <thead>
+          <tr>
+            <th>上昇率</th>
+            <th>目標株価</th>
+            <th>利益（税前）</th>
+            <th>利益（税後）</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="profit-tbody"></tbody>
+      </table>
+      <div class="card-note">※ 税後は20.315%（復興特別所得税含む）差し引き後の概算</div>
+    </div>
+
+    <!-- 損切 -->
+    <div class="oco-card loss">
+      <div class="oco-card-header">
+        <span>📉 損切ライン</span>
+        <button class="add-line-btn" id="add-loss">＋ 追加</button>
+      </div>
+      <table class="oco-table">
+        <thead>
+          <tr>
+            <th>下落率</th>
+            <th>損切株価</th>
+            <th>損失額</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="loss-tbody"></tbody>
+      </table>
+      <div class="card-note">※ 損失には課税されません（損益通算で活用できます）</div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Money<span>Tools</span></div>
+        <p>資産形成に役立つ無料計算ツール</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="../investment-sim/index.html">積立投資シミュレーター</a></li>
+            <li><a href="../lump-sim/index.html">一括投資シミュレーター</a></li>
+            <li><a href="../fire-sim/index.html">FIRE達成シミュレーター</a></li>
+            <li><a href="index.html">OCO注文計算ツール</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>情報</h4>
+          <ul>
+            <li><a href="../privacy/index.html">プライバシーポリシー</a></li>
+            <li><a href="../disclaimer/index.html">免責事項</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      ※ 本ツールの計算結果は参考値です。実際の損益は手数料・税制等により異なる場合があります。投資判断はご自身の責任でお願いします。
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MoneyTools. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const profitPcts = [3, 5, 10];
+  const lossPcts   = [3, 5];
+
+  const priceEl  = document.getElementById('inp-price');
+  const sharesEl = document.getElementById('inp-shares');
+
+  function getPrice()  { return parseFloat(priceEl.value)  || 0; }
+  function getShares() { return parseInt(sharesEl.value)   || 0; }
+  function fmt(v)      { return v.toLocaleString() + '円'; }
+
+  function renderProfit() {
+    const price = getPrice(), shares = getShares();
+    document.getElementById('profit-tbody').innerHTML = profitPcts.map((pct, i) => {
+      const target   = Math.round(price * (1 + pct / 100));
+      const profit   = (target - price) * shares;
+      const afterTax = Math.round(profit * (1 - 0.20315));
+      return `<tr>
+        <td class="pct-cell">
+          <div class="pct-input-wrap">
+            <span class="pct-sign">+</span>
+            <input class="pct-input" type="number" value="${pct}" min="0.1" step="0.1" data-i="${i}" data-t="profit">
+            <span class="pct-sign">%</span>
+          </div>
+        </td>
+        <td class="td-price">${fmt(target)}</td>
+        <td class="td-profit">+${fmt(profit)}</td>
+        <td class="td-aftertax">+${fmt(afterTax)}</td>
+        <td>${profitPcts.length > 1 ? `<button class="remove-btn" data-i="${i}" data-t="profit">✕</button>` : ''}</td>
+      </tr>`;
+    }).join('');
+    bind('profit-tbody');
+  }
+
+  function renderLoss() {
+    const price = getPrice(), shares = getShares();
+    document.getElementById('loss-tbody').innerHTML = lossPcts.map((pct, i) => {
+      const target = Math.round(price * (1 - pct / 100));
+      const loss   = (target - price) * shares;
+      return `<tr>
+        <td class="pct-cell">
+          <div class="pct-input-wrap">
+            <span class="pct-sign">−</span>
+            <input class="pct-input" type="number" value="${pct}" min="0.1" step="0.1" data-i="${i}" data-t="loss">
+            <span class="pct-sign">%</span>
+          </div>
+        </td>
+        <td class="td-price">${fmt(target)}</td>
+        <td class="td-loss">${fmt(loss)}</td>
+        <td>${lossPcts.length > 1 ? `<button class="remove-btn" data-i="${i}" data-t="loss">✕</button>` : ''}</td>
+      </tr>`;
+    }).join('');
+    bind('loss-tbody');
+  }
+
+  function bind(tbodyId) {
+    const el = document.getElementById(tbodyId);
+    el.querySelectorAll('.pct-input').forEach(inp => {
+      inp.addEventListener('input', () => {
+        const v = parseFloat(inp.value);
+        if (!v || v <= 0) return;
+        inp.dataset.t === 'profit' ? (profitPcts[+inp.dataset.i] = v, renderProfit())
+                                   : (lossPcts[+inp.dataset.i]   = v, renderLoss());
+      });
+    });
+    el.querySelectorAll('.remove-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.dataset.t === 'profit' ? (profitPcts.splice(+btn.dataset.i, 1), renderProfit())
+                                   : (lossPcts.splice(+btn.dataset.i, 1),   renderLoss());
+      });
+    });
+  }
+
+  function render() {
+    document.getElementById('total-cost').textContent = fmt(getPrice() * getShares());
+    renderProfit();
+    renderLoss();
+  }
+
+  priceEl.addEventListener('input', render);
+  sharesEl.addEventListener('input', render);
+
+  document.getElementById('add-profit').addEventListener('click', () => {
+    profitPcts.push(Math.round((profitPcts.at(-1) + 5) * 10) / 10);
+    renderProfit();
+  });
+
+  document.getElementById('add-loss').addEventListener('click', () => {
+    lossPcts.push(Math.round((lossPcts.at(-1) + 2) * 10) / 10);
+    renderLoss();
+  });
+
+  render();
+</script>
+</body>
+</html>
