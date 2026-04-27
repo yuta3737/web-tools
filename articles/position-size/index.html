@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ポジションサイズとリスク管理｜何株買えばいい？初心者向け解説 | MoneyTools</title>
+  <meta name="description" content="デイトレードのポジションサイズとリスク管理を初心者向けに解説。1回のトレードで失っていい金額の決め方と、株数の計算方法をわかりやすく説明します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../../index.html#articles">記事</a><span>/</span>
+  <span>ポジションサイズとリスク管理</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">リスク管理</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年4月</span>
+  </div>
+
+  <h1 class="article-title">ポジションサイズとリスク管理｜1回のトレードで何株買えばいい？</h1>
+
+  <p class="article-lead">
+    「いくら買えばいいか」は、デイトレ初心者が最初にぶつかる悩みです。感覚で決めていると、1回のミスで口座を大きく削ることになります。この記事では「ポジションサイズ」という考え方を使って、口座残高に合った安全な株数の決め方を解説します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#what">ポジションサイズとは何か</a></li>
+      <li><a href="#risk-rule">1回のトレードで失っていい金額</a></li>
+      <li><a href="#calc">ポジションサイズの計算方法</a></li>
+      <li><a href="#example">具体的な計算例</a></li>
+      <li><a href="#why-important">なぜこれが重要なのか</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="what">ポジションサイズとは何か</h2>
+    <p><strong>ポジションサイズ</strong>とは、1回のトレードで「何株買うか」の量のことです。</p>
+    <p>「この銘柄が上がりそうだから全力で買う」という発想は危険です。外れたときに口座全体が大ダメージを受けます。ポジションサイズを適切にコントロールすることが、長くトレードを続けるための基本です。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 「ポジション」とは？</div>
+      保有している株のことを「ポジション」と言います。「ポジションを持つ」＝株を保有している状態、「ポジションを閉じる」＝売って手放すことです。
+    </div>
+
+    <h2 id="risk-rule">1回のトレードで失っていい金額</h2>
+    <p>多くのプロトレーダーが採用しているルールが<strong>「1回のトレードで口座全体の1〜2%以上は失わない」</strong>という考え方です。</p>
+
+    <table class="compare-table">
+      <tr><th>口座残高</th><th>1%ルール（上限損失）</th><th>2%ルール（上限損失）</th></tr>
+      <tr><td>5万円</td><td>500円</td><td>1,000円</td></tr>
+      <tr><td>10万円</td><td>1,000円</td><td>2,000円</td></tr>
+      <tr><td>50万円</td><td>5,000円</td><td>10,000円</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ なぜ2%以内か</div>
+      仮に10連敗しても、2%ルールを守れば口座の約82%は残ります。感覚で「少し」買っていると、数回の負けで致命傷になることがあります。
+    </div>
+
+    <h2 id="calc">ポジションサイズの計算方法</h2>
+    <p>計算の流れは3ステップです。</p>
+
+    <div class="order-flow">
+      <div class="flow-box">① 許容損失額を決める<br><small>口座残高 × リスク%</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box trigger">② 1株あたりの損失を計算<br><small>株価 × 損切り%</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box action">③ 株数を計算<br><small>①÷②（100株単位）</small></div>
+    </div>
+
+    <h2 id="example">具体的な計算例</h2>
+
+    <div class="example-box">
+      <div class="example-box-title">計算例</div>
+      <p>口座残高：<strong>5万円</strong>　許容損失：<strong>2%（= 1,000円）</strong></p>
+      <p>購入株価：<strong>1,000円</strong>　損切りライン：<strong>−3%（= 970円）</strong></p>
+      <p>1株あたりの損失：1,000円 × 3% = <strong>30円</strong></p>
+      <p>買える株数：1,000円 ÷ 30円 = 33株 → 単元株で <strong>0株（100株未満のため買えない）</strong></p>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 5万円では買えない？</div>
+      この例では2%ルール厳守だと100株（1単元）も買えません。これは口座残高が少ないことを意味します。この場合は損切り幅を広げるか、もっと安い銘柄を選ぶか、資金を増やすかの選択になります。
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">計算例（現実的なバージョン）</div>
+      <p>口座残高：<strong>5万円</strong>　許容損失：<strong>5%（= 2,500円）</strong></p>
+      <p>購入株価：<strong>500円</strong>　損切りライン：<strong>−5%（= 475円）</strong></p>
+      <p>1株あたりの損失：500円 × 5% = <strong>25円</strong></p>
+      <p>買える株数：2,500円 ÷ 25円 = 100株 → <strong>100株（1単元）購入可能</strong></p>
+      <p>購入金額：500円 × 100株 = <strong>5万円（口座残高内）</strong></p>
+    </div>
+
+    <a class="tool-cta" href="../../position-calc/index.html">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">無料ツール</div>
+        <div class="tool-cta-title">ポジションサイズ計算ツール</div>
+        <div class="tool-cta-sub">口座残高・許容損失・損切り%を入力するだけで株数を自動計算</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+    <h2 id="why-important">なぜこれが重要なのか</h2>
+    <p>感覚で「なんとなく100株」と買っていると、損切りラインに達したときに予想外の大きな損失になることがあります。ポジションサイズを計算することで<strong>「最大でいくら損するか」を買う前に知ることができます</strong>。</p>
+    <p>これが「リスク管理」の本質です。リスクをゼロにすることはできませんが、<strong>リスクの大きさを自分でコントロールすることはできます</strong>。</p>
+
+    <div class="callout good">
+      <div class="callout-title">✅ トレード前のチェックリスト</div>
+      ① 許容損失額はいくらか<br>
+      ② 損切りラインは何%か<br>
+      ③ 計算した株数で購入金額は口座残高に収まっているか
+    </div>
+
+    <div class="summary-box">
+      <h3>まとめ</h3>
+      <ul>
+        <li>ポジションサイズとは「1回のトレードで何株買うか」の量のこと。</li>
+        <li>1回の損失は口座全体の<strong>1〜2%以内</strong>に抑えるのが基本。</li>
+        <li>計算式：許容損失額 ÷ 1株あたりの損失 = 買える株数。</li>
+        <li>口座残高が少ないと買える株数が限られる。安い銘柄から始めるのが現実的。</li>
+        <li>ポジションサイズを決めることで「最大損失を事前に把握」できる。</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../oco-calc/index.html">OCO注文計算ツール</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+</body>
+</html>
