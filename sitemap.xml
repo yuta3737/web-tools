@@ -11,16 +11,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/lump-sim/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://yuta3737.github.io/web-tools/fire-sim/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://yuta3737.github.io/web-tools/oco-calc/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
