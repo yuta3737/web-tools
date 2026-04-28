@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>記事一覧｜デイトレ・投資の基礎知識 | MoneyTools</title>
+  <meta name="description" content="デイトレードと投資の基礎知識を解説する記事一覧。注文の種類・損切り・ポジションサイズ・税金・テクニカル分析など初心者向けにわかりやすく解説します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .articles-hero {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: var(--white);
+      padding: 48px 20px 40px;
+      text-align: center;
+    }
+    .articles-hero h1 {
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 800;
+      margin: 0 0 10px;
+    }
+    .articles-hero p {
+      font-size: 14px;
+      opacity: .85;
+      margin: 0;
+    }
+
+    .articles-page { max-width: 860px; margin: 0 auto; padding: 40px 20px 60px; }
+
+    .category-section { margin-bottom: 48px; }
+    .category-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--primary);
+      background: rgba(37,99,235,.08);
+      border-radius: 4px;
+      padding: 4px 10px;
+      margin-bottom: 16px;
+    }
+    .category-label.risk { color: #d97706; background: rgba(217,119,6,.08); }
+    .category-label.tax  { color: #16a34a; background: rgba(22,163,74,.08); }
+
+    .article-list { display: flex; flex-direction: column; gap: 14px; }
+
+    .article-list-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 18px 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow .15s, border-color .15s, transform .15s;
+    }
+    .article-list-item:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+    .article-icon {
+      font-size: 28px;
+      width: 52px;
+      height: 52px;
+      background: var(--gray-50);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .article-info { flex: 1; min-width: 0; }
+    .article-info h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin: 0 0 5px;
+      line-height: 1.4;
+    }
+    .article-info p {
+      font-size: 13px;
+      color: var(--gray-600);
+      margin: 0;
+      line-height: 1.6;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .article-arrow {
+      color: var(--gray-400);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 480px) {
+      .article-list-item { padding: 14px 16px; }
+      .article-icon { width: 44px; height: 44px; font-size: 22px; }
+      .article-info h3 { font-size: 14px; }
+      .article-info p { -webkit-line-clamp: 1; }
+    }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../index.html">ホーム</a>
+      <a href="../investment-sim/index.html">積立投資</a>
+      <a href="../position-calc/index.html">ポジション計算</a>
+      <a href="../oco-calc/index.html">OCO計算</a>
+      <a href="../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="articles-hero">
+  <h1>記事一覧</h1>
+  <p>デイトレード・投資の基礎知識をカテゴリー別に解説</p>
+</div>
+
+<div class="articles-page">
+
+  <div class="category-section">
+    <div class="category-label">デイトレ基礎</div>
+    <div class="article-list">
+      <a href="order-types/index.html" class="article-list-item">
+        <div class="article-icon">📋</div>
+        <div class="article-info">
+          <h3>注文の種類（成行・指値・逆指値・OCO）</h3>
+          <p>成行・指値・逆指値・OCOの違いを具体例で解説。デイトレを始める前に必ず知っておきたい基本です。</p>
+        </div>
+        <div class="article-arrow">›</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="category-section">
+    <div class="category-label risk">リスク管理</div>
+    <div class="article-list">
+      <a href="stop-loss/index.html" class="article-list-item">
+        <div class="article-icon">✂️</div>
+        <div class="article-info">
+          <h3>損切りの決め方｜何%に設定すればいい？</h3>
+          <p>なぜ損切りが必要か、具体的な数字で解説。感情で動かないためのOCO活用法もわかります。</p>
+        </div>
+        <div class="article-arrow">›</div>
+      </a>
+      <a href="position-size/index.html" class="article-list-item">
+        <div class="article-icon">📊</div>
+        <div class="article-info">
+          <h3>ポジションサイズとリスク管理｜何株買えばいい？</h3>
+          <p>1回のトレードで何株買うかを口座残高から逆算する方法。「最大損失を事前に把握する」考え方を解説。</p>
+        </div>
+        <div class="article-arrow">›</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="category-section">
+    <div class="category-label">テクニカル分析</div>
+    <div class="article-list">
+      <a href="moving-average/index.html" class="article-list-item">
+        <div class="article-icon">📈</div>
+        <div class="article-info">
+          <h3>移動平均線とは何か｜ゴールデンクロス・デッドクロスの読み方</h3>
+          <p>チャート分析の基本「移動平均線」の見方を解説。短期・中期・長期の違いとクロスサインの意味がわかります。</p>
+        </div>
+        <div class="article-arrow">›</div>
+      </a>
+      <a href="volume/index.html" class="article-list-item">
+        <div class="article-icon">🔊</div>
+        <div class="article-info">
+          <h3>出来高とは何か｜デイトレで出来高を確認する理由</h3>
+          <p>デイトレで銘柄を選ぶときに必ず確認する「出来高」の基本と、価格との関係をわかりやすく解説します。</p>
+        </div>
+        <div class="article-arrow">›</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="category-section">
+    <div class="category-label tax">税金・制度</div>
+    <div class="article-list">
+      <a href="tax-basics/index.html" class="article-list-item">
+        <div class="article-icon">🧾</div>
+        <div class="article-info">
+          <h3>デイトレと税金の基礎｜20.315%の仕組みと特定口座</h3>
+          <p>株の税金20.315%の内訳、特定口座と一般口座の違い、損益通算・繰越控除をわかりやすく解説します。</p>
+        </div>
+        <div class="article-arrow">›</div>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../oco-calc/index.html">OCO注文計算ツール</a></li>
+          <li><a href="../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../js/nav.js"></script>
+</body>
+</html>
