@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ローソク足の読み方｜陽線・陰線・ヒゲの意味をデイトレ初心者向けに解説 | MoneyTools</title>
+  <meta name="description" content="ローソク足の読み方をデイトレ初心者向けに解説。陽線・陰線の違い、上ヒゲ・下ヒゲの意味、大陽線・十字線などよく出るパターンと実践的な使い方をわかりやすく説明します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    /* ローソク足の図解用スタイル */
+    .candle-diagram {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 40px;
+      padding: 32px 20px;
+      background: var(--gray-50);
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+    .candle-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .candle-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-700);
+    }
+    .candle-fig {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .wick { width: 3px; background: var(--gray-500); }
+    .body-yo  { background: #ef4444; border-radius: 2px; } /* 陽線：赤 */
+    .body-in  { background: #3b82f6; border-radius: 2px; } /* 陰線：青 */
+    .price-labels {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--gray-500);
+      gap: 4px;
+      text-align: right;
+    }
+
+    /* パターン一覧 */
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .pattern-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+    .pattern-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 4px;
+    }
+    .pattern-card-desc {
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+    .pattern-fig {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80px;
+      margin-bottom: 8px;
+    }
+    .tag-yo { color: #ef4444; font-weight: 700; }
+    .tag-in { color: #3b82f6; font-weight: 700; }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>ローソク足の読み方</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">デイトレ基礎</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年4月</span>
+  </div>
+
+  <h1 class="article-title">ローソク足の読み方｜陽線・陰線・ヒゲの意味をデイトレ初心者向けに解説</h1>
+
+  <p class="article-lead">
+    株のチャートを見ると、赤や青の棒のようなものが並んでいます。これが「ローソク足」です。1本のローソク足の中に「始値・高値・安値・終値」の4つの情報が詰まっており、価格の動きを視覚的に読み取ることができます。チャート分析の出発点となる基礎知識を解説します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#what">ローソク足とは何か</a></li>
+      <li><a href="#yo-in">陽線と陰線</a></li>
+      <li><a href="#hige">ヒゲ（上ヒゲ・下ヒゲ）の意味</a></li>
+      <li><a href="#patterns">よく出るパターン6つ</a></li>
+      <li><a href="#daytrade">デイトレでの使い方</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="what">ローソク足とは何か</h2>
+    <p>ローソク足は、ある時間の株価の動きを1本の図形で表したものです。<br>
+    「日足」なら1日分、「5分足」なら5分間分の動きを1本で表します。</p>
+
+    <p>1本のローソク足には<strong>4つの価格</strong>が含まれています。</p>
+
+    <table class="compare-table">
+      <tr><th>名前</th><th>意味</th></tr>
+      <tr><td><strong>始値（はじめね）</strong></td><td>その時間帯の最初の価格</td></tr>
+      <tr><td><strong>高値（たかね）</strong></td><td>その時間帯の最も高い価格</td></tr>
+      <tr><td><strong>安値（やすね）</strong></td><td>その時間帯の最も低い価格</td></tr>
+      <tr><td><strong>終値（おわりね）</strong></td><td>その時間帯の最後の価格</td></tr>
+    </table>
+
+    <div class="callout info">
+      <div class="callout-title">💡 「4本値」と呼ばれる</div>
+      この始値・高値・安値・終値の4つをまとめて「4本値（よんほんね）」と言います。ローソク足はこの4本値を1本の図形に凝縮したものです。
+    </div>
+
+    <h2 id="yo-in">陽線と陰線</h2>
+    <p>ローソク足には2種類あります。</p>
+
+    <div class="candle-diagram">
+      <!-- 陽線 -->
+      <div class="candle-wrap">
+        <div class="candle-label tag-yo">陽線（上昇）</div>
+        <div style="display:flex; align-items:center; gap:16px;">
+          <div class="price-labels" style="text-align:right;">
+            <span>高値</span>
+            <span style="margin-top:4px;">終値</span>
+            <span style="margin-top:28px;">始値</span>
+            <span style="margin-top:4px;">安値</span>
+          </div>
+          <div class="candle-fig">
+            <div class="wick" style="height:20px;"></div>
+            <div class="body-yo" style="width:32px; height:60px;"></div>
+            <div class="wick" style="height:16px;"></div>
+          </div>
+        </div>
+        <div style="font-size:12px; color:var(--gray-500); margin-top:6px;">終値 ＞ 始値</div>
+      </div>
+
+      <!-- 陰線 -->
+      <div class="candle-wrap">
+        <div class="candle-label tag-in">陰線（下落）</div>
+        <div style="display:flex; align-items:center; gap:16px;">
+          <div class="price-labels" style="text-align:right;">
+            <span>高値</span>
+            <span style="margin-top:4px;">始値</span>
+            <span style="margin-top:28px;">終値</span>
+            <span style="margin-top:4px;">安値</span>
+          </div>
+          <div class="candle-fig">
+            <div class="wick" style="height:20px;"></div>
+            <div class="body-in" style="width:32px; height:60px;"></div>
+            <div class="wick" style="height:16px;"></div>
+          </div>
+        </div>
+        <div style="font-size:12px; color:var(--gray-500); margin-top:6px;">終値 ＜ 始値</div>
+      </div>
+    </div>
+
+    <p><strong class="tag-yo">陽線</strong>：終値が始値より高い（上昇した）ローソク足。日本では<strong>赤</strong>で表示されることが多い。</p>
+    <p><strong class="tag-in">陰線</strong>：終値が始値より低い（下落した）ローソク足。日本では<strong>青</strong>で表示されることが多い。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 色の設定は証券会社によって異なる</div>
+      「陽線＝赤・陰線＝青」が日本の一般的な配色ですが、「陽線＝白・陰線＝黒」や「陽線＝緑・陰線＝赤」の表示もあります。使っているツールの設定を確認しましょう。
+    </div>
+
+    <h2 id="hige">ヒゲ（上ヒゲ・下ヒゲ）の意味</h2>
+    <p>ローソク足の実体（四角い部分）から上下に伸びた線を「ヒゲ」と呼びます。</p>
+
+    <table class="compare-table">
+      <tr><th>ヒゲの種類</th><th>示す価格</th><th>意味</th></tr>
+      <tr>
+        <td><strong>上ヒゲ</strong></td>
+        <td>実体の上端〜高値</td>
+        <td>一度高値まで上がったが、買いが続かず押し戻された</td>
+      </tr>
+      <tr>
+        <td><strong>下ヒゲ</strong></td>
+        <td>実体の下端〜安値</td>
+        <td>一度安値まで下がったが、売りが続かず戻ってきた</td>
+      </tr>
+    </table>
+
+    <div class="example-box">
+      <div class="example-box-title">ヒゲの読み方</div>
+      <p><strong>長い上ヒゲ</strong>：高値まで買われたのに跳ね返された → 「上に行こうとしたが売り圧力が強かった」サイン</p>
+      <p><strong>長い下ヒゲ</strong>：安値まで売られたのに戻ってきた → 「下に行こうとしたが買い圧力が強かった」サイン</p>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 ヒゲが長いほど「攻防が激しかった」</div>
+      ヒゲが長いということは、その方向に値が動いたのに押し戻されたということ。特に長いヒゲは「その方向への動きが否定された」と読むことができます。
+    </div>
+
+    <h2 id="patterns">よく出るパターン6つ</h2>
+    <p>ローソク足には形によって「名前」がついているものがあります。よく出るパターンを覚えておくと、チャートを読む速度が上がります。</p>
+
+    <div class="pattern-grid">
+
+      <div class="pattern-card">
+        <div class="pattern-fig">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div class="wick" style="height:8px;"></div>
+            <div class="body-yo" style="width:28px;height:64px;"></div>
+            <div class="wick" style="height:8px;"></div>
+          </div>
+        </div>
+        <div class="pattern-card-title tag-yo">大陽線</div>
+        <div class="pattern-card-desc">実体が大きい陽線。強い買いの勢いを示す。上昇トレンドの継続サイン。</div>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-fig">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div class="wick" style="height:8px;"></div>
+            <div class="body-in" style="width:28px;height:64px;"></div>
+            <div class="wick" style="height:8px;"></div>
+          </div>
+        </div>
+        <div class="pattern-card-title tag-in">大陰線</div>
+        <div class="pattern-card-desc">実体が大きい陰線。強い売りの勢いを示す。下落トレンドの継続サイン。</div>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-fig">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div class="wick" style="height:32px;"></div>
+            <div style="width:28px;height:4px;background:var(--gray-600);border-radius:2px;"></div>
+            <div class="wick" style="height:32px;"></div>
+          </div>
+        </div>
+        <div class="pattern-card-title">十字線（同時線）</div>
+        <div class="pattern-card-desc">始値と終値がほぼ同じ。買いと売りが拮抗。トレンド転換のサインになりやすい。</div>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-fig">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div class="wick" style="height:48px;"></div>
+            <div class="body-yo" style="width:28px;height:18px;"></div>
+            <div class="wick" style="height:4px;"></div>
+          </div>
+        </div>
+        <div class="pattern-card-title tag-yo">上ヒゲ陽線</div>
+        <div class="pattern-card-desc">高値で跳ね返された形。上値の重さを示す。上昇の勢いが弱まっているサイン。</div>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-fig">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div class="wick" style="height:4px;"></div>
+            <div class="body-yo" style="width:28px;height:18px;"></div>
+            <div class="wick" style="height:48px;"></div>
+          </div>
+        </div>
+        <div class="pattern-card-title tag-yo">下ヒゲ陽線（カラカサ）</div>
+        <div class="pattern-card-desc">大きく下落したが戻った形。下落後に出ると底値反転のサインとして注目される。</div>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-fig">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:1px;">
+            <div class="wick" style="height:4px;"></div>
+            <div class="body-in" style="width:28px;height:18px;"></div>
+            <div class="wick" style="height:48px;"></div>
+          </div>
+        </div>
+        <div class="pattern-card-title tag-in">下ヒゲ陰線（トンボ）</div>
+        <div class="pattern-card-desc">下ヒゲが長い陰線。売られたが買い戻された形。下げ止まりの兆候として読む。</div>
+      </div>
+
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 1本で判断しない</div>
+      ローソク足のパターンは「傾向」であり、1本だけで売買判断するのは危険です。複数のローソク足の流れや、出来高・移動平均線との組み合わせで判断するのが基本です。
+    </div>
+
+    <h2 id="daytrade">デイトレでの使い方</h2>
+    <p>デイトレでは主に<strong>5分足・15分足のローソク足</strong>を見て判断します。</p>
+
+    <div class="order-flow">
+      <div class="flow-box">チャートを開く<br><small>5分足・15分足</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box trigger">直近のローソク足の<br>形と並びを確認</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box action">移動平均線・出来高と<br>合わせてトレンドを判断</div>
+    </div>
+
+    <ul style="padding-left:20px; line-height:2.2; font-size:14px; color:var(--gray-700); margin-top:16px;">
+      <li>大陽線が連続している → 上昇の勢いが強い、乗り遅れに注意</li>
+      <li>長い上ヒゲが出た → 上値が重い、利確や売り転換を検討</li>
+      <li>長い下ヒゲが出た → 買い勢力が強い、反転上昇の可能性</li>
+      <li>十字線が出た → トレンドが変わるかもしれない、次の足で確認</li>
+    </ul>
+
+    <div class="callout good">
+      <div class="callout-title">✅ まずは「陽線・陰線・ヒゲ」の3つを意識するだけでOK</div>
+      最初から全パターンを覚える必要はありません。「今のローソク足は陽線か陰線か」「ヒゲは上下どちらが長いか」を確認する習慣をつけるだけで、チャートの読み方は大きく変わります。
+    </div>
+
+    <div class="summary-box">
+      <h3>まとめ</h3>
+      <ul>
+        <li>ローソク足1本に「始値・高値・安値・終値」の4本値が含まれる。</li>
+        <li><strong class="tag-yo">陽線</strong>（終値＞始値・上昇）と<strong class="tag-in">陰線</strong>（終値＜始値・下落）の2種類がある。</li>
+        <li>上ヒゲは「上値の重さ」、下ヒゲは「下値の堅さ」を示す。</li>
+        <li>大陽線・大陰線・十字線・下ヒゲ陽線などパターンに名前がある。</li>
+        <li>1本だけで判断せず、複数の足の流れや移動平均線・出来高と合わせて読む。</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../oco-calc/index.html">OCO注文計算ツール</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>
