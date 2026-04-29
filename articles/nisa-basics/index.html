@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NISAとは何か｜つみたて投資枠・成長投資枠の違いを初心者向けに解説 | MoneyTools</title>
+  <meta name="description" content="NISAの仕組みをわかりやすく解説。2024年から始まった新NISAのつみたて投資枠・成長投資枠の違い、非課税メリット、始め方を初心者向けに説明します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .nisa-frame-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+    @media (max-width: 540px) {
+      .nisa-frame-grid { grid-template-columns: 1fr; }
+    }
+    .nisa-frame-card {
+      border-radius: 14px;
+      padding: 20px 18px;
+    }
+    .nisa-frame-card.tsumitate {
+      background: #dbeafe;
+      border: 2px solid #93c5fd;
+    }
+    .nisa-frame-card.growth {
+      background: #fef3c7;
+      border: 2px solid #fcd34d;
+    }
+    .nisa-frame-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      margin-bottom: 6px;
+    }
+    .nisa-frame-card.tsumitate .nisa-frame-label { color: #1e40af; }
+    .nisa-frame-card.growth   .nisa-frame-label { color: #92400e; }
+    .nisa-frame-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+    }
+    .nisa-frame-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      color: var(--gray-700);
+    }
+    .nisa-frame-row:last-child { border-bottom: none; }
+    .nisa-frame-row span:last-child { font-weight: 700; color: var(--gray-900); }
+
+    .tax-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+    @media (max-width: 480px) { .tax-compare { grid-template-columns: 1fr; } }
+    .tax-box {
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: center;
+    }
+    .tax-box.normal { background: #fee2e2; border: 2px solid #fca5a5; }
+    .tax-box.nisa   { background: #d1fae5; border: 2px solid #6ee7b7; }
+    .tax-box-label  { font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+    .tax-box.normal .tax-box-label { color: #991b1b; }
+    .tax-box.nisa   .tax-box-label { color: #065f46; }
+    .tax-box-amount { font-size: 22px; font-weight: 900; color: var(--gray-900); }
+    .tax-box-sub    { font-size: 12px; color: var(--gray-500); margin-top: 4px; }
+
+    .steps { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+    .step  {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-body { font-size: 14px; color: var(--gray-700); line-height: 1.7; }
+    .step-body strong { color: var(--gray-900); }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>NISAとは何か</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">NISA・積立投資</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年4月</span>
+  </div>
+
+  <h1 class="article-title">NISAとは何か｜つみたて投資枠・成長投資枠の違いを初心者向けに解説</h1>
+
+  <p class="article-lead">
+    「NISAって名前は聞くけど何なの？」という人向けに、仕組みをゼロから解説します。筆者は楽天証券でNISAを使って月3万円の積立を続けており、現在の資産は約280万円になりました。実際に使っている立場からわかりやすく説明します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#what">NISAとは何か</a></li>
+      <li><a href="#merit">非課税のメリットを具体的に見る</a></li>
+      <li><a href="#frames">つみたて投資枠と成長投資枠の違い</a></li>
+      <li><a href="#howto">始め方</a></li>
+      <li><a href="#faq">よくある疑問</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="what">NISAとは何か</h2>
+    <p>NISAとは、株や投資信託で得た<strong>利益が非課税になる制度</strong>です。通常、投資で利益が出ると約20%の税金がかかりますが、NISA口座内で運用した利益には税金がかかりません。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 NISAは「口座の種類」</div>
+      NISAは投資商品ではなく、「口座の種類」です。NISA口座を証券会社で開設し、その口座の中で投資信託や株を買うと、利益が非課税になります。
+    </div>
+
+    <p>2024年から制度が大幅に改正され、非課税枠が大きく広がりました。旧NISAとの比較は以下の通りです。</p>
+
+    <table class="compare-table">
+      <tr><th>項目</th><th>旧NISA（〜2023年）</th><th>新NISA（2024年〜）</th></tr>
+      <tr><td>年間非課税枠</td><td>最大120万円</td><td><strong>最大360万円</strong></td></tr>
+      <tr><td>生涯非課税枠</td><td>なし（期間制限あり）</td><td><strong>1,800万円</strong></td></tr>
+      <tr><td>非課税期間</td><td>最大20年（つみたて）</td><td><strong>無期限</strong></td></tr>
+      <tr><td>売却後の枠</td><td>復活しない</td><td><strong>翌年に復活する</strong></td></tr>
+    </table>
+
+    <h2 id="merit">非課税のメリットを具体的に見る</h2>
+    <p>「非課税」と言われてもピンとこない人のために、具体的な数字で見てみましょう。</p>
+
+    <p>月3万円を20年間、年利5%で積立投資した場合のシミュレーション：</p>
+
+    <div class="tax-compare">
+      <div class="tax-box normal">
+        <div class="tax-box-label">通常口座（課税あり）</div>
+        <div class="tax-box-amount">約951万円</div>
+        <div class="tax-box-sub">税金で約123万円引かれた手取り</div>
+      </div>
+      <div class="tax-box nisa">
+        <div class="tax-box-label">NISA口座（非課税）</div>
+        <div class="tax-box-amount">約1,233万円</div>
+        <div class="tax-box-sub">利益がまるごと手元に残る</div>
+      </div>
+    </div>
+
+    <p>同じ投資をするだけで、<strong>約282万円の差</strong>が生まれます。NISAを使わない理由がないレベルです。</p>
+
+    <div class="callout good">
+      <div class="callout-title">✅ 筆者の実感</div>
+      月3万円の積立を楽天証券NISAで続けています。設定したら基本ほったらかしで、資産が少しずつ増えていくのを眺めるだけ。ほとんど手間がかかりません。
+    </div>
+
+    <h2 id="frames">つみたて投資枠と成長投資枠の違い</h2>
+    <p>新NISAには2種類の「枠」があり、それぞれ使い方が異なります。</p>
+
+    <div class="nisa-frame-grid">
+      <div class="nisa-frame-card tsumitate">
+        <div class="nisa-frame-label">TSUMITATE</div>
+        <div class="nisa-frame-name">つみたて投資枠</div>
+        <div class="nisa-frame-row"><span>年間上限</span><span>120万円</span></div>
+        <div class="nisa-frame-row"><span>月換算</span><span>10万円/月</span></div>
+        <div class="nisa-frame-row"><span>買える商品</span><span>投資信託のみ</span></div>
+        <div class="nisa-frame-row"><span>買い方</span><span>積立のみ</span></div>
+      </div>
+      <div class="nisa-frame-card growth">
+        <div class="nisa-frame-label">GROWTH</div>
+        <div class="nisa-frame-name">成長投資枠</div>
+        <div class="nisa-frame-row"><span>年間上限</span><span>240万円</span></div>
+        <div class="nisa-frame-row"><span>月換算</span><span>20万円/月</span></div>
+        <div class="nisa-frame-row"><span>買える商品</span><span>株・投資信託・ETF</span></div>
+        <div class="nisa-frame-row"><span>買い方</span><span>積立・スポット両方</span></div>
+      </div>
+    </div>
+
+    <p>合計で年間<strong>360万円</strong>（＝つみたて120万＋成長投資240万）まで非課税で運用できます。生涯の上限は<strong>1,800万円</strong>（うち成長投資枠は最大1,200万円）です。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 初心者はまずつみたて投資枠だけでOK</div>
+      成長投資枠は個別株も買えますが、初心者はつみたて投資枠で投資信託（オルカンやS&P500など）を毎月積立するだけで十分です。シンプルな運用が長続きの秘訣です。
+    </div>
+
+    <h2 id="howto">始め方</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body"><strong>証券口座を開設する</strong><br>NISA口座は証券会社に開設します。楽天証券・SBI証券が人気です。口座開設は無料で、オンラインで10〜20分で申込できます。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body"><strong>NISA口座を開設する</strong><br>証券口座の開設時に一緒に申込できます。審査に1〜2週間かかります。NISA口座は1人1口座のみ（金融機関をまたいで複数持てません）。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body"><strong>積立する投資信託を選ぶ</strong><br>初心者は「eMAXIS Slim 全世界株式（オルカン）」や「eMAXIS Slim 米国株式（S&P500）」が定番です。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body"><strong>積立金額・日付を設定して完了</strong><br>毎月いくら積み立てるか設定したら、あとは自動で引き落とし・購入されます。設定後はほったらかしでOKです。</div>
+      </div>
+    </div>
+
+    <!-- アフィリエイトリンク: 楽天証券 / SBI証券 -->
+    <div class="callout info">
+      <div class="callout-title">💡 どの証券会社を選ぶ？</div>
+      NISAで積立投資をするなら<strong>楽天証券</strong>がおすすめです。楽天カードで積立するとポイントが還元されます。複数の証券会社を比較したい方は<a href="../brokerage-comparison/index.html">証券口座の選び方</a>をご覧ください。
+    </div>
+
+    <h2 id="faq">よくある疑問</h2>
+
+    <table class="compare-table">
+      <tr><th>疑問</th><th>答え</th></tr>
+      <tr><td>いくらから始められる？</td><td>100円から積立できる証券会社もあります。少額からOKです。</td></tr>
+      <tr><td>損をしたら非課税の意味は？</td><td>損をした場合は課税もされません。ただし通常口座との損益通算はできない点は注意。</td></tr>
+      <tr><td>途中で解約できる？</td><td>いつでも売却できます。ただし売却した枠は翌年に復活します。</td></tr>
+      <tr><td>iDeCoとどう違う？</td><td>NISAはいつでも引き出せますが、iDeCoは60歳まで引き出し不可。節税の仕組みも異なります。詳しくは<a href="../ideco-basics/index.html">iDeCoの解説記事</a>へ。</td></tr>
+      <tr><td>会社員でも使える？</td><td>はい。会社員・公務員・自営業・主婦など誰でも利用できます。</td></tr>
+    </table>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>NISAは投資の利益が<strong>非課税</strong>になる国の制度。</li>
+        <li>2024年の新NISAで年間<strong>360万円・生涯1,800万円</strong>まで非課税枠が拡大。</li>
+        <li>つみたて投資枠（120万/年・投資信託のみ）と成長投資枠（240万/年・株もOK）の2種類がある。</li>
+        <li>初心者はつみたて投資枠でオルカン・S&P500を積立するだけでOK。</li>
+        <li>証券口座を開設してNISA口座を申込するところから始めよう。</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../investment-sim/index.html">積立投資シミュレーター</a></li>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

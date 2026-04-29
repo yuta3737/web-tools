@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iDeCoとは何か｜節税メリットと掛け金の決め方を初心者向けに解説 | MoneyTools</title>
+  <meta name="description" content="iDeCo（個人型確定拠出年金）の仕組みを初心者向けに解説。3つの節税メリット、掛け金の上限・決め方、デメリット、NISAとの違いをわかりやすく説明します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .merit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 20px 0;
+    }
+    @media (max-width: 560px) {
+      .merit-grid { grid-template-columns: 1fr; }
+    }
+    .merit-card {
+      background: var(--white);
+      border: 2px solid var(--primary);
+      border-radius: 14px;
+      padding: 18px 14px;
+      text-align: center;
+    }
+    .merit-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: .5px;
+      margin-bottom: 6px;
+    }
+    .merit-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .merit-desc {
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    .limit-table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+    .limit-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      min-width: 420px;
+    }
+    .limit-table th, .limit-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--gray-200);
+      text-align: center;
+    }
+    .limit-table th {
+      background: var(--gray-50);
+      font-weight: 700;
+      color: var(--gray-700);
+    }
+    .limit-table td:first-child {
+      text-align: left;
+      font-weight: 600;
+      background: var(--gray-50);
+    }
+    .highlight-row td { background: #eff6ff; font-weight: 700; }
+
+    .tax-saving-box {
+      background: #f0fdf4;
+      border: 2px solid #86efac;
+      border-radius: 14px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .tax-saving-box h4 {
+      font-size: 15px;
+      font-weight: 800;
+      color: #14532d;
+      margin: 0 0 12px;
+    }
+    .tax-saving-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      padding: 6px 0;
+      border-bottom: 1px solid #bbf7d0;
+      color: var(--gray-700);
+    }
+    .tax-saving-row:last-child { border-bottom: none; }
+    .tax-saving-row .amount { font-weight: 800; color: #15803d; }
+
+    .demerit-list {
+      background: #fff7ed;
+      border: 2px solid #fed7aa;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+    .demerit-list li {
+      font-size: 14px;
+      color: var(--gray-700);
+      line-height: 2;
+      padding-left: 4px;
+    }
+
+    .steps { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+    .step  { display: flex; gap: 14px; align-items: flex-start; }
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-body { font-size: 14px; color: var(--gray-700); line-height: 1.7; }
+    .step-body strong { color: var(--gray-900); }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>iDeCoとは何か</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">NISA・積立投資</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年4月</span>
+  </div>
+
+  <h1 class="article-title">iDeCoとは何か｜節税メリットと掛け金の決め方を初心者向けに解説</h1>
+
+  <p class="article-lead">
+    iDeCo（イデコ）は老後資金を作りながら節税もできる制度です。筆者は月5,000円からiDeCoをスタートして現在の資産は約20万円。「少額でもやる意味あるの？」という疑問に正直に答えながら、仕組みをゼロから解説します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#what">iDeCoとは何か</a></li>
+      <li><a href="#merit">3つの節税メリット</a></li>
+      <li><a href="#limit">掛け金の上限</a></li>
+      <li><a href="#simulation">節税シミュレーション</a></li>
+      <li><a href="#demerit">デメリット・注意点</a></li>
+      <li><a href="#vs-nisa">NISAとiDeCoどちらを優先すべきか</a></li>
+      <li><a href="#howto">始め方</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="what">iDeCoとは何か</h2>
+    <p>iDeCo（個人型確定拠出年金）とは、自分で掛け金を出して運用し、老後に受け取る年金制度です。国が用意した<strong>老後資産形成のための税優遇制度</strong>で、3つの場面で節税できるのが最大の特徴です。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 iDeCoは「年金」の一種</div>
+      通常の投資と違い、iDeCoは「老後のための制度」です。原則として<strong>60歳まで引き出せない</strong>というルールがあります。これが最大のデメリットでもあり、NISAと大きく異なる点です。
+    </div>
+
+    <h2 id="merit">3つの節税メリット</h2>
+
+    <div class="merit-grid">
+      <div class="merit-card">
+        <div class="merit-num">メリット 1</div>
+        <div class="merit-title">掛け金が全額<br>所得控除になる</div>
+        <div class="merit-desc">毎月の掛け金が全額、所得税・住民税の計算から差し引かれます。所得が高いほど節税効果が大きい。</div>
+      </div>
+      <div class="merit-card">
+        <div class="merit-num">メリット 2</div>
+        <div class="merit-title">運用益が<br>非課税</div>
+        <div class="merit-desc">通常は利益に約20%の税金がかかりますが、iDeCo内の運用益は非課税。NISAと同じメリットです。</div>
+      </div>
+      <div class="merit-card">
+        <div class="merit-num">メリット 3</div>
+        <div class="merit-title">受取時も<br>控除が使える</div>
+        <div class="merit-desc">一時金受取なら「退職所得控除」、年金受取なら「公的年金等控除」が使えます。</div>
+      </div>
+    </div>
+
+    <p>NISAが「運用益の非課税」だけなのに対し、iDeCoは<strong>積立時・運用中・受取時の3段階すべてで税優遇</strong>があります。特に会社員は積立時の節税効果が大きいです。</p>
+
+    <h2 id="limit">掛け金の上限</h2>
+
+    <div class="limit-table-wrap">
+      <table class="limit-table">
+        <thead>
+          <tr><th>職業・状況</th><th>月額上限</th><th>年額上限</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>自営業・フリーランス</td><td>68,000円</td><td>816,000円</td></tr>
+          <tr class="highlight-row">
+            <td>会社員（企業年金なし）</td>
+            <td>23,000円</td>
+            <td>276,000円</td>
+          </tr>
+          <tr><td>会社員（企業型DC加入）</td><td>20,000円</td><td>240,000円</td></tr>
+          <tr><td>会社員（確定給付年金あり）</td><td>12,000円</td><td>144,000円</td></tr>
+          <tr><td>公務員</td><td>12,000円</td><td>144,000円</td></tr>
+          <tr><td>専業主婦（夫）</td><td>23,000円</td><td>276,000円</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 筆者は月5,000円からスタート</div>
+      最低掛け金は月5,000円です。筆者もそこからスタートしました。「まず始める」ことが大事で、金額はあとから増やせます。
+    </div>
+
+    <h2 id="simulation">節税シミュレーション</h2>
+    <p>会社員（企業年金なし）が月23,000円（年間276,000円）をiDeCoに拠出した場合の年間節税額の目安です。</p>
+
+    <div class="tax-saving-box">
+      <h4>年収別・年間節税額の目安（月23,000円拠出の場合）</h4>
+      <div class="tax-saving-row">
+        <span>年収300万円（税率10%）</span>
+        <span class="amount">約27,600円/年</span>
+      </div>
+      <div class="tax-saving-row">
+        <span>年収500万円（税率20%）</span>
+        <span class="amount">約55,200円/年</span>
+      </div>
+      <div class="tax-saving-row">
+        <span>年収700万円（税率23%）</span>
+        <span class="amount">約63,480円/年</span>
+      </div>
+      <div class="tax-saving-row">
+        <span>年収1,000万円（税率33%）</span>
+        <span class="amount">約91,080円/年</span>
+      </div>
+    </div>
+
+    <p>所得が高いほど節税効果が大きくなります。節税分だけで見ると、上位の税率の人には非常にお得な制度です。</p>
+
+    <h2 id="demerit">デメリット・注意点</h2>
+
+    <div class="demerit-list">
+      <ul style="padding-left:18px;">
+        <li><strong>60歳まで引き出せない</strong>：最大のデメリット。急にお金が必要になっても使えません。</li>
+        <li><strong>元本割れリスクがある</strong>：運用商品によっては損をする可能性があります（元本確保型を選べば回避可能）。</li>
+        <li><strong>手数料がかかる</strong>：加入時・毎月の口座管理手数料が発生します（金融機関によって異なる）。</li>
+        <li><strong>受取時に課税されることがある</strong>：退職所得控除を超える部分は課税対象になります。</li>
+      </ul>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 生活費が不安なうちは無理に始めない</div>
+      iDeCoは引き出せないお金を積み立てる制度です。生活防衛資金（3〜6ヶ月分の生活費）を確保してから始めましょう。
+    </div>
+
+    <h2 id="vs-nisa">NISAとiDeCoどちらを優先すべきか</h2>
+
+    <table class="compare-table">
+      <tr><th>項目</th><th>NISA</th><th>iDeCo</th></tr>
+      <tr><td>引き出し</td><td>いつでも可能</td><td>60歳まで不可</td></tr>
+      <tr><td>節税のタイミング</td><td>運用益のみ非課税</td><td>積立・運用・受取の3段階</td></tr>
+      <tr><td>年間上限（会社員）</td><td>360万円</td><td>27.6万円（月2.3万）</td></tr>
+      <tr><td>向いている人</td><td>中長期の資産形成全般</td><td>老後資金・節税効果を重視する人</td></tr>
+    </table>
+
+    <div class="callout good">
+      <div class="callout-title">✅ 基本はNISA優先、余裕があればiDeCoも</div>
+      NISAは使い勝手がよく非課税枠も大きいので、まずNISAを最大限活用するのが基本です。iDeCoは「老後専用資金」として別枠で積立するイメージが合っています。筆者はNISAに月3万、iDeCoに月5,000円という構成にしています。
+    </div>
+
+    <h2 id="howto">始め方</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body"><strong>金融機関（証券会社）を選ぶ</strong><br>iDeCoの口座は証券会社や銀行で開設します。手数料が安く商品ラインナップが豊富なSBI証券・楽天証券が人気です。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body"><strong>書類を提出して口座開設する</strong><br>NISAと違い、iDeCoは書類郵送が必要です。会社員は勤務先への確認書類も必要で、開設まで1〜2ヶ月かかります。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body"><strong>掛け金と運用商品を設定する</strong><br>月5,000円から始められます。初心者は全世界株式型のインデックスファンドがおすすめです。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body"><strong>年末調整（または確定申告）で節税を受ける</strong><br>会社員は毎年秋に届く「小規模企業共済等掛金払込証明書」を年末調整に添付するだけで節税が完了します。</div>
+      </div>
+    </div>
+
+    <!-- アフィリエイトリンク: SBI証券 / 楽天証券 -->
+    <div class="callout info">
+      <div class="callout-title">💡 どの証券会社でiDeCoを始める？</div>
+      手数料の安さと商品ラインナップの豊富さで、<strong>SBI証券</strong>か<strong>楽天証券</strong>がおすすめです。詳しくは<a href="../brokerage-comparison/index.html">証券口座の選び方</a>をご覧ください。
+    </div>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>iDeCoは<strong>積立・運用・受取の3段階で節税</strong>できる老後資金制度。</li>
+        <li>最低掛け金は月<strong>5,000円</strong>。会社員（企業年金なし）の上限は月<strong>23,000円</strong>。</li>
+        <li>最大のデメリットは<strong>60歳まで引き出せない</strong>こと。</li>
+        <li>まずNISAを活用し、余裕があればiDeCoも並行するのがおすすめ。</li>
+        <li>開設はSBI証券・楽天証券が手数料・ラインナップともに優秀。</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../investment-sim/index.html">積立投資シミュレーター</a></li>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>
