@@ -280,6 +280,11 @@
       .input-row { gap: 16px; }
       .total-cost { margin-left: 0; }
       .input-field input[type="number"] { width: 130px; font-size: 16px; }
+      .oco-card { overflow-x: auto; }
+      .oco-table { min-width: 420px; }
+      .pct-input { font-size: 16px; width: 58px; }
+      .oco-table tbody td { padding: 10px 8px; font-size: 12px; }
+      .oco-table thead th { padding: 8px 8px; }
     }
   </style>
 </head>
@@ -471,7 +476,7 @@
   function bind(tbodyId) {
     const el = document.getElementById(tbodyId);
     el.querySelectorAll('.pct-input').forEach(inp => {
-      inp.addEventListener('input', () => {
+      inp.addEventListener('change', () => {
         const v = parseFloat(inp.value);
         if (!v || v <= 0) return;
         inp.dataset.t === 'profit' ? (profitPcts[+inp.dataset.i] = v, renderProfit())
