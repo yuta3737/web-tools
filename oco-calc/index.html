@@ -280,7 +280,7 @@
       .input-row { gap: 16px; }
       .total-cost { margin-left: 0; }
       .input-field input[type="number"] { width: 130px; font-size: 16px; }
-      .oco-card { overflow-x: auto; }
+      .table-scroll { overflow-x: auto; }
       .oco-table { min-width: 420px; }
       .pct-input { font-size: 16px; width: 58px; }
       .oco-table tbody td { padding: 10px 8px; font-size: 12px; }
@@ -345,6 +345,7 @@
         <span>📈 利確ライン</span>
         <button class="add-line-btn" id="add-profit">＋ 追加</button>
       </div>
+      <div class="table-scroll">
       <table class="oco-table">
         <thead>
           <tr>
@@ -357,6 +358,7 @@
         </thead>
         <tbody id="profit-tbody"></tbody>
       </table>
+      </div>
       <div class="card-note">※ 税後は20.315%（復興特別所得税含む）差し引き後の概算</div>
     </div>
 
@@ -366,6 +368,7 @@
         <span>📉 損切ライン</span>
         <button class="add-line-btn" id="add-loss">＋ 追加</button>
       </div>
+      <div class="table-scroll">
       <table class="oco-table">
         <thead>
           <tr>
@@ -377,6 +380,7 @@
         </thead>
         <tbody id="loss-tbody"></tbody>
       </table>
+      </div>
       <div class="card-note">※ 損失には課税されません（損益通算で活用できます）</div>
     </div>
 
