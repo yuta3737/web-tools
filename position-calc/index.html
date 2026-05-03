@@ -259,11 +259,14 @@
     .breadcrumb span { color: var(--gray-300); }
 
     @media (max-width: 640px) {
+      .pos-wrap { padding: 24px 12px 60px; }
+      .card { padding: 16px; }
       .form-grid { grid-template-columns: 1fr; }
       .result-grid { grid-template-columns: 1fr; }
       .result-item { border-right: none; }
       .result-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--gray-100); }
       .result-item:last-child { border-bottom: none; }
+      .input-inner input[type="number"] { font-size: 16px; }
     }
   </style>
 </head>
