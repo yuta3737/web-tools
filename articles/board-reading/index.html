@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>板・気配値の読み方｜デイトレ初心者向けに注文板の見方を解説 | MoneyTools</title>
+  <meta name="description" content="デイトレードで必須の「板（注文板）」と「気配値」の読み方を初心者向けに解説。売り板・買い板の見方、板が厚い・薄いの意味、板からわかる相場の勢いを説明します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .board-diagram {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 20px 0;
+      font-size: 13px;
+    }
+    .board-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      background: var(--gray-100);
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--gray-600);
+      text-align: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .board-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      text-align: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--gray-100);
+      align-items: center;
+    }
+    .board-row:last-child { border-bottom: none; }
+    .sell-vol { color: #1d4ed8; font-weight: 600; }
+    .buy-vol  { color: #dc2626; font-weight: 600; }
+    .price-sell { color: #1d4ed8; font-weight: 700; }
+    .price-buy  { color: #dc2626; font-weight: 700; }
+    .price-center {
+      background: #fef9c3;
+      color: var(--gray-900);
+      font-weight: 900;
+      font-size: 14px;
+      padding: 10px 0;
+      border-top: 2px solid #fcd34d;
+      border-bottom: 2px solid #fcd34d;
+    }
+    .board-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      padding: 6px 0;
+      text-align: center;
+    }
+    .board-label.sell { background: rgba(29,78,216,.08); color: #1d4ed8; }
+    .board-label.buy  { background: rgba(220,38,38,.08);  color: #dc2626; }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 70px 1fr 70px;
+      gap: 0;
+      align-items: center;
+      padding: 5px 12px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .bar-row:last-child { border-bottom: none; }
+    .bar-sell-wrap { display: flex; justify-content: flex-end; }
+    .bar-buy-wrap  { display: flex; justify-content: flex-start; }
+    .bar {
+      height: 18px;
+      border-radius: 3px;
+      min-width: 4px;
+    }
+    .bar-sell { background: #93c5fd; }
+    .bar-buy  { background: #fca5a5; }
+    .bar-price {
+      text-align: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--gray-800);
+    }
+
+    .term-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 20px 0;
+    }
+    @media (max-width: 540px) {
+      .term-grid { grid-template-columns: 1fr; }
+    }
+    .term-card {
+      border-radius: 12px;
+      padding: 18px 16px;
+      border: 1px solid var(--gray-200);
+    }
+    .term-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-700);
+      margin-bottom: 6px;
+    }
+    .term-card-value {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .term-card-desc {
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+    .term-card.sell { background: rgba(29,78,216,.05); border-color: #bfdbfe; }
+    .term-card.sell .term-card-value { color: #1d4ed8; }
+    .term-card.buy  { background: rgba(220,38,38,.05);  border-color: #fecaca; }
+    .term-card.buy  .term-card-value { color: #dc2626; }
+    .term-card.spread { background: #fef9c3; border-color: #fcd34d; }
+    .term-card.spread .term-card-value { color: #92400e; }
+
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 20px 0;
+    }
+    @media (max-width: 540px) {
+      .pattern-grid { grid-template-columns: 1fr; }
+    }
+    .pattern-card {
+      border-radius: 12px;
+      padding: 18px 16px;
+      border: 1px solid var(--gray-200);
+    }
+    .pattern-card-icon { font-size: 24px; margin-bottom: 8px; }
+    .pattern-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 6px;
+    }
+    .pattern-card-desc {
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+    .pattern-card.bullish { background: rgba(220,38,38,.04); border-color: #fecaca; }
+    .pattern-card.bearish { background: rgba(29,78,216,.04); border-color: #bfdbfe; }
+    .pattern-card.caution { background: #fef9c3; border-color: #fcd34d; }
+
+    .tip-list {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .tip-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--gray-700);
+    }
+    .tip-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-tags">
+      <span class="tag tag-primary">デイトレ基礎</span>
+    </div>
+    <h1>板・気配値の読み方</h1>
+    <p>デイトレで必須の「注文板」と「気配値」の見方を初心者向けに解説</p>
+    <div class="article-meta">
+      <span>2026年4月 更新</span>
+      <span>読了時間：約7分</span>
+    </div>
+  </div>
+</div>
+
+<div class="article-body">
+
+  <div class="article-toc">
+    <div class="toc-title">目次</div>
+    <ol class="toc-list">
+      <li><a href="#what-is-board">板（注文板）とは何か</a></li>
+      <li><a href="#basic-terms">基本用語：売り板・買い板・気配値・スプレッド</a></li>
+      <li><a href="#board-diagram">板の見た目と構造</a></li>
+      <li><a href="#read-board">板から何がわかるか</a></li>
+      <li><a href="#patterns">よくある板のパターン</a></li>
+      <li><a href="#daytrade-use">デイトレでの活用法</a></li>
+      <li><a href="#caution">板の注意点・落とし穴</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </div>
+
+  <section id="what-is-board">
+    <h2>板（注文板）とは何か</h2>
+    <p>
+      「板」とは、ある銘柄に対して現在出ている<strong>売り注文と買い注文の一覧表</strong>です。
+      証券会社のツールやアプリで確認でき、デイトレーダーは常にこの板を見ながら売買判断をしています。
+    </p>
+    <p>
+      株の売買は「売りたい人」と「買いたい人」の価格が合致したときに成立します。
+      板を見ることで、<strong>今どの価格帯に注文が集まっているか</strong>をリアルタイムで把握できます。
+    </p>
+    <div class="info-box">
+      <div class="info-box-title">板を見るメリット</div>
+      <p>どこで売り買いが多いかがわかる → 価格の支持・抵抗帯の目安になる<br>
+      相場の勢い（買い優勢 / 売り優勢）をリアルタイムで判断できる</p>
+    </div>
+  </section>
+
+  <section id="basic-terms">
+    <h2>基本用語：売り板・買い板・気配値・スプレッド</h2>
+
+    <div class="term-grid">
+      <div class="term-card sell">
+        <div class="term-card-title">売り板（売り気配）</div>
+        <div class="term-card-value">Ask（アスク）</div>
+        <div class="term-card-desc">
+          売りたい人が出している注文。板の上半分に表示される。<br>
+          最も安い売り注文が「最良売り気配」。
+        </div>
+      </div>
+      <div class="term-card buy">
+        <div class="term-card-title">買い板（買い気配）</div>
+        <div class="term-card-value">Bid（ビッド）</div>
+        <div class="term-card-desc">
+          買いたい人が出している注文。板の下半分に表示される。<br>
+          最も高い買い注文が「最良買い気配」。
+        </div>
+      </div>
+      <div class="term-card spread" style="grid-column: 1 / -1;">
+        <div class="term-card-title">スプレッド（売買スプレッド）</div>
+        <div class="term-card-value">Ask − Bid = スプレッド</div>
+        <div class="term-card-desc">
+          最良売り気配と最良買い気配の差。スプレッドが小さいほど取引しやすい。<br>
+          出来高の多い人気銘柄はスプレッドが1円以下のことも多い。
+        </div>
+      </div>
+    </div>
+
+    <p>「気配値」とは、板に出ている売買注文の価格のことです。まだ約定していない指値注文が並んでいる状態をイメージしてください。</p>
+  </section>
+
+  <section id="board-diagram">
+    <h2>板の見た目と構造</h2>
+    <p>実際の板は以下のような形で表示されます。上が売り板（青）、下が買い板（赤）です。</p>
+
+    <div class="board-diagram">
+      <div class="board-label sell">▲ 売り板（売りたい人の注文）</div>
+      <div class="board-header">
+        <span>売り数量（株）</span>
+        <span>値段（円）</span>
+        <span>買い数量（株）</span>
+      </div>
+      <div class="board-row">
+        <span class="sell-vol">8,500</span>
+        <span class="price-sell">1,510</span>
+        <span>—</span>
+      </div>
+      <div class="board-row">
+        <span class="sell-vol">4,200</span>
+        <span class="price-sell">1,509</span>
+        <span>—</span>
+      </div>
+      <div class="board-row">
+        <span class="sell-vol">12,000</span>
+        <span class="price-sell">1,508</span>
+        <span>—</span>
+      </div>
+      <div class="board-row">
+        <span class="sell-vol">3,100</span>
+        <span class="price-sell">1,507</span>
+        <span>—</span>
+      </div>
+      <div class="board-row">
+        <span class="sell-vol">1,800</span>
+        <span class="price-sell">1,506</span>
+        <span>—</span>
+      </div>
+      <div class="board-row price-center">
+        <span>↑ Ask</span>
+        <span>現在値 1,505</span>
+        <span>Bid ↓</span>
+      </div>
+      <div class="board-row">
+        <span>—</span>
+        <span class="price-buy">1,504</span>
+        <span class="buy-vol">2,300</span>
+      </div>
+      <div class="board-row">
+        <span>—</span>
+        <span class="price-buy">1,503</span>
+        <span class="buy-vol">5,700</span>
+      </div>
+      <div class="board-row">
+        <span>—</span>
+        <span class="price-buy">1,502</span>
+        <span class="buy-vol">9,100</span>
+      </div>
+      <div class="board-row">
+        <span>—</span>
+        <span class="price-buy">1,501</span>
+        <span class="buy-vol">1,400</span>
+      </div>
+      <div class="board-row">
+        <span>—</span>
+        <span class="price-buy">1,500</span>
+        <span class="buy-vol">18,000</span>
+      </div>
+      <div class="board-label buy">▼ 買い板（買いたい人の注文）</div>
+    </div>
+
+    <p>この例では：</p>
+    <ul>
+      <li>現在値は <strong>1,505円</strong></li>
+      <li>最良売り気配（Ask）：<strong>1,506円</strong></li>
+      <li>最良買い気配（Bid）：<strong>1,504円</strong></li>
+      <li>スプレッド：<strong>2円</strong></li>
+      <li>1,500円の買い板に <strong>18,000株</strong> が積まれている（厚い）</li>
+    </ul>
+  </section>
+
+  <section id="read-board">
+    <h2>板から何がわかるか</h2>
+
+    <h3>板の厚さ＝売買の圧力</h3>
+    <p>
+      特定の価格帯に注文が多いと、その価格が<strong>「壁（かべ）」</strong>として機能します。
+    </p>
+
+    <div class="board-diagram" style="margin: 16px 0;">
+      <div class="board-header">
+        <span>売り数量</span>
+        <span>値段</span>
+        <span>買い数量</span>
+      </div>
+      <div class="board-row">
+        <span class="sell-vol" style="color:#9ca3af;">2,000</span>
+        <span class="price-sell">1,510</span>
+        <span>—</span>
+      </div>
+      <div class="board-row">
+        <span class="sell-vol" style="color:#1d4ed8;font-size:15px;">50,000</span>
+        <span class="price-sell" style="font-size:15px;">1,508</span>
+        <span>—</span>
+      </div>
+      <div class="board-row price-center">
+        <span>↑ Ask</span><span>現在値</span><span>Bid ↓</span>
+      </div>
+      <div class="board-row">
+        <span>—</span>
+        <span class="price-buy">1,505</span>
+        <span class="buy-vol" style="color:#9ca3af;">3,000</span>
+      </div>
+    </div>
+
+    <p>上の例では 1,508円に <strong>50,000株</strong> の売り板が積まれています。
+    これだけの量を吸収する買い注文が入らないと価格は上がれません。これが<strong>「上値の壁」</strong>です。</p>
+
+    <div class="info-box">
+      <div class="info-box-title">板の厚さの解釈</div>
+      <ul>
+        <li><strong>売り板が厚い</strong> → 上に抵抗がある。超えるには大きな買い圧力が必要</li>
+        <li><strong>買い板が厚い</strong> → 下に支持がある。そこまで落ちると買い支えが入りやすい</li>
+        <li><strong>全体的に薄い</strong> → 少ない注文で価格が動きやすい（値幅が出やすい）</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="patterns">
+    <h2>よくある板のパターン</h2>
+
+    <div class="pattern-grid">
+      <div class="pattern-card bullish">
+        <div class="pattern-card-icon">🔴</div>
+        <div class="pattern-card-title">買い優勢（上昇しやすい）</div>
+        <div class="pattern-card-desc">
+          買い板の量が多く、売り板が薄い状態。成行買いが入ると上にスルスル動く。ニュース材料が出た直後などに見られる。
+        </div>
+      </div>
+      <div class="pattern-card bearish">
+        <div class="pattern-card-icon">🔵</div>
+        <div class="pattern-card-title">売り優勢（下落しやすい）</div>
+        <div class="pattern-card-desc">
+          売り板の量が多く、買い板が薄い状態。売り圧力が強く、買いが入っても価格が上がりにくい。
+        </div>
+      </div>
+      <div class="pattern-card bullish">
+        <div class="pattern-card-icon">📦</div>
+        <div class="pattern-card-title">大口の買い壁</div>
+        <div class="pattern-card-desc">
+          買い板の特定価格に極端に多い注文がある。「ここで買い支える」意図の可能性。下落の下限目安になる場合も。
+        </div>
+      </div>
+      <div class="pattern-card caution">
+        <div class="pattern-card-icon">⚠️</div>
+        <div class="pattern-card-title">板の消え方（板消し）</div>
+        <div class="pattern-card-desc">
+          直前まであった大きな注文が突然消える。見せ板（実際に約定させるつもりのない注文）の可能性。板の消え方に注意。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="daytrade-use">
+    <h2>デイトレでの活用法</h2>
+
+    <h3>エントリーポイントの判断</h3>
+    <p>買い板が厚く支えられている価格帯は、下落が止まりやすいため<strong>ロングエントリーの候補</strong>になります。逆に売り板の壁を価格が突き抜けた（ブレイクした）タイミングも注目されます。</p>
+
+    <h3>利確・損切りラインの目安</h3>
+    <p>厚い売り板がある価格を<strong>利確の目安</strong>にする考え方があります。「あそこに大きな売りが待っているから、その手前で売ろう」という判断です。</p>
+
+    <ul class="tip-list">
+      <li><span class="tip-icon">✅</span><span>買い板が厚い価格 → 損切りラインを少し下に設定（そこが崩れたら相場変化）</span></li>
+      <li><span class="tip-icon">✅</span><span>売り板の壁を超えたら → 上昇トレンド継続のサインとして追いかける</span></li>
+      <li><span class="tip-icon">✅</span><span>スプレッドが広い銘柄 → 成行注文はスリッページが大きくなるので注意</span></li>
+    </ul>
+
+    <h3>出来高と板を組み合わせる</h3>
+    <p>板の枚数（残注文）と実際の出来高（約定済み）はセットで見ると精度が上がります。板が薄くても出来高が急増しているなら、多くの注文が成行で流れ込んでいる証拠です。</p>
+  </section>
+
+  <section id="caution">
+    <h2>板の注意点・落とし穴</h2>
+
+    <div class="caution-box">
+      <div class="caution-box-title">⚠️ 板は「嘘をつく」こともある</div>
+      <p>
+        株式市場では<strong>「見せ板（ダミー注文）」</strong>と呼ばれる行為があります。
+        実際には約定させる気がないのに、大量の注文を板に出して相場を操作しようとする行為です。
+        （法律的には禁止されていますが、完全には排除できない）
+      </p>
+      <p>
+        大きな買い板があるからといって「絶対に下がらない」とは言えません。
+        板だけでなく、チャートの形・出来高・ニュースなど複数の情報を合わせて判断することが大切です。
+      </p>
+    </div>
+
+    <ul class="tip-list">
+      <li><span class="tip-icon">⚠️</span><span>板の厚さだけで売買判断しない。あくまで参考情報のひとつ</span></li>
+      <li><span class="tip-icon">⚠️</span><span>寄り付き前（プレマーケット）の板は流動性が低く、実態と乖離しやすい</span></li>
+      <li><span class="tip-icon">⚠️</span><span>出来高が少ない銘柄は板が薄く、少し買うだけで価格が動いてしまう</span></li>
+    </ul>
+  </section>
+
+  <section id="summary">
+    <h2>まとめ</h2>
+
+    <div class="summary-box">
+      <div class="summary-box-title">板・気配値の読み方 まとめ</div>
+      <ul>
+        <li><strong>板</strong> = 現在出ている売り・買い注文の一覧表</li>
+        <li><strong>売り板（Ask）</strong> = 売りたい人の注文。板の上半分に表示</li>
+        <li><strong>買い板（Bid）</strong> = 買いたい人の注文。板の下半分に表示</li>
+        <li><strong>スプレッド</strong> = Ask と Bid の差。小さいほど取引しやすい</li>
+        <li><strong>板が厚い</strong> = その価格帯に売買の壁がある（支持・抵抗）</li>
+        <li>板は「見せ板」があるため、単独で信じすぎない</li>
+        <li>チャート・出来高・ニュースと組み合わせて総合判断する</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="article-nav">
+    <a href="../index.html" class="article-nav-btn">← 記事一覧に戻る</a>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../oco-calc/index.html">OCO注文計算ツール</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

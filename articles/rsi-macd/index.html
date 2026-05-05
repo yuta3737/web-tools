@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSI・MACDの基本｜テクニカル指標の見方をデイトレ初心者向けに解説 | MoneyTools</title>
+  <meta name="description" content="RSIとMACDの基本的な見方をデイトレ初心者向けに解説。買われすぎ・売られすぎの判断、ゴールデンクロス・デッドクロスの読み方、実践での使い方を説明します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .indicator-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+    @media (max-width: 540px) {
+      .indicator-grid { grid-template-columns: 1fr; }
+    }
+    .indicator-card {
+      border-radius: 14px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .indicator-card.rsi  { background: #fef3c7; border: 2px solid #fcd34d; }
+    .indicator-card.macd { background: #dbeafe; border: 2px solid #93c5fd; }
+    .indicator-label { font-size: 11px; font-weight: 700; letter-spacing: .5px; margin-bottom: 6px; }
+    .indicator-card.rsi  .indicator-label { color: #92400e; }
+    .indicator-card.macd .indicator-label { color: #1e40af; }
+    .indicator-name { font-size: 20px; font-weight: 900; color: var(--gray-900); margin-bottom: 8px; }
+    .indicator-desc { font-size: 12px; color: var(--gray-600); line-height: 1.6; }
+
+    .rsi-gauge {
+      position: relative;
+      background: linear-gradient(to right, #3b82f6 0%, #3b82f6 30%, #e5e7eb 30%, #e5e7eb 70%, #ef4444 70%, #ef4444 100%);
+      height: 20px;
+      border-radius: 10px;
+      margin: 16px 0 8px;
+    }
+    .rsi-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-600);
+      margin-bottom: 16px;
+    }
+    .rsi-zone {
+      display: flex;
+      gap: 12px;
+      margin: 16px 0;
+      flex-wrap: wrap;
+    }
+    .rsi-zone-item {
+      flex: 1;
+      min-width: 120px;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+    }
+    .rsi-zone-item.oversold  { background: #dbeafe; border: 1px solid #93c5fd; }
+    .rsi-zone-item.neutral   { background: var(--gray-50); border: 1px solid var(--gray-200); }
+    .rsi-zone-item.overbought { background: #fee2e2; border: 1px solid #fca5a5; }
+    .rsi-zone-title { font-weight: 800; margin-bottom: 4px; }
+    .rsi-zone-item.oversold   .rsi-zone-title { color: #1e40af; }
+    .rsi-zone-item.neutral    .rsi-zone-title { color: var(--gray-700); }
+    .rsi-zone-item.overbought .rsi-zone-title { color: #991b1b; }
+    .rsi-zone-desc { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+
+    .macd-diagram {
+      background: var(--gray-50);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    .macd-line-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--gray-200);
+      font-size: 13px;
+    }
+    .macd-line-row:last-child { border-bottom: none; }
+    .macd-line-color {
+      width: 32px;
+      height: 4px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .macd-line-name { font-weight: 800; color: var(--gray-900); width: 120px; }
+    .macd-line-desc { color: var(--gray-600); }
+
+    .cross-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 16px 0;
+    }
+    @media (max-width: 480px) { .cross-grid { grid-template-columns: 1fr; } }
+    .cross-card {
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .cross-card.golden { background: #fef9c3; border: 2px solid #fcd34d; }
+    .cross-card.dead   { background: #f1f5f9; border: 2px solid #cbd5e1; }
+    .cross-icon { font-size: 28px; margin-bottom: 8px; }
+    .cross-title { font-size: 14px; font-weight: 800; color: var(--gray-900); margin-bottom: 6px; }
+    .cross-desc  { font-size: 12px; color: var(--gray-600); line-height: 1.6; }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>RSI・MACDの基本</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">テクニカル分析</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年5月</span>
+  </div>
+
+  <h1 class="article-title">RSI・MACDの基本｜テクニカル指標の見方をデイトレ初心者向けに解説</h1>
+
+  <p class="article-lead">
+    移動平均線の次によく使われるテクニカル指標が「RSI」と「MACD」です。どちらも無料のチャートツールに標準搭載されており、デイトレ・スイングトレードどちらでも活用できます。この記事では両者の仕組みと実践的な見方を解説します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#overview">RSIとMACDの違い</a></li>
+      <li><a href="#rsi">RSIの基本と見方</a></li>
+      <li><a href="#macd">MACDの基本と見方</a></li>
+      <li><a href="#combined">組み合わせて使う</a></li>
+      <li><a href="#caution">注意点</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="overview">RSIとMACDの違い</h2>
+
+    <div class="indicator-grid">
+      <div class="indicator-card rsi">
+        <div class="indicator-label">OSCILLATOR</div>
+        <div class="indicator-name">RSI</div>
+        <div class="indicator-desc">「買われすぎ・売られすぎ」を0〜100%で示す。相場の過熱感を測るオシレーター系指標。</div>
+      </div>
+      <div class="indicator-card macd">
+        <div class="indicator-label">TREND</div>
+        <div class="indicator-name">MACD</div>
+        <div class="indicator-desc">移動平均線の差からトレンドの方向・勢いを示す。トレンド系指標。</div>
+      </div>
+    </div>
+
+    <p>RSIは「今の相場が過熱していないか」、MACDは「トレンドがどちらに向いているか」を判断するのに使います。2つは性質が異なるため、組み合わせると補完し合えます。</p>
+
+    <h2 id="rsi">RSIの基本と見方</h2>
+    <p>RSI（Relative Strength Index）は、一定期間の値上がり幅と値下がり幅を比較して、相場の強弱を0〜100%で表した指標です。</p>
+
+    <div class="rsi-gauge"></div>
+    <div class="rsi-labels">
+      <span>0%</span>
+      <span style="color:#1e40af;">30%</span>
+      <span>50%</span>
+      <span style="color:#991b1b;">70%</span>
+      <span>100%</span>
+    </div>
+
+    <div class="rsi-zone">
+      <div class="rsi-zone-item oversold">
+        <div class="rsi-zone-title">30%以下：売られすぎ</div>
+        <div class="rsi-zone-desc">売りが行き過ぎている可能性。反発・買いのサインとして使われる。</div>
+      </div>
+      <div class="rsi-zone-item neutral">
+        <div class="rsi-zone-title">30〜70%：中立</div>
+        <div class="rsi-zone-desc">トレンドが続いている状態。この範囲では判断の材料にしにくい。</div>
+      </div>
+      <div class="rsi-zone-item overbought">
+        <div class="rsi-zone-title">70%以上：買われすぎ</div>
+        <div class="rsi-zone-desc">買いが行き過ぎている可能性。反落・売りのサインとして使われる。</div>
+      </div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>設定</th><th>一般的な値</th><th>特徴</th></tr>
+      <tr><td>計算期間</td><td>14（デフォルト）</td><td>期間が短いほど敏感に動く</td></tr>
+      <tr><td>買われすぎ基準</td><td>70%以上</td><td>80%を基準にする人もいる</td></tr>
+      <tr><td>売られすぎ基準</td><td>30%以下</td><td>20%を基準にする人もいる</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 強いトレンド中はRSIが機能しにくい</div>
+      上昇トレンドが強い場合、RSIが70%以上（買われすぎ）を示し続けることがあります。「買われすぎ＝すぐ下がる」ではない点に注意。
+    </div>
+
+    <h2 id="macd">MACDの基本と見方</h2>
+    <p>MACD（Moving Average Convergence Divergence）は、2本の移動平均線の差からトレンドの方向と勢いを示す指標です。</p>
+
+    <div class="macd-diagram">
+      <div class="macd-line-row">
+        <div class="macd-line-color" style="background:#3b82f6;"></div>
+        <div class="macd-line-name">MACD線</div>
+        <div class="macd-line-desc">短期EMA（12）− 長期EMA（26）。トレンドの方向を示す。</div>
+      </div>
+      <div class="macd-line-row">
+        <div class="macd-line-color" style="background:#ef4444;"></div>
+        <div class="macd-line-name">シグナル線</div>
+        <div class="macd-line-desc">MACD線の9期間EMA。MACD線より遅れて動く。</div>
+      </div>
+      <div class="macd-line-row">
+        <div class="macd-line-color" style="background:#a3e635; height:16px; border-radius:2px;"></div>
+        <div class="macd-line-name">ヒストグラム</div>
+        <div class="macd-line-desc">MACD線とシグナル線の差を棒グラフで表示。勢いの強さを視覚化。</div>
+      </div>
+    </div>
+
+    <h3>MACDのクロスサイン</h3>
+
+    <div class="cross-grid">
+      <div class="cross-card golden">
+        <div class="cross-icon">📈</div>
+        <div class="cross-title">ゴールデンクロス</div>
+        <div class="cross-desc">MACD線がシグナル線を下から上に抜ける。買いのサイン。上昇トレンドへの転換を示唆。</div>
+      </div>
+      <div class="cross-card dead">
+        <div class="cross-icon">📉</div>
+        <div class="cross-title">デッドクロス</div>
+        <div class="cross-desc">MACD線がシグナル線を上から下に抜ける。売りのサイン。下落トレンドへの転換を示唆。</div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 ゼロライン（0）も重要</div>
+      MACD線がゼロラインを上回っている → 上昇トレンド寄り。下回っている → 下落トレンド寄り。クロスサインと合わせて判断するとより精度が上がります。
+    </div>
+
+    <h2 id="combined">組み合わせて使う</h2>
+    <p>RSIとMACDは性質が異なるため、組み合わせることでより精度の高い判断ができます。</p>
+
+    <div class="example-box">
+      <div class="example-box-title">買いを検討するシナリオ例</div>
+      <p>①RSIが30%以下（売られすぎ）かつ②MACDがゴールデンクロスを形成した場合、「売り過多から反転の可能性が高い」と判断できる。さらに③<a href="../moving-average/index.html">移動平均線</a>が上向きであれば根拠が揃う。</p>
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">売り・利確を検討するシナリオ例</div>
+      <p>①RSIが70%以上（買われすぎ）かつ②MACDがデッドクロスを形成した場合、「上昇の勢いが弱まっている可能性が高い」と判断できる。</p>
+    </div>
+
+    <h2 id="caution">注意点</h2>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ どの指標も「遅れる」</div>
+      RSIもMACDも過去のデータを元に計算するため、シグナルは必ず遅れます。「完璧なタイミング」は存在しないと理解した上で使いましょう。
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 指標だけで売買しない</div>
+      テクニカル指標はあくまで補助ツールです。板の状況・出来高・ニュースなど複合的に判断することが重要です。
+    </div>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li><strong>RSI</strong>：0〜100%で「買われすぎ（70%以上）・売られすぎ（30%以下）」を示すオシレーター。</li>
+        <li><strong>MACD</strong>：MACD線とシグナル線のクロスでトレンド転換を示すトレンド系指標。</li>
+        <li>ゴールデンクロス → 買いサイン、デッドクロス → 売りサイン。</li>
+        <li>2つを組み合わせると、片方だけより根拠のある判断ができる。</li>
+        <li>どちらも遅れる指標であり、他の情報と組み合わせて使うのが基本。</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../oco-calc/index.html">OCO注文計算ツール</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>
