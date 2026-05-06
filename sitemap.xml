@@ -1,117 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://yuta3737.github.io/web-tools/</loc>
+    <loc>https://yuta-tools.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/investment-sim/</loc>
+    <loc>https://yuta-tools.com/investment-sim/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/oco-calc/</loc>
+    <loc>https://yuta-tools.com/oco-calc/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/position-calc/</loc>
+    <loc>https://yuta-tools.com/position-calc/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/profit-calc/</loc>
+    <loc>https://yuta-tools.com/profit-calc/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/</loc>
+    <loc>https://yuta-tools.com/articles/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/candlestick/</loc>
+    <loc>https://yuta-tools.com/articles/candlestick/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/order-types/</loc>
+    <loc>https://yuta-tools.com/articles/order-types/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/stop-loss/</loc>
+    <loc>https://yuta-tools.com/articles/stop-loss/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/position-size/</loc>
+    <loc>https://yuta-tools.com/articles/position-size/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/tax-basics/</loc>
+    <loc>https://yuta-tools.com/articles/tax-basics/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/moving-average/</loc>
+    <loc>https://yuta-tools.com/articles/moving-average/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/volume/</loc>
+    <loc>https://yuta-tools.com/articles/volume/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/brokerage-comparison/</loc>
+    <loc>https://yuta-tools.com/articles/brokerage-comparison/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/nisa-basics/</loc>
+    <loc>https://yuta-tools.com/articles/nisa-basics/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/ideco-basics/</loc>
+    <loc>https://yuta-tools.com/articles/ideco-basics/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/board-reading/</loc>
+    <loc>https://yuta-tools.com/articles/board-reading/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/rsi-macd/</loc>
+    <loc>https://yuta-tools.com/articles/rsi-macd/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/sp500-vs-allcountry/</loc>
+    <loc>https://yuta-tools.com/articles/sp500-vs-allcountry/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/stock-selection/</loc>
+    <loc>https://yuta-tools.com/articles/stock-selection/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/market-hours/</loc>
+    <loc>https://yuta-tools.com/articles/market-hours/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/risk-reward/</loc>
+    <loc>https://yuta-tools.com/articles/risk-reward/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yuta3737.github.io/web-tools/articles/bollinger-band/</loc>
+    <loc>https://yuta-tools.com/articles/bollinger-band/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
