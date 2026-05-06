@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>信用取引とは何か｜仕組み・リスク・初心者が知るべきこと | MoneyTools</title>
+  <meta name="description" content="信用取引の仕組みをわかりやすく解説。委託保証金・買い建て・売り建て・レバレッジのリスクまで、デイトレ初心者が知っておくべきことをまとめました。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .leverage-visual {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 24px 20px;
+      margin: 20px 0;
+    }
+    .leverage-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .leverage-row:last-child { margin-bottom: 0; }
+    .leverage-label {
+      width: 100px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-700);
+      flex-shrink: 0;
+    }
+    .leverage-bar-track {
+      flex: 1;
+      background: var(--gray-200);
+      border-radius: 6px;
+      height: 28px;
+      overflow: hidden;
+    }
+    .leverage-bar {
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .leverage-bar.cash   { background: #3b82f6; width: 33%; }
+    .leverage-bar.margin { background: #f59e0b; width: 100%; }
+
+    .compare-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 20px 0;
+    }
+    @media (max-width: 480px) { .compare-cards { grid-template-columns: 1fr; } }
+    .compare-card {
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .compare-card.buy  { background: #eff6ff; border: 2px solid #bfdbfe; }
+    .compare-card.sell { background: #fdf4ff; border: 2px solid #e9d5ff; }
+    .compare-card-title {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .compare-card.buy  .compare-card-title { color: #1e40af; }
+    .compare-card.sell .compare-card-title { color: #7e22ce; }
+    .compare-card p {
+      font-size: 13px;
+      color: var(--gray-700);
+      margin: 0;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>信用取引とは何か</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">デイトレ基礎</span>
+    <span class="article-level">⚠️ 中級者向け</span>
+    <span class="article-date">2026年5月</span>
+  </div>
+
+  <h1 class="article-title">信用取引とは何か｜仕組み・リスク・初心者が知るべきこと</h1>
+
+  <p class="article-lead">
+    信用取引は、証券会社にお金や株を借りて取引を行う仕組みです。自分の資金の最大3.3倍まで取引できますが、損失も同じように拡大します。この記事では信用取引の仕組みとリスクを、始める前に必ず知っておくべきこととして解説します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#what">信用取引とは何か</a></li>
+      <li><a href="#leverage">レバレッジの仕組み</a></li>
+      <li><a href="#types">買い建てと売り建て</a></li>
+      <li><a href="#cost">信用取引のコスト</a></li>
+      <li><a href="#risk">リスクと注意点</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="what">信用取引とは何か</h2>
+    <p>通常の株取引（現物取引）は「自分のお金で株を買う」だけですが、信用取引は<strong>証券会社からお金や株を借りて取引する</strong>仕組みです。</p>
+
+    <table class="compare-table">
+      <tr><th>比較</th><th>現物取引</th><th>信用取引</th></tr>
+      <tr><td>資金</td><td>自分のお金のみ</td><td>証券会社から借りられる</td></tr>
+      <tr><td>最大取引額</td><td>手持ち資金まで</td><td>手持ち資金の約3.3倍</td></tr>
+      <tr><td>売り方</td><td>持っている株のみ売れる</td><td>持っていない株も売れる（空売り）</td></tr>
+      <tr><td>コスト</td><td>売買手数料のみ</td><td>金利・貸株料が追加でかかる</td></tr>
+      <tr><td>損失上限</td><td>投資額まで</td><td>投資額を超える可能性あり</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 信用取引は上級者向け</div>
+      信用取引は現物取引に慣れてからチャレンジするものです。初心者がいきなり始めると、想定外の大きな損失につながる可能性があります。
+    </div>
+
+    <h2 id="leverage">レバレッジの仕組み</h2>
+    <p>信用取引では<strong>委託保証金</strong>（担保）を証券会社に預けることで、その約3.3倍の取引ができます。</p>
+
+    <div class="leverage-visual">
+      <div class="leverage-row">
+        <div class="leverage-label">現物取引</div>
+        <div class="leverage-bar-track">
+          <div class="leverage-bar cash">30万円で30万円分</div>
+        </div>
+      </div>
+      <div class="leverage-row">
+        <div class="leverage-label">信用取引</div>
+        <div class="leverage-bar-track">
+          <div class="leverage-bar margin">30万円の保証金で最大約100万円分</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">レバレッジの損益例（保証金30万円・100万円分取引）</div>
+      <p>株価が10%上昇 → 利益10万円（保証金に対して+33%）</p>
+      <p>株価が10%下落 → 損失10万円（保証金に対して−33%）</p>
+      <p>株価が30%下落 → 損失30万円（保証金がほぼ消える）</p>
+    </div>
+
+    <h2 id="types">買い建てと売り建て</h2>
+    <div class="compare-cards">
+      <div class="compare-card buy">
+        <div class="compare-card-title">買い建て（ロング）</div>
+        <p>株を借金して買う。株価が上がれば利益。現物取引と同じ方向だが、レバレッジがかかる。</p>
+      </div>
+      <div class="compare-card sell">
+        <div class="compare-card-title">売り建て（空売り・ショート）</div>
+        <p>持っていない株を借りて売る。株価が下がれば利益。下落相場でも利益を狙える。</p>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 空売りは理論上損失無限大</div>
+      買い建ては株価がゼロになっても損失は投資額まで。しかし空売りは株価が上昇し続ける限り損失が膨らみます。「踏み上げ」と呼ばれる急騰に巻き込まれると大損する可能性があります。
+    </div>
+
+    <h2 id="cost">信用取引のコスト</h2>
+    <table class="compare-table">
+      <tr><th>コスト</th><th>内容</th><th>目安</th></tr>
+      <tr><td>売買手数料</td><td>現物と同様</td><td>証券会社による</td></tr>
+      <tr><td>金利（買い建て）</td><td>借りたお金への利息</td><td>年2〜3%程度</td></tr>
+      <tr><td>貸株料（売り建て）</td><td>借りた株への手数料</td><td>年1〜4%程度（銘柄による）</td></tr>
+      <tr><td>逆日歩（ぎゃくひぶ）</td><td>空売りが多い銘柄に発生する追加コスト</td><td>不定（高額になることも）</td></tr>
+    </table>
+
+    <h2 id="risk">リスクと注意点</h2>
+
+    <div class="callout bad">
+      <div class="callout-title">⚠️ 追証（おいしょう）に注意</div>
+      保証金の価値が一定水準を下回ると、証券会社から「追加保証金を入れてください」と求められます（追証）。応じられない場合、強制決済されます。大きな損失が確定するリスクがあります。
+    </div>
+
+    <table class="compare-table">
+      <tr><th>リスク</th><th>内容</th></tr>
+      <tr><td>損失の拡大</td><td>レバレッジにより損失も3倍以上になる可能性</td></tr>
+      <tr><td>追証</td><td>保証金維持率を下回ると追加入金が必要</td></tr>
+      <tr><td>コスト増加</td><td>保有期間が長いほど金利・貸株料がかさむ</td></tr>
+      <tr><td>逆日歩</td><td>空売り時に予期せず高額コストが発生することがある</td></tr>
+    </table>
+
+    <div class="callout good">
+      <div class="callout-title">✅ まずは現物取引で経験を積もう</div>
+      信用取引は現物取引で安定して利益を出せるようになってから検討しましょう。損切り・ポジション管理・メンタルコントロールが身についてから挑戦するのが正解です。
+    </div>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>信用取引は証券会社からお金・株を借りて取引する仕組み。最大約3.3倍の取引が可能。</li>
+        <li>買い建て（上昇で利益）と売り建て・空売り（下落で利益）の2種類がある。</li>
+        <li>レバレッジにより利益も損失も拡大する。追証のリスクもある。</li>
+        <li>金利・貸株料・逆日歩などコストが現物より多い。</li>
+        <li>初心者は現物取引に慣れてから検討するのが安全。</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../investment-sim/index.html">積立投資シミュレーター</a></li>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

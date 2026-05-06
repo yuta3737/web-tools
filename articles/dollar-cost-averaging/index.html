@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ドルコスト平均法とは何か｜毎月積立で価格変動リスクを抑える仕組み | MoneyTools</title>
+  <meta name="description" content="ドルコスト平均法の仕組みをわかりやすく解説。毎月一定額を積立することで平均購入単価を下げる効果と、一括投資との比較・NISAとの組み合わせ方を説明します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .dca-table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+    .dca-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      min-width: 400px;
+    }
+    .dca-table th {
+      background: var(--primary);
+      color: var(--white);
+      padding: 10px 12px;
+      text-align: center;
+      font-weight: 700;
+    }
+    .dca-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--gray-100);
+      text-align: center;
+      color: var(--gray-700);
+    }
+    .dca-table tr:last-child td { border-bottom: none; font-weight: 800; color: var(--gray-900); background: var(--gray-50); }
+    .dca-table tr:nth-child(even) td { background: var(--gray-50); }
+    .dca-table tr:last-child td { background: #dbeafe; }
+
+    .compare-method {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 20px 0;
+    }
+    @media (max-width: 480px) { .compare-method { grid-template-columns: 1fr; } }
+    .method-card {
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .method-card.dca  { background: #eff6ff; border: 2px solid #bfdbfe; }
+    .method-card.lump { background: #fdf4ff; border: 2px solid #e9d5ff; }
+    .method-card-title { font-size: 14px; font-weight: 800; margin-bottom: 8px; }
+    .method-card.dca  .method-card-title { color: #1e40af; }
+    .method-card.lump .method-card-title { color: #7e22ce; }
+    .method-card ul { padding-left: 16px; }
+    .method-card li { font-size: 13px; color: var(--gray-700); line-height: 1.7; }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>ドルコスト平均法とは何か</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">NISA・積立投資</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年5月</span>
+  </div>
+
+  <h1 class="article-title">ドルコスト平均法とは何か｜毎月積立で価格変動リスクを抑える仕組み</h1>
+
+  <p class="article-lead">
+    NISAの積立投資で自動的に使われているのが「ドルコスト平均法」です。毎月一定額を積み立てることで、高いときは少なく・安いときは多く買えるため、平均購入単価を自然に下げる効果があります。この記事では仕組みと具体的な数字で解説します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#what">ドルコスト平均法とは何か</a></li>
+      <li><a href="#example">具体的な数字で見る効果</a></li>
+      <li><a href="#compare">一括投資との比較</a></li>
+      <li><a href="#merit">メリット・デメリット</a></li>
+      <li><a href="#nisa">NISAとの組み合わせ</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="what">ドルコスト平均法とは何か</h2>
+    <p>ドルコスト平均法とは、<strong>価格に関わらず毎月一定の金額を積み立てる投資方法</strong>です。価格が高いときは少ない口数を、価格が安いときは多くの口数を自動的に買うことになるため、平均購入単価が下がりやすくなります。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 「高値掴み」を防ぐ仕組み</div>
+      一度に大きな金額を投資すると「最悪のタイミングで高値掴み」になるリスクがあります。ドルコスト平均法は毎月分散して買うことで、このリスクを時間的に分散します。
+    </div>
+
+    <h2 id="example">具体的な数字で見る効果</h2>
+    <p>毎月1万円を4ヶ月積立した場合のシミュレーションです。</p>
+
+    <div class="dca-table-wrap">
+      <table class="dca-table">
+        <tr>
+          <th>月</th>
+          <th>基準価額</th>
+          <th>投資額</th>
+          <th>購入口数</th>
+        </tr>
+        <tr><td>1月</td><td>10,000円</td><td>10,000円</td><td>1.000口</td></tr>
+        <tr><td>2月</td><td>8,000円（下落）</td><td>10,000円</td><td>1.250口</td></tr>
+        <tr><td>3月</td><td>6,000円（下落）</td><td>10,000円</td><td>1.667口</td></tr>
+        <tr><td>4月</td><td>9,000円（回復）</td><td>10,000円</td><td>1.111口</td></tr>
+        <tr><td>合計</td><td>平均8,250円</td><td>40,000円</td><td>5.028口</td></tr>
+      </table>
+    </div>
+
+    <p>平均購入単価 = 40,000円 ÷ 5.028口 = <strong>約7,954円</strong></p>
+    <p>単純平均の基準価額（8,250円）より約300円安く買えています。これがドルコスト平均法の効果です。</p>
+
+    <div class="callout good">
+      <div class="callout-title">✅ 下落したときほど多く買える</div>
+      2月・3月と価格が下落しているときに口数が増えています。「下がったときに多く仕込める」ことが、長期的に平均コストを下げる要因になります。
+    </div>
+
+    <h2 id="compare">一括投資との比較</h2>
+
+    <div class="compare-method">
+      <div class="method-card dca">
+        <div class="method-card-title">ドルコスト平均法（積立）</div>
+        <ul>
+          <li>毎月一定額を継続投資</li>
+          <li>タイミングを考えなくていい</li>
+          <li>下落時のダメージが小さい</li>
+          <li>右肩上がりの相場では一括より不利</li>
+        </ul>
+      </div>
+      <div class="method-card lump">
+        <div class="method-card-title">一括投資</div>
+        <ul>
+          <li>まとまった資金を一度に投資</li>
+          <li>安値のタイミングで買えれば最高</li>
+          <li>高値掴みのリスクがある</li>
+          <li>長期右肩上がりなら積立より有利になることも</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 一括投資が必ずしも悪いわけではない</div>
+      理論上、長期右肩上がりの相場では一括投資の方がリターンが高くなる場合もあります。ただし「いつが底かわからない」一般投資家にとって、タイミングリスクを排除できる積立の方が現実的です。
+    </div>
+
+    <h2 id="merit">メリット・デメリット</h2>
+
+    <table class="compare-table">
+      <tr><th></th><th>内容</th></tr>
+      <tr><td><strong>メリット①</strong></td><td>購入タイミングを考えなくていい。精神的に楽。</td></tr>
+      <tr><td><strong>メリット②</strong></td><td>少額から始められる（月100円〜）。</td></tr>
+      <tr><td><strong>メリット③</strong></td><td>下落相場でも自動的に多く買えるため平均コストが下がりやすい。</td></tr>
+      <tr><td><strong>デメリット①</strong></td><td>右肩上がりの相場では一括投資より最終リターンが低くなる場合がある。</td></tr>
+      <tr><td><strong>デメリット②</strong></td><td>長期間続けないと効果が薄い（10〜20年スパン推奨）。</td></tr>
+    </table>
+
+    <h2 id="nisa">NISAとの組み合わせ</h2>
+    <p>NISAのつみたて投資枠は<strong>ドルコスト平均法を自動で実行する仕組み</strong>です。毎月の積立設定をするだけで、あとは自動で購入されます。</p>
+
+    <div class="example-box">
+      <div class="example-box-title">筆者の実践例</div>
+      <p>楽天証券NISAで毎月3万円を「eMAXIS Slim 全世界株式（オルカン）」に積立設定。</p>
+      <p>設定したらあとはほったらかし。毎月自動でドルコスト平均法が実行されます。</p>
+    </div>
+
+    <a href="../../investment-sim/index.html" class="tool-cta">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">関連ツール</div>
+        <div class="tool-cta-title">積立投資シミュレーター</div>
+        <div class="tool-cta-sub">月々の積立額・年利・期間を入力して将来資産を試算</div>
+      </div>
+      <div class="tool-cta-arrow">›</div>
+    </a>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>ドルコスト平均法は毎月一定額を積立する投資方法。価格変動リスクを時間的に分散する。</li>
+        <li>価格が安いときに多く買えるため、平均購入単価が下がりやすい。</li>
+        <li>タイミングを考えなくていいので、精神的に続けやすい。</li>
+        <li>NISAのつみたて投資枠は自動でドルコスト平均法を実行してくれる。</li>
+        <li>効果を発揮するには長期間（10年以上）続けることが大切。</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../investment-sim/index.html">積立投資シミュレーター</a></li>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

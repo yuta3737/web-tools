@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SBI証券アプリの使い方｜口座開設から注文までスマホで完結 | MoneyTools</title>
+  <meta name="description" content="SBI証券のスマホアプリの使い方を解説。銘柄検索・チャートの見方・注文方法・NISA積立設定まで、初心者向けにわかりやすく説明します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .app-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .app-step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--gray-50);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .app-step-num {
+      width: 32px;
+      height: 32px;
+      background: #ef4444;
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .app-step-body { font-size: 14px; color: var(--gray-700); line-height: 1.7; }
+    .app-step-body strong { color: var(--gray-900); }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    @media (max-width: 480px) { .app-grid { grid-template-columns: 1fr; } }
+    .app-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .app-card-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .app-card p {
+      font-size: 13px;
+      color: var(--gray-600);
+      margin: 0;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>SBI証券アプリの使い方</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">証券口座</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年5月</span>
+  </div>
+
+  <h1 class="article-title">SBI証券アプリの使い方｜口座開設から注文までスマホで完結</h1>
+
+  <p class="article-lead">
+    SBI証券のスマホアプリを使えば、銘柄検索・チャート確認・注文・NISA積立設定まですべてスマホで完結できます。この記事ではアプリの基本的な使い方を、初心者向けに順を追って解説します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#apps">SBI証券のアプリの種類</a></li>
+      <li><a href="#search">銘柄の検索方法</a></li>
+      <li><a href="#chart">チャートの見方</a></li>
+      <li><a href="#order">注文の方法</a></li>
+      <li><a href="#nisa">NISA積立設定</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="apps">SBI証券のアプリの種類</h2>
+    <p>SBI証券には複数のアプリがあります。目的に応じて使い分けましょう。</p>
+
+    <div class="app-grid">
+      <div class="app-card">
+        <div class="app-card-title">📱 SBI証券 株アプリ</div>
+        <p>国内株式のトレード専用。チャート・板・注文機能が充実。デイトレに最適。</p>
+      </div>
+      <div class="app-card">
+        <div class="app-card-title">📱 かんたん積立 アプリ</div>
+        <p>投資信託の積立専用。NISA積立の設定・確認はこちら。シンプルで使いやすい。</p>
+      </div>
+      <div class="app-card">
+        <div class="app-card-title">📱 SBI証券 米国株アプリ</div>
+        <p>米国株・ETFのトレード専用。ドル建て取引に対応。</p>
+      </div>
+      <div class="app-card">
+        <div class="app-card-title">🌐 SBI証券 Webサイト</div>
+        <p>すべての機能が使えるPC向けサイト。詳細な設定や確認はWebが便利。</p>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 デイトレなら株アプリ、積立NISAならかんたん積立アプリ</div>
+      用途によってアプリを使い分けるのがSBI証券の特徴です。最初は「株アプリ」と「かんたん積立アプリ」の2つを入れておけばOKです。
+    </div>
+
+    <h2 id="search">銘柄の検索方法</h2>
+    <p>株アプリで銘柄を検索する方法です。</p>
+
+    <div class="app-steps">
+      <div class="app-step">
+        <div class="app-step-num">1</div>
+        <div class="app-step-body"><strong>アプリ上部の検索バーをタップ</strong><br>銘柄コード（4桁の数字）または会社名で検索できます。例：「トヨタ」「7203」</div>
+      </div>
+      <div class="app-step">
+        <div class="app-step-num">2</div>
+        <div class="app-step-body"><strong>銘柄詳細ページを確認</strong><br>現在値・始値・高値・安値・出来高・前日比が一覧で見られます。</div>
+      </div>
+      <div class="app-step">
+        <div class="app-step-num">3</div>
+        <div class="app-step-body"><strong>ウォッチリストに追加</strong><br>気になる銘柄は☆マークを押してウォッチリストに追加。毎日確認しやすくなります。</div>
+      </div>
+    </div>
+
+    <h2 id="chart">チャートの見方</h2>
+    <p>銘柄詳細ページの「チャート」タブで確認できます。</p>
+
+    <table class="compare-table">
+      <tr><th>操作</th><th>内容</th></tr>
+      <tr><td>期間切替</td><td>1日・1週間・1ヶ月・3ヶ月・1年・5年から選択可能</td></tr>
+      <tr><td>テクニカル指標</td><td>移動平均線・ボリンジャーバンド・RSI・MACDなどを追加表示できる</td></tr>
+      <tr><td>ローソク足</td><td>デフォルトでローソク足表示。陽線（青）・陰線（赤）で表示</td></tr>
+      <tr><td>出来高</td><td>チャート下部に棒グラフで表示</td></tr>
+    </table>
+
+    <div class="callout info">
+      <div class="callout-title">💡 デイトレ用のチャート設定</div>
+      デイトレには「1日」表示で5分足または1分足を使うのが基本です。SBI証券アプリでは分足表示も可能です。
+    </div>
+
+    <h2 id="order">注文の方法</h2>
+
+    <div class="app-steps">
+      <div class="app-step">
+        <div class="app-step-num">1</div>
+        <div class="app-step-body"><strong>銘柄詳細ページの「買う」ボタンをタップ</strong><br>「現物買い」を選択します。</div>
+      </div>
+      <div class="app-step">
+        <div class="app-step-num">2</div>
+        <div class="app-step-body"><strong>注文条件を設定</strong><br>
+        ・注文の種類：成行・指値・逆指値から選択<br>
+        ・株数：何株買うか入力<br>
+        ・価格：指値の場合は目標価格を入力</div>
+      </div>
+      <div class="app-step">
+        <div class="app-step-num">3</div>
+        <div class="app-step-body"><strong>確認画面で内容を確認して「注文する」</strong><br>約定結果はアプリの「注文・約定照会」から確認できます。</div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 成行注文は価格が保証されない</div>
+      成行注文は即座に約定しますが、想定より高い（または安い）価格で約定することがあります。特に出来高が少ない銘柄は注意が必要です。
+    </div>
+
+    <h2 id="nisa">NISA積立設定</h2>
+    <p>「かんたん積立アプリ」でNISAの積立を設定します。</p>
+
+    <div class="app-steps">
+      <div class="app-step">
+        <div class="app-step-num">1</div>
+        <div class="app-step-body"><strong>かんたん積立アプリを開く</strong><br>SBI証券IDでログインします。</div>
+      </div>
+      <div class="app-step">
+        <div class="app-step-num">2</div>
+        <div class="app-step-body"><strong>「積立注文」→「ファンドを選ぶ」</strong><br>検索欄で「オルカン」「S&P500」などと入力して投資信託を選びます。</div>
+      </div>
+      <div class="app-step">
+        <div class="app-step-num">3</div>
+        <div class="app-step-body"><strong>積立金額・引き落とし日を設定</strong><br>毎月いくら積み立てるか入力。NISA（つみたて投資枠）を選択します。</div>
+      </div>
+      <div class="app-step">
+        <div class="app-step-num">4</div>
+        <div class="app-step-body"><strong>支払い方法を設定して完了</strong><br>銀行引き落としまたはクレジットカード払いを選択。クレカ払いはポイントが貯まります。</div>
+      </div>
+    </div>
+
+    <a href="../../investment-sim/index.html" class="tool-cta">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">関連ツール</div>
+        <div class="tool-cta-title">積立投資シミュレーター</div>
+        <div class="tool-cta-sub">毎月の積立額で将来資産がいくらになるか試算しよう</div>
+      </div>
+      <div class="tool-cta-arrow">›</div>
+    </a>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>SBI証券はアプリが複数あり、デイトレは「株アプリ」・NISA積立は「かんたん積立アプリ」を使う。</li>
+        <li>銘柄検索は銘柄コード（4桁）または会社名で検索。ウォッチリストに登録すると便利。</li>
+        <li>チャートでは移動平均線・ボリンジャーバンド・RSIなどのテクニカル指標を追加できる。</li>
+        <li>注文は成行・指値・逆指値から選択。成行は価格が保証されないので注意。</li>
+        <li>NISA積立はかんたん積立アプリで設定するだけ。あとは自動で購入される。</li>
+      </ul>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 関連記事</div>
+      証券会社の選び方は<a href="../brokerage-comparison/index.html">証券口座の選び方</a>で比較しています。注文の種類は<a href="../order-types/index.html">注文の種類の解説記事</a>もどうぞ。
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../investment-sim/index.html">積立投資シミュレーター</a></li>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

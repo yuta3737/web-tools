@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サポート・レジスタンスラインの引き方｜デイトレで使う水平線の基本 | MoneyTools</title>
+  <meta name="description" content="サポートライン・レジスタンスラインの引き方をわかりやすく解説。チャートの水平線の意味、ブレイクアウトの見方、デイトレでの活用方法を初心者向けに説明します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .chart-demo {
+      background: #0f172a;
+      border-radius: 14px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .chart-demo-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,.5);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 12px;
+    }
+    .chart-demo svg { width: 100%; }
+
+    .sr-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 20px 0;
+    }
+    @media (max-width: 480px) { .sr-grid { grid-template-columns: 1fr; } }
+    .sr-card {
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .sr-card.support    { background: #f0fdf4; border: 2px solid #86efac; }
+    .sr-card.resistance { background: #fef2f2; border: 2px solid #fca5a5; }
+    .sr-card-title { font-size: 14px; font-weight: 800; margin-bottom: 8px; }
+    .sr-card.support    .sr-card-title { color: #16a34a; }
+    .sr-card.resistance .sr-card-title { color: #dc2626; }
+    .sr-card p { font-size: 13px; color: var(--gray-700); margin: 0; line-height: 1.7; }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>サポート・レジスタンスラインの引き方</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">テクニカル分析</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年5月</span>
+  </div>
+
+  <h1 class="article-title">サポート・レジスタンスラインの引き方｜デイトレで使う水平線の基本</h1>
+
+  <p class="article-lead">
+    チャートに水平線を引く「サポートライン」と「レジスタンスライン」は、テクニカル分析の中で最もシンプルで効果的な手法のひとつです。移動平均線やRSIより直感的に使えるため、初心者にも取り組みやすい手法です。この記事では引き方と活用方法を解説します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#what">サポート・レジスタンスとは何か</a></li>
+      <li><a href="#howto">水平線の引き方</a></li>
+      <li><a href="#breakout">ブレイクアウトの見方</a></li>
+      <li><a href="#reversal">役割の反転</a></li>
+      <li><a href="#use">デイトレでの使い方</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="what">サポート・レジスタンスとは何か</h2>
+
+    <div class="sr-grid">
+      <div class="sr-card support">
+        <div class="sr-card-title">サポートライン（支持線）</div>
+        <p>価格が何度も跳ね返される「下限」の水平線。買い注文が集まりやすい価格帯で、下落を支える（サポートする）。</p>
+      </div>
+      <div class="sr-card resistance">
+        <div class="sr-card-title">レジスタンスライン（抵抗線）</div>
+        <p>価格が何度も跳ね返される「上限」の水平線。売り注文が集まりやすい価格帯で、上昇を阻む（レジスト）。</p>
+      </div>
+    </div>
+
+    <div class="chart-demo">
+      <div class="chart-demo-title">サポート・レジスタンスのイメージ図</div>
+      <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- レジスタンスライン -->
+        <line x1="20" y1="50" x2="380" y2="50" stroke="#ef4444" stroke-width="2" stroke-dasharray="6,3"/>
+        <text x="385" y="54" font-size="10" fill="#ef4444" font-weight="700">抵抗線</text>
+        <!-- サポートライン -->
+        <line x1="20" y1="150" x2="380" y2="150" stroke="#22c55e" stroke-width="2" stroke-dasharray="6,3"/>
+        <text x="385" y="154" font-size="10" fill="#22c55e" font-weight="700">支持線</text>
+        <!-- 価格の動き -->
+        <polyline points="20,120 60,80 90,145 130,65 160,145 200,70 240,145 280,60 310,145 350,100" fill="none" stroke="#f8fafc" stroke-width="2"/>
+        <!-- 跳ね返りの矢印（サポート） -->
+        <path d="M90,145 L90,125" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrowUp)"/>
+        <path d="M160,145 L160,125" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrowUp)"/>
+        <path d="M240,145 L240,125" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrowUp)"/>
+        <path d="M310,145 L310,125" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrowUp)"/>
+        <!-- 跳ね返りの矢印（レジスタンス） -->
+        <path d="M130,65 L130,85" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+        <path d="M200,70 L200,90" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+        <path d="M280,60 L280,80" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrowDown)"/>
+        <defs>
+          <marker id="arrowUp" markerWidth="6" markerHeight="6" refX="3" refY="0" orient="auto">
+            <path d="M0,6 L3,0 L6,6" fill="none" stroke="#22c55e" stroke-width="1.5"/>
+          </marker>
+          <marker id="arrowDown" markerWidth="6" markerHeight="6" refX="3" refY="6" orient="auto">
+            <path d="M0,0 L3,6 L6,0" fill="none" stroke="#ef4444" stroke-width="1.5"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <h2 id="howto">水平線の引き方</h2>
+    <p>水平線は「過去に何度も価格が反応した価格帯」に引きます。</p>
+
+    <table class="compare-table">
+      <tr><th>引く場所</th><th>説明</th></tr>
+      <tr><td>直近の安値が2〜3回重なる価格</td><td>サポートライン候補。何度も下げ止まっている。</td></tr>
+      <tr><td>直近の高値が2〜3回重なる価格</td><td>レジスタンスライン候補。何度も上値を抑えられている。</td></tr>
+      <tr><td>キリのいい価格（1,000円・2,000円など）</td><td>心理的な節目として機能することが多い。</td></tr>
+    </table>
+
+    <div class="callout info">
+      <div class="callout-title">💡 反応した回数が多いほど強いライン</div>
+      2〜3回反応しているラインは意識されやすく、4〜5回反応しているラインはさらに強力です。1回だけ反応した価格は弱いラインとして扱います。
+    </div>
+
+    <h2 id="breakout">ブレイクアウトの見方</h2>
+    <p>価格がラインを突き抜けることを<strong>ブレイクアウト</strong>といいます。ブレイクアウトはトレンドの転換・加速を示す重要なサインです。</p>
+
+    <table class="compare-table">
+      <tr><th>場面</th><th>意味</th><th>判断</th></tr>
+      <tr><td>レジスタンスを上抜け</td><td>売り圧力を突破した</td><td>上昇トレンド継続の可能性。買いサイン。</td></tr>
+      <tr><td>サポートを下抜け</td><td>買い支えが崩れた</td><td>下降トレンド継続の可能性。売りサイン（または損切り）。</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ ダマシに注意</div>
+      一時的にラインを抜けてすぐ戻る「ダマシ」が頻繁に起きます。ブレイクアウトは出来高の増加を確認してから判断するのが基本です。
+    </div>
+
+    <h2 id="reversal">役割の反転</h2>
+    <p>ブレイクアウト後は、ラインの役割が入れ替わることがよくあります。</p>
+
+    <div class="example-box">
+      <div class="example-box-title">役割反転の例</div>
+      <p>レジスタンス（上値抵抗）を上抜け → そのラインが今度はサポート（下値支持）になる</p>
+      <p>サポート（下値支持）を下抜け → そのラインが今度はレジスタンス（上値抵抗）になる</p>
+    </div>
+
+    <p>これを「<strong>サポレジ転換</strong>」と呼びます。ブレイクアウト後の押し目・戻りで、転換したラインで反応するかを確認してエントリーする手法が有効です。</p>
+
+    <h2 id="use">デイトレでの使い方</h2>
+
+    <div class="callout good">
+      <div class="callout-title">✅ 基本的な使い方3パターン</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>パターン</th><th>エントリー</th><th>損切り</th></tr>
+      <tr><td>サポートで反発を狙う</td><td>サポートに近づいたら買い</td><td>サポートを下抜けたら損切り</td></tr>
+      <tr><td>レジスタンスで戻りを狙う</td><td>レジスタンスに近づいたら売り（信用取引）</td><td>レジスタンスを上抜けたら損切り</td></tr>
+      <tr><td>ブレイクアウトを狙う</td><td>ライン突破後に出来高確認してエントリー</td><td>ラインの内側に戻ったら損切り</td></tr>
+    </table>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>サポートラインは価格が下げ止まる水平線、レジスタンスラインは上値を抑える水平線。</li>
+        <li>複数回反応している価格に引くほど信頼性が高い。</li>
+        <li>ブレイクアウトはトレンド転換のサイン。出来高の増加とセットで確認する。</li>
+        <li>ブレイク後はラインの役割が反転する「サポレジ転換」が起きやすい。</li>
+        <li>移動平均線・ボリンジャーバンドと組み合わせると精度が上がる。</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../investment-sim/index.html">積立投資シミュレーター</a></li>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>フィボナッチリトレースメントの使い方｜押し目の目安を計算する方法 | MoneyTools</title>
+  <meta name="description" content="フィボナッチリトレースメントの基本を解説。23.6%・38.2%・50%・61.8%の意味と、デイトレ・スイングトレードでの押し目・戻りの目安としての使い方をわかりやすく説明します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .fib-levels {
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .fib-level {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .fib-level-pct {
+      width: 56px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--gray-900);
+      flex-shrink: 0;
+    }
+    .fib-level-bar-track {
+      flex: 1;
+      background: var(--gray-100);
+      border-radius: 6px;
+      height: 22px;
+      overflow: hidden;
+    }
+    .fib-level-bar {
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      padding-left: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .fib-desc {
+      width: 100px;
+      font-size: 12px;
+      color: var(--gray-600);
+      flex-shrink: 0;
+    }
+    @media (max-width: 480px) { .fib-desc { display: none; } }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>フィボナッチリトレースメントの使い方</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">テクニカル分析</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年5月</span>
+  </div>
+
+  <h1 class="article-title">フィボナッチリトレースメントの使い方｜押し目の目安を計算する方法</h1>
+
+  <p class="article-lead">
+    「押し目でどこまで下がるか」を計算するときに使うのがフィボナッチリトレースメントです。23.6%・38.2%・50%・61.8%という特定の比率に価格が反応することが多く、世界中のトレーダーが意識しています。この記事では基本的な使い方をわかりやすく解説します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#what">フィボナッチとは何か</a></li>
+      <li><a href="#levels">主要なフィボナッチレベル</a></li>
+      <li><a href="#howto">チャートへの引き方</a></li>
+      <li><a href="#use">デイトレでの使い方</a></li>
+      <li><a href="#combine">他の指標との組み合わせ</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="what">フィボナッチとは何か</h2>
+    <p>フィボナッチ数列（1, 1, 2, 3, 5, 8, 13, 21…）から導かれる比率が、自然界や相場の値動きに繰り返し現れることから、テクニカル分析に応用されています。特に<strong>「価格がどこで反転するか」の目安</strong>として使われます。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 なぜ機能するのか</div>
+      フィボナッチレベルが機能する最大の理由は、世界中の多くのトレーダーが「意識している」からです。自己成就的予言として機能します。
+    </div>
+
+    <h2 id="levels">主要なフィボナッチレベル</h2>
+    <p>リトレースメント（押し戻し）でよく使われる主要なレベルは以下の4つです。</p>
+
+    <div class="fib-levels">
+      <div class="fib-level">
+        <div class="fib-level-pct">23.6%</div>
+        <div class="fib-level-bar-track">
+          <div class="fib-level-bar" style="width:24%;background:#10b981;">浅い押し目</div>
+        </div>
+        <div class="fib-desc">トレンドが強いとき</div>
+      </div>
+      <div class="fib-level">
+        <div class="fib-level-pct">38.2%</div>
+        <div class="fib-level-bar-track">
+          <div class="fib-level-bar" style="width:38%;background:#3b82f6;">普通の押し目</div>
+        </div>
+        <div class="fib-desc">よく意識される</div>
+      </div>
+      <div class="fib-level">
+        <div class="fib-level-pct">50.0%</div>
+        <div class="fib-level-bar-track">
+          <div class="fib-level-bar" style="width:50%;background:#f59e0b;">半値押し</div>
+        </div>
+        <div class="fib-desc">最もよく反応する</div>
+      </div>
+      <div class="fib-level">
+        <div class="fib-level-pct">61.8%</div>
+        <div class="fib-level-bar-track">
+          <div class="fib-level-bar" style="width:62%;background:#ef4444;">深い押し目</div>
+        </div>
+        <div class="fib-desc">黄金比率・最重要</div>
+      </div>
+    </div>
+
+    <p><strong>61.8%は「黄金比率」</strong>と呼ばれ、最も強く意識されるレベルです。このラインで反転すれば上昇トレンド継続、下抜けると転換の可能性が高まります。</p>
+
+    <h2 id="howto">チャートへの引き方</h2>
+    <p>フィボナッチリトレースメントは「高値から安値（または安値から高値）に向けて引く」のが基本です。</p>
+
+    <div class="example-box">
+      <div class="example-box-title">上昇後の押し目を計算する例</div>
+      <p>安値：800円 → 高値：1,200円（上昇幅400円）</p>
+      <p>38.2%戻し：1,200円 − (400円 × 0.382) = <strong>1,047円</strong></p>
+      <p>50.0%戻し：1,200円 − (400円 × 0.500) = <strong>1,000円</strong></p>
+      <p>61.8%戻し：1,200円 − (400円 × 0.618) = <strong>952円</strong></p>
+    </div>
+
+    <p>多くの証券会社のチャートツールにはフィボナッチリトレースメントを自動で引く機能があります。安値と高値を指定するだけで自動計算されます。</p>
+
+    <h2 id="use">デイトレでの使い方</h2>
+
+    <table class="compare-table">
+      <tr><th>場面</th><th>使い方</th></tr>
+      <tr><td>上昇後の押し目買い</td><td>38.2%・50%・61.8%付近で反転を確認してから買いエントリー</td></tr>
+      <tr><td>下降後の戻り売り</td><td>38.2%・50%・61.8%付近で再度下落を確認してから売りエントリー（信用取引）</td></tr>
+      <tr><td>利確目標の設定</td><td>エントリー後の目標価格として161.8%などの拡張レベルを使う</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ フィボナッチだけで判断しない</div>
+      フィボナッチはあくまで「目安」です。レベルに到達したからといって必ず反転するわけではありません。ローソク足の形やRSIなど他の指標と組み合わせて判断しましょう。
+    </div>
+
+    <h2 id="combine">他の指標との組み合わせ</h2>
+
+    <table class="compare-table">
+      <tr><th>組み合わせ</th><th>使い方</th></tr>
+      <tr><td>フィボナッチ + サポートライン</td><td>フィボナッチレベルと水平サポートが重なる価格は特に強い支持帯になる</td></tr>
+      <tr><td>フィボナッチ + RSI</td><td>61.8%付近でRSIが30以下なら強い買いサイン</td></tr>
+      <tr><td>フィボナッチ + 移動平均線</td><td>25日移動平均線とフィボナッチレベルが近い価格は意識されやすい</td></tr>
+    </table>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>フィボナッチリトレースメントは「価格がどこで反転するか」の目安を示す指標。</li>
+        <li>主要レベルは23.6%・38.2%・<strong>50%・61.8%</strong>。61.8%が最重要。</li>
+        <li>高値〜安値（または安値〜高値）にかけてラインを引くだけで自動計算される。</li>
+        <li>サポートライン・RSI・移動平均線と重なる価格は特に注目度が高い。</li>
+        <li>単独で使わず、他の指標と組み合わせて判断する。</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../investment-sim/index.html">積立投資シミュレーター</a></li>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>
