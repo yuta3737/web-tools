@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>デイトレ銘柄の選び方｜初心者が狙うべき銘柄の条件 | MoneyTools</title>
+  <meta name="description" content="デイトレードに向いている銘柄の選び方を解説。出来高・値動き・流動性など初心者が確認すべき条件と、避けるべき銘柄の特徴をわかりやすく説明します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .condition-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin: 20px 0;
+    }
+    .condition-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .condition-icon {
+      font-size: 28px;
+      width: 52px;
+      height: 52px;
+      background: var(--gray-50);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .condition-body { flex: 1; }
+    .condition-body h3 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin: 0 0 6px;
+    }
+    .condition-body p {
+      font-size: 13px;
+      color: var(--gray-600);
+      margin: 0;
+      line-height: 1.7;
+    }
+    .condition-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-bottom: 6px;
+      display: inline-block;
+    }
+    .condition-badge.must { background: #dbeafe; color: #1e40af; }
+
+    .avoid-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    @media (max-width: 540px) { .avoid-grid { grid-template-columns: 1fr; } }
+    .avoid-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    .avoid-box-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: #991b1b;
+      margin-bottom: 6px;
+    }
+    .avoid-box p {
+      font-size: 13px;
+      color: var(--gray-700);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .screen-steps {
+      counter-reset: screen-step;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .screen-step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--gray-50);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .screen-step-num {
+      counter-increment: screen-step;
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .screen-step-body {
+      font-size: 14px;
+      color: var(--gray-700);
+      line-height: 1.7;
+    }
+    .screen-step-body strong { color: var(--gray-900); }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>デイトレ銘柄の選び方</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">デイトレ基礎</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年5月</span>
+  </div>
+
+  <h1 class="article-title">デイトレ銘柄の選び方｜初心者が狙うべき銘柄の条件</h1>
+
+  <p class="article-lead">
+    「どの銘柄でデイトレすればいいかわからない」は初心者が最初にぶつかる壁です。デイトレに向いている銘柄には共通する条件があります。この記事では、初心者が銘柄を選ぶときに確認すべきポイントと、避けるべき銘柄の特徴を解説します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#conditions">デイトレ向き銘柄の3条件</a></li>
+      <li><a href="#volume">出来高の目安</a></li>
+      <li><a href="#avoid">避けるべき銘柄</a></li>
+      <li><a href="#screening">銘柄の探し方・スクリーニング</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="conditions">デイトレ向き銘柄の3条件</h2>
+    <p>デイトレードは1日のうちに売買を完結させるため、「動く銘柄」を選ぶことが重要です。以下の3つが揃っている銘柄が理想です。</p>
+
+    <div class="condition-list">
+      <div class="condition-item">
+        <div class="condition-icon">📊</div>
+        <div class="condition-body">
+          <div class="condition-badge must">最重要</div>
+          <h3>出来高が多い（流動性が高い）</h3>
+          <p>1日の取引量（出来高）が多いほど、買いたいときに買えて・売りたいときに売れます。出来高が少ないと、売りたくても売れない「流動性リスク」が発生します。目安は<strong>1日100万株以上</strong>。</p>
+        </div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-icon">📈</div>
+        <div class="condition-body">
+          <div class="condition-badge must">最重要</div>
+          <h3>値動きが適度に大きい（ボラティリティ）</h3>
+          <p>デイトレは1日の値動きから利益を出します。ほとんど動かない銘柄では利益を取れません。一方で値動きが激しすぎると損失も大きくなります。<strong>1日の値幅が株価の2〜5%程度</strong>が目安です。</p>
+        </div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-icon">💰</div>
+        <div class="condition-body">
+          <h3>株価が手頃（買いやすい価格帯）</h3>
+          <p>100株単位で買う場合、株価×100が必要な資金になります。株価500円なら5万円、株価2,000円なら20万円。初心者は<strong>500円〜2,000円程度の銘柄</strong>から始めると資金効率を管理しやすいです。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 出来高ランキングが出発点</div>
+      証券会社のツールや株探（kabutan.jp）の「出来高ランキング」を毎朝確認するのが基本です。その日動いている銘柄が一目でわかります。
+    </div>
+
+    <h2 id="volume">出来高の目安</h2>
+    <p>出来高はデイトレにおいて最も重要な指標です。出来高が多いと以下のメリットがあります。</p>
+
+    <table class="compare-table">
+      <tr><th>出来高の水準</th><th>特徴</th><th>初心者向け？</th></tr>
+      <tr><td>100万株未満</td><td>流動性が低い。売買のスプレッドが広い</td><td><span class="tag-bad">避ける</span></td></tr>
+      <tr><td>100万〜500万株</td><td>普通の流動性。慣れてきたら対象に</td><td>○</td></tr>
+      <tr><td>500万株以上</td><td>流動性が高い。スムーズに売買できる</td><td><span class="tag-good">おすすめ</span></td></tr>
+      <tr><td>1,000万株以上</td><td>超高流動性。大型株・人気銘柄に多い</td><td><span class="tag-good">最適</span></td></tr>
+    </table>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 急に出来高が増えた銘柄は注意</div>
+      普段出来高が少ない銘柄が急に跳ね上がるのは、材料（ニュース）や仕手筋の動きが原因のことがあります。急騰後は急落するリスクが高いため、初心者は手を出さない方が安全です。
+    </div>
+
+    <h2 id="avoid">避けるべき銘柄</h2>
+    <p>デイトレで損失を大きくしやすい銘柄の特徴です。最初のうちは以下の銘柄を避けるだけでリスクが大幅に下がります。</p>
+
+    <div class="avoid-grid">
+      <div class="avoid-box">
+        <div class="avoid-box-title">出来高が少ない銘柄</div>
+        <p>売りたいときに売れない。スプレッドが広くて損しやすい。</p>
+      </div>
+      <div class="avoid-box">
+        <div class="avoid-box-title">テーマ株・材料株の急騰後</div>
+        <p>高値掴みになりやすい。急落で大きな損失につながりやすい。</p>
+      </div>
+      <div class="avoid-box">
+        <div class="avoid-box-title">株価が極端に安い（ボロ株）</div>
+        <p>100円以下の低位株は値動きが読みにくく、出来高も不安定。</p>
+      </div>
+      <div class="avoid-box">
+        <div class="avoid-box-title">決算発表直前・直後</div>
+        <p>サプライズで急騰・急落しやすい。ギャンブル性が高まる。</p>
+      </div>
+      <div class="avoid-box">
+        <div class="avoid-box-title">自分が知らない業種・銘柄</div>
+        <p>チャートの癖や材料の意味が読めないと判断できない。</p>
+      </div>
+      <div class="avoid-box">
+        <div class="avoid-box-title">信用倍率が極端に高い銘柄</div>
+        <p>売り圧力が溜まっており、上値が重くなりやすい。</p>
+      </div>
+    </div>
+
+    <h2 id="screening">銘柄の探し方・スクリーニング</h2>
+    <p>毎日の銘柄選定は以下の手順で行うと効率的です。証券会社のスクリーニングツールを活用しましょう。</p>
+
+    <div class="screen-steps">
+      <div class="screen-step">
+        <div class="screen-step-num">1</div>
+        <div class="screen-step-body"><strong>出来高ランキングを確認</strong><br>その日の上位50〜100銘柄をチェック。急に出来高が増えている銘柄は何かの材料がある可能性が高い。</div>
+      </div>
+      <div class="screen-step">
+        <div class="screen-step-num">2</div>
+        <div class="screen-step-body"><strong>値上がり率ランキングも合わせて見る</strong><br>出来高上位×値上がり上位の銘柄は注目度が高い。ただし急騰後は慎重に。</div>
+      </div>
+      <div class="screen-step">
+        <div class="screen-step-num">3</div>
+        <div class="screen-step-body"><strong>チャートを確認して動きの癖を見る</strong><br>トレンドが出ているか、支持線・抵抗線の位置はどこかを確認。動きが読みやすい銘柄を選ぶ。</div>
+      </div>
+      <div class="screen-step">
+        <div class="screen-step-num">4</div>
+        <div class="screen-step-body"><strong>2〜3銘柄に絞って集中する</strong><br>初心者は多くの銘柄を同時に追わない。1〜2銘柄に絞って値動きに集中する方が判断しやすい。</div>
+      </div>
+    </div>
+
+    <div class="callout good">
+      <div class="callout-title">✅ 最初は「慣れた銘柄」を繰り返す</div>
+      毎日同じ銘柄を観察し続けると、その銘柄の「癖」がわかってきます。初心者は毎日銘柄を変えるより、同じ銘柄を繰り返し見る方が上達しやすいです。
+    </div>
+
+    <a href="../../position-calc/index.html" class="tool-cta">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">関連ツール</div>
+        <div class="tool-cta-title">ポジションサイズ計算ツール</div>
+        <div class="tool-cta-sub">銘柄が決まったら何株買うかを計算しよう</div>
+      </div>
+      <div class="tool-cta-arrow">›</div>
+    </a>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>デイトレ向き銘柄の条件は「出来高が多い」「値動きが適度」「株価が手頃」の3つ。</li>
+        <li>出来高は1日500万株以上が目安。少ない銘柄は流動性リスクがある。</li>
+        <li>急騰後の材料株・ボロ株・決算直前後は初心者には危険。</li>
+        <li>毎朝出来高ランキングを確認し、2〜3銘柄に絞って集中するのが基本。</li>
+        <li>最初は同じ銘柄を繰り返し観察して「癖」を覚えると上達しやすい。</li>
+      </ul>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 関連記事</div>
+      銘柄を選んだあとは<a href="../board-reading/index.html">板・気配値の読み方</a>と<a href="../stop-loss/index.html">損切りの決め方</a>を確認しておきましょう。
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../investment-sim/index.html">積立投資シミュレーター</a></li>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

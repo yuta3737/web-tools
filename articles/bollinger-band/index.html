@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ボリンジャーバンドの見方｜σの使い方とバンドウォーク・スクイーズ | MoneyTools</title>
+  <meta name="description" content="ボリンジャーバンドの基本をわかりやすく解説。±1σ・±2σの意味、バンドウォーク・スクイーズの読み方、移動平均線・RSIとの組み合わせ方を初心者向けに説明します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .bb-chart {
+      background: #0f172a;
+      border-radius: 14px;
+      padding: 24px 20px;
+      margin: 20px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .bb-chart-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,.5);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 16px;
+    }
+    .bb-svg-wrap {
+      width: 100%;
+      aspect-ratio: 16/7;
+    }
+
+    .sigma-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 20px 0;
+    }
+    @media (max-width: 540px) { .sigma-grid { grid-template-columns: 1fr; } }
+    .sigma-card {
+      border-radius: 12px;
+      padding: 14px 12px;
+      text-align: center;
+    }
+    .sigma-card.s1 { background: #f0fdf4; border: 1px solid #bbf7d0; }
+    .sigma-card.s2 { background: #fefce8; border: 1px solid #fde68a; }
+    .sigma-card.s3 { background: #fef2f2; border: 1px solid #fecaca; }
+    .sigma-card-label {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+    .sigma-card.s1 .sigma-card-label { color: #16a34a; }
+    .sigma-card.s2 .sigma-card-label { color: #d97706; }
+    .sigma-card.s3 .sigma-card-label { color: #dc2626; }
+    .sigma-card-prob {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+    }
+    .sigma-card-desc {
+      font-size: 11px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 20px 0;
+    }
+    @media (max-width: 480px) { .pattern-grid { grid-template-columns: 1fr; } }
+    .pattern-card {
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .pattern-card.bandwalk { background: #eff6ff; border: 2px solid #bfdbfe; }
+    .pattern-card.squeeze  { background: #fdf4ff; border: 2px solid #e9d5ff; }
+    .pattern-card-title {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .pattern-card.bandwalk .pattern-card-title { color: #1e40af; }
+    .pattern-card.squeeze  .pattern-card-title { color: #7e22ce; }
+    .pattern-card p {
+      font-size: 13px;
+      color: var(--gray-700);
+      margin: 0;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>ボリンジャーバンドの見方</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">テクニカル分析</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年5月</span>
+  </div>
+
+  <h1 class="article-title">ボリンジャーバンドの見方｜σの使い方とバンドウォーク・スクイーズ</h1>
+
+  <p class="article-lead">
+    移動平均線の次に覚えておきたいテクニカル指標がボリンジャーバンドです。価格の「振れ幅（標準偏差）」を使って上限・下限ラインを引き、現在の価格が高いか安いかを判断します。この記事ではσ（シグマ）の読み方から実践的な使い方まで解説します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#what">ボリンジャーバンドとは何か</a></li>
+      <li><a href="#sigma">σ（シグマ）の意味と確率</a></li>
+      <li><a href="#patterns">バンドウォークとスクイーズ</a></li>
+      <li><a href="#howto">基本的な使い方</a></li>
+      <li><a href="#combine">他の指標との組み合わせ</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="what">ボリンジャーバンドとは何か</h2>
+    <p>ボリンジャーバンドは、<strong>移動平均線（中心線）を基準に、上下に標準偏差のバンドを描いた指標</strong>です。1980年代にジョン・ボリンジャー氏が開発しました。</p>
+
+    <div class="bb-chart">
+      <div class="bb-chart-title">ボリンジャーバンドのイメージ図</div>
+      <svg class="bb-svg-wrap" viewBox="0 0 400 175" xmlns="http://www.w3.org/2000/svg">
+        <!-- +2σライン -->
+        <path d="M20,30 Q100,20 200,35 Q300,50 380,25" fill="none" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <!-- +1σライン -->
+        <path d="M20,55 Q100,45 200,60 Q300,75 380,50" fill="none" stroke="#60a5fa" stroke-width="1" stroke-dasharray="2,3" opacity="0.6"/>
+        <!-- 中心線（25MA） -->
+        <path d="M20,88 Q100,80 200,90 Q300,102 380,85" fill="none" stroke="#f8fafc" stroke-width="2"/>
+        <!-- -1σライン -->
+        <path d="M20,121 Q100,115 200,120 Q300,129 380,120" fill="none" stroke="#f87171" stroke-width="1" stroke-dasharray="2,3" opacity="0.6"/>
+        <!-- -2σライン -->
+        <path d="M20,146 Q100,140 200,145 Q300,154 380,145" fill="none" stroke="#f87171" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <!-- バンド塗りつぶし -->
+        <path d="M20,30 Q100,20 200,35 Q300,50 380,25 L380,145 Q300,154 200,145 Q100,140 20,146 Z" fill="rgba(99,102,241,0.08)"/>
+        <!-- ローソク足（簡易） -->
+        <rect x="35" y="70" width="6" height="35" fill="#22c55e" rx="1"/>
+        <rect x="55" y="60" width="6" height="45" fill="#22c55e" rx="1"/>
+        <rect x="75" y="50" width="6" height="30" fill="#22c55e" rx="1"/>
+        <rect x="95" y="55" width="6" height="40" fill="#ef4444" rx="1"/>
+        <rect x="115" y="62" width="6" height="35" fill="#22c55e" rx="1"/>
+        <rect x="135" y="58" width="6" height="38" fill="#ef4444" rx="1"/>
+        <rect x="155" y="65" width="6" height="42" fill="#22c55e" rx="1"/>
+        <rect x="175" y="72" width="6" height="35" fill="#22c55e" rx="1"/>
+        <rect x="195" y="80" width="6" height="40" fill="#ef4444" rx="1"/>
+        <rect x="215" y="88" width="6" height="38" fill="#ef4444" rx="1"/>
+        <rect x="235" y="82" width="6" height="42" fill="#22c55e" rx="1"/>
+        <rect x="255" y="75" width="6" height="45" fill="#22c55e" rx="1"/>
+        <rect x="275" y="85" width="6" height="35" fill="#ef4444" rx="1"/>
+        <rect x="295" y="90" width="6" height="42" fill="#22c55e" rx="1"/>
+        <rect x="315" y="78" width="6" height="40" fill="#22c55e" rx="1"/>
+        <rect x="335" y="68" width="6" height="38" fill="#ef4444" rx="1"/>
+        <rect x="355" y="72" width="6" height="36" fill="#22c55e" rx="1"/>
+        <!-- ラベル -->
+        <text x="385" y="29" font-size="10" fill="#60a5fa" font-weight="700">+2σ</text>
+        <text x="385" y="54" font-size="10" fill="#60a5fa" opacity="0.7">+1σ</text>
+        <text x="385" y="89" font-size="10" fill="#f8fafc" font-weight="700">25MA</text>
+        <text x="385" y="124" font-size="10" fill="#f87171" opacity="0.7">-1σ</text>
+        <text x="385" y="149" font-size="10" fill="#f87171" font-weight="700">-2σ</text>
+      </svg>
+    </div>
+
+    <p>通常は<strong>25日移動平均線（中心線）</strong>を基準に、±1σ・±2σの4本のバンドを表示します。バンドの幅は価格の変動が大きいほど広がり、落ち着いているほど狭くなります。</p>
+
+    <h2 id="sigma">σ（シグマ）の意味と確率</h2>
+    <p>σは統計学の「標準偏差」のことです。正規分布の性質から、価格がバンド内に収まる確率が計算できます。</p>
+
+    <div class="sigma-grid">
+      <div class="sigma-card s1">
+        <div class="sigma-card-label">±1σ</div>
+        <div class="sigma-card-prob">68%</div>
+        <div class="sigma-card-desc">価格がこの範囲に収まる確率。バンドの内側。</div>
+      </div>
+      <div class="sigma-card s2">
+        <div class="sigma-card-label">±2σ</div>
+        <div class="sigma-card-prob">95%</div>
+        <div class="sigma-card-desc">価格がこの範囲に収まる確率。最もよく使われる。</div>
+      </div>
+      <div class="sigma-card s3">
+        <div class="sigma-card-label">±3σ</div>
+        <div class="sigma-card-prob">99.7%</div>
+        <div class="sigma-card-desc">価格がこの範囲に収まる確率。タッチは極めてまれ。</div>
+      </div>
+    </div>
+
+    <p>つまり、<strong>価格が±2σのバンドに触れるのは統計上5%程度のまれな状態</strong>です。「上のバンドに触れたら買われすぎ、下のバンドに触れたら売られすぎ」という逆張りのサインとして使われます。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ ±2σタッチ＝必ず反転するわけではない</div>
+      トレンドが強い相場では、価格が±2σを超えて走り続ける「バンドウォーク」が発生します。±2σをタッチしたからといって、すぐ逆張りするのは初心者が失敗しやすいパターンです。
+    </div>
+
+    <h2 id="patterns">バンドウォークとスクイーズ</h2>
+    <p>ボリンジャーバンドには2つの重要なパターンがあります。</p>
+
+    <div class="pattern-grid">
+      <div class="pattern-card bandwalk">
+        <div class="pattern-card-title">バンドウォーク（順張りサイン）</div>
+        <p>価格が+2σまたは-2σのバンドに沿って動き続ける状態。強いトレンドが発生しているサイン。逆張りは危険で、<strong>トレンドに乗る（順張り）</strong>のが基本。</p>
+      </div>
+      <div class="pattern-card squeeze">
+        <div class="pattern-card-title">スクイーズ（ブレイクアウト前兆）</div>
+        <p>バンドの幅が極端に狭くなった状態。エネルギーが溜まっているサインで、その後に<strong>大きな値動き（ブレイクアウト）</strong>が起きやすい。どちらに動くかはスクイーズ中はわからない。</p>
+      </div>
+    </div>
+
+    <h2 id="howto">基本的な使い方</h2>
+
+    <h3>逆張りシグナル（レンジ相場向け）</h3>
+    <p>価格が横ばいで動いているレンジ相場では、バンドの端での反転を狙えます。</p>
+
+    <table class="compare-table">
+      <tr><th>場面</th><th>サイン</th><th>判断</th></tr>
+      <tr><td>価格が-2σに触れる</td><td>売られすぎ</td><td>買いエントリーを検討</td></tr>
+      <tr><td>価格が+2σに触れる</td><td>買われすぎ</td><td>売りエントリーを検討（または利確）</td></tr>
+    </table>
+
+    <h3>順張りシグナル（トレンド相場向け）</h3>
+    <p>バンドウォークが発生しているトレンド相場では逆張りは危険です。</p>
+
+    <table class="compare-table">
+      <tr><th>場面</th><th>判断</th></tr>
+      <tr><td>価格が+2σを上抜けてバンドウォーク</td><td>上昇トレンド継続。買いポジションをキープ</td></tr>
+      <tr><td>価格が-2σを下抜けてバンドウォーク</td><td>下降トレンド継続。売りポジションをキープ（信用取引）</td></tr>
+      <tr><td>スクイーズ後に上方向にブレイク</td><td>上昇トレンド開始の可能性。買いを検討</td></tr>
+    </table>
+
+    <h2 id="combine">他の指標との組み合わせ</h2>
+    <p>ボリンジャーバンド単体ではなく、他の指標と組み合わせることで精度が上がります。</p>
+
+    <div class="callout good">
+      <div class="callout-title">✅ おすすめの組み合わせ</div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>組み合わせ</th><th>使い方</th></tr>
+      <tr><td>ボリンジャー + RSI</td><td>-2σタッチ＆RSI30以下 → 強い買いサイン。+2σタッチ＆RSI70以上 → 強い売りサイン。両方一致すると精度が高まる。</td></tr>
+      <tr><td>ボリンジャー + 移動平均線</td><td>中心線（25MA）が上向きならバンドウォーク中の上昇。下向きなら下降トレンドと判断できる。</td></tr>
+      <tr><td>ボリンジャー + 出来高</td><td>スクイーズ後のブレイクアウトに出来高が伴っていれば、本物のトレンド発生の可能性が高い。</td></tr>
+    </table>
+
+    <div class="callout info">
+      <div class="callout-title">💡 RSIとMACDの解説はこちら</div>
+      ボリンジャーバンドと組み合わせて使うRSI・MACDの基本は<a href="../rsi-macd/index.html">RSI・MACDの基本</a>で解説しています。
+    </div>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>ボリンジャーバンドは移動平均線を中心に±1σ・±2σのバンドを描く指標。</li>
+        <li>価格が±2σに収まる確率は約95%。タッチは統計的に過熱を示す。</li>
+        <li><strong>バンドウォーク</strong>はトレンド継続サイン。逆張りではなく順張りで対応。</li>
+        <li><strong>スクイーズ</strong>はブレイクアウトの前兆。どちらに動くか方向を確認してから入る。</li>
+        <li>RSIや移動平均線と組み合わせることで精度が上がる。</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../investment-sim/index.html">積立投資シミュレーター</a></li>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

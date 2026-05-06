@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>オルカンとS&P500どっちがいい？｜NISAで選ぶ投資信託の比較 | MoneyTools</title>
+  <meta name="description" content="NISAで人気の「eMAXIS Slim 全世界株式（オルカン）」と「eMAXIS Slim 米国株式（S&P500）」を徹底比較。投資範囲・コスト・過去実績の違いと、どちらを選ぶべきかを解説します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .fund-compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+    @media (max-width: 540px) {
+      .fund-compare-grid { grid-template-columns: 1fr; }
+    }
+    .fund-card {
+      border-radius: 14px;
+      padding: 20px 18px;
+    }
+    .fund-card.world {
+      background: #dbeafe;
+      border: 2px solid #93c5fd;
+    }
+    .fund-card.us {
+      background: #fce7f3;
+      border: 2px solid #f9a8d4;
+    }
+    .fund-card-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      margin-bottom: 6px;
+    }
+    .fund-card.world .fund-card-label { color: #1e40af; }
+    .fund-card.us    .fund-card-label { color: #9d174d; }
+    .fund-card-name {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .fund-card-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      color: var(--gray-700);
+    }
+    .fund-card-row:last-child { border-bottom: none; }
+    .fund-card-row span:last-child { font-weight: 700; color: var(--gray-900); }
+
+    .merit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 20px 0;
+    }
+    @media (max-width: 540px) {
+      .merit-grid { grid-template-columns: 1fr; }
+    }
+    .merit-box {
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .merit-box.world-merit { background: #eff6ff; border: 1px solid #bfdbfe; }
+    .merit-box.us-merit    { background: #fdf2f8; border: 1px solid #fbcfe8; }
+    .merit-box-title {
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .merit-box.world-merit .merit-box-title { color: #1e40af; }
+    .merit-box.us-merit    .merit-box-title { color: #9d174d; }
+    .merit-box ul {
+      padding-left: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .merit-box li {
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    .recommend-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 2px solid #7dd3fc;
+      border-radius: 14px;
+      padding: 24px 22px;
+      margin: 24px 0;
+    }
+    .recommend-box-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0369a1;
+      margin-bottom: 12px;
+    }
+    .recommend-box p {
+      font-size: 14px;
+      color: var(--gray-700);
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+    .recommend-box p:last-child { margin-bottom: 0; }
+
+    .performance-bar-wrap {
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .perf-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .perf-label {
+      width: 80px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-700);
+      flex-shrink: 0;
+    }
+    .perf-bar-track {
+      flex: 1;
+      background: var(--gray-100);
+      border-radius: 6px;
+      height: 20px;
+      overflow: hidden;
+    }
+    .perf-bar {
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      padding-left: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .perf-bar.world { background: #3b82f6; }
+    .perf-bar.us    { background: #ec4899; }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>オルカンとS&amp;P500どっちがいい？</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">NISA・積立投資</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年5月</span>
+  </div>
+
+  <h1 class="article-title">オルカンとS&amp;P500どっちがいい？｜NISAで選ぶ投資信託の比較</h1>
+
+  <p class="article-lead">
+    NISAを始めようとすると必ず出てくる「オルカンとS&P500、どっちにすればいい？」という疑問。どちらも長期積立に向いた優良ファンドですが、投資範囲とリターンの特性が異なります。この記事では2つの違いを具体的に比較し、どちらを選ぶべきかの考え方を解説します。筆者は楽天証券でオルカンを積立中です。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#what">オルカン・S&amp;P500とは何か</a></li>
+      <li><a href="#diff">2つの具体的な違い</a></li>
+      <li><a href="#performance">過去のパフォーマンス比較</a></li>
+      <li><a href="#merit">それぞれのメリット・デメリット</a></li>
+      <li><a href="#choose">どちらを選ぶべきか</a></li>
+      <li><a href="#both">両方持つという選択肢</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="what">オルカン・S&amp;P500とは何か</h2>
+    <p>NISAで最も人気の高い2つの投資信託を簡単に説明します。どちらも三菱UFJアセットマネジメントが運用する「eMAXIS Slim」シリーズで、信託報酬（コスト）が業界最低水準です。</p>
+
+    <div class="fund-compare-grid">
+      <div class="fund-card world">
+        <div class="fund-card-label">ALL COUNTRY</div>
+        <div class="fund-card-name">eMAXIS Slim<br>全世界株式（オルカン）</div>
+        <div class="fund-card-row"><span>投資対象</span><span>全世界約3,000銘柄</span></div>
+        <div class="fund-card-row"><span>対象国</span><span>50カ国以上</span></div>
+        <div class="fund-card-row"><span>信託報酬</span><span>年0.05775%</span></div>
+        <div class="fund-card-row"><span>連動指数</span><span>MSCIオール・カントリー</span></div>
+      </div>
+      <div class="fund-card us">
+        <div class="fund-card-label">S&P 500</div>
+        <div class="fund-card-name">eMAXIS Slim<br>米国株式（S&amp;P500）</div>
+        <div class="fund-card-row"><span>投資対象</span><span>米国大型株500銘柄</span></div>
+        <div class="fund-card-row"><span>対象国</span><span>アメリカのみ</span></div>
+        <div class="fund-card-row"><span>信託報酬</span><span>年0.09372%</span></div>
+        <div class="fund-card-row"><span>連動指数</span><span>S&amp;P500指数</span></div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 どちらもNISAつみたて投資枠の対象</div>
+      両方ともつみたて投資枠で積立できる金融庁が認定した投資信託です。低コストで長期積立に適しています。
+    </div>
+
+    <h2 id="diff">2つの具体的な違い</h2>
+    <p>一番大きな違いは<strong>投資する地域の範囲</strong>です。オルカンは全世界に分散投資しますが、S&P500はアメリカだけに集中投資します。</p>
+
+    <table class="compare-table">
+      <tr><th>比較項目</th><th>オルカン（全世界）</th><th>S&amp;P500（米国）</th></tr>
+      <tr><td>投資先</td><td>全世界50カ国以上</td><td>アメリカのみ</td></tr>
+      <tr><td>銘柄数</td><td>約3,000銘柄</td><td>500銘柄</td></tr>
+      <tr><td>米国比率</td><td>約60〜65%</td><td>100%</td></tr>
+      <tr><td>主要銘柄</td><td>Apple・Microsoft・Amazonなど（米国比率高め）</td><td>Apple・Microsoft・Amazonなど</td></tr>
+      <tr><td>信託報酬</td><td><span class="tag-good">0.05775%（低い）</span></td><td>0.09372%</td></tr>
+      <tr><td>分散度</td><td><span class="tag-good">高い（全世界）</span></td><td>やや低い（米国集中）</td></tr>
+      <tr><td>為替リスク</td><td>複数通貨（円・ドル・ユーロなど）</td><td>ドルのみ</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ オルカンも米国比率は6割以上</div>
+      「全世界に分散」といっても、現在のオルカンは構成比率の約60〜65%がアメリカ株です。米国経済が好調なときはS&P500に近い動きをします。
+    </div>
+
+    <h2 id="performance">過去のパフォーマンス比較</h2>
+    <p>直近5〜10年の実績では、<strong>S&P500の方がリターンが高い傾向</strong>があります。これはアメリカのGAFAM（Google・Apple・Facebook・Amazon・Microsoft）が世界をリードしてきたためです。</p>
+
+    <p>参考：過去10年間の年平均リターン（概算）</p>
+
+    <div class="performance-bar-wrap">
+      <div class="perf-row">
+        <div class="perf-label">オルカン</div>
+        <div class="perf-bar-track">
+          <div class="perf-bar world" style="width:78%;">約+10〜12%/年</div>
+        </div>
+      </div>
+      <div class="perf-row">
+        <div class="perf-label">S&amp;P500</div>
+        <div class="perf-bar-track">
+          <div class="perf-bar us" style="width:95%;">約+12〜15%/年</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 過去の実績は将来を保証しない</div>
+      「直近10年はS&P500が優秀」という事実は、今後もそうとは限りません。2000年代（ITバブル崩壊後）は新興国が米国を上回る時期もありました。将来がわからないからこそ分散投資が有効です。
+    </div>
+
+    <h2 id="merit">それぞれのメリット・デメリット</h2>
+
+    <div class="merit-grid">
+      <div class="merit-box world-merit">
+        <div class="merit-box-title">オルカン（全世界）</div>
+        <ul>
+          <li>世界経済全体に分散できる</li>
+          <li>信託報酬が最安水準（0.05775%）</li>
+          <li>米国が衰退しても他国がカバー</li>
+          <li>「これ1本でOK」と言われる完結型</li>
+        </ul>
+      </div>
+      <div class="merit-box us-merit">
+        <div class="merit-box-title">S&amp;P500（米国）</div>
+        <ul>
+          <li>直近の実績はオルカンより高め</li>
+          <li>米国経済・ドル資産への集中投資</li>
+          <li>GAFAMなど世界最強企業を包含</li>
+          <li>シンプルでわかりやすい</li>
+        </ul>
+      </div>
+    </div>
+
+    <table class="compare-table">
+      <tr><th></th><th>オルカン</th><th>S&amp;P500</th></tr>
+      <tr><td>リターン（直近）</td><td>やや低め</td><td><span class="tag-good">高め</span></td></tr>
+      <tr><td>リスク分散</td><td><span class="tag-good">高い</span></td><td>米国集中（やや高リスク）</td></tr>
+      <tr><td>コスト</td><td><span class="tag-good">最安（0.05775%）</span></td><td>やや高め（0.09372%）</td></tr>
+      <tr><td>わかりやすさ</td><td>○</td><td>◎（米国一択でシンプル）</td></tr>
+      <tr><td>米国依存リスク</td><td>低い</td><td><span class="tag-bad">高い</span></td></tr>
+    </table>
+
+    <h2 id="choose">どちらを選ぶべきか</h2>
+
+    <div class="recommend-box">
+      <div class="recommend-box-title">結論：迷ったらオルカンでOK</div>
+      <p>「リターンを最大化したい」ならS&P500、「分散を重視してとにかく長く続けたい」ならオルカン、という考え方が一般的です。</p>
+      <p>ただし、どちらを選んでも<strong>「長期間・毎月コツコツ積立を続けること」の方が、銘柄選択よりはるかに重要</strong>です。完璧な答えを求めて悩むより、どちらかで始めることが大切です。</p>
+      <p>筆者はオルカンを選んでいます。「全世界に分散しているので、将来どの国が強くなっても対応できる」という安心感があり、積立を続けやすいからです。</p>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>こんな人には</th><th>おすすめ</th></tr>
+      <tr><td>とにかくシンプルに1本で完結させたい</td><td><strong>オルカン</strong></td></tr>
+      <tr><td>米国経済の成長を信じている</td><td><strong>S&amp;P500</strong></td></tr>
+      <tr><td>分散を最優先にしたい</td><td><strong>オルカン</strong></td></tr>
+      <tr><td>直近のリターン重視で選びたい</td><td><strong>S&amp;P500</strong></td></tr>
+      <tr><td>どちらがいいかわからない</td><td><strong>オルカン</strong>（迷ったらこちら）</td></tr>
+    </table>
+
+    <h2 id="both">両方持つという選択肢</h2>
+    <p>「どちらか一方を選ばなければいけない」ということはありません。つみたて投資枠（年120万円）では複数のファンドを組み合わせることもできます。</p>
+
+    <div class="example-box">
+      <div class="example-box-title">例：月3万円の積立を分ける場合</div>
+      <p>オルカン：月2万円 ＋ S&P500：月1万円</p>
+      <p>→ 全世界分散を基本にしつつ、米国の成長も取り込む構成</p>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ ただし「両方持つ」は本当に必要か？</div>
+      オルカンは元々60%以上が米国株です。S&P500を追加すると米国比率がさらに高まり、分散効果が薄れます。シンプルさを重視するならどちらか1本に絞った方が管理しやすいです。
+    </div>
+
+    <a href="../../investment-sim/index.html" class="tool-cta">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">関連ツール</div>
+        <div class="tool-cta-title">積立投資シミュレーター</div>
+        <div class="tool-cta-sub">月々の積立額・年利・期間を入力して将来資産を試算</div>
+      </div>
+      <div class="tool-cta-arrow">›</div>
+    </a>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>オルカンは全世界約3,000銘柄に分散。信託報酬0.05775%と最安水準。</li>
+        <li>S&P500は米国大型株500銘柄に集中。直近10年のリターンはオルカンより高め。</li>
+        <li>オルカンも米国比率が60%以上あるため、実際の値動きは似ている。</li>
+        <li>迷ったらオルカン。「将来どの国が強くなってもOK」という安心感がある。</li>
+        <li>どちらを選ぶかより、<strong>長期間積立を続けることの方が重要</strong>。</li>
+      </ul>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 関連記事</div>
+      NISAの仕組みや始め方は<a href="../nisa-basics/index.html">NISAとは何か</a>で解説しています。どの証券会社を選ぶかは<a href="../brokerage-comparison/index.html">証券口座の選び方</a>をご覧ください。
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../investment-sim/index.html">積立投資シミュレーター</a></li>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

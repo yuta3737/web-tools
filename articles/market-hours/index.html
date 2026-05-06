@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>寄り付き・引けとは｜時間帯別の値動きとデイトレの狙い目 | MoneyTools</title>
+  <meta name="description" content="株の取引時間・前場・後場・寄り付き・引けの意味を解説。デイトレードで値動きが大きい時間帯と、初心者が注意すべき時間帯をわかりやすく説明します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .timeline {
+      position: relative;
+      margin: 24px 0;
+      padding-left: 20px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 3px;
+      background: var(--gray-200);
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative;
+      padding: 0 0 24px 24px;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot {
+      position: absolute;
+      left: -9px;
+      top: 6px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 3px solid var(--white);
+    }
+    .timeline-dot.active  { background: var(--primary); }
+    .timeline-dot.warn    { background: #f59e0b; }
+    .timeline-dot.success { background: #10b981; }
+    .timeline-dot.gray    { background: var(--gray-400); }
+    .timeline-time {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+    }
+    .timeline-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-bottom: 6px;
+    }
+    .timeline-label.active  { background: #dbeafe; color: #1e40af; }
+    .timeline-label.warn    { background: #fef3c7; color: #92400e; }
+    .timeline-label.success { background: #d1fae5; color: #065f46; }
+    .timeline-label.gray    { background: var(--gray-100); color: var(--gray-600); }
+    .timeline-body {
+      font-size: 14px;
+      color: var(--gray-700);
+      line-height: 1.7;
+    }
+
+    .hour-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+    @media (max-width: 540px) { .hour-grid { grid-template-columns: 1fr; } }
+    .hour-card {
+      border-radius: 12px;
+      padding: 16px 14px;
+      text-align: center;
+    }
+    .hour-card.hot    { background: #fef2f2; border: 2px solid #fca5a5; }
+    .hour-card.normal { background: var(--gray-50); border: 1px solid var(--gray-200); }
+    .hour-card.cool   { background: #eff6ff; border: 2px solid #bfdbfe; }
+    .hour-card-time {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+    }
+    .hour-card-label {
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .hour-card.hot    .hour-card-label { color: #991b1b; }
+    .hour-card.normal .hour-card-label { color: var(--gray-600); }
+    .hour-card.cool   .hour-card-label { color: #1e40af; }
+    .hour-card-desc {
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>寄り付き・引けとは</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">デイトレ基礎</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年5月</span>
+  </div>
+
+  <h1 class="article-title">寄り付き・引けとは｜時間帯別の値動きとデイトレの狙い目</h1>
+
+  <p class="article-lead">
+    「寄り付き」「引け」「前場」「後場」——株の取引でよく出るこれらの言葉の意味と、時間帯ごとの値動きの特徴を解説します。どの時間帯に活発に動くか知るだけで、デイトレの判断が変わります。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#session">取引時間の基本（前場・後場）</a></li>
+      <li><a href="#timeline">1日の流れと各時間帯の意味</a></li>
+      <li><a href="#characteristics">時間帯別の値動きの特徴</a></li>
+      <li><a href="#beginner">初心者が狙いやすい時間帯</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="session">取引時間の基本（前場・後場）</h2>
+    <p>東京証券取引所（東証）の株式取引時間は、1日2セッションに分かれています。</p>
+
+    <table class="compare-table">
+      <tr><th>セッション</th><th>時間</th><th>始まり</th><th>終わり</th></tr>
+      <tr><td><strong>前場（ぜんば）</strong></td><td>9:00〜11:30</td><td>寄り付き</td><td>前引け</td></tr>
+      <tr><td><strong>昼休み</strong></td><td>11:30〜12:30</td><td>—</td><td>—</td></tr>
+      <tr><td><strong>後場（ごば）</strong></td><td>12:30〜15:30</td><td>後場寄り</td><td>大引け（引け）</td></tr>
+    </table>
+
+    <div class="callout info">
+      <div class="callout-title">💡 2024年11月から取引時間が延長</div>
+      2024年11月から東証の後場終了時刻が15:00→<strong>15:30に延長</strong>されました。「引けは15時」という情報は古い場合があります。
+    </div>
+
+    <h2 id="timeline">1日の流れと各時間帯の意味</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot warn"></div>
+        <div class="timeline-time">8:00〜9:00</div>
+        <div class="timeline-label warn">板寄せ前</div>
+        <div class="timeline-body">取引開始前。前日の米国市場・夜間先物の動きを確認する時間。<strong>気配値（板）が形成され始める</strong>。どの価格で寄り付くかの予測を立てる。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot active"></div>
+        <div class="timeline-time">9:00</div>
+        <div class="timeline-label active">寄り付き（前場開始）</div>
+        <div class="timeline-body">前場の始まり。<strong>最初に成立する価格が「寄り値」</strong>。前日終値から大きく乖離することがある。ギャップアップ（上昇スタート）・ギャップダウン（下落スタート）が発生しやすい。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot gray"></div>
+        <div class="timeline-time">9:30〜11:00</div>
+        <div class="timeline-label gray">前場中盤</div>
+        <div class="timeline-body">値動きが落ち着いてくる時間帯。トレンドが出やすく、初心者でも判断しやすい。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot warn"></div>
+        <div class="timeline-time">11:30</div>
+        <div class="timeline-label warn">前引け</div>
+        <div class="timeline-body">前場終了。昼休みに入る。<strong>前引け前後に出来高が増えることがある</strong>（ポジション整理）。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot gray"></div>
+        <div class="timeline-time">11:30〜12:30</div>
+        <div class="timeline-label gray">昼休み</div>
+        <div class="timeline-body">取引なし。米国の夜間先物や為替の動きを確認する時間。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot active"></div>
+        <div class="timeline-time">12:30</div>
+        <div class="timeline-label active">後場寄り（後場開始）</div>
+        <div class="timeline-body">後場の始まり。昼休み中の材料を受けて、再び出来高が増えることがある。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot success"></div>
+        <div class="timeline-time">15:00〜15:30</div>
+        <div class="timeline-label success">大引け前</div>
+        <div class="timeline-body">1日の取引の終盤。機関投資家の最終ポジション調整が入り、<strong>出来高・値動きが再び増える</strong>。デイトレの決済が集中する時間帯。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot success"></div>
+        <div class="timeline-time">15:30</div>
+        <div class="timeline-label success">大引け（引け）</div>
+        <div class="timeline-body">1日の取引終了。最後に成立した価格が「終値（引け値）」。デイトレはすべてのポジションをここまでに決済する。</div>
+      </div>
+    </div>
+
+    <h2 id="characteristics">時間帯別の値動きの特徴</h2>
+
+    <div class="hour-grid">
+      <div class="hour-card hot">
+        <div class="hour-card-time">9:00〜9:30</div>
+        <div class="hour-card-label">値動き大・リスク高</div>
+        <div class="hour-card-desc">最も活発で荒い。急騰・急落しやすく、初心者には難しい時間帯。</div>
+      </div>
+      <div class="hour-card normal">
+        <div class="hour-card-time">9:30〜11:30</div>
+        <div class="hour-card-label">値動き中・狙いやすい</div>
+        <div class="hour-card-desc">トレンドが出やすく、チャートが読みやすい。初心者向けの時間帯。</div>
+      </div>
+      <div class="hour-card normal">
+        <div class="hour-card-time">12:30〜14:00</div>
+        <div class="hour-card-label">値動き小・様子見</div>
+        <div class="hour-card-desc">動きが少ない。無理にエントリーせず、次の動きを待つ時間。</div>
+      </div>
+      <div class="hour-card cool">
+        <div class="hour-card-time">14:00〜15:30</div>
+        <div class="hour-card-label">値動き増・決済集中</div>
+        <div class="hour-card-desc">後場後半は出来高が増える。デイトレのポジション決済が集中。</div>
+      </div>
+    </div>
+
+    <h2 id="beginner">初心者が狙いやすい時間帯</h2>
+    <p>デイトレ初心者には、<strong>9:30〜11:00の前場中盤</strong>が最も取り組みやすい時間帯です。</p>
+
+    <div class="callout good">
+      <div class="callout-title">✅ 初心者の基本戦略</div>
+      <p style="margin:0;font-size:14px;line-height:1.8;">寄り付き（9:00〜9:30）は様子見 → 9:30以降にトレンドを確認 → エントリー → 15:00〜15:30までに必ず決済</p>
+    </div>
+
+    <table class="compare-table">
+      <tr><th>時間帯</th><th>初心者への推奨</th><th>理由</th></tr>
+      <tr><td>9:00〜9:30（寄り付き）</td><td><span class="tag-bad">様子見</span></td><td>値動きが激しく予測しづらい</td></tr>
+      <tr><td>9:30〜11:30（前場中盤）</td><td><span class="tag-good">エントリー狙い目</span></td><td>トレンドが出て読みやすい</td></tr>
+      <tr><td>11:30〜12:30（昼休み）</td><td>—</td><td>取引なし</td></tr>
+      <tr><td>12:30〜14:00（後場前半）</td><td>様子見</td><td>動きが少なく利益を取りにくい</td></tr>
+      <tr><td>14:00〜15:30（後場後半）</td><td>決済を意識</td><td>持ち越しリスクを避けるため</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ デイトレは当日中に必ず決済</div>
+      デイトレは翌日に持ち越さないのが基本です。引け（15:30）までに必ずポジションを閉じましょう。持ち越すと夜間の海外市場の影響を受けて、翌朝に想定外の価格で始まるリスクがあります。
+    </div>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>東証の取引は<strong>前場（9:00〜11:30）</strong>と<strong>後場（12:30〜15:30）</strong>の2セッション。</li>
+        <li>「寄り付き」は前場の始まり、「引け（大引け）」は後場の終わり（15:30）。</li>
+        <li>寄り付き直後（9:00〜9:30）は値動きが激しく、初心者には難しい。</li>
+        <li>前場中盤（9:30〜11:30）はトレンドが出て読みやすく、初心者の狙い目。</li>
+        <li>引け（15:30）までに必ず決済する。持ち越しは別のリスクが発生する。</li>
+      </ul>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 関連記事</div>
+      どの銘柄を選ぶかは<a href="../stock-selection/index.html">デイトレ銘柄の選び方</a>で解説しています。損切りのタイミングは<a href="../stop-loss/index.html">損切りの決め方</a>もあわせてどうぞ。
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../investment-sim/index.html">積立投資シミュレーター</a></li>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>損益比率（RR比）とは｜勝率が低くても利益を出す仕組み | MoneyTools</title>
+  <meta name="description" content="デイトレードで重要な損益比率（リスクリワード比）をわかりやすく解説。RR比の計算方法と、勝率が低くても利益を出せる仕組みを具体例で説明します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .rr-visual {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 24px 20px;
+      margin: 20px 0;
+    }
+    .rr-bar-wrap {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+      margin-bottom: 12px;
+      height: 100px;
+    }
+    .rr-bar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+    }
+    .rr-bar {
+      width: 100%;
+      border-radius: 6px 6px 0 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .rr-bar.loss { background: #ef4444; }
+    .rr-bar.gain { background: #22c55e; }
+    .rr-bar-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-700);
+    }
+    .rr-formula {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--gray-900);
+      text-align: center;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .sim-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+    @media (max-width: 560px) { .sim-grid { grid-template-columns: 1fr; } }
+    .sim-card {
+      border-radius: 12px;
+      padding: 16px 14px;
+      text-align: center;
+    }
+    .sim-card.bad     { background: #fef2f2; border: 1px solid #fecaca; }
+    .sim-card.neutral { background: var(--gray-50); border: 1px solid var(--gray-200); }
+    .sim-card.good    { background: #f0fdf4; border: 1px solid #bbf7d0; }
+    .sim-card-rr {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+    }
+    .sim-card-winrate {
+      font-size: 12px;
+      color: var(--gray-600);
+      margin-bottom: 10px;
+    }
+    .sim-card-result {
+      font-size: 15px;
+      font-weight: 800;
+    }
+    .sim-card.bad  .sim-card-result { color: #dc2626; }
+    .sim-card.neutral .sim-card-result { color: var(--gray-700); }
+    .sim-card.good .sim-card-result { color: #16a34a; }
+    .sim-card-desc {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>損益比率（RR比）とは</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">リスク管理</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年5月</span>
+  </div>
+
+  <h1 class="article-title">損益比率（RR比）とは｜勝率が低くても利益を出す仕組み</h1>
+
+  <p class="article-lead">
+    「勝率が5割以上ないと稼げない」と思っていませんか？実は損益比率（リスクリワード比）を意識すれば、勝率が40%以下でも利益を出し続けることができます。この記事では損益比率の計算方法と、トレードに活かす具体的な使い方を解説します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#what">損益比率（RR比）とは何か</a></li>
+      <li><a href="#calc">計算方法と具体例</a></li>
+      <li><a href="#winrate">勝率との組み合わせで考える</a></li>
+      <li><a href="#howto">トレードでの使い方</a></li>
+      <li><a href="#oco">OCO注文でRR比を固定する</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="what">損益比率（RR比）とは何か</h2>
+    <p>損益比率（リスクリワード比、RR比）とは、<strong>「1回のトレードで負けたときの損失」に対して「勝ったときの利益」が何倍か</strong>を示す指標です。</p>
+
+    <div class="rr-visual">
+      <div class="rr-bar-wrap">
+        <div class="rr-bar-col">
+          <div class="rr-bar loss" style="height:40px;">損失</div>
+          <div class="rr-bar-label">損切り幅</div>
+        </div>
+        <div style="font-size:22px;font-weight:900;color:var(--gray-400);padding-bottom:20px;">：</div>
+        <div class="rr-bar-col">
+          <div class="rr-bar gain" style="height:80px;">利益</div>
+          <div class="rr-bar-label">利確幅</div>
+        </div>
+      </div>
+      <div class="rr-formula">損失1 ：利益2 → RR比 1:2</div>
+    </div>
+
+    <p>たとえば損切りを<strong>−1万円</strong>、利確を<strong>+2万円</strong>に設定した場合、RR比は<strong>1:2</strong>です。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 RR比の読み方</div>
+      「1:2」は「負けると1万円の損失、勝つと2万円の利益」という意味。RR比が高いほど、1回の勝ちで複数回の負けを取り戻せます。
+    </div>
+
+    <h2 id="calc">計算方法と具体例</h2>
+
+    <div class="example-box">
+      <div class="example-box-title">具体例：1,000円の銘柄を100株買う</div>
+      <p>エントリー価格：1,000円</p>
+      <p>損切りライン：980円（−20円 × 100株 = <strong>損失2,000円</strong>）</p>
+      <p>利確ライン：1,060円（+60円 × 100株 = <strong>利益6,000円</strong>）</p>
+      <p>→ RR比 = 2,000円 : 6,000円 = <strong>1:3</strong></p>
+    </div>
+
+    <p>計算式はシンプルです：</p>
+    <div class="example-box">
+      <div class="example-box-title">計算式</div>
+      <p>RR比 = 損切り幅（リスク）: 利確幅（リワード）</p>
+      <p>例：損切り20円、利確60円 → 1:3</p>
+    </div>
+
+    <h2 id="winrate">勝率との組み合わせで考える</h2>
+    <p>RR比が高いと、勝率が低くても利益を出せます。以下は10回トレードした場合のシミュレーションです（1回あたりの損失：1万円）。</p>
+
+    <div class="sim-grid">
+      <div class="sim-card bad">
+        <div class="sim-card-rr">RR比 1:1</div>
+        <div class="sim-card-winrate">勝率40% / 10回</div>
+        <div class="sim-card-result">−2万円</div>
+        <div class="sim-card-desc">勝4回(+4万) 負6回(−6万)</div>
+      </div>
+      <div class="sim-card neutral">
+        <div class="sim-card-rr">RR比 1:2</div>
+        <div class="sim-card-winrate">勝率40% / 10回</div>
+        <div class="sim-card-result">+2万円</div>
+        <div class="sim-card-desc">勝4回(+8万) 負6回(−6万)</div>
+      </div>
+      <div class="sim-card good">
+        <div class="sim-card-rr">RR比 1:3</div>
+        <div class="sim-card-winrate">勝率40% / 10回</div>
+        <div class="sim-card-result">+6万円</div>
+        <div class="sim-card-desc">勝4回(+12万) 負6回(−6万)</div>
+      </div>
+    </div>
+
+    <p><strong>勝率40%でも、RR比が1:2以上あれば利益を出せます。</strong>逆に、どれだけ高い勝率でもRR比が1:1未満では長期的に勝てません。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 「勝率」だけ見ていると危険</div>
+      「勝率80%」でも、負けるときに大きく損して勝つときは少額、というパターンでは資産は減ります。勝率とRR比をセットで管理することが重要です。
+    </div>
+
+    <h2 id="howto">トレードでの使い方</h2>
+    <p>エントリーする前に、損切り・利確の価格を決めてRR比を計算する習慣をつけましょう。<strong>RR比が1:1.5未満のトレードは見送る</strong>のが基本です。</p>
+
+    <table class="compare-table">
+      <tr><th>RR比</th><th>評価</th><th>推奨</th></tr>
+      <tr><td>1:3以上</td><td>理想的</td><td><span class="tag-good">積極的にエントリー</span></td></tr>
+      <tr><td>1:2</td><td>良い</td><td><span class="tag-good">エントリーOK</span></td></tr>
+      <tr><td>1:1.5</td><td>最低ライン</td><td>条件が揃えばOK</td></tr>
+      <tr><td>1:1以下</td><td>悪い</td><td><span class="tag-bad">見送りを推奨</span></td></tr>
+    </table>
+
+    <div class="callout good">
+      <div class="callout-title">✅ エントリー前のチェック</div>
+      「損切りラインと利確ラインを決める → RR比を計算する → 1:2以上なら入る」この手順を習慣にするだけで、トレードの質が大きく変わります。
+    </div>
+
+    <h2 id="oco">OCO注文でRR比を固定する</h2>
+    <p>RR比を設定しても、感情的に損切りできなければ意味がありません。OCO注文を使うと、<strong>損切りと利確を同時に注文</strong>できるため、設定したRR比を機械的に実行できます。</p>
+
+    <div class="example-box">
+      <div class="example-box-title">OCO注文でRR比 1:2 を固定する例</div>
+      <p>エントリー：1,000円で買い</p>
+      <p>OCO注文①（損切り）：980円で逆指値売り（損失2,000円）</p>
+      <p>OCO注文②（利確）：1,040円で指値売り（利益4,000円）</p>
+      <p>→ どちらかが約定したらもう片方は自動キャンセル。RR比1:2を感情なしで実行。</p>
+    </div>
+
+    <a href="../../oco-calc/index.html" class="tool-cta">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">関連ツール</div>
+        <div class="tool-cta-title">OCO注文計算ツール</div>
+        <div class="tool-cta-sub">損切り・利確の価格を自動計算してRR比を確認</div>
+      </div>
+      <div class="tool-cta-arrow">›</div>
+    </a>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>損益比率（RR比）は「1回の損失」に対して「1回の利益」が何倍かを示す指標。</li>
+        <li>RR比が1:2あれば、勝率40%でも利益を出し続けられる。</li>
+        <li>エントリー前に損切り・利確ラインを決めてRR比を計算する習慣をつける。</li>
+        <li>目安はRR比<strong>1:2以上</strong>。1:1以下のトレードは見送りを推奨。</li>
+        <li>OCO注文と組み合わせることで、感情に左右されずRR比を実行できる。</li>
+      </ul>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 関連記事</div>
+      損切りの具体的な設定方法は<a href="../stop-loss/index.html">損切りの決め方</a>、OCO注文の使い方は<a href="../order-types/index.html">注文の種類</a>で解説しています。
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../investment-sim/index.html">積立投資シミュレーター</a></li>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>
