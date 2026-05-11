@@ -255,6 +255,38 @@
 .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
 .breadcrumb span { color: var(--gray-300); }
 
+/* 関連記事カード */
+.related-article {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin: 0 0 32px;
+  text-decoration: none;
+  transition: background .15s;
+}
+.related-article:hover { background: var(--primary-light); text-decoration: none; }
+.related-article-text { flex: 1; }
+.related-article-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  margin-bottom: 3px;
+}
+.related-article-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gray-900);
+  line-height: 1.5;
+}
+.related-article-arrow { color: var(--gray-400); font-size: 20px; font-weight: 900; flex-shrink: 0; }
+
 @media (max-width: 640px) {
   .order-flow { flex-direction: column; align-items: flex-start; }
   .tool-cta   { flex-direction: column; align-items: flex-start; }
