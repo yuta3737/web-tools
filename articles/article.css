@@ -255,6 +255,23 @@
 .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
 .breadcrumb span { color: var(--gray-300); }
 
+/* アフィリエイトボタン */
+.broker-cta {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  background: var(--primary);
+  color: var(--white);
+  transition: opacity 0.2s;
+  margin: 6px 0;
+}
+.broker-cta:hover { opacity: 0.85; text-decoration: none; }
+.broker-cta.sub { background: var(--gray-700); }
+
 /* 関連記事カード */
 .related-article {
   display: flex;
