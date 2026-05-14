@@ -61,6 +61,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://yuta-tools.com/articles/daytrade-vs-swing/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://yuta-tools.com/articles/volume/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
