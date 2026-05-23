@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://yuta-tools.com/articles/gap-trading/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>窓（ギャップ）とは何か｜ギャップアップ・ダウンをデイトレで活用する方法 | MoneyTools</title>
+  <meta name="description" content="株チャートの「窓（ギャップ）」とは何かをデイトレ初心者向けに解説。ギャップアップ・ギャップダウンが発生する理由、窓埋めの考え方、デイトレでの使い方をわかりやすく説明します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .gap-visual {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 20px 0;
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+    }
+    .gap-visual-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 16px;
+    }
+    .candle-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 120px;
+      padding: 0 8px;
+    }
+    .candle-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .candle-label {
+      font-size: 10px;
+      color: var(--gray-500);
+      font-weight: 700;
+      margin-top: 4px;
+    }
+    .candle {
+      width: 20px;
+      border-radius: 2px;
+    }
+    .candle.up   { background: var(--success); }
+    .candle.down { background: var(--danger); }
+    .gap-zone {
+      width: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .gap-arrow {
+      font-size: 20px;
+      font-weight: 900;
+    }
+    .gap-arrow.up   { color: var(--success); }
+    .gap-arrow.down { color: var(--danger); }
+    .gap-text {
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .gap-text.up   { color: var(--success); }
+    .gap-text.down { color: var(--danger); }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+      <a href="../index.html">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>窓（ギャップ）の使い方</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">チャート分析</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年5月</span>
+  </div>
+
+  <h1 class="article-title">窓（ギャップ）とは何か｜ギャップアップ・ダウンをデイトレで活用する方法</h1>
+
+  <p class="article-lead">
+    株のチャートを見ていると、前日の終値と翌日の始値の間に「空白」ができることがあります。これを<strong>「窓（まど）」</strong>または<strong>「ギャップ」</strong>と呼びます。窓はデイトレードで非常に重要なサインです。この記事では窓が発生する理由、ギャップアップ・ダウンの見方、そして実際のトレードでどう活用するかを解説します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#what">窓（ギャップ）とは何か</a></li>
+      <li><a href="#why">窓が発生する理由</a></li>
+      <li><a href="#types">ギャップアップとギャップダウン</a></li>
+      <li><a href="#fill">窓埋めとは何か</a></li>
+      <li><a href="#how-to-use">デイトレでの活用方法</a></li>
+      <li><a href="#caution">注意点</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <a href="../candlestick/" class="related-article">
+      <div class="related-article-text">
+        <div class="related-article-label">関連記事</div>
+        <div class="related-article-title">ローソク足の読み方｜陽線・陰線・ヒゲの意味をデイトレ初心者向けに解説</div>
+      </div>
+      <span class="related-article-arrow">›</span>
+    </a>
+
+    <h2 id="what">窓（ギャップ）とは何か</h2>
+
+    <p>株のチャートは、1本のローソク足が「始値・高値・安値・終値」の4つの価格情報を持っています。通常、前日の終値と翌日の始値は近い価格になりますが、何らかの要因で大きく離れることがあります。</p>
+
+    <p>この<strong>前日終値と翌日始値の間にできる空白</strong>を「窓」と呼びます。チャートで見ると文字通り「空白のスペース」になるため、一目でわかります。</p>
+
+    <div class="gap-visual">
+      <div class="gap-visual-title">ギャップアップのイメージ</div>
+      <div class="candle-row">
+        <div class="candle-wrap">
+          <div class="candle up" style="height:60px;"></div>
+          <div class="candle-label">前日</div>
+        </div>
+        <div class="gap-zone" style="height:60px; justify-content: flex-start; padding-top: 0;">
+          <span class="gap-arrow up" style="margin-top:-8px;">↑</span>
+          <span class="gap-text up">Gap</span>
+        </div>
+        <div class="candle-wrap" style="margin-bottom: 40px;">
+          <div class="candle up" style="height:50px;"></div>
+          <div class="candle-label">翌日</div>
+        </div>
+      </div>
+      <p style="font-size:12px; color:var(--gray-500); margin:8px 0 0; text-align:center;">前日の終値より高い価格から翌日の取引がスタートする</p>
+    </div>
+
+    <h2 id="why">窓が発生する理由</h2>
+
+    <p>窓が発生するのは、株式市場が<strong>閉まっている間（夜間・週末）にニュースや材料が出る</strong>からです。市場が開いていれば価格は連続して動きますが、閉場中は取引ができないため、翌朝に一気に織り込まれます。</p>
+
+    <table class="compare-table">
+      <tr>
+        <th>原因</th>
+        <th>内容</th>
+      </tr>
+      <tr>
+        <td><strong>決算発表</strong></td>
+        <td>予想を上回る・下回る決算が引け後に発表された</td>
+      </tr>
+      <tr>
+        <td><strong>ニュース・材料</strong></td>
+        <td>M&A・新製品発表・不祥事などの夜間ニュース</td>
+      </tr>
+      <tr>
+        <td><strong>米国市場の影響</strong></td>
+        <td>NYダウが大きく動いた翌朝に日本株も連動しやすい</td>
+      </tr>
+      <tr>
+        <td><strong>為替の変動</strong></td>
+        <td>円高・円安が輸出企業株に影響する</td>
+      </tr>
+    </table>
+
+    <h2 id="types">ギャップアップとギャップダウン</h2>
+
+    <p>窓には2種類あります。</p>
+
+    <h3>ギャップアップ（上窓）</h3>
+    <p>前日の終値より<strong>高い価格から翌日の取引が始まる</strong>ことです。好材料が出たときに発生しやすく、強いトレンドの始まりになることもあります。</p>
+
+    <div class="example-box">
+      <div class="example-box-title">具体例</div>
+      <p>A株の昨日の終値：<strong>1,000円</strong></p>
+      <p>今日の始値：<strong>1,050円</strong></p>
+      <p>→ 50円のギャップアップ。昨夜の好決算が要因。</p>
+    </div>
+
+    <h3>ギャップダウン（下窓）</h3>
+    <p>前日の終値より<strong>低い価格から翌日の取引が始まる</strong>ことです。悪材料・地政学リスク・市場全体の急落などで発生します。</p>
+
+    <div class="example-box">
+      <div class="example-box-title">具体例</div>
+      <p>B株の昨日の終値：<strong>500円</strong></p>
+      <p>今日の始値：<strong>460円</strong></p>
+      <p>→ 40円のギャップダウン。引け後に不祥事が報道された。</p>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 持ち越しリスク</div>
+      デイトレで保有株を翌日に持ち越すと、このギャップリスクを受けます。大きなギャップダウンが発生すると、損切りラインを大きく下回った価格で始まることもあります。持ち越しには注意が必要です。
+    </div>
+
+    <h2 id="fill">窓埋めとは何か</h2>
+
+    <p>株の世界には<strong>「窓は埋まる」</strong>という経験則があります。ギャップアップで上に飛んだ価格が、後日に元の価格帯まで戻ってくることを「窓埋め」と呼びます。</p>
+
+    <p>これはすべてのケースで起こるわけではありませんが、特に材料が一時的なものであったり、上がりすぎた場合には窓埋めが発生しやすい傾向があります。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 窓埋めの考え方</div>
+      ギャップアップした翌日に株価が下落し始めたとき、「窓埋めを狙って空売り（または下落を警戒して利確）する」という戦略があります。ただし必ず埋まるわけではないため、あくまで参考の一つとして使います。
+    </div>
+
+    <h2 id="how-to-use">デイトレでの活用方法</h2>
+
+    <h3>① 寄り付きの方向を確認する</h3>
+    <p>朝の取引開始（9:00）前に、前日終値と気配値を比較してギャップの方向と大きさを確認します。大きなギャップアップなら買い圧力が強い可能性があり、その日の方向性の参考になります。</p>
+
+    <h3>② 窓埋めを意識したエントリー</h3>
+    <p>ギャップアップ後に株価が上値で失速し、下落し始めたとき「窓埋めが起きるかもしれない」と意識します。窓の下限（前日終値）が一つの目安価格になります。</p>
+
+    <h3>③ 持ち越しリスクを避ける</h3>
+    <p>逆にギャップリスクを避けるため、デイトレでは<strong>当日中にポジションを解消する</strong>のが基本です。夜間にどんな材料が出るかわからないため、持ち越しは計算外のリスクを生みます。</p>
+
+    <div class="example-box">
+      <div class="example-box-title">実践的な使い方の例</div>
+      <p>前日終値：<strong>400円</strong></p>
+      <p>今日の始値：<strong>420円</strong>（+20円のギャップアップ）</p>
+      <p>→ 寄り付き後に上値が重くなり410円まで下落。</p>
+      <p>→ 前日終値400円を意識しつつ、400円付近がサポートになるか観察する。</p>
+    </div>
+
+    <a href="../support-resistance/" class="related-article">
+      <div class="related-article-text">
+        <div class="related-article-label">関連記事</div>
+        <div class="related-article-title">サポート・レジスタンスラインの引き方｜デイトレで使う水平線の基本</div>
+      </div>
+      <span class="related-article-arrow">›</span>
+    </a>
+
+    <h2 id="caution">注意点</h2>
+
+    <h3>窓が必ず埋まるとは限らない</h3>
+    <p>決算で大幅に業績が改善した銘柄がギャップアップした場合、そのまま上昇トレンドが続いて窓埋めが起きないこともあります。「窓は埋まる」は経験則であり、絶対ルールではありません。</p>
+
+    <h3>大きすぎるギャップは追わない</h3>
+    <p>ギャップが大きすぎる場合（前日比5%以上など）、寄り付き直後の値動きが激しくスリッページが大きくなりやすいです。追いかけるよりも、値動きが落ち着いてから入るほうが安全です。</p>
+
+    <h3>出来高も一緒に確認する</h3>
+    <p>ギャップアップしても出来高が少ない場合は、方向性が続かないことが多いです。出来高が伴っているかどうかを必ず確認しましょう。</p>
+
+    <a href="../volume/" class="related-article">
+      <div class="related-article-text">
+        <div class="related-article-label">関連記事</div>
+        <div class="related-article-title">出来高とは何か｜デイトレで出来高を使う理由をわかりやすく解説</div>
+      </div>
+      <span class="related-article-arrow">›</span>
+    </a>
+
+    <div class="callout info">
+      <div class="callout-title">💡 口座をまだ持っていない方へ</div>
+      手数料無料で始められる証券会社をご紹介します。口座開設は無料です。
+    </div>
+    <a href="https://h.accesstrade.net/sp/cc?rk=01000t2900os8p" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta">松井証券 口座開設（無料）</a>
+    <a href="https://h.accesstrade.net/sp/cc?rk=0100h3p700os8p" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub" style="margin-bottom:24px;">マネックス証券 口座開設（無料）</a>
+
+    <h2 id="summary">まとめ</h2>
+
+    <div class="summary-box">
+      <h3>この記事のまとめ</h3>
+      <ul>
+        <li><strong>窓（ギャップ）</strong>とは、前日終値と翌日始値の間にできる価格の空白のこと。</li>
+        <li>決算・ニュース・米国市場の影響など、夜間の出来事が原因で発生する。</li>
+        <li><strong>ギャップアップ</strong>は前日より高く始まること。<strong>ギャップダウン</strong>は低く始まること。</li>
+        <li>「窓埋め」という経験則があるが、必ず起きるわけではない。</li>
+        <li>デイトレでは寄り付きの方向確認・窓埋め意識・持ち越しリスク回避に活用できる。</li>
+        <li>大きすぎるギャップは追わず、出来高も合わせて確認するのが基本。</li>
+      </ul>
+    </div>
+
+    <a class="tool-cta" href="../../oco-calc/index.html">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">無料ツール</div>
+        <div class="tool-cta-title">OCO注文計算ツール</div>
+        <div class="tool-cta-sub">購入株価と株数を入力するだけで利確・損切り価格を自動計算</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Money<span>Tools</span></div>
+        <p>資産形成に役立つ無料計算ツール</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="../../investment-sim/index.html">積立投資シミュレーター</a></li>
+            <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+            <li><a href="../../oco-calc/index.html">OCO注文計算ツール</a></li>
+            <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>情報</h4>
+          <ul>
+            <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+            <li><a href="../../disclaimer/index.html">免責事項</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      ※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MoneyTools. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../../js/nav.js"></script>
+</body>
+</html>

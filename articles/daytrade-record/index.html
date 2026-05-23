@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://yuta-tools.com/articles/daytrade-record/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>デイトレ実践記録｜5万円スタートの取引結果を全公開【4〜5月】| MoneyTools</title>
+  <meta name="description" content="元手5万円でのデイトレード実践記録。4月〜5月の全取引を公開。負けトレードの原因分析、ルールの変遷、累計損益まで包み隠さずまとめています。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .trade-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 16px 0;
+    }
+    .trade-table th {
+      background: var(--primary);
+      color: var(--white);
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+    }
+    .trade-table th:first-child { border-radius: 8px 0 0 0; }
+    .trade-table th:last-child  { border-radius: 0 8px 0 0; }
+    .trade-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+      vertical-align: middle;
+    }
+    .trade-table tr:last-child td { border-bottom: none; }
+    .trade-table tr:nth-child(even) td { background: var(--gray-50); }
+    .pnl-plus  { color: var(--success); font-weight: 800; }
+    .pnl-minus { color: var(--danger);  font-weight: 800; }
+    .pnl-hold  { color: var(--gray-500); font-weight: 700; }
+    .summary-stat {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-label { font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+    .stat-value { font-size: 22px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; }
+    .stat-value.plus  { color: var(--success); }
+    .stat-value.minus { color: var(--danger); }
+    @media (max-width: 640px) {
+      .summary-stat { grid-template-columns: repeat(2, 1fr); }
+      .trade-table { font-size: 12px; }
+      .trade-table th, .trade-table td { padding: 8px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+      <a href="../index.html">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>デイトレ実践記録</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">デイトレ実践</span>
+    <span class="article-date">2026年5月</span>
+  </div>
+
+  <h1 class="article-title">デイトレ実践記録｜元手5万円の取引結果を全公開【4〜5月】</h1>
+
+  <p class="article-lead">
+    バックエンドエンジニアとして働きながら、元手5万円でデイトレを始めました。この記事では4月〜5月の全取引を記録として公開します。負けたトレードの原因分析、ルールの変遷、気づきも包み隠さず書いています。「リアルな初心者の記録」として参考にしてもらえれば。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#rule">自分のトレードルール</a></li>
+      <li><a href="#april">4月の取引記録</a></li>
+      <li><a href="#may">5月の取引記録</a></li>
+      <li><a href="#summary">累計成績と振り返り</a></li>
+      <li><a href="#lesson">気づいたこと</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 免責事項</div>
+      この記事は個人の取引記録です。特定の銘柄への投資を推奨するものではありません。投資判断はご自身の責任でお願いします。
+    </div>
+
+    <h2 id="rule">自分のトレードルール</h2>
+
+    <p>最初にルールを決めてからトレードを始めました。ルールなしで動くと感情に左右されて大きな損失につながるからです。</p>
+
+    <table class="trade-table">
+      <tr>
+        <th>項目</th>
+        <th>内容</th>
+      </tr>
+      <tr>
+        <td>使用資金</td>
+        <td>5万円以下</td>
+      </tr>
+      <tr>
+        <td>利確ライン</td>
+        <td>+500円</td>
+      </tr>
+      <tr>
+        <td>損切りライン</td>
+        <td>-600円</td>
+      </tr>
+      <tr>
+        <td>保有期間</td>
+        <td>3〜4日目安</td>
+      </tr>
+      <tr>
+        <td>証券会社</td>
+        <td>SBI証券（手数料無料）</td>
+      </tr>
+    </table>
+
+    <div class="callout info">
+      <div class="callout-title">💡 なぜ+500/-600にしたか</div>
+      5万円だと買える株は500円以下が中心になります。この価格帯の銘柄は1日に10円程度しか動かないことも多く、+1,000円の利確は現実的でないと判断しました。+500円なら比較的達成しやすいラインです。
+    </div>
+
+    <a href="../stop-loss/" class="related-article">
+      <div class="related-article-text">
+        <div class="related-article-label">関連記事</div>
+        <div class="related-article-title">損切りの決め方｜何%に設定すればいい？初心者向け解説</div>
+      </div>
+      <span class="related-article-arrow">›</span>
+    </a>
+
+    <h2 id="april">4月の取引記録</h2>
+
+    <p>4月は6トレード。結果は2勝4敗でマイナスになりました。</p>
+
+    <table class="trade-table">
+      <tr>
+        <th>銘柄</th>
+        <th>買値</th>
+        <th>売値</th>
+        <th>株数</th>
+        <th>損益</th>
+      </tr>
+      <tr>
+        <td>LINEヤフー(4689)</td>
+        <td>407.6円</td>
+        <td>422.8円</td>
+        <td>100株</td>
+        <td class="pnl-plus">+1,520円</td>
+      </tr>
+      <tr>
+        <td>ブイキューブ(3681)</td>
+        <td>82.8円</td>
+        <td>73.0円</td>
+        <td>100株</td>
+        <td class="pnl-minus">-980円</td>
+      </tr>
+      <tr>
+        <td>日産自動車(7201)①</td>
+        <td>369.1円</td>
+        <td>363.0円</td>
+        <td>100株</td>
+        <td class="pnl-minus">-610円</td>
+      </tr>
+      <tr>
+        <td>パーソルHD(2181)</td>
+        <td>245.8円</td>
+        <td>240.0円</td>
+        <td>100株</td>
+        <td class="pnl-minus">-580円</td>
+      </tr>
+      <tr>
+        <td>ソニーFG(8729)①</td>
+        <td>135.5円</td>
+        <td>141.2円</td>
+        <td>100株</td>
+        <td class="pnl-plus">+570円</td>
+      </tr>
+      <tr>
+        <td>日産自動車(7201)②</td>
+        <td>355.3円</td>
+        <td>348.6円</td>
+        <td>100株</td>
+        <td class="pnl-minus">-670円</td>
+      </tr>
+    </table>
+
+    <p><strong>4月合計：-1,350円（2勝4敗）</strong></p>
+
+    <div class="callout bad">
+      <div class="callout-title">反省点</div>
+      日産自動車を2回連続で同じパターンで損切りしました。1回目の損切り後に同じ銘柄に再エントリーしたのが失敗。「前に損したから今度こそ」という感情が入っていたと思います。
+    </div>
+
+    <h2 id="may">5月の取引記録</h2>
+
+    <p>5月は8トレード。ルールを守り続けた結果、8勝0敗と大幅に改善しました。</p>
+
+    <table class="trade-table">
+      <tr>
+        <th>銘柄</th>
+        <th>買値</th>
+        <th>売値</th>
+        <th>株数</th>
+        <th>損益</th>
+      </tr>
+      <tr>
+        <td>ソニーFG(8729)②</td>
+        <td>141.3円</td>
+        <td>148.1円</td>
+        <td>300株</td>
+        <td class="pnl-plus">+2,040円</td>
+      </tr>
+      <tr>
+        <td>パーソルHD(2181)</td>
+        <td>224.9円</td>
+        <td>230.0円</td>
+        <td>200株</td>
+        <td class="pnl-plus">+1,020円</td>
+      </tr>
+      <tr>
+        <td>ユーグレナ(2931)</td>
+        <td>372.0円</td>
+        <td>377.0円</td>
+        <td>100株</td>
+        <td class="pnl-plus">+500円</td>
+      </tr>
+      <tr>
+        <td>メタプラネット(3350)①</td>
+        <td>308.0円</td>
+        <td>304.0円</td>
+        <td>100株</td>
+        <td class="pnl-minus">-400円</td>
+      </tr>
+      <tr>
+        <td>ソニーFG(8729)③</td>
+        <td>147.7円</td>
+        <td>148.4円</td>
+        <td>300株</td>
+        <td class="pnl-plus">+210円</td>
+      </tr>
+      <tr>
+        <td>日産自動車(7201)③</td>
+        <td>356.6円</td>
+        <td>362.0円</td>
+        <td>100株</td>
+        <td class="pnl-plus">+540円</td>
+      </tr>
+      <tr>
+        <td>メタプラネット(3350)②</td>
+        <td>302.8円</td>
+        <td>308.0円</td>
+        <td>100株</td>
+        <td class="pnl-plus">+520円</td>
+      </tr>
+      <tr>
+        <td>ＡＲＣＨＩＯＮ(543A)</td>
+        <td>389.0円</td>
+        <td>394.0円</td>
+        <td>100株</td>
+        <td class="pnl-plus">+500円</td>
+      </tr>
+    </table>
+
+    <p><strong>5月合計：+4,930円（7勝1敗）</strong></p>
+
+    <div class="callout good">
+      <div class="callout-title">✅ 5月に変わったこと</div>
+      4月の反省から「負けた銘柄にすぐ再エントリーしない」を徹底しました。またソニーFGは値動きのクセが掴めてきて、繰り返しトレードできるようになりました。
+    </div>
+
+    <h2 id="summary">累計成績と振り返り</h2>
+
+    <div class="summary-stat">
+      <div class="stat-card">
+        <div class="stat-label">累計損益</div>
+        <div class="stat-value plus">+4,180円</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">勝率</div>
+        <div class="stat-value">71%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">元手</div>
+        <div class="stat-value">50,000円</div>
+      </div>
+    </div>
+
+    <table class="trade-table">
+      <tr>
+        <th>期間</th>
+        <th>トレード数</th>
+        <th>勝敗</th>
+        <th>損益</th>
+      </tr>
+      <tr>
+        <td>4月</td>
+        <td>6</td>
+        <td>2勝4敗</td>
+        <td class="pnl-minus">-1,350円</td>
+      </tr>
+      <tr>
+        <td>5月</td>
+        <td>8</td>
+        <td>7勝1敗</td>
+        <td class="pnl-plus">+5,530円</td>
+      </tr>
+      <tr>
+        <td><strong>累計</strong></td>
+        <td><strong>14</strong></td>
+        <td><strong>9勝5敗</strong></td>
+        <td class="pnl-plus"><strong>+4,180円</strong></td>
+      </tr>
+    </table>
+
+    <h2 id="lesson">気づいたこと</h2>
+
+    <h3>損切りは早いほうがいい</h3>
+    <p>4月の負けトレードを振り返ると、「もう少し待てば戻るかも」という気持ちで損切りが遅れたケースがありました。結局ルールの-600円まで粘っても戻らない。最初に違和感を感じた時点で切れば傷は浅かったはずです。</p>
+
+    <h3>同じ銘柄を繰り返すのはアリ</h3>
+    <p>ソニーFGは4回エントリーして3勝1敗でした。同じ銘柄を何度も触ることで値動きのクセが掴めてきます。初心者のうちは「触れる銘柄を絞る」戦略は有効だと感じています。</p>
+
+    <h3>感情で再エントリーしない</h3>
+    <p>日産自動車で2回連続負けたのは典型的な失敗パターンです。「前に損したから次は勝てる」という根拠のない期待で動くと傷が広がります。損切り後の同銘柄への再エントリーは冷静になってから判断する必要があります。</p>
+
+    <a href="../order-types/" class="related-article">
+      <div class="related-article-text">
+        <div class="related-article-label">関連記事</div>
+        <div class="related-article-title">デイトレの注文の種類を図解で解説｜成行・指値・逆指値・OCOの違いとは？</div>
+      </div>
+      <span class="related-article-arrow">›</span>
+    </a>
+
+    <div class="callout info">
+      <div class="callout-title">💡 口座をまだ持っていない方へ</div>
+      手数料無料で始められる証券会社をご紹介します。口座開設は無料です。
+    </div>
+    <a href="https://h.accesstrade.net/sp/cc?rk=01000t2900os8p" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta">松井証券 口座開設（無料）</a>
+    <a href="https://h.accesstrade.net/sp/cc?rk=0100h3p700os8p" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub" style="margin-bottom:24px;">マネックス証券 口座開設（無料）</a>
+
+    <div class="summary-box">
+      <h3>この記事のまとめ</h3>
+      <ul>
+        <li>元手5万円スタート、利確+500円・損切り-600円のルールで運用中。</li>
+        <li>4月は2勝4敗（-1,350円）。感情での再エントリーが最大の失敗。</li>
+        <li>5月は7勝1敗（+5,530円）。ルールを守り続けることで改善した。</li>
+        <li>累計：14トレード・71%勝率・+4,180円（税引き前）。</li>
+        <li>同じ銘柄を繰り返し触ることで値動きのクセが掴めてくる。</li>
+      </ul>
+    </div>
+
+    <a class="tool-cta" href="../../oco-calc/index.html">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">無料ツール</div>
+        <div class="tool-cta-title">OCO注文計算ツール</div>
+        <div class="tool-cta-sub">購入株価と株数を入力するだけで利確・損切り価格を自動計算</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Money<span>Tools</span></div>
+        <p>資産形成に役立つ無料計算ツール</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="../../investment-sim/index.html">積立投資シミュレーター</a></li>
+            <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+            <li><a href="../../oco-calc/index.html">OCO注文計算ツール</a></li>
+            <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>情報</h4>
+          <ul>
+            <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+            <li><a href="../../disclaimer/index.html">免責事項</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      ※ 本記事の内容は個人の取引記録であり、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MoneyTools. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../../js/nav.js"></script>
+</body>
+</html>
