@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://yuta-tools.com/articles/trailing-stop/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>段階的トレーリングストップとは｜+5円利確を伸ばすデイトレ手法 | MoneyTools</title>
+  <meta name="description" content="固定の利確で利益を取り逃したくないけど、伸ばしすぎて戻されるのも怖い。その間を取る「段階的トレーリングストップ」の仕組みと、デイトレでの使い方を具体例つきで解説します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .trail-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 16px 0 20px;
+    }
+    .trail-table th {
+      background: var(--primary);
+      color: var(--white);
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+    }
+    .trail-table th:first-child { border-radius: 8px 0 0 0; }
+    .trail-table th:last-child  { border-radius: 0 8px 0 0; }
+    .trail-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+      vertical-align: middle;
+    }
+    .trail-table tr:last-child td { border-bottom: none; }
+    .trail-table tr:nth-child(even) td { background: var(--gray-50); }
+    .trail-table .hit { color: var(--success); font-weight: 800; }
+    .trail-table .stop { color: var(--danger); font-weight: 800; }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../index.html" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../index.html">ホーム</a>
+      <a href="../../investment-sim/index.html">積立投資</a>
+      <a href="../../position-calc/index.html">ポジション計算</a>
+      <a href="../../oco-calc/index.html">OCO計算</a>
+      <a href="../../profit-calc/index.html">損益計算</a>
+      <a href="../index.html">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">ホーム</a><span>/</span>
+  <a href="../index.html">記事一覧</a><span>/</span>
+  <span>段階的トレーリングストップ</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">リスク管理</span>
+    <span class="article-date">2026年6月</span>
+  </div>
+
+  <h1 class="article-title">段階的トレーリングストップとは｜+5円利確を伸ばすデイトレ手法</h1>
+
+  <p class="article-lead">
+    デイトレで「+5円で利確したら、その後さらに+20円伸びた…」という経験は誰でもあります。固定の利確は安全ですが、伸びる場面で利益を取りこぼします。逆に「伸びるところまで持つ」とすると、戻ったときに利益が消えてしまう。その間を取るのが「段階的トレーリングストップ」です。この記事では仕組み・具体例・デイトレでの注意点を解説します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#what">トレーリングストップとは</a></li>
+      <li><a href="#fixed-limit">固定利確の限界</a></li>
+      <li><a href="#mechanism">段階的トレーリングストップの仕組み</a></li>
+      <li><a href="#example">具体例で見る価格と売却ライン</a></li>
+      <li><a href="#pros-cons">メリット・デメリット</a></li>
+      <li><a href="#when">効きやすい相場・効きにくい相場</a></li>
+      <li><a href="#brokers">証券会社での実装方法</a></li>
+      <li><a href="#caution">デイトレでの注意点</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="what">トレーリングストップとは</h2>
+    <p>トレーリングストップは、株価が上がるたびに売却ライン（逆指値）も一緒に切り上げていく注文方式です。「ここまで下がったら売る」を固定するのが通常の損切りで、「上がるたびに売却ラインも上に動かす」のがトレーリングです。</p>
+    <p>これによって、伸びる時は伸ばし、戻った時はしっかり売る、という両取りを狙えます。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 言葉の意味</div>
+      Trail＝「追跡する」。価格を追跡する損切り／利確ラインなので「トレーリングストップ」と呼ばれます。
+    </div>
+
+    <h2 id="fixed-limit">固定利確の限界</h2>
+    <p>固定+5円で利確するルールはシンプルで強いです。ただ、強いトレンドに乗った時には早すぎる撤退になります。</p>
+
+    <div class="example-box">
+      <div class="example-box-title">+5円固定利確の例</div>
+      <p>購入株価：1,000円 × 100株</p>
+      <p>株価推移：1,000円 → 1,005円（利確） → その後 1,020円まで上昇</p>
+      <p>得られた利益：<strong>+500円</strong>（取り逃した利益：+1,500円）</p>
+    </div>
+
+    <p>かといって「+20円まで持つ」と利確ラインを上に変えると、+5円タッチ後に戻ってしまうケースで利益がゼロになります。固定のラインは、上にしても下にしても弱点が出ます。</p>
+
+    <h2 id="mechanism">段階的トレーリングストップの仕組み</h2>
+    <p>解決策が、初動を見届けてから追跡を開始する方式です。この記事で扱うルールは次の3ステップです。</p>
+
+    <div class="callout good">
+      <div class="callout-title">✅ 3ステップのルール</div>
+      <ol style="padding-left:18px; margin:6px 0;">
+        <li><strong>+5円に到達したら監視開始</strong>（それまでは通常の-5円損切りのみ）</li>
+        <li><strong>その時点の高値から-1円下がったら売り</strong></li>
+        <li><strong>株価が+1円更新するたびに、売却ラインも+1円ずつ切り上げ</strong></li>
+      </ol>
+    </div>
+
+    <p>ポイントは「+5円という起動条件」です。これがあることで、+5円に届かない弱い初動では普通の損切りで撤退、しっかり+5円を超えた強い局面でだけトレールが起動します。</p>
+
+    <h2 id="example">具体例で見る価格と売却ライン</h2>
+    <p>購入株価：1,000円・100株で、価格が次のように動いた場合をシミュレートします。</p>
+
+    <table class="trail-table">
+      <tr>
+        <th>株価</th>
+        <th>売却ライン</th>
+        <th>状態</th>
+      </tr>
+      <tr>
+        <td>1,000円（買い）</td>
+        <td>995円（-5円損切り）</td>
+        <td>監視前</td>
+      </tr>
+      <tr>
+        <td>1,003円</td>
+        <td>995円</td>
+        <td>監視前</td>
+      </tr>
+      <tr>
+        <td><span class="hit">1,005円</span></td>
+        <td>1,004円</td>
+        <td>トレール起動</td>
+      </tr>
+      <tr>
+        <td>1,008円</td>
+        <td>1,007円</td>
+        <td>追跡中</td>
+      </tr>
+      <tr>
+        <td>1,012円</td>
+        <td>1,011円</td>
+        <td>追跡中</td>
+      </tr>
+      <tr>
+        <td>1,015円</td>
+        <td>1,014円</td>
+        <td>追跡中（高値更新）</td>
+      </tr>
+      <tr>
+        <td>1,013円（下落）</td>
+        <td><span class="stop">1,014円で売却</span></td>
+        <td>利確</td>
+      </tr>
+    </table>
+
+    <div class="callout info">
+      <div class="callout-title">💡 結果</div>
+      売却価格：<strong>1,014円</strong>／利益：<strong>+1,400円</strong>（100株）<br>
+      固定+5円利確の場合：+500円 → <strong>+900円多く取れた</strong>計算になります。
+    </div>
+
+    <a href="../stop-loss/" class="related-article">
+      <div class="related-article-text">
+        <div class="related-article-label">関連記事</div>
+        <div class="related-article-title">損切りの決め方｜何%に設定すればいい？初心者向け解説</div>
+      </div>
+      <span class="related-article-arrow">›</span>
+    </a>
+
+    <h2 id="pros-cons">メリット・デメリット</h2>
+
+    <table class="compare-table">
+      <tr><th>観点</th><th>段階的トレーリング</th><th>固定+5円利確</th></tr>
+      <tr><td>強いトレンド時の取り分</td><td>◎ 伸びるだけ取れる</td><td>△ +5円で頭打ち</td></tr>
+      <tr><td>戻った時の利益確保</td><td>◯ 高値-1円で利確</td><td>◎ +5円ですぐ確定</td></tr>
+      <tr><td>操作の手間</td><td>△ 価格監視が必要</td><td>◎ OCOで放置</td></tr>
+      <tr><td>ボラ大・板薄銘柄</td><td>× 誤発火・滑り</td><td>◯ シンプルなので安定</td></tr>
+    </table>
+
+    <h2 id="when">効きやすい相場・効きにくい相場</h2>
+
+    <div class="callout good">
+      <div class="callout-title">✅ 効きやすい</div>
+      <ul style="padding-left:18px; margin:6px 0;">
+        <li>一方向に流れるトレンド相場（出来高ありで素直に上昇）</li>
+        <li>ニュース・決算後の素直な反応局面</li>
+        <li>板が厚く、1円刻みで約定する銘柄</li>
+      </ul>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 効きにくい</div>
+      <ul style="padding-left:18px; margin:6px 0;">
+        <li>レンジ相場（+5円タッチ→戻り、で何度も起動して摩耗）</li>
+        <li>ボラが極端に大きい銘柄（1円戻りで誤発火）</li>
+        <li>板が薄く、1〜2円スリッページが当たり前の銘柄</li>
+      </ul>
+    </div>
+
+    <h2 id="brokers">証券会社での実装方法</h2>
+    <p>「-1円ごとに自動でラインを切り上げる」処理は、証券会社の機能を使えるかどうかで運用負荷が変わります。</p>
+
+    <table class="compare-table">
+      <tr><th>証券会社</th><th>対応状況</th></tr>
+      <tr>
+        <td><strong>松井証券</strong></td>
+        <td>「<strong>追跡指値</strong>（トレーリングストップ）」機能あり。トリガー価格とトレール幅を指定でき、本記事の3ステップに最も近い</td>
+      </tr>
+      <tr>
+        <td><strong>SBI証券</strong></td>
+        <td>逆指値はあるが、自動追跡には未対応。アプリで利確指値を手動で切り上げる運用になる</td>
+      </tr>
+      <tr>
+        <td><strong>マネックス証券</strong></td>
+        <td>逆指値あり。一部商品でトレール対応。詳細は最新仕様を要確認</td>
+      </tr>
+    </table>
+
+    <div class="callout info">
+      <div class="callout-title">💡 自動でやりたい人へ</div>
+      手動更新は本業がある人にはきついです。松井証券の<strong>追跡指値</strong>を使うと、この手法に近い動きを自動化できます。
+    </div>
+
+    <a href="https://h.accesstrade.net/sp/cc?rk=01000t2900os8p" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta">松井証券 口座開設（無料）</a>
+    <a href="https://h.accesstrade.net/sp/cc?rk=0100h3p700os8p" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub" style="margin-bottom:24px;">マネックス証券 口座開設（無料）</a>
+
+    <h2 id="caution">デイトレでの注意点</h2>
+
+    <h3>スリッページ前提で考える</h3>
+    <p>「高値-1円で売却」と言っても、板が薄いとそこで売れず1〜2円下で約定することがあります。表計算どおりの利益にはなりません。</p>
+
+    <h3>寄り付き・引け間際は使わない</h3>
+    <p>寄り付き直後・引け間際は値動きが乱れます。+5円タッチ→即-1円戻り、という偽起動が起きやすい時間帯なので避けるのが無難です。</p>
+
+    <h3>レンジ銘柄では普通の固定利確に戻す</h3>
+    <p>同じ値幅を行ったり来たりする銘柄では、起動→誤発火→起動→誤発火と摩耗します。前日までの値動きで「トレンドが出やすい」か「レンジか」を見て、銘柄ごとに使い分けます。</p>
+
+    <a class="tool-cta" href="../../oco-calc/index.html">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">無料ツール</div>
+        <div class="tool-cta-title">OCO注文計算ツール</div>
+        <div class="tool-cta-sub">起動条件・トレール幅から、想定の利確価格を試算できます</div>
+      </div>
+      <div class="tool-cta-arrow">→</div>
+    </a>
+
+    <h2 id="summary">まとめ</h2>
+    <div class="summary-box">
+      <h3>この記事のまとめ</h3>
+      <ul>
+        <li>固定利確は安全だがトレンドの伸びを取り逃す。完全放置は戻りで利益が消える。</li>
+        <li>段階的トレーリングストップは「+5円で起動→高値-1円で売り→+1円更新で切り上げ」の3ステップ。</li>
+        <li>起動条件があるおかげで、弱い初動では普通の-5円損切りに任せられる。</li>
+        <li>強いトレンド相場では効果が大きいが、レンジ・板薄銘柄では誤発火・滑りに注意。</li>
+        <li>自動で運用したいなら松井証券の追跡指値が近い動きをしてくれる。</li>
+      </ul>
+    </div>
+
+    <a href="../risk-reward/" class="related-article">
+      <div class="related-article-text">
+        <div class="related-article-label">関連記事</div>
+        <div class="related-article-title">損益比率（RR比）とは｜勝率が低くても利益を出す仕組み</div>
+      </div>
+      <span class="related-article-arrow">›</span>
+    </a>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../position-calc/index.html">ポジションサイズ計算</a></li>
+          <li><a href="../../oco-calc/index.html">OCO注文計算ツール</a></li>
+          <li><a href="../../profit-calc/index.html">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/index.html">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/index.html">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

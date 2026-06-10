@@ -116,6 +116,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://yuta-tools.com/articles/trailing-stop/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://yuta-tools.com/articles/bollinger-band/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
