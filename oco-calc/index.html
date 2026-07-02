@@ -277,6 +277,23 @@
     .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
     .breadcrumb span { color: var(--gray-300); }
 
+    /* アフィリエイトボタン */
+    .broker-cta {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      background: var(--primary);
+      color: var(--white);
+      transition: opacity 0.2s;
+      margin: 6px 0;
+    }
+    .broker-cta:hover { opacity: 0.85; text-decoration: none; }
+    .broker-cta.sub { background: var(--gray-700); }
+
     @media (max-width: 640px) {
       .oco-grid { grid-template-columns: 1fr; }
       .input-row { gap: 16px; }
@@ -415,9 +432,9 @@
           <h4>ツール</h4>
           <ul>
             <li><a href="../investment-sim/index.html">積立投資シミュレーター</a></li>
-            <li><a href="../lump-sim/index.html">一括投資シミュレーター</a></li>
-            <li><a href="../fire-sim/index.html">FIRE達成シミュレーター</a></li>
+            <li><a href="../position-calc/index.html">ポジションサイズ計算</a></li>
             <li><a href="index.html">OCO注文計算ツール</a></li>
+            <li><a href="../profit-calc/index.html">株式損益計算ツール</a></li>
           </ul>
         </div>
         <div>
