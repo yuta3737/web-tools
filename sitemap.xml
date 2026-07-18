@@ -32,7 +32,7 @@
   </url>
   <url>
     <loc>https://yuta-tools.com/articles/</loc>
-    <lastmod>2026-07-03</lastmod>
+    <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -61,8 +61,14 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://yuta-tools.com/articles/tax-calculation/</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://yuta-tools.com/articles/tax-basics/</loc>
-    <lastmod>2026-07-03</lastmod>
+    <lastmod>2026-07-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -164,7 +170,7 @@
   </url>
   <url>
     <loc>https://yuta-tools.com/articles/tax-filing/</loc>
-    <lastmod>2026-07-03</lastmod>
+    <lastmod>2026-07-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
