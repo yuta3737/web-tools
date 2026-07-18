@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://yuta-tools.com/articles/average-price/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株の平均取得単価の計算方法｜買い増し・ナンピン後の単価がすぐわかる【計算機つき】 | MoneyTools</title>
+  <meta name="description" content="株の平均取得単価の計算方法を具体例で解説。計算式は「投資総額÷保有株数」。買い増し・ナンピン後の単価がその場でわかる計算機つき。証券会社の表示と自分の計算が合わない理由（手数料込み・切り上げ）も説明します。">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:title" content="株の平均取得単価の計算方法｜買い増し・ナンピン後の単価がすぐわかる【計算機つき】 | MoneyTools">
+  <meta property="og:description" content="株の平均取得単価の計算方法を具体例で解説。計算式は「投資総額÷保有株数」。買い増し・ナンピン後の単価がその場でわかる計算機つき。証券会社の表示と自分の計算が合わない理由（手数料込み・切り上げ）も説明します。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yuta-tools.com/articles/average-price/">
+  <meta property="og:image" content="https://yuta-tools.com/ogp.png">
+  <meta property="og:site_name" content="MoneyTools">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="株の平均取得単価の計算方法｜買い増し・ナンピン後の単価がすぐわかる【計算機つき】 | MoneyTools">
+  <meta name="twitter:description" content="株の平均取得単価の計算方法を具体例で解説。計算式は「投資総額÷保有株数」。買い増し・ナンピン後の単価がその場でわかる計算機つき。証券会社の表示と自分の計算が合わない理由（手数料込み・切り上げ）も説明します。">
+  <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .verdict-box {
+      background: #eff6ff;
+      border: 2px solid var(--primary);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin: 20px 0;
+    }
+    .verdict-box h4 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 0 0 12px;
+    }
+    .verdict-box p { margin: 0 0 10px; font-size: 14px; color: var(--gray-700); line-height: 1.8; }
+    .verdict-box p:last-child { margin-bottom: 0; }
+
+    .calc-steps { counter-reset: step; margin: 20px 0; }
+    .calc-step {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray-100);
+      align-items: flex-start;
+    }
+    .calc-step:last-child { border-bottom: none; }
+    .calc-step-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--white);
+      font-weight: 800;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .calc-step-body { font-size: 14px; color: var(--gray-700); line-height: 1.8; }
+
+    /* ミニ計算機 */
+    .mini-calc {
+      background: var(--white);
+      border: 2px solid var(--primary);
+      border-radius: 14px;
+      padding: 20px 18px;
+      margin: 24px 0;
+    }
+    .mini-calc-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 0 0 14px;
+    }
+    .mini-calc-row {
+      display: grid;
+      grid-template-columns: 64px 1fr 1fr;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .mini-calc-row-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-700);
+    }
+    .mini-calc input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      -moz-appearance: textfield;
+    }
+    .mini-calc input::-webkit-outer-spin-button,
+    .mini-calc input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .mini-calc input:focus { outline: none; border-color: var(--primary); }
+    .mini-calc-head {
+      display: grid;
+      grid-template-columns: 64px 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: var(--gray-500);
+      font-weight: 600;
+    }
+    .mini-calc-head span:first-child { visibility: hidden; }
+    .mini-calc-result {
+      background: #eff6ff;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 14px;
+    }
+    .mini-calc-result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 4px 0;
+      font-size: 13px;
+      color: var(--gray-700);
+    }
+    .mini-calc-result-row strong { font-size: 15px; }
+    .mini-calc-result-row.main { border-top: 1px dashed var(--gray-200); margin-top: 6px; padding-top: 10px; }
+    .mini-calc-result-row.main strong { font-size: 20px; color: var(--primary); font-weight: 900; }
+    .mini-calc-note { font-size: 12px; color: var(--gray-500); margin-top: 10px; line-height: 1.7; }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "株の平均取得単価の計算方法｜買い増し・ナンピン後の単価がすぐわかる【計算機つき】 | MoneyTools",
+  "description": "株の平均取得単価の計算方法を具体例で解説。計算式は「投資総額÷保有株数」。買い増し・ナンピン後の単価がその場でわかる計算機つき。証券会社の表示と自分の計算が合わない理由（手数料込み・切り上げ）も説明します。",
+  "image": "https://yuta-tools.com/ogp.png",
+  "url": "https://yuta-tools.com/articles/average-price/",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yuta-tools.com/articles/average-price/"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "MoneyTools",
+    "url": "https://yuta-tools.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yuta-tools.com/ogp.png"
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MoneyTools",
+    "url": "https://yuta-tools.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yuta-tools.com/ogp.png"
+    }
+  },
+  "datePublished": "2026-07-18"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "https://yuta-tools.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "記事一覧",
+      "item": "https://yuta-tools.com/articles/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "株の平均取得単価の計算方法",
+      "item": "https://yuta-tools.com/articles/average-price/"
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../">ホーム</a>
+      <a href="../../investment-sim/">積立投資</a>
+      <a href="../../position-calc/">ポジション計算</a>
+      <a href="../../oco-calc/">OCO計算</a>
+      <a href="../../profit-calc/">損益計算</a>
+      <a href="../">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../">ホーム</a><span>/</span>
+  <a href="../">記事一覧</a><span>/</span>
+  <span>株の平均取得単価の計算方法</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">デイトレ基礎</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年7月</span>
+  </div>
+
+  <h1 class="article-title">株の平均取得単価の計算方法｜買い増し・ナンピン後の単価がすぐわかる【計算機つき】</h1>
+
+  <p class="article-lead">
+    同じ株を何回かに分けて買ったとき、「自分はいくらで持っていることになるのか」を表すのが<strong>平均取得単価</strong>です。計算式はシンプルで、<strong>投資総額 ÷ 保有株数</strong>。この記事では買い増し・ナンピン後の単価の計算方法を具体例で解説し、その場で計算できる計算機も用意しました。「証券会社の表示と自分の計算が微妙に合わない」理由もわかります。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#verdict">結論：平均取得単価 = 投資総額 ÷ 保有株数</a></li>
+      <li><a href="#calc">平均取得単価 計算機</a></li>
+      <li><a href="#howto">計算方法を具体例で解説</a></li>
+      <li><a href="#table">ナンピン後の単価 早見表</a></li>
+      <li><a href="#broker">証券会社の表示と合わない理由</a></li>
+      <li><a href="#rules">売却・NISA・株式分割のときどうなる？</a></li>
+      <li><a href="#nanpin">ナンピンで単価を下げるときの注意点</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+<a href="../position-size/" class="related-article">
+  <div class="related-article-text">
+    <div class="related-article-label">関連記事</div>
+    <div class="related-article-title">ポジションサイズの決め方｜1回のトレードで買っていい株数の計算方法</div>
+  </div>
+  <span class="related-article-arrow">›</span>
+</a>
+
+    <h2 id="verdict">結論：平均取得単価 = 投資総額 ÷ 保有株数</h2>
+    <p>平均取得単価は、これまでにその株へ支払った金額の合計を、いま持っている株数で割るだけで求められます。</p>
+
+    <div class="verdict-box">
+      <h4>✅ 平均取得単価の計算式</h4>
+      <p><strong>平均取得単価 = 投資総額（買った金額の合計） ÷ 保有株数</strong></p>
+      <p>例：1,000円で100株 ＋ 800円で100株 → 18万円 ÷ 200株 = <strong>900円</strong></p>
+      <p>現在の株価がこの単価より上なら含み益、下なら含み損。つまり平均取得単価は<strong>あなた専用の損益分岐点</strong>です。</p>
+    </div>
+
+    <h2 id="calc">平均取得単価 計算機</h2>
+    <p>買った株価と株数を入れると、平均取得単価がその場でわかります（3回目までの買い増しに対応。2回目・3回目は空欄でもOK）。</p>
+
+    <div class="mini-calc">
+      <div class="mini-calc-title">🧮 平均取得単価をその場で計算</div>
+      <div class="mini-calc-head"><span>回</span><span>株価（円）</span><span>株数（株）</span></div>
+      <div class="mini-calc-row">
+        <div class="mini-calc-row-label">1回目</div>
+        <input type="number" id="p1" inputmode="decimal" placeholder="例：1000">
+        <input type="number" id="q1" inputmode="numeric" placeholder="例：100">
+      </div>
+      <div class="mini-calc-row">
+        <div class="mini-calc-row-label">2回目</div>
+        <input type="number" id="p2" inputmode="decimal" placeholder="例：800">
+        <input type="number" id="q2" inputmode="numeric" placeholder="例：100">
+      </div>
+      <div class="mini-calc-row">
+        <div class="mini-calc-row-label">3回目</div>
+        <input type="number" id="p3" inputmode="decimal" placeholder="空欄可">
+        <input type="number" id="q3" inputmode="numeric" placeholder="空欄可">
+      </div>
+      <div class="mini-calc-result">
+        <div class="mini-calc-result-row"><span>投資総額</span><strong id="rTotal">—</strong></div>
+        <div class="mini-calc-result-row"><span>保有株数</span><strong id="rQty">—</strong></div>
+        <div class="mini-calc-result-row main"><span>平均取得単価</span><strong id="rAvg">—</strong></div>
+      </div>
+      <div class="mini-calc-note">※ 手数料は含めない単純計算です。証券会社の画面では手数料込み・小数点以下切り上げで表示されるため、数円ずれることがあります（<a href="#broker">理由はこちら</a>）。</div>
+    </div>
+
+    <p>平均取得単価がわかったら、いまの株価で売った場合の<strong>税引後の手取り</strong>まで知りたくなるはずです。それは<a href="../../profit-calc/">株の利益計算ツール</a>で計算できます。</p>
+
+    <h2 id="howto">計算方法を具体例で解説</h2>
+    <p>「1,000円のときに100株買い、その後800円に下がったところで100株買い増した」という例で計算してみます。</p>
+
+    <div class="calc-steps">
+      <div class="calc-step">
+        <div class="calc-step-num">1</div>
+        <div class="calc-step-body"><strong>投資総額を出す</strong><br>1回目：1,000円 × 100株 = 100,000円<br>2回目：800円 × 100株 = 80,000円<br>合計 = <strong>180,000円</strong></div>
+      </div>
+      <div class="calc-step">
+        <div class="calc-step-num">2</div>
+        <div class="calc-step-body"><strong>保有株数を出す</strong><br>100株 ＋ 100株 = <strong>200株</strong></div>
+      </div>
+      <div class="calc-step">
+        <div class="calc-step-num">3</div>
+        <div class="calc-step-body"><strong>割り算する</strong><br>180,000円 ÷ 200株 = <strong>平均取得単価 900円</strong><br>→ 株価が900円まで戻れば含み損はゼロ。900円を超えれば含み益です。</div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 「買値の平均」ではなく「金額で加重した平均」</div>
+      1,000円と800円を単純に平均して900円になったのは、<strong>同じ株数ずつ買ったから</strong>です。株数が違う場合は単純平均になりません。たとえば1,000円×100株＋800円×300株なら、(100,000＋240,000)÷400株＝<strong>850円</strong>。多く買ったほうの株価に引っ張られます。
+    </div>
+
+    <h2 id="table">ナンピン後の単価 早見表</h2>
+    <p>「1,000円で100株持っている状態から、下がったところで100株買い増した（ナンピンした）」場合の平均取得単価の早見表です。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>買い増した株価</th><th>平均取得単価</th><th>単価の下がり幅</th></tr>
+      <tr><td>900円で100株</td><td>950円</td><td>−50円</td></tr>
+      <tr><td>800円で100株</td><td>900円</td><td>−100円</td></tr>
+      <tr><td>700円で100株</td><td>850円</td><td>−150円</td></tr>
+      <tr><td>600円で100株</td><td>800円</td><td>−200円</td></tr>
+      <tr><td>500円で100株</td><td>750円</td><td>−250円</td></tr>
+    </table>
+    </div>
+
+    <p>同じ株数を買い増した場合、平均取得単価は<strong>2つの買値のちょうど中間</strong>になります。「下落幅の半分しか単価は下がらない」と覚えておくと、ナンピンの効果を過大評価せずに済みます。</p>
+
+    <h2 id="broker">証券会社の表示と合わない理由</h2>
+    <p>自分で計算した単価と、証券会社の画面に表示される平均取得単価が数円ずれることがあります。これは間違いではなく、証券会社（特定口座）は税金のルールに沿った計算をしているためです。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>ずれる理由</th><th>内容</th></tr>
+      <tr><td><strong>手数料込み</strong></td><td>買付手数料（税込）は取得価額に含めて計算される。手数料のぶんだけ単価は少し高くなる</td></tr>
+      <tr><td><strong>小数点以下は切り上げ</strong></td><td>計算結果に端数が出た場合、小数点以下を<strong>切り上げ</strong>て表示するルール（例：833.34円 → 834円）</td></tr>
+      <tr><td><strong>総平均法に準ずる方法</strong></td><td>特定口座では「総平均法に準ずる方法」という税法上の計算方式で単価を管理している</td></tr>
+    </table>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 手数料も取得単価を押し上げる</div>
+      買うたびに手数料を払うと、そのぶん平均取得単価が上がり、損益分岐点も上がります。<strong>手数料0円の証券会社なら「株価×株数」がそのまま取得価額</strong>になり、計算もシンプルです。
+    </div>
+
+    <h2 id="rules">売却・NISA・株式分割のときどうなる？</h2>
+    <p>平均取得単価が「動くとき」と「動かないとき」を整理しておきます。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>ケース</th><th>平均取得単価は？</th></tr>
+      <tr><td><strong>買い増し・ナンピン</strong></td><td><strong>変わる</strong>（再計算される）</td></tr>
+      <tr><td><strong>一部だけ売却</strong></td><td><strong>変わらない</strong>。売った株も残った株も同じ単価のまま</td></tr>
+      <tr><td><strong>売却後に買い直し</strong></td><td>残っている株の単価と新しい買値で<strong>再計算される</strong></td></tr>
+      <tr><td><strong>NISA口座と特定口座で同じ銘柄を保有</strong></td><td>口座ごとに<strong>別々に計算</strong>される（合算されない）</td></tr>
+      <tr><td><strong>株式分割</strong></td><td>自動で調整される（1→2分割なら株数2倍・単価半分。損益は変わらない）</td></tr>
+    </table>
+    </div>
+
+    <p>「一部売却では単価が変わらない」は意外と知られていないポイントです。900円で200株持っていて100株を1,000円で売っても、残り100株の平均取得単価は900円のままです。売却益にかかる税金の計算は<a href="../tax-calculation/">株の税金はいくら？</a>で解説しています。</p>
+
+    <h2 id="nanpin">ナンピンで単価を下げるときの注意点</h2>
+    <p>ナンピン（難平）は、下がったところで買い増して平均取得単価を下げる手法です。単価が下がるので損益分岐点は近づきますが、<strong>使っている資金とリスクは確実に増えている</strong>ことを忘れてはいけません。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 「単価が下がった」＝「リスクが減った」ではない</div>
+      先ほどの例（1,000円×100株 → 800円で100株ナンピン）では、単価は900円に下がりましたが、投資額は10万円から<strong>18万円に増えています</strong>。さらに下落すれば損失は2倍のスピードで膨らみます。ナンピンは「その株価でも新規に買いたいか」で判断し、<strong>何回までと決めておく</strong>のが鉄則です。
+    </div>
+
+    <p>買い増しに使っていい金額の目安は<a href="../position-size/">ポジションサイズの決め方</a>で、下がったときに逃げるルールは<a href="../stop-loss/">損切りルールの決め方</a>で解説しています。ナンピンを考える前に、この2つを読んでおくことをおすすめします。</p>
+
+    <a href="../../profit-calc/" class="tool-cta">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">関連ツール</div>
+        <div class="tool-cta-title">株の利益計算ツール</div>
+        <div class="tool-cta-sub">平均取得単価と現在の株価を入れれば、税引後の手取りと損益分岐点を自動計算</div>
+      </div>
+      <div class="tool-cta-arrow">›</div>
+    </a>
+
+    <h2 id="faq">よくある質問</h2>
+
+    <div class="example-box">
+      <div class="example-box-title">Q. 一部だけ売ったら平均取得単価は下がる？</div>
+      <p>下がりません。平均取得単価が動くのは<strong>買ったとき</strong>だけで、売却では変わりません。「高く売れたから単価が下がったはず」と誤解しやすいですが、残った株の単価は元のままです。</p>
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">Q. 証券会社の表示より自分の計算のほうが安いのはなぜ？</div>
+      <p>証券会社は<strong>手数料込み・小数点以下切り上げ</strong>で計算しているためです（<a href="#broker">前述</a>）。数円のずれなら正常です。大きくずれている場合は、過去の買い直しや分割を見落としていないか確認してください。</p>
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">Q. 平均取得単価まで戻ったら売れば損はない？</div>
+      <p>特定口座の表示単価（手数料込み）まで戻って売れば、ほぼトントンです。ただし売却時にも手数料がかかる証券会社では、そのぶんだけ上で売る必要があります。正確な損益分岐点は<a href="../../profit-calc/">株の利益計算ツール</a>で手数料込みで計算できます。</p>
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">Q. 投資信託の「平均取得価額」も同じ計算？</div>
+      <p>考え方は同じで、投資総額÷保有口数です（表示は1万口あたりが一般的）。積立投資で毎月買うたびに平均取得価額が更新されていく仕組みは<a href="../dollar-cost-averaging/">ドルコスト平均法の記事</a>で解説しています。</p>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 手数料0円なら取得単価の計算はもっとシンプル</div>
+      手数料がかからなければ「株価×株数」がそのまま取得価額。単価も上がらず、損益分岐点も低いままです。口座開設は無料です。
+    </div>
+    <a href="https://h.accesstrade.net/sp/cc?rk=01000t2900os8p" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta">松井証券 口座開設（1日50万円まで手数料0円・無料）</a>
+    <a href="https://h.accesstrade.net/sp/cc?rk=0100h3p700os8p" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub" style="margin-bottom:24px;">マネックス証券 口座開設（無料）</a>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>平均取得単価は<strong>投資総額 ÷ 保有株数</strong>。あなた専用の損益分岐点になる。</li>
+        <li>同じ株数のナンピンなら、単価は<strong>2つの買値の中間</strong>までしか下がらない。</li>
+        <li>証券会社の表示は<strong>手数料込み・小数点以下切り上げ</strong>なので、自分の計算と数円ずれるのは正常。</li>
+        <li>単価が動くのは買ったときだけ。<strong>一部売却では変わらない</strong>。NISAと特定口座は別々に計算される。</li>
+        <li>ナンピンで単価が下がっても<strong>投資額とリスクは増えている</strong>。回数の上限を決めておく。</li>
+        <li>売ったときの手取りは<a href="../../profit-calc/">株の利益計算ツール</a>で税金・手数料込みで計算できる。</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../investment-sim/">積立投資シミュレーター</a></li>
+          <li><a href="../../position-calc/">ポジションサイズ計算</a></li>
+          <li><a href="../../profit-calc/">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資助言を目的とするものではありません。投資の判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+<script>
+(function(){
+  var ids=['p1','q1','p2','q2','p3','q3'];
+  function num(id){var v=parseFloat(document.getElementById(id).value);return isNaN(v)||v<0?0:v;}
+  function fmt(n){return n.toLocaleString('ja-JP');}
+  function calc(){
+    var total=0,qty=0;
+    for(var i=1;i<=3;i++){
+      var p=num('p'+i),q=num('q'+i);
+      if(p>0&&q>0){total+=p*q;qty+=q;}
+    }
+    var rT=document.getElementById('rTotal'),rQ=document.getElementById('rQty'),rA=document.getElementById('rAvg');
+    if(qty>0){
+      var avg=Math.round(total/qty*100)/100;
+      rT.textContent=fmt(Math.round(total))+'円';
+      rQ.textContent=fmt(qty)+'株';
+      rA.textContent=avg.toLocaleString('ja-JP',{maximumFractionDigits:2})+'円';
+    }else{
+      rT.textContent='—';rQ.textContent='—';rA.textContent='—';
+    }
+  }
+  ids.forEach(function(id){document.getElementById(id).addEventListener('input',calc);});
+})();
+</script>
+</body>
+</html>
