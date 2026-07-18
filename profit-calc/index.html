@@ -13,19 +13,19 @@
   <link rel="canonical" href="https://yuta-tools.com/profit-calc/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>株式損益計算ツール | MoneyTools</title>
-  <meta name="description" content="株の売買差益・手数料・税金を自動計算。税引後の実質利益と損益分岐点をすぐに確認できます。">
+  <title>株の利益計算ツール｜売却損益・含み益・税金まで自動計算 | MoneyTools</title>
+  <meta name="description" content="株の売却益・含み益をその場で自動計算。手数料と税金（20.315%）を差し引いた税引後の手取り利益、損益分岐点までまとめて確認できる無料ツールです。">
   <!-- OGP / Twitter Card -->
-  <meta property="og:title" content="株式損益計算ツール | MoneyTools">
-  <meta property="og:description" content="株の売買差益・手数料・税金を自動計算。税引後の実質利益と損益分岐点をすぐに確認できます。">
+  <meta property="og:title" content="株の利益計算ツール｜売却損益・含み益・税金まで自動計算 | MoneyTools">
+  <meta property="og:description" content="株の売却益・含み益をその場で自動計算。手数料と税金（20.315%）を差し引いた税引後の手取り利益、損益分岐点までまとめて確認できる無料ツールです。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://yuta-tools.com/profit-calc/">
   <meta property="og:image" content="https://yuta-tools.com/ogp.png">
   <meta property="og:site_name" content="MoneyTools">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="株式損益計算ツール | MoneyTools">
-  <meta name="twitter:description" content="株の売買差益・手数料・税金を自動計算。税引後の実質利益と損益分岐点をすぐに確認できます。">
+  <meta name="twitter:title" content="株の利益計算ツール｜売却損益・含み益・税金まで自動計算 | MoneyTools">
+  <meta name="twitter:description" content="株の売却益・含み益をその場で自動計算。手数料と税金（20.315%）を差し引いた税引後の手取り利益、損益分岐点までまとめて確認できる無料ツールです。">
   <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
@@ -315,6 +315,23 @@
     .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
     .breadcrumb span { color: var(--gray-300); }
 
+    /* アフィリエイトボタン */
+    .broker-cta {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      background: var(--primary);
+      color: var(--white);
+      transition: opacity 0.2s;
+      margin: 6px 0;
+    }
+    .broker-cta:hover { opacity: 0.85; text-decoration: none; }
+    .broker-cta.sub { background: var(--gray-700); }
+
     @media (max-width: 640px) {
       .wrap { padding: 24px 12px 60px; }
       .card { padding: 16px; }
@@ -328,8 +345,8 @@
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "株式損益計算ツール | MoneyTools",
-  "description": "株の売買差益・手数料・税金を自動計算。税引後の実質利益と損益分岐点をすぐに確認できます。",
+  "name": "株の利益計算ツール（売却損益・含み益・税金対応） | MoneyTools",
+  "description": "株の売却益・含み益をその場で自動計算。手数料と税金（20.315%）を差し引いた税引後の手取り利益、損益分岐点までまとめて確認できる無料ツールです。",
   "url": "https://yuta-tools.com/profit-calc/",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Web",
@@ -363,7 +380,7 @@
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "株式損益計算ツール",
+      "name": "株の利益・損益計算ツール",
       "item": "https://yuta-tools.com/profit-calc/"
     }
   ]
@@ -390,12 +407,12 @@
 <div class="breadcrumb">
   <a href="../index.html">ホーム</a>
   <span>/</span>
-  <span>株式損益計算ツール</span>
+  <span>株の利益・損益計算ツール</span>
 </div>
 
 <div class="wrap">
-  <h1 class="page-title">株式損益計算ツール</h1>
-  <div class="page-sub">手数料・税金を含めた実質的な利益・損失を計算します。</div>
+  <h1 class="page-title">株の利益・損益計算ツール</h1>
+  <div class="page-sub">売却益・含み益から手数料と税金（20.315%）を引いた「手取り利益」と損益分岐点を自動計算します。</div>
 
   <!-- 入力カード -->
   <div class="card">
@@ -504,6 +521,23 @@
       <div class="breakeven-hint">手数料を含めたコストを回収できる最低の売値です</div>
     </div>
     <div class="breakeven-value" id="res-breakeven">---</div>
+  </div>
+
+  <div style="margin-top:40px; padding:20px 0; border-top:1px solid var(--gray-200);">
+    <p style="font-size:13px; color:var(--gray-600); margin-bottom:12px;">あわせて読みたい関連記事</p>
+    <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+      <li><a href="../articles/brokerage-comparison/index.html" style="font-size:14px; font-weight:700; color:var(--primary); text-decoration:underline;">証券口座の選び方｜SBI・楽天・松井・マネックスを手数料で徹底比較</a></li>
+      <li><a href="../articles/stock-selection/index.html" style="font-size:14px; font-weight:700; color:var(--primary); text-decoration:underline;">デイトレ銘柄の選び方｜初心者が狙うべき銘柄の条件</a></li>
+      <li><a href="../articles/order-types/index.html" style="font-size:14px; font-weight:700; color:var(--primary); text-decoration:underline;">デイトレの注文の種類を図解で解説｜成行・指値・逆指値・OCOの違いとは？</a></li>
+    </ul>
+  </div>
+
+  <div style="margin-top:32px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius-lg); padding:20px 24px;">
+    <p style="font-size:13px; font-weight:700; color:var(--gray-700); margin-bottom:4px;">💡 手数料0円なら、利益はもっと手元に残ります</p>
+    <p style="font-size:13px; color:var(--gray-500); margin-bottom:16px;">上の計算で入力した手数料、実は条件付きで0円にできる証券会社があります。口座開設は無料です。</p>
+    <a href="https://h.accesstrade.net/sp/cc?rk=01000t2900os8p" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta">松井証券 口座開設（1日50万円まで手数料0円・無料）</a>
+    <a href="https://h.accesstrade.net/sp/cc?rk=0100h3p700os8p" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub">マネックス証券 口座開設（無料）</a>
+    <a href="https://ad2.trafficgate.net/t/r/1190/738/317787_397122" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub">楽天証券 口座開設（100万円まで手数料0円・無料）</a>
   </div>
 
 </div>
