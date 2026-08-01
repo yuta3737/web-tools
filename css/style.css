@@ -170,6 +170,27 @@ img { max-width: 100%; }
   color: var(--white);
 }
 
+.hero-sub-links {
+  margin-top: 18px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hero-sub-links a {
+  color: var(--white);
+  opacity: .85;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 600;
+}
+
+.hero-sub-links a:hover { opacity: 1; color: var(--white); }
+.hero-sub-links span { opacity: .5; }
+
 /* ===== Container ===== */
 .container {
   max-width: 1100px;
