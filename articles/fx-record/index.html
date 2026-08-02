@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://yuta-tools.com/articles/fx-record/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FX実践記録①｜勝率70%なのに-6,014円だった話 | MoneyTools</title>
+  <meta name="description" content="FXを5万円で始めた初月の全記録。48トレードで勝率70%を出しながら-6,014円（-12.0%）で終わりました。なぜ勝率が高いのに負けたのか、全取引と損益比の数字を公開して原因を分析します。">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:title" content="FX実践記録①｜勝率70%なのに-6,014円だった話 | MoneyTools">
+  <meta property="og:description" content="FXを5万円で始めた初月の全記録。48トレード・勝率70%で-6,014円。なぜ勝率が高いのに負けたのかを数字で分析します。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yuta-tools.com/articles/fx-record/">
+  <meta property="og:image" content="https://yuta-tools.com/ogp.png">
+  <meta property="og:site_name" content="MoneyTools">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FX実践記録①｜勝率70%なのに-6,014円だった話 | MoneyTools">
+  <meta name="twitter:description" content="FXを5万円で始めた初月の全記録。48トレード・勝率70%で-6,014円。なぜ勝率が高いのに負けたのかを数字で分析します。">
+  <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .trade-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 16px 0;
+    }
+    .trade-table th {
+      background: var(--primary);
+      color: var(--white);
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+    }
+    .trade-table th:first-child { border-radius: 8px 0 0 0; }
+    .trade-table th:last-child  { border-radius: 0 8px 0 0; }
+    .trade-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+      vertical-align: middle;
+    }
+    .trade-table tr:last-child td { border-bottom: none; }
+    .trade-table tr:nth-child(even) td { background: var(--gray-50); }
+    .pnl-plus  { color: var(--success); font-weight: 800; }
+    .pnl-minus { color: var(--danger);  font-weight: 800; }
+
+    .summary-stat {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-label { font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+    .stat-value { font-size: 22px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; }
+    .stat-value.plus  { color: var(--success); }
+    .stat-value.minus { color: var(--danger); }
+
+    .verdict-box {
+      background: #eff6ff;
+      border: 2px solid var(--primary);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin: 20px 0;
+    }
+    .verdict-box h4 { font-size: 15px; font-weight: 800; color: var(--primary); margin: 0 0 12px; }
+    .verdict-box p { margin: 0 0 10px; font-size: 14px; color: var(--gray-700); line-height: 1.8; }
+    .verdict-box p:last-child { margin-bottom: 0; }
+
+    .balance-box {
+      background: #fef2f2;
+      border: 2px solid var(--danger);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .balance-box .bl-label { font-size: 12px; font-weight: 700; color: var(--gray-600); margin-bottom: 8px; }
+    .balance-box .bl-main { font-size: 15px; font-weight: 800; color: var(--gray-800); line-height: 1.9; }
+    .balance-box .bl-main strong { font-size: 26px; color: var(--danger); }
+
+    @media (max-width: 640px) {
+      .summary-stat { grid-template-columns: repeat(2, 1fr); }
+      .trade-table { font-size: 12px; }
+      .trade-table th, .trade-table td { padding: 8px 8px; }
+      .balance-box .bl-main strong { font-size: 22px; }
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "FX実践記録①｜勝率70%なのに-6,014円だった話 | MoneyTools",
+  "description": "FXを5万円で始めた初月の全記録。48トレードで勝率70%を出しながら-6,014円で終わりました。なぜ勝率が高いのに負けたのかを数字で分析します。",
+  "image": "https://yuta-tools.com/ogp.png",
+  "url": "https://yuta-tools.com/articles/fx-record/",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://yuta-tools.com/articles/fx-record/" },
+  "author": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "publisher": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "datePublished": "2026-08-02"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yuta-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "記事一覧", "item": "https://yuta-tools.com/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "FX実践記録①｜7月", "item": "https://yuta-tools.com/articles/fx-record/" }
+  ]
+}
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../">ホーム</a>
+      <a href="../../investment-sim/">積立投資</a>
+      <a href="../../position-calc/">ポジション計算</a>
+      <a href="../../oco-calc/">OCO計算</a>
+      <a href="../../profit-calc/">損益計算</a>
+      <a href="../../nanpin-calc/">ナンピン計算</a>
+      <a href="../../fx-calc/">FX計算</a>
+      <a href="../">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../">ホーム</a><span>/</span>
+  <a href="../">記事一覧</a><span>/</span>
+  <span>FX実践記録①｜7月</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">実践記録</span>
+    <span class="article-level">📒 実体験</span>
+    <span class="article-date">2026年8月</span>
+  </div>
+
+  <h1 class="article-title">FX実践記録①｜勝率70%なのに-6,014円だった話</h1>
+
+  <p class="article-lead">
+    株のデイトレと並行して、<strong>5万円でFXを始めました</strong>。初月（2026年7月）の結果は48トレードで<strong>勝率70%、しかし-6,014円</strong>。読みは当たっていたのに資金は12%減りました。なぜこうなったのか、全取引の数字を公開して原因を分析します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#result">初月の結果を先に</a></li>
+      <li><a href="#why">勝率70%で負ける仕組み</a></li>
+      <li><a href="#daily">日別の推移</a></li>
+      <li><a href="#worst">最大の失点日（7/30・-4,532円）</a></li>
+      <li><a href="#rules">決めたルールを守れていたか</a></li>
+      <li><a href="#lesson">初月で分かったこと</a></li>
+      <li><a href="#next">来月やること</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+<a href="../fx-basics/" class="related-article">
+  <div class="related-article-text">
+    <div class="related-article-label">関連記事</div>
+    <div class="related-article-title">FXとは？株との違いを初心者向けにわかりやすく解説</div>
+  </div>
+  <span class="related-article-arrow">›</span>
+</a>
+
+    <h2 id="result">初月の結果を先に</h2>
+    <p>2026年7月27日から31日までの5営業日、実際に取引した結果です。証券会社の月次報告書に記載された確定値です。</p>
+
+    <div class="summary-stat">
+      <div class="stat-card">
+        <div class="stat-label">取引回数</div>
+        <div class="stat-value">48回</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">勝率</div>
+        <div class="stat-value plus">70%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">損益</div>
+        <div class="stat-value minus">-6,014円</div>
+      </div>
+    </div>
+
+    <div class="balance-box">
+      <div class="bl-label">口座残高の推移</div>
+      <div class="bl-main">50,000円 → <strong>43,986円</strong><br>（-12.0%）</div>
+    </div>
+
+    <p>5営業日で48トレード、資金は12%減りました。勝ちは32回、負けは14回、引き分け2回です。<strong>3回に2回は勝っているのに、資金は減っています。</strong></p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 最初は「-1,027円」だと思っていた</div>
+      取引アプリの履歴は<strong>3日分しか遡れません</strong>。そのため序盤に確認したときは-1,027円だと認識していました。月末に月次報告書（PDF）を取得して初めて、実際は<strong>-6,014円</strong>だったと判明しています。記録を残す仕組みがないと、自分の成績すら正しく把握できないという教訓でした。
+    </div>
+
+    <h2 id="why">勝率70%で負ける仕組み</h2>
+    <p>原因は明確でした。<strong>1回の勝ちと1回の負けの大きさが、まったく釣り合っていなかった</strong>ためです。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>区分</th><th>回数</th><th>合計</th><th>1回あたり平均</th></tr>
+      <tr><td>勝ち</td><td>32回</td><td class="pnl-plus">+9,523円</td><td class="pnl-plus">+298円</td></tr>
+      <tr><td>負け</td><td>14回</td><td class="pnl-minus">-15,537円</td><td class="pnl-minus">-1,110円</td></tr>
+      <tr><td>引き分け</td><td>2回</td><td>0円</td><td>—</td></tr>
+      <tr><td><strong>合計</strong></td><td><strong>48回</strong></td><td class="pnl-minus"><strong>-6,014円</strong></td><td>—</td></tr>
+    </table>
+    </div>
+
+    <div class="verdict-box">
+      <h4>✅ 平均損失が平均利益の3.7倍</h4>
+      <p><strong>勝ち平均+298円／負け平均-1,110円 ＝ 損益比 1:0.27</strong></p>
+      <p>この比率だと、<strong>勝率79%を超えないと利益が残りません</strong>。実際の勝率は70%だったので、計算通り負けています。</p>
+    </div>
+
+    <p>ここで重要なのは、<strong>勝率をさらに上げても解決しないこと</strong>です。勝率を75%に上げても、この損益比のままなら赤字が続きます。変えるべきは勝率ではなく「1回の負けの大きさ」でした。</p>
+
+    <p>この構造は<a href="../risk-reward/">損益比率（RR比）</a>の記事で解説した通りですが、頭で分かっていることと、実際に守れることは別物だと痛感しました。</p>
+
+    <h2 id="daily">日別の推移</h2>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>日付</th><th>取引回数</th><th>損益</th></tr>
+      <tr><td>7/27（月）</td><td>5回</td><td class="pnl-plus">+52円</td></tr>
+      <tr><td>7/28（火）</td><td>9回</td><td class="pnl-minus">-1,079円</td></tr>
+      <tr><td>7/29（水）</td><td>9回</td><td class="pnl-plus">+1,741円</td></tr>
+      <tr><td><strong>7/30（木）</strong></td><td><strong>15回</strong></td><td class="pnl-minus"><strong>-4,532円</strong></td></tr>
+      <tr><td>7/31（金）</td><td>10回</td><td class="pnl-minus">-2,196円</td></tr>
+    </table>
+    </div>
+
+    <p>注目すべきは<strong>7/29に+1,741円勝った翌日、7/30に-4,532円負けている</strong>点です。勝った翌日に取引回数が9回から15回に増えており、勢いに乗って回数を増やした結果、大きく崩しています。</p>
+
+    <h2 id="worst">最大の失点日（7/30・-4,532円）</h2>
+    <p>この日だけで15回取引しています。決めていたルールは「1日1〜2回」でした。特に大きかった2トレードがこちらです。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>時刻</th><th>売買</th><th>数量</th><th>建値→決済</th><th>損益</th></tr>
+      <tr><td>23:27</td><td>売り</td><td>4,000通貨</td><td>159.000 → 159.600</td><td class="pnl-minus">-2,400円</td></tr>
+      <tr><td>23:46</td><td>買い</td><td>4,000通貨</td><td>159.602 → 158.994</td><td class="pnl-minus">-2,432円</td></tr>
+    </table>
+    </div>
+
+    <p><strong>この2回だけで-4,832円</strong>。1日の損失のほぼ全てです。しかも23:27に売って損切りした直後、23:46に真逆の買いを入れてまた損切りしています。値動きに振り回されている典型的な形でした。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 相場が悪かったわけではない</div>
+      この期間、ドル円は<strong>163円台から159円台へ約400pips下落</strong>する明確なトレンド相場でした。方向感があり、本来なら取りやすい地合いです。実際7/30も、トレンドに沿った売りでは+944円・+976円と取れています。<strong>負けたのは相場ではなく、自分の執行が原因</strong>でした。
+    </div>
+
+    <h2 id="rules">決めたルールを守れていたか</h2>
+    <p>始める前にルールを決めていました。実際どうだったかを照合します。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>決めたルール</th><th>実際</th><th>判定</th></tr>
+      <tr><td>1日1〜2回（上限3回）</td><td>7/30に15回、7/31に10回</td><td class="pnl-minus">❌</td></tr>
+      <tr><td>1トレードの損失は-1,000円まで</td><td>-1,000円超が7回</td><td class="pnl-minus">❌</td></tr>
+      <tr><td>数量は2,000通貨で固定</td><td>4,000通貨を常用</td><td class="pnl-minus">❌</td></tr>
+      <tr><td>証拠金維持率300%以上</td><td>7/28時点で153%</td><td class="pnl-minus">❌</td></tr>
+      <tr><td>週末・重要指標をまたがない</td><td>またいでいない</td><td class="pnl-plus">✅</td></tr>
+    </table>
+    </div>
+
+    <div class="verdict-box">
+      <h4>一番こたえた事実</h4>
+      <p><strong>「2,000通貨で固定する」というルールを決めたのは7月29日です。</strong>その翌日から、4,000通貨を常用していました。</p>
+      <p>ルールを作った直後に、そのルールを破っていたことになります。知識の問題ではなく、実行の問題でした。</p>
+    </div>
+
+    <p>ポジションサイズを感覚で決めてしまうのが、そもそもの間違いです。口座資金と損切り幅から逆算すれば適正な数量は計算できます（<a href="../../fx-calc/">FX計算ツール</a>で自動計算できるようにしました）。</p>
+
+    <a href="../../fx-calc/" class="tool-cta">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">無料ツール</div>
+        <div class="tool-cta-title">FX計算ツール</div>
+        <div class="tool-cta-sub">必要証拠金・1pipsの損益・証拠金維持率・損切り幅から逆算した適正な取引数量を自動計算</div>
+      </div>
+      <div class="tool-cta-arrow">›</div>
+    </a>
+
+    <h2 id="lesson">初月で分かったこと</h2>
+
+    <h3>① 勝率は問題ではなかった</h3>
+    <p>70%という勝率は決して悪くありません。相場の方向を読む部分では、そこそこ機能していたと言えます。それでも負けたのは、<strong>入り口ではなく出口（決済）に問題があった</strong>からです。</p>
+
+    <h3>② 勝った翌日が一番危ない</h3>
+    <p>7/29に+1,741円勝った翌日、取引回数が9回→15回に増えて-4,532円。「今日はいける」という感覚が、そのまま損失につながっています。<strong>調子がいいときこそ回数を増やさない</strong>のが鉄則だと実感しました。</p>
+
+    <h3>③ 記録がないと自分の成績すら分からない</h3>
+    <p>アプリの履歴が3日で消えるため、途中まで「-1,027円」だと思い込んでいました。実際は6倍の-6,014円です。<strong>月次報告書を毎月保存する</strong>という仕組みを作らないと、振り返りようがありません。</p>
+
+    <h3>④ ロットを上げるのは最も簡単で、最も危険</h3>
+    <p>2,000通貨から4,000通貨に上げれば、利益は2倍になります。同時に損失も2倍です。「もう少し稼ぎたい」という気持ちが、そのままリスクの倍増になっていました。</p>
+
+    <h2 id="next">来月やること</h2>
+    <p>結論として、やることは1つだけです。<strong>決めたルールを守る</strong>。新しい手法を探すより先に、これが検証すべき唯一の項目になります。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>項目</th><th>8月のルール</th></tr>
+      <tr><td>通貨ペア</td><td>USDJPYのみ</td></tr>
+      <tr><td>数量</td><td><strong>2,000通貨で固定</strong>（勝っても増やさない）</td></tr>
+      <tr><td>損切り</td><td>-25pips（-500円）※OCOで同時発注</td></tr>
+      <tr><td>利確</td><td>分割（1,000通貨を+25pips、1,000通貨を+50pips）</td></tr>
+      <tr><td>取引回数</td><td><strong>1日1〜2回</strong></td></tr>
+    </table>
+    </div>
+
+    <p>損切りを-25pips（-500円）に固定すれば、平均損失-1,110円が半分以下になります。利確を+25〜50pipsに置けば損益比は1:1〜1:2になり、<strong>勝率70%のままでも黒字に転じる計算</strong>です。</p>
+
+    <p>ポジションサイズの決め方は<a href="../position-size/">ポジションサイズとリスク管理</a>、損切り幅の考え方は<a href="../stop-loss/">損切りの決め方</a>で解説しています。どちらも株向けに書いた記事ですが、考え方はFXでもそのまま使えます。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 資金は10万円に増やします</div>
+      8月から入金して10万円体制にします。ただし<strong>ロットは2,000通貨のまま</strong>据え置きます。資金を増やすのは、リスクを増やすためではなく証拠金に余裕を持たせるためです。
+    </div>
+
+    <h2 id="honest">正直に書いておくこと</h2>
+    <p>FXは通貨の売買なので、株のように企業が利益を生む仕組みがありません。参加者同士で利益を奪い合う<strong>ゼロサム（手数料を引くとマイナスサム）</strong>の世界です。放置していても増えるインデックス投資とは、前提から違います。</p>
+
+    <p>実際、同時期に運用しているNISAのインデックス積立は、何もしていないのに含み益が出ています。それと比べると、FXで5営業日かけて-6,014円という結果は、労力に対して割に合っていません。</p>
+
+    <p>それでも記録を続けるのは、<strong>失っていい金額の範囲で、自分の判断がどれだけ甘いかを可視化できる</strong>からです。この-6,014円は、リスク管理の重要性を身をもって理解するための授業料だと考えています。</p>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>FX初月（7/27〜31・5営業日）は<strong>48トレード・勝率70%・-6,014円</strong>。口座は5万円→43,986円（-12.0%）。</li>
+        <li>負けた原因は勝率ではなく<strong>損益比0.27</strong>（平均利益+298円 vs 平均損失-1,110円）。この比率では勝率79%が必要。</li>
+        <li>最大の失点は7/30の-4,532円。<strong>勝った翌日に取引回数を9回→15回に増やした</strong>結果。</li>
+        <li>相場は400pips動くトレンド相場で、地合いは悪くなかった。<strong>負けたのは執行の問題</strong>。</li>
+        <li>「2,000通貨固定」のルールを決めた<strong>翌日から4,000通貨を使っていた</strong>。知識ではなく実行が課題。</li>
+        <li>8月は新ルール（2,000通貨固定・損切り-25pips・分割利確・1日1〜2回）を<strong>守れるかどうかだけ</strong>を検証する。</li>
+      </ul>
+    </div>
+
+    <p style="font-size:13px; color:var(--gray-500); margin-top:24px;">
+      ※ 本記事の数値はSBI証券の月次報告書に基づく実際の記録です。特定の投資手法や商品を推奨するものではありません。FXはレバレッジにより大きな損失を被る可能性があります。投資判断はご自身の責任でお願いします。
+    </p>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../fx-calc/">FX計算ツール</a></li>
+          <li><a href="../../position-calc/">ポジションサイズ計算</a></li>
+          <li><a href="../../profit-calc/">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事は個人の取引記録であり、投資成果を保証するものではありません。FXはレバレッジにより元本を超える損失が生じる可能性があります。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>
