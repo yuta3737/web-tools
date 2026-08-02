@@ -8,10 +8,10 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>移動平均線とは何か｜デイトレ初心者が最初に覚えるチャートの見方 | MoneyTools</title>
-  <meta name="description" content="移動平均線をデイトレ初心者向けにわかりやすく解説。短期・中期・長期の違い、ゴールデンクロス・デッドクロスの読み方、デイトレでの実践的な使い方を説明します。">
+  <meta name="description" content="移動平均線をデイトレ初心者向けに解説。短期・中期・長期の違い、ゴールデンクロス・デッドクロス、SMAとEMAの使い分け、グランビルの法則、パーフェクトオーダー、ダマシへの対処法まで実践的に説明します。">
   <!-- OGP / Twitter Card -->
   <meta property="og:title" content="移動平均線とは何か｜デイトレ初心者が最初に覚えるチャートの見方 | MoneyTools">
-  <meta property="og:description" content="移動平均線をデイトレ初心者向けにわかりやすく解説。短期・中期・長期の違い、ゴールデンクロス・デッドクロスの読み方、デイトレでの実践的な使い方を説明します。">
+  <meta property="og:description" content="移動平均線をデイトレ初心者向けに解説。短期・中期・長期の違い、ゴールデンクロス・デッドクロス、SMAとEMAの使い分け、グランビルの法則、パーフェクトオーダー、ダマシへの対処法まで実践的に説明します。">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://yuta-tools.com/articles/moving-average/">
   <meta property="og:image" content="https://yuta-tools.com/ogp.png">
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="移動平均線とは何か｜デイトレ初心者が最初に覚えるチャートの見方 | MoneyTools">
-  <meta name="twitter:description" content="移動平均線をデイトレ初心者向けにわかりやすく解説。短期・中期・長期の違い、ゴールデンクロス・デッドクロスの読み方、デイトレでの実践的な使い方を説明します。">
+  <meta name="twitter:description" content="移動平均線をデイトレ初心者向けに解説。短期・中期・長期の違い、ゴールデンクロス・デッドクロス、SMAとEMAの使い分け、グランビルの法則、パーフェクトオーダー、ダマシへの対処法まで実践的に説明します。">
   <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
@@ -30,7 +30,7 @@
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "移動平均線とは何か｜デイトレ初心者が最初に覚えるチャートの見方 | MoneyTools",
-  "description": "移動平均線をデイトレ初心者向けにわかりやすく解説。短期・中期・長期の違い、ゴールデンクロス・デッドクロスの読み方、デイトレでの実践的な使い方を説明します。",
+  "description": "移動平均線をデイトレ初心者向けに解説。短期・中期・長期の違い、ゴールデンクロス・デッドクロス、SMAとEMAの使い分け、グランビルの法則、パーフェクトオーダー、ダマシへの対処法まで実践的に説明します。",
   "image": "https://yuta-tools.com/ogp.png",
   "url": "https://yuta-tools.com/articles/moving-average/",
   "mainEntityOfPage": {
@@ -130,6 +130,10 @@
       <li><a href="#cross">ゴールデンクロスとデッドクロス</a></li>
       <li><a href="#support">サポートとレジスタンス</a></li>
       <li><a href="#daytrade">デイトレでの使い方</a></li>
+      <li><a href="#sma-ema">SMAとEMAの違い</a></li>
+      <li><a href="#granville">グランビルの法則（8つの売買サイン）</a></li>
+      <li><a href="#perfect-order">パーフェクトオーダー</a></li>
+      <li><a href="#damashi">「ダマシ」への対処法</a></li>
       <li><a href="#summary">まとめ</a></li>
     </ol>
   </nav>
@@ -240,6 +244,98 @@
 
     <p>また、移動平均線がきれいに機能するのは値動きと出来高がある銘柄です。そもそもどの銘柄でトレードするかは<a href="../stock-selection/">デイトレ銘柄の選び方</a>を参考にしてください。</p>
 
+    <h2 id="sma-ema">SMAとEMAの違い｜デイトレはどちらを使うか</h2>
+    <p>移動平均線には計算方法の異なる2種類があります。証券会社のチャート設定で選べるので、違いを知っておくと迷いません。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>種類</th><th>正式名称</th><th>計算方法</th><th>特徴</th></tr>
+      <tr><td><strong>SMA</strong></td><td>単純移動平均</td><td>期間内の終値を単純に平均</td><td>なめらか。反応は遅いがダマシが少ない</td></tr>
+      <tr><td><strong>EMA</strong></td><td>指数平滑移動平均</td><td>直近の価格に大きな重みをつけて平均</td><td>反応が速い。トレンド転換を早く捉えられる</td></tr>
+    </table>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 デイトレならEMAが向いている</div>
+      デイトレは数分〜数時間で決着をつけるため、<strong>反応の速いEMA</strong>の方が扱いやすいです。SMAだとサインが出た頃には値動きが終わっていることがあります。逆に数日〜数週間持つスイングでは、ダマシの少ないSMAで十分です。
+    </div>
+
+    <p>ただし、どちらが優れているというものではありません。<strong>多くの市場参加者が見ている設定ほど機能しやすい</strong>という性質があるため、迷ったら日本株で一般的な「日足はSMA・分足はEMA」から始めるのが無難です。</p>
+
+    <h2 id="granville">グランビルの法則｜移動平均線の8つの売買サイン</h2>
+    <p>移動平均線と価格の位置関係から売買タイミングを判断する古典的な法則です。1960年代にジョセフ・グランビルが提唱したもので、今でも多くのトレーダーが意識しています。</p>
+
+    <h3>買いの4パターン</h3>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>№</th><th>状況</th><th>意味</th></tr>
+      <tr><td>①</td><td>移動平均線が横ばい〜上向きに変わり、価格が下から上抜けた</td><td><strong>新規買い</strong>（最も基本的な買いサイン）</td></tr>
+      <tr><td>②</td><td>上昇中の移動平均線を、価格が一時的に下回った</td><td><strong>押し目買い</strong></td></tr>
+      <tr><td>③</td><td>上昇中の移動平均線に価格が近づいたが、割らずに反発した</td><td><strong>買い増し</strong></td></tr>
+      <tr><td>④</td><td>下落中の移動平均線から価格が大きく下に乖離した</td><td><strong>短期の反発狙い</strong>（リバウンド）</td></tr>
+    </table>
+    </div>
+
+    <h3>売りの4パターン</h3>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>№</th><th>状況</th><th>意味</th></tr>
+      <tr><td>⑤</td><td>移動平均線が横ばい〜下向きに変わり、価格が上から下抜けた</td><td><strong>新規売り</strong></td></tr>
+      <tr><td>⑥</td><td>下落中の移動平均線を、価格が一時的に上回った</td><td><strong>戻り売り</strong></td></tr>
+      <tr><td>⑦</td><td>下落中の移動平均線に価格が近づいたが、超えられず反落した</td><td><strong>売り増し</strong></td></tr>
+      <tr><td>⑧</td><td>上昇中の移動平均線から価格が大きく上に乖離した</td><td><strong>利益確定</strong></td></tr>
+    </table>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 8つ全部を覚える必要はない</div>
+      実戦でよく使うのは<strong>②の押し目買い</strong>と<strong>⑧の利益確定</strong>です。「上昇トレンド中に移動平均線まで下がってきたら買い、線から離れすぎたら利確」——この2つだけでも十分に機能します。
+    </div>
+
+    <h2 id="perfect-order">パーフェクトオーダー｜強いトレンドの見分け方</h2>
+    <p>3本の移動平均線が<strong>短期・中期・長期の順にきれいに並んだ状態</strong>を「パーフェクトオーダー」と呼びます。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>種類</th><th>並び方（上から）</th><th>意味</th></tr>
+      <tr><td><strong>上昇のパーフェクトオーダー</strong></td><td>短期 → 中期 → 長期</td><td>強い上昇トレンド。買い目線に絞る</td></tr>
+      <tr><td><strong>下降のパーフェクトオーダー</strong></td><td>長期 → 中期 → 短期</td><td>強い下降トレンド。売り目線に絞る</td></tr>
+    </table>
+    </div>
+
+    <p>この形が出ている間は、<strong>トレンドに逆らわないこと</strong>が最も重要です。上昇のパーフェクトオーダー中に「そろそろ下がるだろう」と逆張りするのは、勝率の低い戦い方になります。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 崩れ始めがトレンド終了のサイン</div>
+      パーフェクトオーダーが崩れて線が絡み合い始めたら、トレンドが弱まった合図です。この段階では新規エントリーを控え、保有ポジションの利確を検討する場面になります。
+    </div>
+
+    <h2 id="damashi">「ダマシ」への対処法</h2>
+    <p>移動平均線を使っていると必ず遭遇するのが「ダマシ」です。ゴールデンクロスが出たのにすぐ下落する、といった現象を指します。</p>
+
+    <h3>ダマシが起きやすい場面</h3>
+    <ul style="padding-left:20px; line-height:2.2; font-size:14px; color:var(--gray-700);">
+      <li><strong>レンジ相場</strong>：価格が一定の幅を行ったり来たりしている状態。クロスが頻発してすべてダマシになる</li>
+      <li><strong>移動平均線が横ばい</strong>：線に傾きがないときのクロスは信頼度が低い</li>
+      <li><strong>出来高が少ない</strong>：参加者が少ないと値動きが不安定になる</li>
+      <li><strong>寄り付き直後</strong>：始値付近は値が飛びやすく、サインが安定しない</li>
+    </ul>
+
+    <h3>減らすための3つの工夫</h3>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>工夫</th><th>やり方</th></tr>
+      <tr><td><strong>線の傾きを確認する</strong></td><td>横ばいのときのクロスは見送る。傾きが出ているときだけ入る</td></tr>
+      <tr><td><strong>上位足と方向を揃える</strong></td><td>5分足で買うなら、15分足や日足も上向きか確認する</td></tr>
+      <tr><td><strong>他の指標と組み合わせる</strong></td><td><a href="../rsi-macd/">RSI・MACD</a>や<a href="../volume/">出来高</a>で裏付けを取る</td></tr>
+    </table>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ ダマシはゼロにできない</div>
+      どんな工夫をしてもダマシは必ず起きます。大事なのは「ダマシを避けること」より<strong>「ダマシに当たったときに小さく撤退できること」</strong>です。エントリー前に損切りラインを決めておけば、ダマシは単なる小さな負けで済みます（<a href="../stop-loss/">損切りの決め方</a>）。
+    </div>
+
     <div class="callout info">
       <div class="callout-title">💡 口座をまだ持っていない方へ</div>
       手数料無料で始められる証券会社をご紹介します。口座開設は無料です。
@@ -265,6 +361,10 @@
         <li><strong>ゴールデンクロス</strong>（短期が長期を上抜け）は買いサイン、<strong>デッドクロス</strong>は売りサイン。</li>
         <li>移動平均線はサポート・レジスタンスとしても機能する。</li>
         <li>デイトレでは分足チャートの移動平均線を使ってトレンドを判断する。</li>
+        <li><strong>デイトレはEMA</strong>（反応が速い）、スイングはSMA（ダマシが少ない）が向いている。</li>
+        <li><strong>グランビルの法則</strong>の中でも、②押し目買いと⑧利益確定の2つは実戦で使える。</li>
+        <li>3本の線が順に並ぶ<strong>パーフェクトオーダー</strong>は強いトレンドのサイン。逆張りしない。</li>
+        <li>ダマシはゼロにできない。<strong>線の傾き・上位足・出来高</strong>で確度を上げ、損切りで小さく撤退する。</li>
       </ul>
     </div>
 
