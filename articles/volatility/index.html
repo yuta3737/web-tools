@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://yuta-tools.com/articles/volatility/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株のボラティリティの調べ方｜1日に何円動くかを数字で判定する方法 | MoneyTools</title>
+  <meta name="description" content="「この銘柄は1日何円動くのか」を数字で判定する方法を解説。過去60日ボラティリティ(HV)を円に換算する計算式と、ボリンジャーバンドの±2σの幅で読む方法を実例つきで説明します。利確目標が届く銘柄の選び方がわかります。">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:title" content="株のボラティリティの調べ方｜1日に何円動くかを数字で判定する方法 | MoneyTools">
+  <meta property="og:description" content="「この銘柄は1日何円動くのか」を数字で判定する方法を解説。過去60日ボラティリティ(HV)を円に換算する計算式と、ボリンジャーバンドの±2σの幅で読む方法を実例つきで説明します。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yuta-tools.com/articles/volatility/">
+  <meta property="og:image" content="https://yuta-tools.com/ogp.png">
+  <meta property="og:site_name" content="MoneyTools">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="株のボラティリティの調べ方｜1日に何円動くかを数字で判定する方法 | MoneyTools">
+  <meta name="twitter:description" content="「この銘柄は1日何円動くのか」を数字で判定する方法を解説。HVを円に換算する計算式とボリンジャーバンドでの読み方を実例つきで説明します。">
+  <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .verdict-box {
+      background: #eff6ff;
+      border: 2px solid var(--primary);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin: 20px 0;
+    }
+    .verdict-box h4 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 0 0 12px;
+    }
+    .verdict-box p { margin: 0 0 10px; font-size: 14px; color: var(--gray-700); line-height: 1.8; }
+    .verdict-box p:last-child { margin-bottom: 0; }
+
+    .formula-box {
+      background: var(--gray-50);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      margin: 18px 0;
+      border-radius: 0 10px 10px 0;
+    }
+    .formula-main {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--gray-900);
+      line-height: 1.7;
+      margin-bottom: 6px;
+    }
+    .formula-note { font-size: 12.5px; color: var(--gray-600); line-height: 1.7; }
+
+    .calc-steps { counter-reset: step; margin: 20px 0; }
+    .calc-step {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray-100);
+      align-items: flex-start;
+    }
+    .calc-step:last-child { border-bottom: none; }
+    .calc-step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--white);
+      font-weight: 800; font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .calc-step-body { font-size: 14px; color: var(--gray-700); line-height: 1.8; }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "株のボラティリティの調べ方｜1日に何円動くかを数字で判定する方法 | MoneyTools",
+  "description": "「この銘柄は1日何円動くのか」を数字で判定する方法を解説。過去60日ボラティリティ(HV)を円に換算する計算式と、ボリンジャーバンドの±2σの幅で読む方法を実例つきで説明します。",
+  "image": "https://yuta-tools.com/ogp.png",
+  "url": "https://yuta-tools.com/articles/volatility/",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://yuta-tools.com/articles/volatility/" },
+  "author": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "publisher": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "datePublished": "2026-08-02"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yuta-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "記事一覧", "item": "https://yuta-tools.com/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "株のボラティリティの調べ方", "item": "https://yuta-tools.com/articles/volatility/" }
+  ]
+}
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../">ホーム</a>
+      <a href="../../investment-sim/">積立投資</a>
+      <a href="../../position-calc/">ポジション計算</a>
+      <a href="../../oco-calc/">OCO計算</a>
+      <a href="../../profit-calc/">損益計算</a>
+      <a href="../../fx-calc/">FX計算</a>
+      <a href="../">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../">ホーム</a><span>/</span>
+  <a href="../">記事一覧</a><span>/</span>
+  <span>株のボラティリティの調べ方</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">テクニカル分析</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年8月</span>
+  </div>
+
+  <h1 class="article-title">株のボラティリティの調べ方｜1日に何円動くかを数字で判定する方法</h1>
+
+  <p class="article-lead">
+    「+10円で利確」と決めても、<strong>1日に2円しか動かない銘柄では何週間もかかります</strong>。利確目標が現実的に届くかどうかは、その銘柄の「値動きの大きさ（ボラティリティ）」で決まります。この記事では、感覚ではなく数字でそれを判定する2つの方法を、実際の計算例つきで解説します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#why">なぜボラティリティを見る必要があるのか</a></li>
+      <li><a href="#hv">方法1：過去60日ボラティリティ（HV）を円に換算する</a></li>
+      <li><a href="#bb">方法2：ボリンジャーバンドの±2σの幅で読む</a></li>
+      <li><a href="#compare">2つの使い分け</a></li>
+      <li><a href="#atr">ATRという指標について</a></li>
+      <li><a href="#mistake">やりがちな間違い</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+    <h2 id="why">なぜボラティリティを見る必要があるのか</h2>
+    <p>デイトレやスイングで「+10円で利確する」というルールを決めたとします。このとき、<strong>銘柄によって達成までの日数がまったく違います</strong>。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>1日の値動き幅</th><th>+10円に届くまで</th><th>判定</th></tr>
+      <tr><td>10円</td><td>1〜2日</td><td>◎ 狙える</td></tr>
+      <tr><td>5円</td><td>2〜3日</td><td>○ 現実的</td></tr>
+      <tr><td>2円</td><td>1週間以上</td><td>△ 資金が寝る</td></tr>
+      <tr><td>0.5円</td><td>1ヶ月以上</td><td>✗ 論外</td></tr>
+    </table>
+    </div>
+
+    <p>値動きの小さい銘柄を選ぶと、目標に届かないまま資金が何週間も拘束されます。トレード回数が減れば、当然チャンスも減ります。「利確目標を下げれば解決する」と思いがちですが、<strong>目標を+5円に下げても、1日0.5円しか動かない銘柄なら10日かかります</strong>。下げても解決しません。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 問題は「目標値」ではなく「銘柄選び」</div>
+      利確目標が届かないとき、多くの人は目標を下げようとします。しかし本当の原因は<strong>値動きの小さい銘柄を選んでいること</strong>です。目標を下げると1回の利益が小さくなり、損切り1回で複数回分の利益が消える構造になります（詳しくは<a href="../risk-reward/">損益比率（RR比）とは</a>）。
+    </div>
+
+    <h2 id="hv">方法1：過去60日ボラティリティ（HV）を円に換算する</h2>
+    <p>証券会社のスクリーニング機能や銘柄詳細画面に「<strong>過去60日ボラティリティ</strong>」という項目があります。ヒストリカル・ボラティリティ（HV）と呼ばれ、過去60日間の値動きの荒さを1つの%で表した数字です。</p>
+
+    <p>ただしHVは通常<strong>年率</strong>で表示されるため、そのままでは「1日何円動くか」が分かりません。次の式で換算します。</p>
+
+    <div class="formula-box">
+      <div class="formula-main">1日の値動き幅（円）≒ 株価 × HV% ÷ 16</div>
+      <div class="formula-note">16は「1年の営業日約250日の平方根（√250 ≒ 15.8）」です。年率を1日あたりに直すために使います。</div>
+    </div>
+
+    <h3>計算例</h3>
+    <div class="calc-steps">
+      <div class="calc-step">
+        <div class="calc-step-num">1</div>
+        <div class="calc-step-body"><strong>株価230円・HV 80%の銘柄</strong><br>230 × 0.80 ÷ 16 = <strong>約11.5円</strong><br>→ 1日に約11.5円動くので、+10円は1日で届く可能性が高い</div>
+      </div>
+      <div class="calc-step">
+        <div class="calc-step-num">2</div>
+        <div class="calc-step-body"><strong>株価230円・HV 30%の銘柄</strong><br>230 × 0.30 ÷ 16 = <strong>約4.3円</strong><br>→ 1日4.3円なので、+10円には数日かかる</div>
+      </div>
+      <div class="calc-step">
+        <div class="calc-step-num">3</div>
+        <div class="calc-step-body"><strong>株価1,000円・HV 25%の銘柄</strong><br>1,000 × 0.25 ÷ 16 = <strong>約15.6円</strong><br>→ 株価が高いとHVが低くても値幅は大きくなる</div>
+      </div>
+    </div>
+
+    <h3>一般的なHVの水準</h3>
+    <p>自分が見ている銘柄が荒いのか穏やかなのか、比較の目安です。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>銘柄の性格</th><th>HVの目安</th></tr>
+      <tr><td>日経平均</td><td>約20%</td></tr>
+      <tr><td>大型株（トヨタなど）</td><td>20〜30%</td></tr>
+      <tr><td>小型株・新興株</td><td>40〜60%</td></tr>
+      <tr><td>材料株・急騰銘柄</td><td>80〜150%</td></tr>
+    </table>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 スクリーニングの足切りに使える</div>
+      HVは%表示なので<strong>株価が違う銘柄同士を直接比較できます</strong>。スクリーニング機能で「ボラティリティ 下限◯%」と設定すれば、値動きの小さい銘柄をまとめて除外できます。株価100〜400円の低位株を狙う場合、HV 70%程度を下限にすると+10円が狙える銘柄だけが残ります。
+    </div>
+
+    <h2 id="bb">方法2：ボリンジャーバンドの±2σの幅で読む</h2>
+    <p>もう1つは<a href="../bollinger-band/">ボリンジャーバンド</a>をチャートに表示して、<strong>帯の幅を目で読む方法</strong>です。</p>
+
+    <p>ボリンジャーバンドは移動平均線の上下に「株価がだいたい収まる範囲」を描いた指標で、±1σに約68%、<strong>±2σに約95%</strong>の確率で株価が収まります。この帯の幅がそのまま「この銘柄が動く範囲」を表します。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>±2σの帯の幅</th><th>意味</th><th>+10円の狙いやすさ</th></tr>
+      <tr><td>40円</td><td>よく動く</td><td>◎ 日常的な値幅</td></tr>
+      <tr><td>20円</td><td>そこそこ動く</td><td>○ 狙える</td></tr>
+      <tr><td>8円</td><td>ほぼ動かない</td><td>✗ 10円は稀な大変動</td></tr>
+    </table>
+    </div>
+
+    <h3>見方の手順</h3>
+    <div class="calc-steps">
+      <div class="calc-step">
+        <div class="calc-step-num">1</div>
+        <div class="calc-step-body">日足チャートにボリンジャーバンドを表示（期間は25日が標準。証券会社のデフォルトのままでOK）</div>
+      </div>
+      <div class="calc-step">
+        <div class="calc-step-num">2</div>
+        <div class="calc-step-body">上の線（+2σ）と下の線（−2σ）の株価を読む</div>
+      </div>
+      <div class="calc-step">
+        <div class="calc-step-num">3</div>
+        <div class="calc-step-body">引き算する。例：+2σが250円・−2σが210円なら<strong>帯の幅は40円</strong>。この銘柄なら10円の値動きは日常的</div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 数値で見たいなら「標準偏差」</div>
+      指標一覧に「標準偏差」があれば、それがσそのものを数値で出してくれます。<strong>σ × 4 ＝ ±2σの幅</strong>なので、σが10円なら帯は40円と即座に分かります。チャートから目視で読むより速いです。
+    </div>
+
+    <h2 id="compare">2つの使い分け</h2>
+    <p>HVとボリンジャーバンドは似ているようで、見ているものが違います。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>項目</th><th>HV（過去60日）</th><th>ボリンジャーバンド</th></tr>
+      <tr><td><strong>計算元</strong></td><td>日々の変化率のばらつき（60日）</td><td>終値が移動平均線からどれだけ離れているか（25日）</td></tr>
+      <tr><td><strong>見えるもの</strong></td><td>銘柄の<strong>性格</strong>（数字1個・安定）</td><td><strong>今の状態</strong>（帯・リアルタイム）</td></tr>
+      <tr><td><strong>単位</strong></td><td>%（要換算）</td><td>円（そのまま使える）</td></tr>
+      <tr><td><strong>銘柄間の比較</strong></td><td>◎ しやすい</td><td>△ 株価帯が違うと比較しにくい</td></tr>
+      <tr><td><strong>エントリー判断</strong></td><td>✗ できない</td><td>◎ できる</td></tr>
+    </table>
+    </div>
+
+    <div class="verdict-box">
+      <h4>✅ 結論：両方を段階的に使う</h4>
+      <p><strong>銘柄を探す段階 → HV</strong><br>候補を%で比較して、値動きの小さい銘柄をまとめて足切りする。</p>
+      <p><strong>買う直前 → ボリンジャーバンド</strong><br>今の±2σが何円か、帯が狭まっていないかを確認する。</p>
+    </div>
+
+    <p>ボリンジャーバンドには<strong>スクイーズ</strong>（帯が狭まる＝大きな動きの前兆）と<strong>バンドウォーク</strong>（帯に沿って動き続ける＝トレンド発生）というサインもあります。HVは数字1個なのでこうしたタイミングは読めません。詳しくは<a href="../bollinger-band/">ボリンジャーバンドの見方</a>で解説しています。</p>
+
+    <h2 id="atr">ATRという指標について</h2>
+    <p>ボラティリティの指標として<strong>ATR（Average True Range／真の値幅の平均）</strong>もよく紹介されます。前日終値も考慮して、1日にだいたい何円動くかを直接数値で出してくれる指標です。</p>
+
+    <p>ただし<strong>証券会社のスマホアプリには搭載されていないことがあります</strong>。搭載されていない場合は、この記事で紹介したHVとボリンジャーバンドで代用できるので、ATRのために別のツールを入れる必要はありません。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ DMI／ADXは値幅の判定に使えない</div>
+      同じくワイルダーが考案したDMI／ADXは、内部計算でATRを使っていますが、出てくるのは「<strong>トレンドの強さ</strong>」であって値幅（円）ではありません。1日1円ずつ30日間じわじわ動く銘柄でもADXは高く出ます。「何円動くか」を知りたい目的には使えません。
+    </div>
+
+    <h2 id="mistake">やりがちな間違い</h2>
+
+    <div class="example-box">
+      <div class="example-box-title">❌ 過去の自分の取引から「1日あたり◯円」を逆算する</div>
+      <p>「30日持って+3円だったから、この銘柄は1日0.1円しか動かない」——これは<strong>不正確</strong>です。実際には毎日±5円の幅で上下していて、たまたま30日後に+3円の地点で売っただけかもしれません。往復の値動きが打ち消し合うため、実際のボラティリティより小さく出ます。</p>
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">❌ 値動きが大きい＝勝ちやすい、と考える</div>
+      <p>ボラティリティが高い銘柄は<strong>上昇も下落も速い</strong>だけです。+10円に早く届く銘柄は、−10円にも同じ速さで届きます。勝ちやすくなるわけではなく、<strong>結果が出るのが速くなる</strong>だけだと理解しておく必要があります。だからこそ<a href="../position-size/">ポジションサイズ</a>と<a href="../stop-loss/">損切りライン</a>を先に決めておくことが重要になります。</p>
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">❌ ボラティリティだけで銘柄を絞る</div>
+      <p>HVが高い銘柄には「材料が出て急騰した優良銘柄」だけでなく「<strong>取引が薄いせいで値が飛んでいるだけの銘柄</strong>」も混ざります。後者は板がスカスカなので、指値が約定しない・想定より大幅に不利な価格で約定するといった問題が起きます。<strong>出来高や売買代金のフィルタと必ず併用</strong>してください（目安は出来高500万株以上。詳しくは<a href="../stock-selection/">デイトレ銘柄の選び方</a>）。</p>
+    </div>
+
+    <a href="../../position-calc/" class="tool-cta">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">関連ツール</div>
+        <div class="tool-cta-title">ポジションサイズ計算ツール</div>
+        <div class="tool-cta-sub">値動きの大きい銘柄ほど、株数を先に計算しておくことが重要になります</div>
+      </div>
+      <div class="tool-cta-arrow">›</div>
+    </a>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>利確目標が届くかどうかは<strong>銘柄の値動きの大きさ</strong>で決まる。目標値を下げても解決しない。</li>
+        <li><strong>HV（過去60日ボラティリティ）</strong>は <code>株価 × HV% ÷ 16</code> で1日の値動き幅（円）に換算できる。</li>
+        <li><strong>ボリンジャーバンドの±2σの幅</strong>は、そのまま円で読める。幅20円以上が目安。</li>
+        <li>使い分けは<strong>「銘柄を探す＝HV」「買う直前＝ボリンジャーバンド」</strong>。</li>
+        <li>ATRは同じ目的の指標だが、アプリに非搭載の場合は上記2つで代用できる。DMI/ADXは値幅が出ないので使えない。</li>
+        <li>値動きが大きい＝勝ちやすい、ではない。<strong>結果が出るのが速くなるだけ</strong>。出来高フィルタとリスク管理を併用する。</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../investment-sim/">積立投資シミュレーター</a></li>
+          <li><a href="../../position-calc/">ポジションサイズ計算</a></li>
+          <li><a href="../../profit-calc/">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事の内容は情報提供を目的としており、投資を推奨するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>
