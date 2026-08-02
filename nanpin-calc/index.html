@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VPXV9BMEY');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://yuta-tools.com/nanpin-calc/">
+  <title>ナンピン計算ツール｜買い増し後の平均取得単価 | MoneyTools</title>
+  <meta name="description" content="買い増し・ナンピン後の平均取得単価を最大5回分まで自動計算。投資総額・保有株数・損益分岐点に加え、現在値を入れれば評価損益と必要な値上がり率もわかります。入力するだけの無料ツールです。">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:title" content="ナンピン計算ツール｜買い増し後の平均取得単価 | MoneyTools">
+  <meta property="og:description" content="買い増し・ナンピン後の平均取得単価を最大5回分まで自動計算。投資総額・保有株数・損益分岐点・評価損益までまとめて確認できます。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yuta-tools.com/nanpin-calc/">
+  <meta property="og:image" content="https://yuta-tools.com/ogp.png">
+  <meta property="og:site_name" content="MoneyTools">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ナンピン計算ツール｜買い増し後の平均取得単価 | MoneyTools">
+  <meta name="twitter:description" content="買い増し・ナンピン後の平均取得単価を最大5回分まで自動計算。損益分岐点・評価損益までまとめて確認できます。">
+  <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .pos-wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+    .page-title { font-size: 22px; font-weight: 800; color: var(--gray-900); margin: 0 0 4px; letter-spacing: -0.5px; }
+    .page-sub { font-size: 13px; color: var(--gray-500); margin-bottom: 28px; }
+
+    .concept-box {
+      background: var(--primary-light); border-radius: var(--radius);
+      padding: 14px 18px; font-size: 13px; color: var(--primary-dark);
+      line-height: 1.8; margin-bottom: 24px;
+    }
+    .concept-box strong { font-weight: 800; }
+
+    .input-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); padding: 28px;
+      box-shadow: var(--shadow); margin-bottom: 20px;
+    }
+    .input-card h2 {
+      font-size: 14px; font-weight: 800; color: var(--gray-700);
+      margin-bottom: 6px; padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .buy-hint { font-size: 11.5px; color: var(--gray-500); margin: 10px 0 16px; }
+
+    .buy-row {
+      display: grid; grid-template-columns: 62px 1fr 1fr; gap: 10px;
+      align-items: center; margin-bottom: 12px;
+    }
+    .buy-label {
+      font-size: 11px; font-weight: 800; color: var(--gray-600);
+      background: var(--gray-50); border-radius: 6px;
+      padding: 8px 6px; text-align: center; white-space: nowrap;
+    }
+    .buy-row.first .buy-label { background: var(--primary-light); color: var(--primary-dark); }
+    .field { display: flex; align-items: center; gap: 5px; min-width: 0; }
+    .field input {
+      flex: 1; padding: 10px 12px; border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius-sm); font-size: 16px; font-weight: 700;
+      font-family: var(--font); color: var(--gray-900); outline: none;
+      transition: border-color .15s; min-width: 0; width: 100%;
+    }
+    .field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,86,219,.1); }
+    .field span { font-size: 12px; font-weight: 700; color: var(--gray-500); white-space: nowrap; }
+    .col-head {
+      display: grid; grid-template-columns: 62px 1fr 1fr; gap: 10px;
+      font-size: 11px; font-weight: 700; color: var(--gray-500);
+      text-transform: uppercase; letter-spacing: .8px; margin-bottom: 6px;
+    }
+    .col-head span:first-child { visibility: hidden; }
+
+    .now-block { margin-top: 22px; padding-top: 18px; border-top: 1px dashed var(--gray-200); }
+    .now-block label { font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .8px; }
+    .now-block .hint { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+
+    .result-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--shadow); margin-bottom: 20px;
+    }
+    .result-card-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white); padding: 16px 24px; font-size: 14px; font-weight: 800;
+    }
+    .result-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+    .result-item {
+      padding: 20px 24px; border-bottom: 1px solid var(--gray-100);
+      border-right: 1px solid var(--gray-100);
+    }
+    .result-item:nth-child(even) { border-right: none; }
+    .result-item:nth-last-child(-n+2) { border-bottom: none; }
+    .result-label {
+      font-size: 11px; font-weight: 700; color: var(--gray-500);
+      text-transform: uppercase; letter-spacing: .8px; margin-bottom: 6px;
+    }
+    .result-value { font-size: 22px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; line-height: 1; }
+    .result-value.primary { color: var(--primary); }
+    .result-value.danger  { color: var(--danger); }
+    .result-value.success { color: var(--success); }
+    .result-sub { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+
+    .warn-box {
+      background: #fef3c7; border-radius: var(--radius); padding: 12px 16px;
+      font-size: 12px; color: var(--accent-dark); line-height: 1.7; margin-bottom: 20px;
+    }
+
+    .oco-cta {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--white); border: 1.5px solid var(--primary);
+      border-radius: var(--radius-lg); padding: 20px 24px; text-decoration: none;
+      transition: background .15s, box-shadow .15s; box-shadow: var(--shadow-sm); margin-bottom: 20px;
+    }
+    .oco-cta:hover { background: var(--primary-light); box-shadow: var(--shadow); text-decoration: none; }
+    .oco-cta-left { display: flex; flex-direction: column; gap: 4px; }
+    .oco-cta-label { font-size: 11px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .8px; }
+    .oco-cta-title { font-size: 15px; font-weight: 800; color: var(--gray-900); }
+    .oco-cta-sub { font-size: 12px; color: var(--gray-500); }
+    .oco-cta-arrow { font-size: 22px; color: var(--primary); font-weight: 900; }
+
+    .info-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); padding: 24px 28px;
+      box-shadow: var(--shadow-sm); margin-bottom: 20px;
+    }
+    .info-card h2 { font-size: 15px; font-weight: 800; color: var(--gray-900); margin: 0 0 14px; }
+    .info-card h3 { font-size: 13px; font-weight: 800; color: var(--gray-700); margin: 20px 0 8px; }
+    .info-card p { font-size: 13px; color: var(--gray-700); line-height: 1.9; margin: 0 0 10px; }
+    .formula {
+      background: var(--gray-50); border-left: 3px solid var(--primary);
+      padding: 12px 16px; font-size: 13px; font-weight: 700;
+      color: var(--gray-800); margin: 10px 0; border-radius: 0 8px 8px 0; line-height: 1.8;
+    }
+    .info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+    .info-table th {
+      background: var(--gray-50); padding: 9px 12px; text-align: left;
+      font-weight: 700; color: var(--gray-600); font-size: 11px; border-bottom: 1px solid var(--gray-200);
+    }
+    .info-table td { padding: 9px 12px; border-bottom: 1px solid var(--gray-100); color: var(--gray-700); }
+    .info-table tr:last-child td { border-bottom: none; }
+
+    .breadcrumb {
+      max-width: 760px; margin: 0 auto; padding: 16px 20px 0;
+      font-size: 12px; color: var(--gray-500); display: flex; gap: 8px; align-items: center;
+    }
+    .breadcrumb a { color: var(--gray-500); }
+    .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
+    .breadcrumb span { color: var(--gray-300); }
+
+    @media (max-width: 640px) {
+      .pos-wrap { padding: 24px 12px 60px; }
+      .input-card { padding: 16px; }
+      .info-card { padding: 18px 16px; }
+      .result-grid { grid-template-columns: 1fr; }
+      .result-item { border-right: none; }
+      .result-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--gray-100); }
+      .result-item:last-child { border-bottom: none; }
+      .buy-row, .col-head { grid-template-columns: 52px 1fr 1fr; gap: 7px; }
+      .field input { font-size: 16px; padding: 9px 10px; }
+      .info-table { display: block; overflow-x: auto; }
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ナンピン計算ツール",
+  "url": "https://yuta-tools.com/nanpin-calc/",
+  "description": "買い増し・ナンピン後の平均取得単価を最大5回分まで自動計算。投資総額・保有株数・損益分岐点・評価損益がわかります。",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+  "publisher": { "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/" }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yuta-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "ナンピン計算ツール", "item": "https://yuta-tools.com/nanpin-calc/" }
+  ]
+}
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../">ホーム</a>
+      <a href="../investment-sim/">積立投資</a>
+      <a href="../position-calc/">ポジション計算</a>
+      <a href="../oco-calc/">OCO計算</a>
+      <a href="../profit-calc/">損益計算</a>
+      <a href="./" class="active">ナンピン計算</a>
+      <a href="../fx-calc/">FX計算</a>
+      <a href="../articles/">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../">ホーム</a>
+  <span>/</span>
+  <span>ナンピン計算ツール</span>
+</div>
+
+<div class="pos-wrap">
+  <h1 class="page-title">ナンピン計算ツール</h1>
+  <div class="page-sub">買い増し・ナンピン後の平均取得単価を、最大5回分までまとめて自動計算します。</div>
+
+  <div class="concept-box">
+    💡 <strong>買い増した後、自分の平均取得単価がいくらか即答できますか？</strong><br>
+    株価と株数を入れるだけで、平均取得単価・投資総額・損益分岐点が一度に出ます。現在の株価を入れれば、評価損益と「あと何%上がれば建値に戻るか」も確認できます。
+  </div>
+
+  <div class="input-card">
+    <h2>買った価格と株数を入力</h2>
+    <div class="buy-hint">使わない行は空欄のままでOKです。</div>
+
+    <div class="col-head"><span>回</span><span>株価</span><span>株数</span></div>
+
+    <div class="buy-row first">
+      <div class="buy-label">初回</div>
+      <div class="field"><input type="number" id="p1" inputmode="decimal" placeholder="1000" value="1000"><span>円</span></div>
+      <div class="field"><input type="number" id="q1" inputmode="numeric" placeholder="100" value="100"><span>株</span></div>
+    </div>
+    <div class="buy-row">
+      <div class="buy-label">2回目</div>
+      <div class="field"><input type="number" id="p2" inputmode="decimal" placeholder="800"><span>円</span></div>
+      <div class="field"><input type="number" id="q2" inputmode="numeric" placeholder="100"><span>株</span></div>
+    </div>
+    <div class="buy-row">
+      <div class="buy-label">3回目</div>
+      <div class="field"><input type="number" id="p3" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
+      <div class="field"><input type="number" id="q3" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
+    </div>
+    <div class="buy-row">
+      <div class="buy-label">4回目</div>
+      <div class="field"><input type="number" id="p4" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
+      <div class="field"><input type="number" id="q4" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
+    </div>
+    <div class="buy-row">
+      <div class="buy-label">5回目</div>
+      <div class="field"><input type="number" id="p5" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
+      <div class="field"><input type="number" id="q5" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
+    </div>
+
+    <div class="now-block">
+      <label>現在の株価（任意）</label>
+      <div class="field" style="margin-top:6px;">
+        <input type="number" id="now" inputmode="decimal" placeholder="例：900"><span>円</span>
+      </div>
+      <div class="hint">入れると評価損益と、建値に戻るのに必要な値上がり率が出ます</div>
+    </div>
+  </div>
+
+  <div class="warn-box" id="warn-box" style="display:none;"></div>
+
+  <div class="result-card">
+    <div class="result-card-header">計算結果</div>
+    <div class="result-grid">
+      <div class="result-item">
+        <div class="result-label">平均取得単価</div>
+        <div class="result-value primary" id="r-avg">—</div>
+        <div class="result-sub" id="r-avg-sub">投資総額 ÷ 保有株数</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">保有株数</div>
+        <div class="result-value" id="r-qty">—</div>
+        <div class="result-sub" id="r-qty-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">投資総額</div>
+        <div class="result-value" id="r-total">—</div>
+        <div class="result-sub">株価 × 株数 の合計</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">初回からの単価変化</div>
+        <div class="result-value" id="r-diff">—</div>
+        <div class="result-sub" id="r-diff-sub"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card" id="now-card" style="display:none;">
+    <div class="result-card-header">現在の株価で評価すると</div>
+    <div class="result-grid">
+      <div class="result-item">
+        <div class="result-label">評価損益</div>
+        <div class="result-value" id="r-pl">—</div>
+        <div class="result-sub" id="r-pl-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">建値まで必要な値上がり</div>
+        <div class="result-value" id="r-need">—</div>
+        <div class="result-sub" id="r-need-sub"></div>
+      </div>
+    </div>
+  </div>
+
+  <a class="oco-cta" href="../profit-calc/">
+    <div class="oco-cta-left">
+      <div class="oco-cta-label">次のステップ</div>
+      <div class="oco-cta-title">株の利益計算ツールへ →</div>
+      <div class="oco-cta-sub">売却時の手数料・税金を引いた実際の手取りを計算できます</div>
+    </div>
+    <div class="oco-cta-arrow">→</div>
+  </a>
+
+  <div class="info-card">
+    <h2>平均取得単価の計算方法</h2>
+    <p>ナンピン（買い増し）をすると、平均取得単価は「それまでの投資総額と新しい買い付けを合算して、保有株数で割った値」になります。</p>
+    <div class="formula">平均取得単価 = 投資総額 ÷ 保有株数</div>
+
+    <h3>計算例</h3>
+    <p>1,000円で100株買った後、800円で100株買い増した場合：</p>
+    <div style="overflow-x:auto;">
+    <table class="info-table">
+      <tr><th>回</th><th>株価</th><th>株数</th><th>金額</th></tr>
+      <tr><td>初回</td><td>1,000円</td><td>100株</td><td>100,000円</td></tr>
+      <tr><td>2回目</td><td>800円</td><td>100株</td><td>80,000円</td></tr>
+      <tr><td><strong>合計</strong></td><td>—</td><td><strong>200株</strong></td><td><strong>180,000円</strong></td></tr>
+    </table>
+    </div>
+    <p>180,000円 ÷ 200株 = <strong>平均取得単価 900円</strong> となります。</p>
+
+    <h3>⚠️ 単価は「半分」しか下がらない</h3>
+    <p>この例では株価が<strong>200円下落</strong>したのに、平均取得単価は<strong>100円しか下がっていません</strong>。同じ株数で買い増した場合、単価の下落は値下がり幅のちょうど半分になります。</p>
+    <p>その一方で<strong>投資額は2倍</strong>になっています。「単価が下がった」という安心感の裏で、値動きに対する損益の振れ幅は大きくなっている点に注意してください。</p>
+
+    <h3>売却では単価は動かない</h3>
+    <p>意外と誤解されやすいのですが、<strong>一部を売却しても平均取得単価は変わりません</strong>。単価が動くのは買い付けたときだけです。高値で半分売っても、残りの取得単価は下がりません。</p>
+  </div>
+
+  <div class="info-card">
+    <h2>よくある質問</h2>
+    <h3>Q. 証券会社の表示と計算結果がずれます</h3>
+    <p>証券会社の画面では<strong>売買手数料を含めた金額</strong>で計算されていたり、円未満が切り上げ処理されていることがあります。このツールは手数料を含まない単純計算なので、数円程度の差が出ることがあります。</p>
+
+    <h3>Q. 何回まで買い増しを入力できますか？</h3>
+    <p>このツールでは<strong>最大5回分</strong>まで入力できます。それ以上の回数を計算したい場合は、すでに保有している分をまとめて1行（平均取得単価と合計株数）として入力すると、同じ結果が得られます。</p>
+
+    <h3>Q. ナンピンは何回までやっていい？</h3>
+    <p>決まった正解はありませんが、<strong>買い増しの上限と撤退ラインを事前に決めておく</strong>ことが重要です。ナンピンは下落が続くと投資額と含み損が加速度的に増える手法で、回数を重ねるほど1回の下落インパクトが大きくなります。詳しくは<a href="../articles/average-price/">株の平均取得単価の計算方法</a>と<a href="../articles/position-size/">ポジションサイズとリスク管理</a>を参照してください。</p>
+  </div>
+
+  <div class="info-card">
+    <h2>関連ページ</h2>
+    <p><a href="../articles/average-price/">株の平均取得単価の計算方法｜買い増し後の求め方</a><br>計算の考え方や、証券会社の表示とずれる理由をくわしく解説しています。</p>
+    <p><a href="../profit-calc/">株の利益計算ツール</a><br>売却したときの手数料・税金（20.315%）を引いた実際の手取りを計算できます。</p>
+    <p><a href="../position-calc/">ポジションサイズ計算ツール</a><br>買い増しを始める前に「そもそも何株買うべきか」を口座残高から逆算できます。</p>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Money<span>Tools</span></div>
+        <p>資産形成に役立つ無料計算ツール</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="../investment-sim/">積立投資シミュレーター</a></li>
+            <li><a href="../position-calc/">ポジションサイズ計算</a></li>
+            <li><a href="../oco-calc/">OCO注文計算ツール</a></li>
+            <li><a href="../profit-calc/">株式損益計算ツール</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>情報</h4>
+          <ul>
+            <li><a href="../privacy/">プライバシーポリシー</a></li>
+            <li><a href="../disclaimer/">免責事項</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本ツールの計算結果は手数料を含まない参考値です。実際の平均取得単価は証券会社の画面をご確認ください。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script src="../js/nav.js"></script>
+<script>
+(function(){
+  var N = 5;
+  function el(id){ return document.getElementById(id); }
+  function num(id){ var v = parseFloat(el(id).value); return (isNaN(v) || v < 0) ? 0 : v; }
+  function yen(n){ return Math.round(n).toLocaleString('ja-JP') + '円'; }
+  function yen2(n){ return n.toLocaleString('ja-JP', {maximumFractionDigits:2}) + '円'; }
+
+  function calc(){
+    var total = 0, qty = 0, first = 0, rows = 0;
+    for (var i = 1; i <= N; i++){
+      var p = num('p'+i), q = num('q'+i);
+      if (p > 0 && q > 0){
+        total += p * q; qty += q; rows++;
+        if (first === 0) first = p;
+      }
+    }
+
+    var warn = el('warn-box');
+    warn.style.display = 'none';
+
+    if (qty <= 0){
+      ['r-avg','r-qty','r-total','r-diff'].forEach(function(id){ el(id).textContent = '—'; });
+      el('r-qty-sub').textContent = '';
+      el('r-diff-sub').textContent = '';
+      el('now-card').style.display = 'none';
+      return;
+    }
+
+    var avg = total / qty;
+    el('r-avg').textContent = yen2(Math.round(avg * 100) / 100);
+    el('r-qty').textContent = qty.toLocaleString('ja-JP') + '株';
+    el('r-qty-sub').textContent = rows + '回に分けて購入';
+    el('r-total').textContent = yen(total);
+
+    var diff = avg - first;
+    var dEl = el('r-diff');
+    if (rows <= 1){
+      dEl.textContent = '—';
+      dEl.className = 'result-value';
+      el('r-diff-sub').textContent = '買い増すと表示されます';
+    } else {
+      dEl.textContent = (diff >= 0 ? '+' : '') + yen2(Math.round(diff * 100) / 100);
+      dEl.className = 'result-value' + (diff < 0 ? ' success' : diff > 0 ? ' danger' : '');
+      el('r-diff-sub').textContent = '初回 ' + yen2(first) + ' → 平均 ' + yen2(Math.round(avg*100)/100);
+    }
+
+    // 現在値での評価
+    var now = num('now');
+    if (now > 0){
+      el('now-card').style.display = 'block';
+      var pl = (now - avg) * qty;
+      var plEl = el('r-pl');
+      plEl.textContent = (pl >= 0 ? '+' : '') + yen(pl);
+      plEl.className = 'result-value' + (pl > 0 ? ' success' : pl < 0 ? ' danger' : '');
+      el('r-pl-sub').textContent = '(' + yen2(now) + ' − ' + yen2(Math.round(avg*100)/100) + ') × ' + qty.toLocaleString('ja-JP') + '株';
+
+      var needEl = el('r-need');
+      if (now >= avg){
+        needEl.textContent = '達成済み';
+        needEl.className = 'result-value success';
+        el('r-need-sub').textContent = 'すでに平均取得単価を上回っています';
+      } else {
+        var pct = (avg / now - 1) * 100;
+        needEl.textContent = '+' + pct.toFixed(1) + '%';
+        needEl.className = 'result-value';
+        el('r-need-sub').textContent = yen2(Math.round(avg*100)/100) + ' まで戻れば損益ゼロ';
+        if (pct >= 20){
+          warn.style.display = 'block';
+          warn.innerHTML = '⚠️ <strong>建値回復に' + pct.toFixed(1) + '%の値上がりが必要です。</strong>ナンピンを重ねるほど、必要な反発幅は大きくなります。買い増しの上限と撤退ラインを決めておくことをおすすめします。';
+        }
+      }
+    } else {
+      el('now-card').style.display = 'none';
+    }
+  }
+
+  var ids = [];
+  for (var i = 1; i <= N; i++){ ids.push('p'+i, 'q'+i); }
+  ids.push('now');
+  ids.forEach(function(id){ el(id).addEventListener('input', calc); });
+  calc();
+})();
+</script>
+</body>
+</html>
