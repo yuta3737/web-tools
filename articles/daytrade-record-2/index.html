@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://yuta-tools.com/articles/daytrade-record-2/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>デイトレ実践記録②｜6月-4,590円→7月+12,210円 | MoneyTools</title>
+  <meta name="description" content="デイトレ実践記録の続編。6月は-4,590円と1勝4敗で大きく負け、7月は+12,210円・8勝0敗に転じました。全取引を公開し、何を変えたのか（銘柄の集中・ナンピン導入・保有期間）を実際の数字で振り返ります。">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:title" content="デイトレ実践記録②｜6月-4,590円→7月+12,210円 | MoneyTools">
+  <meta property="og:description" content="6月は-4,590円で1勝4敗、7月は+12,210円で8勝0敗。全取引を公開し、間で何を変えたのかを実際の数字で振り返ります。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yuta-tools.com/articles/daytrade-record-2/">
+  <meta property="og:image" content="https://yuta-tools.com/ogp.png">
+  <meta property="og:site_name" content="MoneyTools">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="デイトレ実践記録②｜6月-4,590円→7月+12,210円 | MoneyTools">
+  <meta name="twitter:description" content="6月は-4,590円で1勝4敗、7月は+12,210円で8勝0敗。全取引を公開し、間で何を変えたのかを振り返ります。">
+  <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .trade-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 16px 0;
+    }
+    .trade-table th {
+      background: var(--primary);
+      color: var(--white);
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+    }
+    .trade-table th:first-child { border-radius: 8px 0 0 0; }
+    .trade-table th:last-child  { border-radius: 0 8px 0 0; }
+    .trade-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+      vertical-align: middle;
+    }
+    .trade-table tr:last-child td { border-bottom: none; }
+    .trade-table tr:nth-child(even) td { background: var(--gray-50); }
+    .pnl-plus  { color: var(--success); font-weight: 800; }
+    .pnl-minus { color: var(--danger);  font-weight: 800; }
+    .summary-stat {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-label { font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+    .stat-value { font-size: 22px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; }
+    .stat-value.plus  { color: var(--success); }
+    .stat-value.minus { color: var(--danger); }
+
+    .verdict-box {
+      background: #eff6ff;
+      border: 2px solid var(--primary);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin: 20px 0;
+    }
+    .verdict-box h4 { font-size: 15px; font-weight: 800; color: var(--primary); margin: 0 0 12px; }
+    .verdict-box p { margin: 0 0 10px; font-size: 14px; color: var(--gray-700); line-height: 1.8; }
+    .verdict-box p:last-child { margin-bottom: 0; }
+
+    @media (max-width: 640px) {
+      .summary-stat { grid-template-columns: repeat(2, 1fr); }
+      .trade-table { font-size: 12px; }
+      .trade-table th, .trade-table td { padding: 8px 8px; }
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "デイトレ実践記録②｜6月-4,590円→7月+12,210円 | MoneyTools",
+  "description": "デイトレ実践記録の続編。6月は-4,590円と1勝4敗、7月は+12,210円・8勝0敗。全取引を公開し、何を変えたのかを実際の数字で振り返ります。",
+  "image": "https://yuta-tools.com/ogp.png",
+  "url": "https://yuta-tools.com/articles/daytrade-record-2/",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://yuta-tools.com/articles/daytrade-record-2/" },
+  "author": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "publisher": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "datePublished": "2026-08-02"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yuta-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "記事一覧", "item": "https://yuta-tools.com/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "デイトレ実践記録②｜6〜7月", "item": "https://yuta-tools.com/articles/daytrade-record-2/" }
+  ]
+}
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../">ホーム</a>
+      <a href="../../investment-sim/">積立投資</a>
+      <a href="../../position-calc/">ポジション計算</a>
+      <a href="../../oco-calc/">OCO計算</a>
+      <a href="../../profit-calc/">損益計算</a>
+      <a href="../../nanpin-calc/">ナンピン計算</a>
+      <a href="../../fx-calc/">FX計算</a>
+      <a href="../">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../">ホーム</a><span>/</span>
+  <a href="../">記事一覧</a><span>/</span>
+  <span>デイトレ実践記録②｜6〜7月</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">実践記録</span>
+    <span class="article-level">📒 実体験</span>
+    <span class="article-date">2026年8月</span>
+  </div>
+
+  <h1 class="article-title">デイトレ実践記録②｜6月-4,590円→7月+12,210円</h1>
+
+  <p class="article-lead">
+    <a href="../daytrade-record/">前回の記録（4〜5月）</a>の続きです。<strong>6月は-4,590円で1勝4敗</strong>と大きく負け、<strong>7月は+12,210円で8勝0敗</strong>という真逆の結果になりました。同じ人間が同じ資金でやって、なぜここまで変わったのか。全取引を公開して振り返ります。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#result">2ヶ月の結果を先に</a></li>
+      <li><a href="#june">6月の取引記録（-4,590円）</a></li>
+      <li><a href="#july">7月の取引記録（+12,210円）</a></li>
+      <li><a href="#change">何を変えたのか</a></li>
+      <li><a href="#nanpin">ナンピンが機能した2回</a></li>
+      <li><a href="#honest">正直に書いておくこと</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+<a href="../daytrade-record/" class="related-article">
+  <div class="related-article-text">
+    <div class="related-article-label">前回の記録</div>
+    <div class="related-article-title">デイトレ実践記録｜元手5万円の取引結果を全公開【4〜5月】</div>
+  </div>
+  <span class="related-article-arrow">›</span>
+</a>
+
+    <h2 id="result">2ヶ月の結果を先に</h2>
+
+    <div class="summary-stat">
+      <div class="stat-card">
+        <div class="stat-label">6月</div>
+        <div class="stat-value minus">-4,590円</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">7月</div>
+        <div class="stat-value plus">+12,210円</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">2ヶ月合計</div>
+        <div class="stat-value plus">+7,620円</div>
+      </div>
+    </div>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>月</th><th>成績</th><th>損益</th><th>1トレード平均</th></tr>
+      <tr><td>6月</td><td>1勝4敗</td><td class="pnl-minus">-4,590円</td><td>-918円</td></tr>
+      <tr><td><strong>7月</strong></td><td><strong>8勝0敗</strong></td><td class="pnl-plus"><strong>+12,210円</strong></td><td><strong>+1,526円</strong></td></tr>
+    </table>
+    </div>
+
+    <p>金額もさることながら、<strong>1トレードあたりの平均が-918円から+1,526円へ</strong>と大きく変わっています。ここに理由があります。</p>
+
+    <h2 id="june">6月の取引記録（-4,590円）</h2>
+    <p>まず負けた月から。すべて実際の約定履歴です。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>決済日</th><th>銘柄</th><th>株数</th><th>買値→売値</th><th>損益</th></tr>
+      <tr><td>6/01</td><td>ソニーFG</td><td>300株</td><td>142.6 → 138.0</td><td class="pnl-minus">-1,380円</td></tr>
+      <tr><td>6/02</td><td>メタプラネット</td><td>100株</td><td>276.9 → 272.0</td><td class="pnl-minus">-490円</td></tr>
+      <tr><td>6/08</td><td>ＮＴＴ</td><td>400株</td><td>149.9 → 145.0</td><td class="pnl-minus">-1,960円</td></tr>
+      <tr><td>6/08</td><td>メタプラネット</td><td>200株</td><td>239.0 → 234.0</td><td class="pnl-minus">-1,000円</td></tr>
+      <tr><td>6/10</td><td>ソニーFG</td><td>100株</td><td>145.6 → 148.0</td><td class="pnl-plus">+240円</td></tr>
+    </table>
+    </div>
+
+    <p>負けの中身を見ると、はっきりした共通点があります。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 6月の負けパターン</div>
+      <strong>①株数が多い</strong>（NTT 400株・ソニーFG 300株）／<strong>②持ちすぎ</strong>（ソニーFGは10日、NTTは11日保有）。この2つが重なると、含み損が膨らんでも切れなくなります。実際、NTTの-1,960円は「そのうち戻るだろう」で11日持った結果です。
+    </div>
+
+    <p>当時のルールは「損切り-600円」でした。<strong>-1,960円は、その3倍以上まで放置したことになります</strong>。ルールを決めていても、株数が多いと金額のインパクトが大きくなり、切る決断が鈍くなるのを実感しました。</p>
+
+    <h2 id="july">7月の取引記録（+12,210円）</h2>
+    <p>翌月です。同じ資金・同じ人間で、結果はこうなりました。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>決済日</th><th>銘柄</th><th>株数</th><th>買値→売値</th><th>損益</th></tr>
+      <tr><td>7/08</td><td>ユーグレナ</td><td>100株</td><td>351.0 → 352.0</td><td class="pnl-plus">+100円</td></tr>
+      <tr><td>7/09</td><td>ソフトバンク</td><td>100株</td><td>212.2 → 215.5</td><td class="pnl-plus">+330円</td></tr>
+      <tr><td>7/13</td><td>ユーグレナ</td><td>100株</td><td>342.0 → 352.6</td><td class="pnl-plus">+1,060円</td></tr>
+      <tr><td>7/14</td><td>メタプラネット</td><td>100株</td><td>235.5 → 241.0</td><td class="pnl-plus">+550円</td></tr>
+      <tr><td>7/16</td><td>ＮＴＴ</td><td>100株</td><td>148.9 → 151.1</td><td class="pnl-plus">+220円</td></tr>
+      <tr><td>7/22</td><td>メタプラネット</td><td><strong>300株</strong></td><td>平均237.5 → 255.0</td><td class="pnl-plus"><strong>+5,260円</strong></td></tr>
+      <tr><td>7/22</td><td>ＮＴＴ</td><td>100株</td><td>150.0 → 151.9</td><td class="pnl-plus">+190円</td></tr>
+      <tr><td>7/31</td><td>メタプラネット</td><td><strong>300株</strong></td><td>平均230.0 → 245.0</td><td class="pnl-plus"><strong>+4,500円</strong></td></tr>
+    </table>
+    </div>
+
+    <p><strong>8勝0敗</strong>。そして利益の8割（9,760円）は、<strong>メタプラネットの300株ポジション2回</strong>から出ています。</p>
+
+    <h2 id="change">何を変えたのか</h2>
+    <p>結果が変わった要因を、データから3つに絞りました。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>項目</th><th>6月</th><th>7月</th></tr>
+      <tr><td><strong>銘柄</strong></td><td>ソニーFG・NTT・メタプラネットと分散</td><td><strong>メタプラネットに集中</strong>（利益の8割）</td></tr>
+      <tr><td><strong>買い方</strong></td><td>一度にまとめて買う</td><td><strong>下がるたびに分けて買う</strong>（ナンピン）</td></tr>
+      <tr><td><strong>保有期間</strong></td><td>10〜11日（塩漬け化）</td><td>1〜8日</td></tr>
+    </table>
+    </div>
+
+    <h3>① 銘柄を絞った</h3>
+    <p>6月は3銘柄をバラバラに触っていましたが、7月はメタプラネット中心に切り替えました。同じ銘柄を繰り返すと<strong>値動きの癖がわかってくる</strong>のが最大の利点です。「この価格帯まで下げたら反発しやすい」という感覚が、実際の売買判断につながりました。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 なぜメタプラネットだったか</div>
+      値動きが大きい銘柄だからです。1日に10円以上動くので、+10円の利確目標が現実的に届きます。逆にNTT（1日2円程度）では、同じ目標に何日もかかります。この判断基準は<a href="../volatility/">株のボラティリティの調べ方</a>で数字の出し方をまとめています。
+    </div>
+
+    <h3>② ナンピン（買い増し）を取り入れた</h3>
+    <p>6月は「買って、下がって、耐えて、切る」でした。7月は<strong>下がったところで買い増す</strong>形に変えています。これが最大の変化です。</p>
+
+    <h3>③ 保有期間が短くなった</h3>
+    <p>6月の負け2つは10日・11日の保有。7月は最長でも8日です。長く持つほど「戻るまで待とう」という心理が働き、損切りができなくなります。</p>
+
+    <h2 id="nanpin">ナンピンが機能した2回</h2>
+    <p>7月の利益の大半を生んだ2つのトレードを、買い付けの内訳まで公開します。</p>
+
+    <h3>7/22決済（+5,260円）</h3>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>日付</th><th>売買</th><th>株価</th><th>株数</th></tr>
+      <tr><td>7/15</td><td>買い</td><td>245円</td><td>100株</td></tr>
+      <tr><td>7/16</td><td>買い増し</td><td>231円</td><td>100株</td></tr>
+      <tr><td>7/16</td><td>買い増し</td><td>236.4円</td><td>100株</td></tr>
+      <tr><td>7/22</td><td><strong>売却</strong></td><td><strong>255円</strong></td><td>300株</td></tr>
+    </table>
+    </div>
+    <p>平均取得単価237.5円 → 255円で決済。<strong>+5,260円</strong>でした。</p>
+
+    <h3>7/31決済（+4,500円）</h3>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>日付</th><th>売買</th><th>株価</th><th>株数</th></tr>
+      <tr><td>7/23</td><td>買い</td><td>240円</td><td>100株</td></tr>
+      <tr><td>7/24</td><td>買い増し</td><td>230円</td><td>100株</td></tr>
+      <tr><td>7/27</td><td>買い増し</td><td>220円</td><td>100株</td></tr>
+      <tr><td>7/31</td><td><strong>売却</strong></td><td><strong>245円</strong></td><td>300株</td></tr>
+    </table>
+    </div>
+    <p>こちらは<strong>10円下がるごとに100株ずつ買い増す</strong>という形がきれいに出ています。平均取得単価は230円、245円で決済して<strong>+4,500円</strong>。</p>
+
+    <div class="verdict-box">
+      <h4>✅ ナンピンが効いた理由</h4>
+      <p>初回の240円で買った100株だけなら、245円で売っても<strong>+500円</strong>にしかなりません。</p>
+      <p>下がったところで買い増して300株にしたことで、同じ245円への戻りが<strong>+4,500円（9倍）</strong>になりました。<strong>下落を利益に変換したのがナンピン</strong>です。</p>
+    </div>
+
+    <a href="../../nanpin-calc/" class="tool-cta">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">無料ツール</div>
+        <div class="tool-cta-title">ナンピン計算ツール</div>
+        <div class="tool-cta-sub">買い増し後の平均取得単価・評価損益・建値回復に必要な値上がり率を自動計算</div>
+      </div>
+      <div class="tool-cta-arrow">›</div>
+    </a>
+
+    <h2 id="honest">正直に書いておくこと</h2>
+    <p>「ナンピンすれば勝てる」と読まれると危険なので、都合の悪いことも書いておきます。</p>
+
+    <div class="example-box">
+      <div class="example-box-title">⚠️ 7月は相場が味方していた</div>
+      <p>8勝0敗は、正直に言って<strong>出来すぎです</strong>。メタプラネットが220〜255円のレンジで上下していたから、下で買って上で売る形がハマりました。一方向に下げ続ける相場だったら、同じやり方で大きな含み損を抱えていたはずです。</p>
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">⚠️ ナンピンは損失も倍にする</div>
+      <p>300株持つということは、<strong>1円動くと300円動く</strong>ということです。今回は上に動きましたが、下に動けば同じスピードで損失が膨らみます。実際、下落幅30円に対して平均取得単価は15円しか下がりません（<a href="../average-price/">詳しくはこちら</a>）。単価が下がった安心感の裏で、リスクは確実に増えています。</p>
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">⚠️ 6月の失敗の本質は変わっていない</div>
+      <p>6月に-1,960円を出した原因は「損切りできなかったこと」です。7月は全部勝ったので損切りする場面がありませんでした。つまり<strong>本当の課題はまだ検証されていない</strong>ということです。次に大きく下げたときに切れるかどうかが、本当の分かれ目になります。</p>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ ナンピンの上限は必ず決めておく</div>
+      今回は3回の買い増しで済みましたが、下げ続けたら4回目・5回目と続けたくなります。含み損は<strong>0 → -1,000 → -3,000 → -6,000円と加速度的に増える</strong>ので（100株ずつ・10円刻みの場合）、買い増しの回数と撤退ラインを先に決めておくことが必須です。
+    </div>
+
+    <h2 id="cumulative">累計成績</h2>
+    <p>4月に始めてからの通算です。</p>
+
+    <div class="summary-stat">
+      <div class="stat-card">
+        <div class="stat-label">通算トレード</div>
+        <div class="stat-value">27回</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">勝率</div>
+        <div class="stat-value">70%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">税引後の損益</div>
+        <div class="stat-value plus">+9,403円</div>
+      </div>
+    </div>
+
+    <p>19勝8敗、税引前+11,800円。そこから約20.315%の税金を引いて、手元に残るのは<strong>約9,403円</strong>です（税金の計算方法は<a href="../tax-calculation/">こちら</a>）。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 4ヶ月で+9,403円をどう見るか</div>
+      元手10万円に対して<strong>約9.4%</strong>。金額としては地味ですが、インデックス投資の年利5〜7%と比べれば悪くない数字です。ただし7月の1ヶ月に大きく依存しているので、<strong>継続できるかはまだ分かりません</strong>。
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">💡 口座をまだ持っていない方へ</div>
+      手数料が安い証券会社ほど、少額トレードでは差が出ます。口座開設は無料です。
+    </div>
+    <a href="https://h.accesstrade.net/sp/cc?rk=01000t2900os8p" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta">松井証券 口座開設（1日50万円まで手数料0円・無料）</a>
+    <a href="https://h.accesstrade.net/sp/cc?rk=0100h3p700os8p" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub" style="margin-bottom:24px;">マネックス証券 口座開設（無料）</a>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li><strong>6月は-4,590円（1勝4敗）</strong>。原因は株数の多さ（400株）と持ちすぎ（11日）で、損切りルールを3倍超えて放置した。</li>
+        <li><strong>7月は+12,210円（8勝0敗）</strong>。利益の8割はメタプラネットの300株ポジション2回から。</li>
+        <li>変えたのは<strong>①銘柄を絞る ②下がったら買い増す ③長く持たない</strong>の3点。</li>
+        <li>ナンピンで300株にしたことで、同じ値幅の戻りが<strong>+500円→+4,500円（9倍）</strong>になった。</li>
+        <li>ただし<strong>7月は相場に恵まれた</strong>。損切りする場面がなかったので、本当の課題はまだ検証されていない。</li>
+        <li>通算27トレード・19勝8敗・税引後<strong>+9,403円</strong>（元手10万円に対して約9.4%）。</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+          <li><a href="../../investment-sim/">積立投資シミュレーター</a></li>
+          <li><a href="../../nanpin-calc/">ナンピン計算ツール</a></li>
+          <li><a href="../../profit-calc/">株式損益計算ツール</a></li>
+        </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事は個人の取引記録であり、特定の銘柄・手法を推奨するものではありません。投資判断はご自身の責任でお願いします。掲載の損益は実際の約定履歴に基づく数値です。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>
