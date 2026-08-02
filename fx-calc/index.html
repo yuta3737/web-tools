@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VPXV9BMEY');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://yuta-tools.com/fx-calc/">
+  <title>FX計算ツール｜必要証拠金・pips損益・ロット数を自動計算 | MoneyTools</title>
+  <meta name="description" content="FXの必要証拠金・1pipsあたりの損益・証拠金維持率・適正ロット数をまとめて自動計算。通貨ペアの価格と通貨数を入力するだけ。損切り幅から逆算した適正な取引数量もわかります。">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:title" content="FX計算ツール｜必要証拠金・pips損益・ロット数を自動計算 | MoneyTools">
+  <meta property="og:description" content="FXの必要証拠金・1pipsあたりの損益・証拠金維持率・適正ロット数をまとめて自動計算。通貨ペアの価格と通貨数を入力するだけ。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yuta-tools.com/fx-calc/">
+  <meta property="og:image" content="https://yuta-tools.com/ogp.png">
+  <meta property="og:site_name" content="MoneyTools">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FX計算ツール｜必要証拠金・pips損益・ロット数を自動計算 | MoneyTools">
+  <meta name="twitter:description" content="FXの必要証拠金・1pipsあたりの損益・証拠金維持率・適正ロット数をまとめて自動計算。">
+  <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .pos-wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+
+    .page-title {
+      font-size: 22px; font-weight: 800; color: var(--gray-900);
+      margin: 0 0 4px; letter-spacing: -0.5px;
+    }
+    .page-sub { font-size: 13px; color: var(--gray-500); margin-bottom: 28px; }
+
+    .concept-box {
+      background: var(--primary-light); border-radius: var(--radius);
+      padding: 14px 18px; font-size: 13px; color: var(--primary-dark);
+      line-height: 1.8; margin-bottom: 24px;
+    }
+    .concept-box strong { font-weight: 800; }
+
+    .input-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); padding: 28px;
+      box-shadow: var(--shadow); margin-bottom: 20px;
+    }
+    .input-card h2 {
+      font-size: 14px; font-weight: 800; color: var(--gray-700);
+      margin-bottom: 20px; padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .form-group label {
+      font-size: 11px; font-weight: 700; color: var(--gray-500);
+      text-transform: uppercase; letter-spacing: .8px;
+    }
+    .form-group .hint { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+
+    .input-inner { display: flex; align-items: center; gap: 6px; }
+    .input-inner input[type="number"], .input-inner select {
+      flex: 1; padding: 10px 14px; border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius-sm); font-size: 17px; font-weight: 800;
+      font-family: var(--font); color: var(--gray-900); outline: none;
+      transition: border-color .15s; min-width: 0; background: var(--white);
+    }
+    .input-inner select { font-size: 15px; }
+    .input-inner input[type="number"]:focus, .input-inner select:focus {
+      border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,86,219,.1);
+    }
+    .input-unit { font-size: 13px; font-weight: 700; color: var(--gray-500); white-space: nowrap; }
+
+    .result-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--shadow); margin-bottom: 20px;
+    }
+    .result-card-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white); padding: 16px 24px; font-size: 14px; font-weight: 800;
+    }
+    .result-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; }
+    .result-item {
+      padding: 20px 24px; border-bottom: 1px solid var(--gray-100);
+      border-right: 1px solid var(--gray-100);
+    }
+    .result-item:nth-child(even) { border-right: none; }
+    .result-item:nth-last-child(-n+2) { border-bottom: none; }
+    .result-label {
+      font-size: 11px; font-weight: 700; color: var(--gray-500);
+      text-transform: uppercase; letter-spacing: .8px; margin-bottom: 6px;
+    }
+    .result-value {
+      font-size: 22px; font-weight: 900; color: var(--gray-900);
+      letter-spacing: -0.5px; line-height: 1;
+    }
+    .result-value.primary { color: var(--primary); }
+    .result-value.danger  { color: var(--danger); }
+    .result-value.success { color: var(--success); }
+    .result-sub { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+
+    .warn-box {
+      background: #fef3c7; border-radius: var(--radius); padding: 12px 16px;
+      font-size: 12px; color: var(--accent-dark); line-height: 1.7; margin-bottom: 20px;
+    }
+    .good-box {
+      background: #ecfdf5; border-radius: var(--radius); padding: 12px 16px;
+      font-size: 12px; color: #065f46; line-height: 1.7; margin-bottom: 20px;
+    }
+
+    .oco-cta {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--white); border: 1.5px solid var(--primary);
+      border-radius: var(--radius-lg); padding: 20px 24px; text-decoration: none;
+      transition: background .15s, box-shadow .15s; box-shadow: var(--shadow-sm);
+      margin-bottom: 20px;
+    }
+    .oco-cta:hover { background: var(--primary-light); box-shadow: var(--shadow); text-decoration: none; }
+    .oco-cta-left { display: flex; flex-direction: column; gap: 4px; }
+    .oco-cta-label {
+      font-size: 11px; font-weight: 700; color: var(--primary);
+      text-transform: uppercase; letter-spacing: .8px;
+    }
+    .oco-cta-title { font-size: 15px; font-weight: 800; color: var(--gray-900); }
+    .oco-cta-sub { font-size: 12px; color: var(--gray-500); }
+    .oco-cta-arrow { font-size: 22px; color: var(--primary); font-weight: 900; }
+
+    /* 解説テーブル */
+    .info-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); padding: 24px 28px;
+      box-shadow: var(--shadow-sm); margin-bottom: 20px;
+    }
+    .info-card h2 {
+      font-size: 15px; font-weight: 800; color: var(--gray-900); margin: 0 0 14px;
+    }
+    .info-card h3 {
+      font-size: 13px; font-weight: 800; color: var(--gray-700); margin: 20px 0 8px;
+    }
+    .info-card p { font-size: 13px; color: var(--gray-700); line-height: 1.9; margin: 0 0 10px; }
+    .info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+    .info-table th {
+      background: var(--gray-50); padding: 9px 12px; text-align: left;
+      font-weight: 700; color: var(--gray-600); font-size: 11px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .info-table td {
+      padding: 9px 12px; border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+    }
+    .info-table tr:last-child td { border-bottom: none; }
+    .formula {
+      background: var(--gray-50); border-left: 3px solid var(--primary);
+      padding: 12px 16px; font-size: 13px; font-weight: 700;
+      color: var(--gray-800); margin: 10px 0; border-radius: 0 8px 8px 0;
+      line-height: 1.8;
+    }
+
+    .breadcrumb {
+      max-width: 760px; margin: 0 auto; padding: 16px 20px 0;
+      font-size: 12px; color: var(--gray-500); display: flex; gap: 8px; align-items: center;
+    }
+    .breadcrumb a { color: var(--gray-500); }
+    .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
+    .breadcrumb span { color: var(--gray-300); }
+
+    @media (max-width: 640px) {
+      .pos-wrap { padding: 24px 12px 60px; }
+      .input-card { padding: 16px; }
+      .info-card { padding: 18px 16px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .result-grid { grid-template-columns: 1fr; }
+      .result-item { border-right: none; }
+      .result-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--gray-100); }
+      .result-item:last-child { border-bottom: none; }
+      .input-inner input[type="number"] { font-size: 16px; }
+      .info-table { display: block; overflow-x: auto; }
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "FX計算ツール",
+  "url": "https://yuta-tools.com/fx-calc/",
+  "description": "FXの必要証拠金・1pipsあたりの損益・証拠金維持率・適正ロット数をまとめて自動計算するツール。",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MoneyTools",
+    "url": "https://yuta-tools.com/"
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yuta-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "FX計算ツール", "item": "https://yuta-tools.com/fx-calc/" }
+  ]
+}
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../">ホーム</a>
+      <a href="../investment-sim/">積立投資</a>
+      <a href="../position-calc/">ポジション計算</a>
+      <a href="../oco-calc/">OCO計算</a>
+      <a href="../profit-calc/">損益計算</a>
+      <a href="./" class="active">FX計算</a>
+      <a href="../articles/">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../">ホーム</a>
+  <span>/</span>
+  <span>FX計算ツール</span>
+</div>
+
+<div class="pos-wrap">
+  <h1 class="page-title">FX計算ツール</h1>
+  <div class="page-sub">必要証拠金・1pipsあたりの損益・証拠金維持率・適正ロット数をまとめて自動計算します。</div>
+
+  <div class="concept-box">
+    💡 <strong>FXで最初につまずくのが「何通貨買えばいいか」</strong><br>
+    通貨数を決めると、必要証拠金・1pipsの損益・維持率がすべて連動して変わります。このツールでは数値を入れるだけで全部まとめて確認でき、さらに「損切り幅から逆算した適正な通貨数」も出ます。
+  </div>
+
+  <!-- 入力 -->
+  <div class="input-card">
+    <h2>条件を入力</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>口座資金</label>
+        <div class="input-inner">
+          <input type="number" id="inp-capital" value="100000" min="1000" step="10000">
+          <span class="input-unit">円</span>
+        </div>
+        <div class="hint">FX口座に入れている金額</div>
+      </div>
+      <div class="form-group">
+        <label>現在レート</label>
+        <div class="input-inner">
+          <input type="number" id="inp-rate" value="150.000" min="0.01" step="0.001">
+          <span class="input-unit">円</span>
+        </div>
+        <div class="hint">米ドル/円などクロス円の価格</div>
+      </div>
+      <div class="form-group">
+        <label>取引数量</label>
+        <div class="input-inner">
+          <input type="number" id="inp-units" value="10000" min="1" step="1000">
+          <span class="input-unit">通貨</span>
+        </div>
+        <div class="hint">1万通貨＝1Lot（業者による）</div>
+      </div>
+      <div class="form-group">
+        <label>レバレッジ</label>
+        <div class="input-inner">
+          <select id="inp-lev">
+            <option value="25" selected>25倍（国内上限）</option>
+            <option value="10">10倍</option>
+            <option value="5">5倍</option>
+            <option value="3">3倍</option>
+            <option value="1">1倍</option>
+          </select>
+        </div>
+        <div class="hint">口座のレバレッジコース</div>
+      </div>
+      <div class="form-group">
+        <label>損切り幅</label>
+        <div class="input-inner">
+          <input type="number" id="inp-stop" value="25" min="1" step="1">
+          <span class="input-unit">pips</span>
+        </div>
+        <div class="hint">何pips逆行したら損切りするか</div>
+      </div>
+      <div class="form-group">
+        <label>許容損失率</label>
+        <div class="input-inner">
+          <input type="number" id="inp-risk" value="2" min="0.1" max="100" step="0.1">
+          <span class="input-unit">%</span>
+        </div>
+        <div class="hint">1回のトレードで失ってもいい割合</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="warn-box" id="warn-box" style="display:none;"></div>
+  <div class="good-box" id="good-box" style="display:none;"></div>
+
+  <!-- 結果 -->
+  <div class="result-card">
+    <div class="result-card-header">計算結果</div>
+    <div class="result-grid">
+      <div class="result-item">
+        <div class="result-label">必要証拠金</div>
+        <div class="result-value primary" id="res-margin">---</div>
+        <div class="result-sub" id="res-margin-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">証拠金維持率</div>
+        <div class="result-value" id="res-ratio">---</div>
+        <div class="result-sub" id="res-ratio-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">1pipsあたりの損益</div>
+        <div class="result-value" id="res-pip">---</div>
+        <div class="result-sub" id="res-pip-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">損切り時の損失額</div>
+        <div class="result-value danger" id="res-loss">---</div>
+        <div class="result-sub" id="res-loss-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">ポジション評価額</div>
+        <div class="result-value" id="res-position">---</div>
+        <div class="result-sub">レート × 取引数量</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">許容損失額</div>
+        <div class="result-value" id="res-allow">---</div>
+        <div class="result-sub">口座資金 × 許容損失率</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 適正ロット -->
+  <div class="result-card">
+    <div class="result-card-header">この損切り幅での適正な取引数量</div>
+    <div class="result-grid">
+      <div class="result-item">
+        <div class="result-label">リスクから逆算した数量</div>
+        <div class="result-value success" id="res-ideal">---</div>
+        <div class="result-sub" id="res-ideal-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">維持率300%を保てる上限</div>
+        <div class="result-value" id="res-maxunits">---</div>
+        <div class="result-sub">急変動に耐えるための目安</div>
+      </div>
+    </div>
+  </div>
+
+  <a class="oco-cta" href="../articles/fx-mindset/">
+    <div class="oco-cta-left">
+      <div class="oco-cta-label">次のステップ</div>
+      <div class="oco-cta-title">FX初心者の心構え →</div>
+      <div class="oco-cta-sub">通貨ペアの選び方と、守るべき5つのルール</div>
+    </div>
+    <div class="oco-cta-arrow">→</div>
+  </a>
+
+  <!-- 解説 -->
+  <div class="info-card">
+    <h2>計算方法の解説</h2>
+
+    <h3>必要証拠金</h3>
+    <p>ポジションを持つために口座へ担保として預ける金額です。レバレッジが高いほど少なくて済みます。</p>
+    <div class="formula">必要証拠金 = レート × 取引数量 ÷ レバレッジ</div>
+    <p>例：150円 × 10,000通貨 ÷ 25倍 = 60,000円</p>
+
+    <h3>1pipsあたりの損益</h3>
+    <p>クロス円（米ドル/円など）では <strong>1pips = 0.01円</strong> です。つまり取引数量を100で割った額が、1pips動いたときの損益になります。</p>
+    <div class="formula">1pipsの損益 = 取引数量 ÷ 100</div>
+    <p>例：10,000通貨なら1pips＝100円、1,000通貨なら1pips＝10円</p>
+
+    <h3>証拠金維持率</h3>
+    <p>預けている資金が、必要証拠金の何倍あるかを示す割合です。この数値が低いほど、少しの逆行で強制ロスカットに近づきます。</p>
+    <div class="formula">証拠金維持率 = 口座資金 ÷ 必要証拠金 × 100</div>
+    <div style="overflow-x:auto;">
+    <table class="info-table">
+      <tr><th>維持率</th><th>状態</th></tr>
+      <tr><td>300%以上</td><td>余裕あり。急変動にも耐えやすい</td></tr>
+      <tr><td>200〜300%</td><td>やや余裕あり</td></tr>
+      <tr><td>150〜200%</td><td>注意。大きめの逆行で危険水域に入る</td></tr>
+      <tr><td>150%未満</td><td>危険。ロスカットが近い</td></tr>
+    </table>
+    </div>
+
+    <h3>適正な取引数量（ロット）の考え方</h3>
+    <p>「何通貨買うか」は感覚ではなく、<strong>損切り幅と許容損失額から逆算</strong>して決めます。</p>
+    <div class="formula">適正な取引数量 = 許容損失額 ÷ 損切り幅(pips) × 100</div>
+    <p>例：許容損失2,000円・損切り25pipsなら → 2,000 ÷ 25 × 100 = 8,000通貨</p>
+    <p>これは株の<a href="../position-calc/">ポジションサイズ計算</a>とまったく同じ考え方です。1回の損失を先に決めてから数量を決める、という順番が重要になります。</p>
+  </div>
+
+  <div class="info-card">
+    <h2>よくある質問</h2>
+    <h3>Q. 1Lotは何通貨ですか？</h3>
+    <p>業者によって異なります。国内では<strong>1Lot＝1万通貨</strong>が一般的ですが、1Lot＝1,000通貨としている業者もあります。また最低取引単位も業者により1通貨・100通貨・1,000通貨と差があるので、口座のルールを確認してください。</p>
+
+    <h3>Q. 維持率はどれくらい確保すべき？</h3>
+    <p>明確な正解はありませんが、<strong>300%以上</strong>を目安にすると急変動時の耐性が高くなります。維持率が低い状態は、レバレッジを実質的に高く使っているのと同じ意味になります。</p>
+
+    <h3>Q. ロスカットは何%で発動しますか？</h3>
+    <p>業者ごとに異なり、50%〜100%程度が一般的です。ただし相場が急変動した場合、ロスカット水準を超えて約定し、証拠金以上の損失（追証）が発生する可能性もあります。取引を始める前に、使っている業者のロスカット水準を必ず確認してください。</p>
+
+    <h3>Q. クロス円以外の通貨ペアでも使えますか？</h3>
+    <p>このツールは<strong>クロス円（米ドル/円・ユーロ/円など、円が絡む通貨ペア）</strong>を前提にしています。ユーロ/米ドルのような通貨ペアは1pipsの価値が異なるため、そのままの数値では使えません。</p>
+  </div>
+
+  <div class="info-card">
+    <h2>関連記事</h2>
+    <p><a href="../articles/fx-basics/">FXとは？株との違いを初心者向けにわかりやすく解説</a><br>取引時間・レバレッジ・pips・スプレッドなどの基本用語を、株式投資との違いを軸に解説しています。</p>
+    <p><a href="../articles/fx-mindset/">FX初心者の心構え｜USDJPYから始めるべき理由と守るべき5つのルール</a><br>なぜ最初はUSDJPYなのか、レバレッジ・資金・ルール・記録について解説しています。</p>
+    <p><a href="../articles/risk-reward/">損益比率（RR比）とは｜勝率が低くても利益を出す仕組み</a><br>損切り幅と利確幅のバランスをどう決めるかの考え方です。</p>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Money<span>Tools</span></div>
+        <p>資産形成に役立つ無料計算ツール</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="../investment-sim/">積立投資シミュレーター</a></li>
+            <li><a href="../position-calc/">ポジションサイズ計算</a></li>
+            <li><a href="../oco-calc/">OCO注文計算ツール</a></li>
+            <li><a href="../profit-calc/">株式損益計算ツール</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>情報</h4>
+          <ul>
+            <li><a href="../privacy/">プライバシーポリシー</a></li>
+            <li><a href="../disclaimer/">免責事項</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本ツールの計算結果は参考値です。実際の必要証拠金・ロスカット水準は証券会社により異なります。FXはレバレッジにより大きな損失を被る可能性があります。取引はご自身の判断と責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script src="../js/nav.js"></script>
+<script>
+  const $ = id => document.getElementById(id);
+  const capEl = $('inp-capital'), rateEl = $('inp-rate'), unitsEl = $('inp-units'),
+        levEl = $('inp-lev'), stopEl = $('inp-stop'), riskEl = $('inp-risk');
+
+  const yen = v => Math.round(v).toLocaleString() + '円';
+
+  function render() {
+    const cap   = parseFloat(capEl.value)   || 0;
+    const rate  = parseFloat(rateEl.value)  || 0;
+    const units = parseFloat(unitsEl.value) || 0;
+    const lev   = parseFloat(levEl.value)   || 25;
+    const stop  = parseFloat(stopEl.value)  || 0;
+    const risk  = parseFloat(riskEl.value)  || 0;
+
+    const position = rate * units;
+    const margin   = position / lev;
+    const ratio    = margin > 0 ? (cap / margin) * 100 : 0;
+    const pipValue = units / 100;
+    const loss     = pipValue * stop;
+    const allow    = cap * risk / 100;
+
+    $('res-position').textContent = yen(position);
+    $('res-margin').textContent   = yen(margin);
+    $('res-margin-sub').textContent = `${rate} × ${units.toLocaleString()}通貨 ÷ ${lev}倍`;
+
+    $('res-ratio').textContent = margin > 0 ? Math.round(ratio) + '%' : '---';
+    const ratioEl = $('res-ratio');
+    ratioEl.className = 'result-value' + (ratio >= 300 ? ' success' : ratio >= 150 ? '' : ' danger');
+    $('res-ratio-sub').textContent =
+      ratio >= 300 ? '余裕あり' : ratio >= 200 ? 'やや余裕あり' : ratio >= 150 ? '注意' : '危険水域';
+
+    $('res-pip').textContent = yen(pipValue);
+    $('res-pip-sub').textContent = `${units.toLocaleString()}通貨 ÷ 100`;
+
+    $('res-loss').textContent = yen(loss);
+    $('res-loss-sub').textContent = `${stop}pips × ${yen(pipValue)}`;
+
+    $('res-allow').textContent = yen(allow);
+
+    // 適正数量（リスクから逆算・100通貨単位に丸め）
+    const idealRaw = stop > 0 ? (allow / stop) * 100 : 0;
+    const ideal = Math.floor(idealRaw / 100) * 100;
+    $('res-ideal').textContent = ideal.toLocaleString() + '通貨';
+    $('res-ideal-sub').textContent = `${yen(allow)} ÷ ${stop}pips × 100`;
+
+    // 維持率300%を保てる上限
+    const maxRaw = rate > 0 ? (cap / 3) * lev / rate : 0;
+    const maxUnits = Math.floor(maxRaw / 100) * 100;
+    $('res-maxunits').textContent = maxUnits.toLocaleString() + '通貨';
+
+    // メッセージ
+    const warn = $('warn-box'), good = $('good-box');
+    warn.style.display = 'none';
+    good.style.display = 'none';
+
+    if (margin > cap) {
+      warn.style.display = 'block';
+      warn.innerHTML = '⚠️ <strong>必要証拠金が口座資金を超えています。</strong>この数量ではポジションを持てません。取引数量を減らすか、資金を追加してください。';
+    } else if (ratio < 150) {
+      warn.style.display = 'block';
+      warn.innerHTML = `⚠️ <strong>証拠金維持率が${Math.round(ratio)}%と低い状態です。</strong>少しの逆行でロスカットの可能性があります。目安として<strong>${maxUnits.toLocaleString()}通貨以下</strong>に抑えると維持率300%を確保できます。`;
+    } else if (loss > allow && allow > 0) {
+      warn.style.display = 'block';
+      warn.innerHTML = `⚠️ <strong>損切り時の損失(${yen(loss)})が、許容損失額(${yen(allow)})を超えています。</strong>取引数量を<strong>${ideal.toLocaleString()}通貨</strong>まで減らすとルール内に収まります。`;
+    } else if (ratio >= 300 && loss <= allow) {
+      good.style.display = 'block';
+      good.innerHTML = '✅ <strong>証拠金にも余裕があり、損切り時の損失も許容範囲内です。</strong>リスク管理の観点では問題ない設定です。';
+    }
+  }
+
+  [capEl, rateEl, unitsEl, levEl, stopEl, riskEl].forEach(el => el.addEventListener('input', render));
+  levEl.addEventListener('change', render);
+  render();
+</script>
+</body>
+</html>
