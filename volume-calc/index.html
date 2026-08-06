@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VPXV9BMEY');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://yuta-tools.com/volume-calc/">
+  <title>出来高・売買代金チェックツール｜デイトレ向きの銘柄か判定 | MoneyTools</title>
+  <meta name="description" content="株価と出来高を入力するだけで売買代金を自動計算し、デイトレに向いている流動性かどうかを判定。自分の売買予定株数が出来高に占める割合（市場インパクト）もチェックできる無料ツールです。">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:title" content="出来高・売買代金チェックツール｜デイトレ向きの銘柄か判定 | MoneyTools">
+  <meta property="og:description" content="株価と出来高から売買代金を自動計算し、デイトレに向いている流動性かどうかを判定する無料ツールです。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yuta-tools.com/volume-calc/">
+  <meta property="og:image" content="https://yuta-tools.com/ogp.png">
+  <meta property="og:site_name" content="MoneyTools">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="出来高・売買代金チェックツール｜デイトレ向きの銘柄か判定 | MoneyTools">
+  <meta name="twitter:description" content="株価と出来高から売買代金を自動計算し、流動性を判定できます。">
+  <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .pos-wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+    .page-title { font-size: 22px; font-weight: 800; color: var(--gray-900); margin: 0 0 4px; letter-spacing: -0.5px; }
+    .page-sub { font-size: 13px; color: var(--gray-500); margin-bottom: 28px; }
+
+    .concept-box {
+      background: var(--primary-light); border-radius: var(--radius);
+      padding: 14px 18px; font-size: 13px; color: var(--primary-dark);
+      line-height: 1.8; margin-bottom: 24px;
+    }
+    .concept-box strong { font-weight: 800; }
+
+    .input-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); padding: 28px;
+      box-shadow: var(--shadow); margin-bottom: 20px;
+    }
+    .input-card h2 {
+      font-size: 14px; font-weight: 800; color: var(--gray-700);
+      margin-bottom: 6px; padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .form-row { margin: 16px 0; }
+    .form-row label {
+      display: block; font-size: 11px; font-weight: 700; color: var(--gray-500);
+      text-transform: uppercase; letter-spacing: .8px; margin-bottom: 6px;
+    }
+    .field { display: flex; align-items: center; gap: 5px; min-width: 0; }
+    .field input {
+      flex: 1; padding: 10px 12px; border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius-sm); font-size: 16px; font-weight: 700;
+      font-family: var(--font); color: var(--gray-900); outline: none;
+      transition: border-color .15s; min-width: 0; width: 100%;
+    }
+    .field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,86,219,.1); }
+    .field span { font-size: 12px; font-weight: 700; color: var(--gray-500); white-space: nowrap; }
+    .form-hint { font-size: 11.5px; color: var(--gray-500); margin-top: 6px; }
+
+    .result-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--shadow); margin-bottom: 20px;
+    }
+    .result-card-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white); padding: 16px 24px; font-size: 14px; font-weight: 800;
+    }
+    .result-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+    .result-item {
+      padding: 20px 24px; border-bottom: 1px solid var(--gray-100);
+      border-right: 1px solid var(--gray-100);
+    }
+    .result-item:nth-child(even) { border-right: none; }
+    .result-item:nth-last-child(-n+2) { border-bottom: none; }
+    .result-item.full { grid-column: 1 / -1; border-right: none; }
+    .result-label {
+      font-size: 11px; font-weight: 700; color: var(--gray-500);
+      text-transform: uppercase; letter-spacing: .8px; margin-bottom: 6px;
+    }
+    .result-value { font-size: 22px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; line-height: 1; }
+    .result-value.primary { color: var(--primary); }
+    .result-value.danger  { color: var(--danger); }
+    .result-value.success { color: var(--success); }
+    .result-sub { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+
+    .verdict-box {
+      border-radius: var(--radius); padding: 14px 18px; font-size: 13px;
+      line-height: 1.8; margin-bottom: 20px; font-weight: 700;
+    }
+    .verdict-box.v-good { background: #ecfdf5; color: var(--success); }
+    .verdict-box.v-mid  { background: var(--gray-50); color: var(--gray-700); }
+    .verdict-box.v-bad  { background: #fef2f2; color: var(--danger); }
+
+    .warn-box {
+      background: #fef3c7; border-radius: var(--radius); padding: 12px 16px;
+      font-size: 12px; color: var(--accent-dark); line-height: 1.7; margin-bottom: 20px;
+    }
+
+    .oco-cta {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--white); border: 1.5px solid var(--primary);
+      border-radius: var(--radius-lg); padding: 20px 24px; text-decoration: none;
+      transition: background .15s, box-shadow .15s; box-shadow: var(--shadow-sm); margin-bottom: 20px;
+    }
+    .oco-cta:hover { background: var(--primary-light); box-shadow: var(--shadow); text-decoration: none; }
+    .oco-cta-left { display: flex; flex-direction: column; gap: 4px; }
+    .oco-cta-label { font-size: 11px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .8px; }
+    .oco-cta-title { font-size: 15px; font-weight: 800; color: var(--gray-900); }
+    .oco-cta-sub { font-size: 12px; color: var(--gray-500); }
+    .oco-cta-arrow { font-size: 22px; color: var(--primary); font-weight: 900; }
+
+    .info-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); padding: 24px 28px;
+      box-shadow: var(--shadow-sm); margin-bottom: 20px;
+    }
+    .info-card h2 { font-size: 15px; font-weight: 800; color: var(--gray-900); margin: 0 0 14px; }
+    .info-card h3 { font-size: 13px; font-weight: 800; color: var(--gray-700); margin: 20px 0 8px; }
+    .info-card p { font-size: 13px; color: var(--gray-700); line-height: 1.9; margin: 0 0 10px; }
+    .formula {
+      background: var(--gray-50); border-left: 3px solid var(--primary);
+      padding: 12px 16px; font-size: 13px; font-weight: 700;
+      color: var(--gray-800); margin: 10px 0; border-radius: 0 8px 8px 0; line-height: 1.8;
+    }
+    .info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+    .info-table th {
+      background: var(--gray-50); padding: 9px 12px; text-align: left;
+      font-weight: 700; color: var(--gray-600); font-size: 11px; border-bottom: 1px solid var(--gray-200);
+    }
+    .info-table td { padding: 9px 12px; border-bottom: 1px solid var(--gray-100); color: var(--gray-700); }
+    .info-table tr:last-child td { border-bottom: none; }
+
+    .breadcrumb {
+      max-width: 760px; margin: 0 auto; padding: 16px 20px 0;
+      font-size: 12px; color: var(--gray-500); display: flex; gap: 8px; align-items: center;
+    }
+    .breadcrumb a { color: var(--gray-500); }
+    .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
+    .breadcrumb span { color: var(--gray-300); }
+
+    @media (max-width: 640px) {
+      .pos-wrap { padding: 24px 12px 60px; }
+      .input-card { padding: 16px; }
+      .info-card { padding: 18px 16px; }
+      .result-grid { grid-template-columns: 1fr; }
+      .result-item { border-right: none; }
+      .result-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--gray-100); }
+      .result-item:last-child { border-bottom: none; }
+      .field input { font-size: 16px; padding: 9px 10px; }
+      .info-table { display: block; overflow-x: auto; }
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "出来高・売買代金チェックツール",
+  "url": "https://yuta-tools.com/volume-calc/",
+  "description": "株価と出来高から売買代金を自動計算し、デイトレに向いている流動性かどうかを判定する無料ツール。",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+  "publisher": { "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/" }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yuta-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "出来高・売買代金チェックツール", "item": "https://yuta-tools.com/volume-calc/" }
+  ]
+}
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../">ホーム</a>
+      <a href="../investment-sim/">積立投資</a>
+      <a href="../position-calc/">ポジション計算</a>
+      <a href="../oco-calc/">OCO計算</a>
+      <a href="../profit-calc/">損益計算</a>
+      <a href="../nanpin-calc/">ナンピン計算</a>
+      <a href="../fx-calc/">FX計算</a>
+      <a href="../ideco-calc/">iDeCo節税</a>
+      <a href="./" class="active">出来高チェック</a>
+      <a href="../articles/">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../">ホーム</a>
+  <span>/</span>
+  <span>出来高・売買代金チェックツール</span>
+</div>
+
+<div class="pos-wrap">
+  <h1 class="page-title">出来高・売買代金チェックツール</h1>
+  <div class="page-sub">株価と出来高を入れるだけで売買代金を計算し、デイトレに向いている流動性かどうかを判定します。</div>
+
+  <div class="concept-box">
+    💡 <strong>「出来高が多い」の基準、数字で即答できますか？</strong><br>
+    株価と出来高（株数）を入れると、売買代金と流動性の判定が一度に出ます。売買予定株数を入れれば、自分の注文が出来高に占める割合（市場インパクトの目安）もわかります。
+  </div>
+
+  <div class="input-card">
+    <h2>銘柄の情報を入力</h2>
+
+    <div class="form-row">
+      <label>株価</label>
+      <div class="field"><input type="number" id="price" inputmode="decimal" placeholder="500" value="500"><span>円</span></div>
+    </div>
+
+    <div class="form-row">
+      <label>出来高（本日 or 平均）</label>
+      <div class="field"><input type="number" id="volume" inputmode="numeric" placeholder="3000000" value="3000000"><span>株</span></div>
+      <div class="form-hint">証券会社の銘柄詳細ページや株探（kabutan.jp）で確認できます。</div>
+    </div>
+
+    <div class="form-row">
+      <label>自分の売買予定株数（任意）</label>
+      <div class="field"><input type="number" id="qty" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
+      <div class="form-hint">入力すると、自分の注文が出来高の何%を占めるかを計算します。</div>
+    </div>
+  </div>
+
+  <div class="warn-box" id="warn-box" style="display:none;"></div>
+
+  <div class="result-card">
+    <div class="result-card-header">計算結果</div>
+    <div class="result-grid">
+      <div class="result-item full">
+        <div class="result-label">売買代金</div>
+        <div class="result-value primary" id="r-value">—</div>
+        <div class="result-sub" id="r-value-sub">株価 × 出来高</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">出来高の水準</div>
+        <div class="result-value" id="r-vol-tier">—</div>
+        <div class="result-sub" id="r-vol-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">売買代金の水準</div>
+        <div class="result-value" id="r-value-tier">—</div>
+        <div class="result-sub" id="r-value-tier-sub"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict-box" id="verdict-box"></div>
+
+  <div class="result-card" id="qty-card" style="display:none;">
+    <div class="result-card-header">自分の注文の市場インパクト</div>
+    <div class="result-grid">
+      <div class="result-item full">
+        <div class="result-label">出来高に占める割合</div>
+        <div class="result-value" id="r-share">—</div>
+        <div class="result-sub" id="r-share-sub"></div>
+      </div>
+    </div>
+  </div>
+
+  <a class="oco-cta" href="../position-calc/">
+    <div class="oco-cta-left">
+      <div class="oco-cta-label">次のステップ</div>
+      <div class="oco-cta-title">ポジションサイズ計算ツールへ →</div>
+      <div class="oco-cta-sub">流動性を確認したら、口座残高から適正な株数を逆算しましょう</div>
+    </div>
+    <div class="oco-cta-arrow">→</div>
+  </a>
+
+  <div class="info-card">
+    <h2>出来高・売買代金の判定基準</h2>
+    <p><strong>出来高</strong>は株数ベース、<strong>売買代金</strong>は金額ベースの指標です。株価500円の銘柄が300万株売買されたなら、出来高300万株・売買代金15億円になります。</p>
+    <div class="formula">売買代金 = 株価 × 出来高</div>
+
+    <h3>出来高の目安</h3>
+    <div style="overflow-x:auto;">
+    <table class="info-table">
+      <tr><th>出来高の水準</th><th>判定</th></tr>
+      <tr><td>100万株未満</td><td>流動性が低い（避ける）</td></tr>
+      <tr><td>100万〜500万株</td><td>普通の流動性</td></tr>
+      <tr><td>500万〜1,000万株</td><td>流動性が高い（おすすめ）</td></tr>
+      <tr><td>1,000万株以上</td><td>超高流動性（最適）</td></tr>
+    </table>
+    </div>
+
+    <h3>売買代金の目安</h3>
+    <div style="overflow-x:auto;">
+    <table class="info-table">
+      <tr><th>売買代金の水準</th><th>判定</th></tr>
+      <tr><td>1億円未満</td><td>流動性が低い</td></tr>
+      <tr><td>1億〜10億円</td><td>やや低い</td></tr>
+      <tr><td>10億〜50億円</td><td>デイトレ向きの目安をクリア</td></tr>
+      <tr><td>50億円以上</td><td>非常に高い（大型・人気銘柄に多い）</td></tr>
+    </table>
+    </div>
+    <p>詳しい考え方は<a href="../articles/volume/">出来高とは何か</a>と<a href="../articles/stock-selection/">デイトレ銘柄の選び方</a>で解説しています。</p>
+  </div>
+
+  <div class="info-card">
+    <h2>よくある質問</h2>
+    <h3>Q. 出来高と売買代金、どちらを重視すべきですか？</h3>
+    <p>両方確認するのが理想です。<strong>低位株（株価が安い銘柄）は出来高が多くても売買代金が小さくなりがち</strong>で、逆に<strong>値がさ株（株価が高い銘柄）は出来高が少なくても売買代金は大きい</strong>ことがあります。片方だけでは流動性を見誤ることがあります。</p>
+
+    <h3>Q. 「出来高に占める割合」が高いと何が問題ですか？</h3>
+    <p>自分の注文が出来高の数%以上を占めると、<strong>希望の価格で約定しにくくなったり、自分の売買自体が株価を動かしてしまう</strong>ことがあります。目安として1%を超えたら慎重に、5%を超える場合は分割して発注することを検討してください。</p>
+
+    <h3>Q. 出来高が「急に増えた」銘柄はどう判断すればいいですか？</h3>
+    <p>普段より出来高が急増している場合は、ニュースや材料が出ているサインです。急騰後の高値づかみに注意しつつ、詳しくは<a href="../articles/volume/">出来高とは何か</a>を参照してください。</p>
+  </div>
+
+  <div class="info-card">
+    <h2>関連ページ</h2>
+    <p><a href="../articles/volume/">出来高とは何か｜デイトレで出来高を使う理由をわかりやすく解説</a><br>出来高と売買代金の違い、価格との関係を解説しています。</p>
+    <p><a href="../articles/stock-selection/">デイトレ銘柄の選び方｜出来高の目安・値動き・初心者向けの条件</a><br>出来高以外に確認すべき銘柄選びの条件をまとめています。</p>
+    <p><a href="../position-calc/">ポジションサイズ計算ツール</a><br>流動性を確認した銘柄について、口座残高から適正な株数を計算できます。</p>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Money<span>Tools</span></div>
+        <p>資産形成に役立つ無料計算ツール</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="../investment-sim/">積立投資シミュレーター</a></li>
+            <li><a href="../position-calc/">ポジションサイズ計算</a></li>
+            <li><a href="../oco-calc/">OCO注文計算ツール</a></li>
+            <li><a href="../profit-calc/">株式損益計算ツール</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>情報</h4>
+          <ul>
+            <li><a href="../privacy/">プライバシーポリシー</a></li>
+            <li><a href="../disclaimer/">免責事項</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本ツールの判定は出来高・売買代金の目安に基づく参考値です。実際の流動性や約定のしやすさを保証するものではありません。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script src="../js/nav.js"></script>
+<script>
+(function(){
+  function el(id){ return document.getElementById(id); }
+  function num(id){ var v = parseFloat(el(id).value); return (isNaN(v) || v < 0) ? 0 : v; }
+  function yen(n){ return Math.round(n).toLocaleString('ja-JP') + '円'; }
+  function shares(n){ return Math.round(n).toLocaleString('ja-JP') + '株'; }
+
+  function volumeTier(v){
+    if (v < 1000000) return { label: '低い', cls: 'danger', sub: '100万株未満・避ける水準', rank: 0 };
+    if (v < 5000000) return { label: '普通', cls: '', sub: '100〜500万株', rank: 1 };
+    if (v < 10000000) return { label: 'おすすめ', cls: 'primary', sub: '500〜1,000万株', rank: 2 };
+    return { label: '最適', cls: 'success', sub: '1,000万株以上', rank: 3 };
+  }
+
+  function valueTier(v){
+    if (v < 100000000) return { label: '低い', cls: 'danger', sub: '1億円未満', rank: 0 };
+    if (v < 1000000000) return { label: 'やや低い', cls: '', sub: '1億〜10億円', rank: 1 };
+    if (v < 5000000000) return { label: '十分', cls: 'primary', sub: '10億〜50億円', rank: 2 };
+    return { label: '非常に高い', cls: 'success', sub: '50億円以上', rank: 3 };
+  }
+
+  function calc(){
+    var price = num('price');
+    var volume = num('volume');
+    var qty = num('qty');
+    var warn = el('warn-box');
+    warn.style.display = 'none';
+
+    if (price <= 0 || volume <= 0){
+      el('r-value').textContent = '—';
+      el('r-vol-tier').textContent = '—';
+      el('r-value-tier').textContent = '—';
+      el('verdict-box').className = 'verdict-box';
+      el('verdict-box').textContent = '株価と出来高を入力してください。';
+      el('qty-card').style.display = 'none';
+      return;
+    }
+
+    var value = price * volume;
+    el('r-value').textContent = yen(value);
+    el('r-value-sub').textContent = yen(price) + ' × ' + shares(volume);
+
+    var vt = volumeTier(volume);
+    el('r-vol-tier').textContent = vt.label;
+    el('r-vol-tier').className = 'result-value' + (vt.cls ? ' ' + vt.cls : '');
+    el('r-vol-sub').textContent = vt.sub;
+
+    var vvt = valueTier(value);
+    el('r-value-tier').textContent = vvt.label;
+    el('r-value-tier').className = 'result-value' + (vvt.cls ? ' ' + vvt.cls : '');
+    el('r-value-tier-sub').textContent = vvt.sub;
+
+    var minRank = Math.min(vt.rank, vvt.rank);
+    var vb = el('verdict-box');
+    if (minRank <= 0){
+      vb.className = 'verdict-box v-bad';
+      vb.innerHTML = '⚠️ <strong>流動性が低めの銘柄です。</strong>売りたいときに売れない・買いたいときに買えないリスクがあります。デイトレ初心者は避けるのが無難です。';
+    } else if (minRank === 1){
+      vb.className = 'verdict-box v-mid';
+      vb.innerHTML = '△ <strong>普通の流動性です。</strong>デイトレ対象として使えますが、大きめの株数を扱う場合はスプレッドや約定のしやすさに注意してください。';
+    } else {
+      vb.className = 'verdict-box v-good';
+      vb.innerHTML = '✓ <strong>デイトレに向いている流動性です。</strong>出来高・売買代金ともに目安をクリアしています。';
+    }
+
+    if (qty > 0){
+      el('qty-card').style.display = 'block';
+      var share = (qty / volume) * 100;
+      var shareEl = el('r-share');
+      shareEl.textContent = (share < 0.01 ? '<0.01' : share.toFixed(share < 1 ? 2 : 1)) + '%';
+      if (share >= 5){
+        shareEl.className = 'result-value danger';
+        el('r-share-sub').textContent = '⚠️ 出来高の5%以上。分割発注を検討してください。';
+      } else if (share >= 1){
+        shareEl.className = 'result-value';
+        el('r-share-sub').textContent = '出来高の1%以上。約定価格がズレる可能性があります。';
+      } else {
+        shareEl.className = 'result-value success';
+        el('r-share-sub').textContent = '出来高に対して十分小さく、市場インパクトは軽微です。';
+      }
+    } else {
+      el('qty-card').style.display = 'none';
+    }
+  }
+
+  ['price','volume','qty'].forEach(function(id){
+    el(id).addEventListener('input', calc);
+  });
+  calc();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VPXV9BMEY');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://yuta-tools.com/ideco-calc/">
+  <title>iDeCo節税額シミュレーター｜掛金でいくら税金が戻るか計算 | MoneyTools</title>
+  <meta name="description" content="iDeCoの掛金・年収・職業区分を入力するだけで、年間の節税額と拠出期間の累計節税額を自動計算。専業主婦(夫)など節税メリットが出にくいケースの注意点もわかる無料ツールです。">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:title" content="iDeCo節税額シミュレーター｜掛金でいくら税金が戻るか計算 | MoneyTools">
+  <meta property="og:description" content="iDeCoの掛金・年収・職業区分を入力するだけで、年間の節税額と拠出期間の累計節税額を自動計算します。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yuta-tools.com/ideco-calc/">
+  <meta property="og:image" content="https://yuta-tools.com/ogp.png">
+  <meta property="og:site_name" content="MoneyTools">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="iDeCo節税額シミュレーター｜掛金でいくら税金が戻るか計算 | MoneyTools">
+  <meta name="twitter:description" content="iDeCoの掛金・年収・職業区分から、年間と累計の節税額を自動計算できます。">
+  <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .pos-wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+    .page-title { font-size: 22px; font-weight: 800; color: var(--gray-900); margin: 0 0 4px; letter-spacing: -0.5px; }
+    .page-sub { font-size: 13px; color: var(--gray-500); margin-bottom: 28px; }
+
+    .concept-box {
+      background: var(--primary-light); border-radius: var(--radius);
+      padding: 14px 18px; font-size: 13px; color: var(--primary-dark);
+      line-height: 1.8; margin-bottom: 24px;
+    }
+    .concept-box strong { font-weight: 800; }
+
+    .input-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); padding: 28px;
+      box-shadow: var(--shadow); margin-bottom: 20px;
+    }
+    .input-card h2 {
+      font-size: 14px; font-weight: 800; color: var(--gray-700);
+      margin-bottom: 6px; padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .form-row { margin: 16px 0; }
+    .form-row label {
+      display: block; font-size: 11px; font-weight: 700; color: var(--gray-500);
+      text-transform: uppercase; letter-spacing: .8px; margin-bottom: 6px;
+    }
+    .field { display: flex; align-items: center; gap: 5px; min-width: 0; }
+    .field input, .field select {
+      flex: 1; padding: 10px 12px; border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius-sm); font-size: 16px; font-weight: 700;
+      font-family: var(--font); color: var(--gray-900); outline: none;
+      transition: border-color .15s; min-width: 0; width: 100%; background: var(--white);
+    }
+    .field input:focus, .field select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,86,219,.1); }
+    .field span { font-size: 12px; font-weight: 700; color: var(--gray-500); white-space: nowrap; }
+    .form-hint { font-size: 11.5px; color: var(--gray-500); margin-top: 6px; }
+    .limit-hint { font-size: 11.5px; color: var(--primary-dark); margin-top: 6px; font-weight: 700; }
+
+    .result-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--shadow); margin-bottom: 20px;
+    }
+    .result-card-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white); padding: 16px 24px; font-size: 14px; font-weight: 800;
+    }
+    .result-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+    .result-item {
+      padding: 20px 24px; border-bottom: 1px solid var(--gray-100);
+      border-right: 1px solid var(--gray-100);
+    }
+    .result-item:nth-child(even) { border-right: none; }
+    .result-item:nth-last-child(-n+2) { border-bottom: none; }
+    .result-label {
+      font-size: 11px; font-weight: 700; color: var(--gray-500);
+      text-transform: uppercase; letter-spacing: .8px; margin-bottom: 6px;
+    }
+    .result-value { font-size: 22px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; line-height: 1; }
+    .result-value.primary { color: var(--primary); }
+    .result-value.danger  { color: var(--danger); }
+    .result-value.success { color: var(--success); }
+    .result-sub { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+
+    .warn-box {
+      background: #fef3c7; border-radius: var(--radius); padding: 12px 16px;
+      font-size: 12px; color: var(--accent-dark); line-height: 1.7; margin-bottom: 20px;
+    }
+    .note-box {
+      background: var(--gray-50); border-radius: var(--radius); padding: 12px 16px;
+      font-size: 12px; color: var(--gray-600); line-height: 1.7; margin-bottom: 20px;
+    }
+
+    .oco-cta {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--white); border: 1.5px solid var(--primary);
+      border-radius: var(--radius-lg); padding: 20px 24px; text-decoration: none;
+      transition: background .15s, box-shadow .15s; box-shadow: var(--shadow-sm); margin-bottom: 20px;
+    }
+    .oco-cta:hover { background: var(--primary-light); box-shadow: var(--shadow); text-decoration: none; }
+    .oco-cta-left { display: flex; flex-direction: column; gap: 4px; }
+    .oco-cta-label { font-size: 11px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .8px; }
+    .oco-cta-title { font-size: 15px; font-weight: 800; color: var(--gray-900); }
+    .oco-cta-sub { font-size: 12px; color: var(--gray-500); }
+    .oco-cta-arrow { font-size: 22px; color: var(--primary); font-weight: 900; }
+
+    .info-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); padding: 24px 28px;
+      box-shadow: var(--shadow-sm); margin-bottom: 20px;
+    }
+    .info-card h2 { font-size: 15px; font-weight: 800; color: var(--gray-900); margin: 0 0 14px; }
+    .info-card h3 { font-size: 13px; font-weight: 800; color: var(--gray-700); margin: 20px 0 8px; }
+    .info-card p { font-size: 13px; color: var(--gray-700); line-height: 1.9; margin: 0 0 10px; }
+    .formula {
+      background: var(--gray-50); border-left: 3px solid var(--primary);
+      padding: 12px 16px; font-size: 13px; font-weight: 700;
+      color: var(--gray-800); margin: 10px 0; border-radius: 0 8px 8px 0; line-height: 1.8;
+    }
+    .info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+    .info-table th {
+      background: var(--gray-50); padding: 9px 12px; text-align: left;
+      font-weight: 700; color: var(--gray-600); font-size: 11px; border-bottom: 1px solid var(--gray-200);
+    }
+    .info-table td { padding: 9px 12px; border-bottom: 1px solid var(--gray-100); color: var(--gray-700); }
+    .info-table tr:last-child td { border-bottom: none; }
+
+    .breadcrumb {
+      max-width: 760px; margin: 0 auto; padding: 16px 20px 0;
+      font-size: 12px; color: var(--gray-500); display: flex; gap: 8px; align-items: center;
+    }
+    .breadcrumb a { color: var(--gray-500); }
+    .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
+    .breadcrumb span { color: var(--gray-300); }
+
+    @media (max-width: 640px) {
+      .pos-wrap { padding: 24px 12px 60px; }
+      .input-card { padding: 16px; }
+      .info-card { padding: 18px 16px; }
+      .result-grid { grid-template-columns: 1fr; }
+      .result-item { border-right: none; }
+      .result-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--gray-100); }
+      .result-item:last-child { border-bottom: none; }
+      .field input, .field select { font-size: 16px; padding: 9px 10px; }
+      .info-table { display: block; overflow-x: auto; }
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "iDeCo節税額シミュレーター",
+  "url": "https://yuta-tools.com/ideco-calc/",
+  "description": "iDeCoの掛金・年収・職業区分から、年間と拠出期間累計の節税額を自動計算する無料ツール。",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+  "publisher": { "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/" }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yuta-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "iDeCo節税額シミュレーター", "item": "https://yuta-tools.com/ideco-calc/" }
+  ]
+}
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../">ホーム</a>
+      <a href="../investment-sim/">積立投資</a>
+      <a href="../position-calc/">ポジション計算</a>
+      <a href="../oco-calc/">OCO計算</a>
+      <a href="../profit-calc/">損益計算</a>
+      <a href="../nanpin-calc/">ナンピン計算</a>
+      <a href="../fx-calc/">FX計算</a>
+      <a href="./" class="active">iDeCo節税</a>
+      <a href="../volume-calc/">出来高チェック</a>
+      <a href="../articles/">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../">ホーム</a>
+  <span>/</span>
+  <span>iDeCo節税額シミュレーター</span>
+</div>
+
+<div class="pos-wrap">
+  <h1 class="page-title">iDeCo節税額シミュレーター</h1>
+  <div class="page-sub">職業区分・年収・掛金を入力するだけで、年間と拠出期間累計の節税額を自動計算します。</div>
+
+  <div class="concept-box">
+    💡 <strong>iDeCoの掛金は全額が所得控除の対象</strong>になります。年収と税率区分から、掛金1年分でいくら税金が戻るかを概算できます。
+  </div>
+
+  <div class="input-card">
+    <h2>あなたの情報を入力</h2>
+
+    <div class="form-row">
+      <label>職業区分</label>
+      <div class="field">
+        <select id="job">
+          <option value="employee" data-limit="23000">会社員（企業年金なし）／上限 月2.3万円</option>
+          <option value="employee-pension" data-limit="20000">会社員（企業年金あり）／上限 月2.0万円</option>
+          <option value="civil" data-limit="12000">公務員／上限 月1.2万円</option>
+          <option value="self" data-limit="68000">自営業・フリーランス／上限 月6.8万円</option>
+          <option value="dependent" data-limit="23000">専業主婦(夫)（国民年金第3号）／上限 月2.3万円</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label id="income-label">年収（額面・円）</label>
+      <div class="field"><input type="number" id="income" inputmode="numeric" placeholder="5000000" value="5000000"><span>円</span></div>
+      <div class="form-hint" id="income-hint">会社員・公務員は源泉徴収票の「支払金額」（額面年収）を入力してください。</div>
+    </div>
+
+    <div class="form-row">
+      <label>iDeCo掛金（月額）</label>
+      <div class="field"><input type="number" id="monthly" inputmode="numeric" placeholder="12000" value="12000"><span>円</span></div>
+      <div class="limit-hint" id="limit-hint"></div>
+    </div>
+
+    <div class="form-row">
+      <label>拠出予定年数</label>
+      <div class="field"><input type="number" id="years" inputmode="numeric" placeholder="20" value="20"><span>年</span></div>
+      <div class="form-hint">60歳まで拠出できる年数の目安を入れてください。</div>
+    </div>
+  </div>
+
+  <div class="warn-box" id="warn-box" style="display:none;"></div>
+
+  <div class="result-card">
+    <div class="result-card-header">節税額の計算結果</div>
+    <div class="result-grid">
+      <div class="result-item">
+        <div class="result-label">年間の節税額</div>
+        <div class="result-value success" id="r-annual">—</div>
+        <div class="result-sub" id="r-annual-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">拠出期間累計の節税額</div>
+        <div class="result-value success" id="r-total">—</div>
+        <div class="result-sub" id="r-total-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">実質負担（年間）</div>
+        <div class="result-value" id="r-net-annual">—</div>
+        <div class="result-sub" id="r-net-annual-sub">掛金 − 節税額</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">実質負担（累計）</div>
+        <div class="result-value" id="r-net-total">—</div>
+        <div class="result-sub" id="r-net-total-sub">掛金累計 − 節税額累計</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-box" id="rate-note"></div>
+
+  <a class="oco-cta" href="../articles/nisa-vs-ideco/">
+    <div class="oco-cta-left">
+      <div class="oco-cta-label">次のステップ</div>
+      <div class="oco-cta-title">NISAとiDeCo、どっちを優先すべき？ →</div>
+      <div class="oco-cta-sub">併用する場合の配分の考え方を解説しています</div>
+    </div>
+    <div class="oco-cta-arrow">→</div>
+  </a>
+
+  <div class="info-card">
+    <h2>節税額の計算方法</h2>
+    <p>iDeCoの掛金は<strong>全額が「小規模企業共済等掛金控除」として所得控除</strong>されます。控除された分だけ課税所得が下がるため、その年の所得税・住民税がその場で軽くなります。</p>
+    <div class="formula">節税額（年間） ≒ 掛金年額 ×（所得税率 + 住民税率10%）</div>
+    <p>このツールでは、年収から給与所得控除・社会保険料控除（概算15%）・基礎控除48万円を差し引いた「課税所得」を求め、その金額が該当する所得税率区分を使って概算しています。配偶者控除・扶養控除など個別の控除は考慮していないため、実際の還付額とはズレが生じます。</p>
+
+    <h3>所得税率の区分（速算表）</h3>
+    <div style="overflow-x:auto;">
+    <table class="info-table">
+      <tr><th>課税所得</th><th>税率</th></tr>
+      <tr><td>195万円以下</td><td>5%</td></tr>
+      <tr><td>195万円超 330万円以下</td><td>10%</td></tr>
+      <tr><td>330万円超 695万円以下</td><td>20%</td></tr>
+      <tr><td>695万円超 900万円以下</td><td>23%</td></tr>
+      <tr><td>900万円超 1,800万円以下</td><td>33%</td></tr>
+      <tr><td>1,800万円超</td><td>40%〜45%</td></tr>
+    </table>
+    </div>
+    <p>課税所得が高い（税率区分が上の）人ほど、同じ掛金でも節税額は大きくなります。</p>
+  </div>
+
+  <div class="info-card">
+    <h2>専業主婦(夫)はなぜ節税額がほぼ0円なのか</h2>
+    <p>iDeCoの節税は「支払うはずだった税金が減る」仕組みです。そもそも<strong>収入が少なく所得税・住民税を払っていない人（専業主婦・主夫など）は、控除しようにも控除する税金がありません</strong>。そのため掛金を拠出しても、所得控除による節税メリットはほぼ発生しません。</p>
+    <p>ただし運用益が非課税になるメリットは残るため、iDeCoに全く意味がないわけではありません。将来的に働き方が変わり課税所得が発生する見込みがあるなら、検討の余地はあります。</p>
+  </div>
+
+  <div class="info-card">
+    <h2>よくある質問</h2>
+    <h3>Q. 掛金の上限を超えて入力するとどうなりますか？</h3>
+    <p>職業区分ごとの上限を超えて入力すると警告が表示されます。<strong>実際の上限を超えて拠出することはできません</strong>ので、上限内で金額を調整してください。</p>
+
+    <h3>Q. 会社員（企業年金あり）の上限が一律で表示されているのはなぜですか？</h3>
+    <p>企業型DBとの併用有無などで上限は月1.2万円〜2.0万円まで細かく分かれます。このツールでは代表的なケース（企業型DCのみ加入）として月2.0万円を採用しています。正確な上限は勤務先の担当部署にご確認ください。</p>
+
+    <h3>Q. 復興特別所得税は含まれていますか？</h3>
+    <p>含まれていません。所得税額に対して2.1%上乗せされる復興特別所得税を厳密に計算すると、節税額は表示額よりわずかに大きくなります。</p>
+  </div>
+
+  <div class="info-card">
+    <h2>関連ページ</h2>
+    <p><a href="../articles/ideco-basics/">iDeCoとは何か｜掛金・節税・受け取り方の基本</a><br>iDeCoの制度全体をゼロから解説しています。</p>
+    <p><a href="../articles/nisa-vs-ideco/">NISAとiDeCoどっちを優先すべきか</a><br>併用する場合の優先順位と配分の考え方を解説しています。</p>
+    <p><a href="../articles/tax-basics/">株の税金の基本｜利益にかかる税金の仕組み</a><br>投資全般にかかる税金の考え方を整理しています。</p>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Money<span>Tools</span></div>
+        <p>資産形成に役立つ無料計算ツール</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="../investment-sim/">積立投資シミュレーター</a></li>
+            <li><a href="../position-calc/">ポジションサイズ計算</a></li>
+            <li><a href="../oco-calc/">OCO注文計算ツール</a></li>
+            <li><a href="../profit-calc/">株式損益計算ツール</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>情報</h4>
+          <ul>
+            <li><a href="../privacy/">プライバシーポリシー</a></li>
+            <li><a href="../disclaimer/">免責事項</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本ツールの計算結果は概算です。配偶者控除・扶養控除など個別の事情は考慮していません。正確な金額は源泉徴収票やお住まいの自治体の税額試算でご確認ください。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script src="../js/nav.js"></script>
+<script>
+(function(){
+  function el(id){ return document.getElementById(id); }
+  function num(id){ var v = parseFloat(el(id).value); return (isNaN(v) || v < 0) ? 0 : v; }
+  function yen(n){ return Math.round(n).toLocaleString('ja-JP') + '円'; }
+
+  function salaryDeduction(income){
+    if (income <= 1625000) return 550000;
+    if (income <= 1800000) return income * 0.4 - 100000;
+    if (income <= 3600000) return income * 0.3 + 80000;
+    if (income <= 6600000) return income * 0.2 + 440000;
+    if (income <= 8500000) return income * 0.1 + 1100000;
+    return 1950000;
+  }
+
+  function incomeTaxBracket(taxable){
+    if (taxable <= 1949000) return 0.05;
+    if (taxable <= 3299000) return 0.10;
+    if (taxable <= 6949000) return 0.20;
+    if (taxable <= 8999000) return 0.23;
+    if (taxable <= 17999000) return 0.33;
+    if (taxable <= 39999000) return 0.40;
+    return 0.45;
+  }
+
+  function calc(){
+    var jobSelect = el('job');
+    var jobOpt = jobSelect.options[jobSelect.selectedIndex];
+    var job = jobSelect.value;
+    var limit = parseFloat(jobOpt.getAttribute('data-limit'));
+    var income = num('income');
+    var monthly = num('monthly');
+    var years = num('years');
+    var annualContribution = monthly * 12;
+
+    // 上限チェック
+    var warn = el('warn-box');
+    if (monthly > limit){
+      warn.style.display = 'block';
+      warn.innerHTML = '⚠️ <strong>選択した区分の上限（月' + limit.toLocaleString('ja-JP') + '円）を超えています。</strong>実際にはこの上限までしか拠出できません。上限内の金額で再計算してください。';
+    } else {
+      warn.style.display = 'none';
+    }
+
+    // ラベル切り替え
+    if (job === 'self'){
+      el('income-label').textContent = '年間所得（経費差引後・円）';
+      el('income-hint').textContent = '売上から経費を差し引いた「事業所得」の目安を入力してください。';
+    } else {
+      el('income-label').textContent = '年収（額面・円）';
+      el('income-hint').textContent = '会社員・公務員は源泉徴収票の「支払金額」（額面年収）を入力してください。';
+    }
+    el('limit-hint').textContent = 'この区分の掛金上限は月' + limit.toLocaleString('ja-JP') + '円です。';
+
+    if (job === 'dependent'){
+      el('r-annual').textContent = '0円';
+      el('r-annual').className = 'result-value';
+      el('r-annual-sub').textContent = '課税所得がないため節税額は発生しません';
+      el('r-total').textContent = '0円';
+      el('r-total').className = 'result-value';
+      el('r-total-sub').textContent = '';
+      el('r-net-annual').textContent = yen(annualContribution);
+      el('r-net-annual-sub').textContent = '掛金がそのまま負担額になります';
+      el('r-net-total').textContent = yen(annualContribution * years);
+      el('r-net-total-sub').textContent = '';
+      el('rate-note').textContent = '💡 専業主婦(夫)は所得税・住民税を納めていないケースが多く、iDeCoの所得控除メリットはほぼ発生しません（運用益非課税のメリットは残ります）。';
+      return;
+    }
+
+    var baseIncome = job === 'self' ? income : Math.max(0, income - salaryDeduction(income));
+    var socialInsurance = income * 0.15;
+    var basicDeduction = 480000;
+    var taxableBefore = Math.max(0, baseIncome - socialInsurance - basicDeduction);
+
+    var rate = incomeTaxBracket(taxableBefore);
+    var residentRate = 0.10;
+
+    var incomeTaxSaving = annualContribution * rate * 1.021; // 復興特別所得税分を概算で含める
+    var residentTaxSaving = annualContribution * residentRate;
+    var annualSaving = incomeTaxSaving + residentTaxSaving;
+    var totalSaving = annualSaving * years;
+
+    el('r-annual').textContent = yen(annualSaving);
+    el('r-annual').className = 'result-value success';
+    el('r-annual-sub').textContent = '掛金年額 ' + yen(annualContribution) + ' に対して';
+
+    el('r-total').textContent = yen(totalSaving);
+    el('r-total').className = 'result-value success';
+    el('r-total-sub').textContent = years + '年間・掛金累計 ' + yen(annualContribution * years);
+
+    var netAnnual = annualContribution - annualSaving;
+    el('r-net-annual').textContent = yen(netAnnual);
+    el('r-net-annual-sub').textContent = '掛金 ' + yen(annualContribution) + ' − 節税 ' + yen(annualSaving);
+
+    var netTotal = (annualContribution * years) - totalSaving;
+    el('r-net-total').textContent = yen(netTotal);
+    el('r-net-total-sub').textContent = '掛金累計 − 節税累計';
+
+    el('rate-note').textContent = '適用した税率区分：所得税 ' + (rate*100).toFixed(0) + '%（課税所得の概算 ' + yen(taxableBefore) + ' から算出）＋住民税10%。復興特別所得税(2.1%)を含む概算です。';
+  }
+
+  ['job','income','monthly','years'].forEach(function(id){
+    el(id).addEventListener('input', calc);
+    el(id).addEventListener('change', calc);
+  });
+  calc();
+})();
+</script>
+</body>
+</html>
