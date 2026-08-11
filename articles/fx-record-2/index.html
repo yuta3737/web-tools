@@ -459,12 +459,24 @@
     <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
     <table class="trade-table">
       <tr><th>設定</th><th>1回のリスク</th><th>資金比</th><th>判定</th></tr>
-      <tr><td>4,000通貨 × -25pips</td><td>-1,000円</td><td>2.57%</td><td class="pnl-minus">✗ 2%ルール超過</td></tr>
-      <tr><td><strong>4,000通貨 × -20pips</strong></td><td><strong>-800円</strong></td><td><strong>2.06%</strong></td><td class="pnl-plus"><strong>◎ 採用</strong></td></tr>
+      <tr><td><strong>4,000通貨 × 25pips</strong></td><td><strong>-1,000円</strong></td><td><strong>2.57%</strong></td><td class="pnl-plus"><strong>◎ 採用</strong></td></tr>
+      <tr><td>4,000通貨 × 20pips</td><td>-800円</td><td>2.06%</td><td>2%には収まるが、差は損得に出ない</td></tr>
     </table>
     </div>
 
-    <p>採用したのは<strong>-20pips</strong>です。ただし理由は「期待値が上がるから」ではなく、<strong>「1回のリスクが資金の2%に収まるから」</strong>。同じ結論に別の理由でたどり着きました。</p>
+    <p>一度は「2%ルールに収まるから」という理由で-20pipsを採用しました。ですが<strong>最終的に25pipsに戻しました</strong>。理由は3つです。</p>
+
+    <ul>
+      <li>上で確認したとおり、<strong>幅をどこに置いても損得は変わらない</strong>。20と25の差は結果に出ない</li>
+      <li>2.57%を2.06%にする調整より、<strong>「逆指値があるか無いか」の差（-13,157円）が桁違いに大きい</strong></li>
+      <li><strong>覚えられないルールは守れない。</strong>4,000通貨なら25pipsが<strong>ちょうど1,000円</strong>なので、pipsの計算が不要になる</li>
+    </ul>
+
+    <div class="verdict-box">
+      <h4>✅ 結論：「±1,000円のところにOCOを置く」だけ</h4>
+      <p>157.500で買うなら<strong>損切り157.250 / 利確157.750</strong>。pipsを数えなくて済みます。</p>
+      <p>2%ルールの2.57%超過は承知の上です。資金が10万円になれば自動的に1.0%へ下がるので、それまでの暫定として扱います。<strong>精密さより実行率を採りました。</strong></p>
+    </div>
 
     <p>そして<strong>期待値は幅ではなく「いつ入るか」で作るしかありません</strong>。実データで唯一それらしきものが出ているのは、後述する<a href="#window">22〜24時の28件</a>だけです。</p>
 
@@ -540,14 +552,14 @@
 
     <div class="rule-single">
       <div class="rs-label">ABSOLUTE RULE</div>
-      <div class="rs-main">エントリーと同時に-20pipsの逆指値を置く。<br>置いていない状態でポジションを持たない。</div>
+      <div class="rs-main">エントリーと同時に逆指値（-1,000円）を置く。<br>置いていない状態でポジションを持たない。</div>
       <div class="rs-sub">守るのはこれだけ。他は全部「推奨」で、破っても検証は成立する。</div>
     </div>
 
     <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
     <table class="trade-table">
       <tr><th>項目</th><th>内容</th><th>位置づけ</th></tr>
-      <tr><td>損切り</td><td><strong>-20pipsの逆指値をOCOで同時発注</strong></td><td class="pnl-minus"><strong>絶対</strong></td></tr>
+      <tr><td>損切り</td><td><strong>-1,000円（25pips）の逆指値をOCOで同時発注</strong></td><td class="pnl-minus"><strong>絶対</strong></td></tr>
       <tr><td>利確</td><td>見ていられるかで変える（下記の2モード）</td><td>推奨</td></tr>
       <tr><td>時間帯</td><td>22:00〜24:00に入り、0時までに閉じる</td><td>推奨</td></tr>
       <tr><td>保有時間</td><td>4時間以内（4時間超は勝率33%だった）</td><td>推奨</td></tr>
@@ -565,7 +577,7 @@
     <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
     <table class="trade-table">
       <tr><th></th><th>日中モード（会社にいる時）</th><th>夜モード（22〜24時）</th></tr>
-      <tr><td>逆指値</td><td class="pnl-minus"><strong>-20pips（必須）</strong></td><td class="pnl-minus"><strong>-20pips（必須）</strong></td></tr>
+      <tr><td>逆指値</td><td class="pnl-minus"><strong>-1,000円（必須）</strong></td><td class="pnl-minus"><strong>-1,000円（必須）</strong></td></tr>
       <tr><td>利確</td><td>+25pipsの指値も同時に入れて<strong>完全放置</strong></td><td><strong>裁量</strong>（自分のタイミングで決済）</td></tr>
       <tr><td>アプリ</td><td>見ない</td><td>見ていて良い</td></tr>
       <tr><td>期限</td><td>どちらかが約定するまで</td><td>0時までに必ず閉じる</td></tr>
@@ -579,7 +591,7 @@
     <div class="callout warn">
       <div class="callout-title">⚠️ 裁量利確には数字上の懸念がある（承知の上で採用）</div>
       勝ち50件のうち<strong>35件は+23pipsに届く前に自分で閉じており、平均は+6.9pips</strong>でした。指値に任せた15件は+23pips以上です。<strong>平均勝ちが+11.9pipsしかない主因は、この手仕舞い</strong>です。<br><br>
-      ただし「持っていれば+25pipsに届いていた」証拠はありません。逆に-20pipsで刈られていた可能性も同じだけあります。<strong>断定できないので、測って決めることにしました</strong>。<br><br>
+      ただし「持っていれば+25pipsに届いていた」証拠はありません。逆に損切りに刈られていた可能性も同じだけあります。<strong>断定できないので、測って決めることにしました</strong>。<br><br>
       夜モードでは決済ごとに「何pipsで利確したか」を記録し、30件たまった時点で平均勝ちpipsを見ます。<strong>+25pipsを下回っていたら、夜も指値に切り替えます。</strong>
     </div>
 
@@ -598,7 +610,7 @@
 
     <p>そこで入金する条件を先に決めました。<strong>①直近30トレードで逆指値の執行率が100%、かつ②その30回の合計pipsがプラス</strong>。両方そろった時点で入金します。</p>
 
-    <p><strong>10万円にする方針自体は変えていません。</strong>今の4,000通貨・-20pipsだと1回の損失は-800円＝口座の2.06%で、自分で決めた「1トレードのリスクは資金の2%まで」にほぼ収まっています。ただし<strong>ぎりぎりです</strong>。資金が10万円になれば同じ条件で0.8%まで下がり、余裕ができます。<strong>増資はロットを上げるためではなく、リスク比に余裕を持たせるために使うもの</strong>という位置づけです。</p>
+    <p><strong>10万円にする方針自体は変えていません。</strong>今の4,000通貨・25pipsだと1回の損失は-1,000円＝口座の2.57%で、自分で決めた「1トレードのリスクは資金の2%まで」を超えています。資金が10万円になれば同じ条件で1.0%まで下がり、この超過が解消します。<strong>増資はロットを上げるためではなく、リスク比を正常に戻すために使うもの</strong>という位置づけです。</p>
 
     <h3>この分析には限界があります</h3>
     <ul>
@@ -625,7 +637,7 @@
         <li>ランダムウォークでは損益比をどう設定しても<strong>期待値は理論上ゼロ</strong>。実測48.4%は理論値50%と区別できず、<strong>負けているのではなく優位性が検出されていない</strong>。</li>
         <li>小さく利確すること自体は期待値をマイナスにしない（勝率が上がって釣り合う）。<strong>損失を作っていたのは逆指値のない5件だけ</strong>。</li>
         <li>ただし利確が小さいと<strong>事故1回から立ち直るのが遅くなる</strong>。-90pipsを1回やると、+8pips利確なら勝ち11回分、+25pips利確なら4回分が消える。</li>
-        <li>損切り幅は期待値ではなく<strong>資金管理</strong>で決めた。<strong>4,000通貨×-20pips＝-800円＝資金の2.06%</strong>で2%ルールにほぼ一致。</li>
+        <li>幅では損得が変わらないので<strong>精密化をやめた</strong>。<strong>4,000通貨で「±1,000円」（＝25pips）にOCOを置く</strong>だけ。覚えやすさ＝実行率を優先した。</li>
         <li>黒字に必要なのは<strong>平均負けを-28.8→-21.3pipsにすること</strong>だけ。勝率を上げる必要はない。</li>
         <li>4,000通貨でも逆指値がある回だけならほぼトントン。<strong>ロットは主犯ではなかった</strong>。</li>
         <li>「22〜24時に入り0時までに閉じる」28件は勝率85.7%・+3,358円で<strong>両月プラス</strong>。</li>
