@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://yuta-tools.com/articles/fx-record-2/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FX実践記録②｜78回中5回のミスで-11,118円になった話 | MoneyTools</title>
+  <meta name="description" content="FX2ヶ月目の全記録。累計78トレードを損益ではなくpipsで数え直したら、損失の全額がたった5トレードから出ていました。残り73回は合計プラス。損切り注文の有無だけで何が変わるかを実データで検証します。">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:title" content="FX実践記録②｜78回中5回のミスで-11,118円になった話 | MoneyTools">
+  <meta property="og:description" content="累計78トレードをpipsで数え直したら、損失の全額がたった5トレードから出ていました。残り73回は合計プラス。損切り注文の有無だけで何が変わるかを実データで検証します。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yuta-tools.com/articles/fx-record-2/">
+  <meta property="og:image" content="https://yuta-tools.com/ogp.png">
+  <meta property="og:site_name" content="MoneyTools">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FX実践記録②｜78回中5回のミスで-11,118円になった話 | MoneyTools">
+  <meta name="twitter:description" content="累計78トレードをpipsで数え直したら、損失の全額がたった5トレードから出ていました。残り73回は合計プラス。">
+  <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .trade-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 16px 0;
+    }
+    .trade-table th {
+      background: var(--primary);
+      color: var(--white);
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+    }
+    .trade-table th:first-child { border-radius: 8px 0 0 0; }
+    .trade-table th:last-child  { border-radius: 0 8px 0 0; }
+    .trade-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+      vertical-align: middle;
+    }
+    .trade-table tr:last-child td { border-bottom: none; }
+    .trade-table tr:nth-child(even) td { background: var(--gray-50); }
+    .pnl-plus  { color: var(--success); font-weight: 800; }
+    .pnl-minus { color: var(--danger);  font-weight: 800; }
+
+    .summary-stat {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-label { font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+    .stat-value { font-size: 22px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; }
+    .stat-value.plus  { color: var(--success); }
+    .stat-value.minus { color: var(--danger); }
+
+    .verdict-box {
+      background: #eff6ff;
+      border: 2px solid var(--primary);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin: 20px 0;
+    }
+    .verdict-box h4 { font-size: 15px; font-weight: 800; color: var(--primary); margin: 0 0 12px; }
+    .verdict-box p { margin: 0 0 10px; font-size: 14px; color: var(--gray-700); line-height: 1.8; }
+    .verdict-box p:last-child { margin-bottom: 0; }
+
+    .balance-box {
+      background: #fef2f2;
+      border: 2px solid var(--danger);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .balance-box .bl-label { font-size: 12px; font-weight: 700; color: var(--gray-600); margin-bottom: 8px; }
+    .balance-box .bl-main { font-size: 15px; font-weight: 800; color: var(--gray-800); line-height: 1.9; }
+    .balance-box .bl-main strong { font-size: 26px; color: var(--danger); }
+
+    /* 5件 vs 73件の対比 */
+    .split-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 22px 0;
+    }
+    .split-cell {
+      border-radius: 14px;
+      padding: 18px 16px;
+      text-align: center;
+    }
+    .split-cell.bad  { background: #fef2f2; border: 2px solid var(--danger); }
+    .split-cell.good { background: #f0fdf4; border: 2px solid var(--success); }
+    .split-cell .sc-count { font-size: 12px; font-weight: 700; color: var(--gray-600); margin-bottom: 6px; }
+    .split-cell .sc-main  { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; line-height: 1.3; }
+    .split-cell.bad  .sc-main { color: var(--danger); }
+    .split-cell.good .sc-main { color: var(--success); }
+    .split-cell .sc-sub { font-size: 12px; color: var(--gray-600); margin-top: 6px; font-weight: 700; }
+
+    .rule-single {
+      background: var(--gray-900);
+      color: var(--white);
+      border-radius: 14px;
+      padding: 24px 22px;
+      margin: 22px 0;
+      text-align: center;
+    }
+    .rule-single .rs-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; opacity: .7; margin-bottom: 10px; }
+    .rule-single .rs-main { font-size: 19px; font-weight: 900; line-height: 1.6; }
+    .rule-single .rs-sub { font-size: 13px; opacity: .85; margin-top: 12px; line-height: 1.8; }
+
+    @media (max-width: 640px) {
+      .summary-stat { grid-template-columns: repeat(2, 1fr); }
+      .trade-table { font-size: 12px; }
+      .trade-table th, .trade-table td { padding: 8px 8px; }
+      .balance-box .bl-main strong { font-size: 22px; }
+      .split-box { grid-template-columns: 1fr; }
+      .rule-single .rs-main { font-size: 17px; }
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "FX実践記録②｜78回中5回のミスで-11,118円になった話 | MoneyTools",
+  "description": "FX2ヶ月目の全記録。累計78トレードをpipsで数え直したら、損失の全額がたった5トレードから出ていました。残り73回は合計プラス。",
+  "image": "https://yuta-tools.com/ogp.png",
+  "url": "https://yuta-tools.com/articles/fx-record-2/",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://yuta-tools.com/articles/fx-record-2/" },
+  "author": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "publisher": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "datePublished": "2026-08-10"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yuta-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "記事一覧", "item": "https://yuta-tools.com/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "FX実践記録②｜8月", "item": "https://yuta-tools.com/articles/fx-record-2/" }
+  ]
+}
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../">ホーム</a>
+      <a href="../../investment-sim/">積立投資</a>
+      <a href="../../position-calc/">ポジション計算</a>
+      <a href="../../oco-calc/">OCO計算</a>
+      <a href="../../profit-calc/">損益計算</a>
+      <a href="../../nanpin-calc/">ナンピン計算</a>
+      <a href="../../fx-calc/">FX計算</a>
+      <a href="../../ideco-calc/">iDeCo節税</a>
+      <a href="../../volume-calc/">出来高チェック</a>
+      <a href="../">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../">ホーム</a><span>/</span>
+  <a href="../">記事一覧</a><span>/</span>
+  <span>FX実践記録②｜8月</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">実践記録</span>
+    <span class="article-level">📒 実体験</span>
+    <span class="article-date">2026年8月</span>
+  </div>
+
+  <h1 class="article-title">FX実践記録②｜78回中5回のミスで-11,118円になった話</h1>
+
+  <p class="article-lead">
+    FX2ヶ月目の記録です。8月第1週は30トレードで-5,104円、累計は<strong>78トレード・-11,118円</strong>になりました。ただ今回、損益（円）ではなく<strong>pips（値幅）で数え直した</strong>ところ、まったく別の絵が見えました。<strong>損失の全額は、たった5トレードから出ていた</strong>のです。残りの73回は合計でプラスでした。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#result">8月第1週の結果</a></li>
+      <li><a href="#pips">なぜ「円」で振り返ると自分を誤解するのか</a></li>
+      <li><a href="#five">損失の全額は5トレードから出ていた</a></li>
+      <li><a href="#common">その5回の共通点</a></li>
+      <li><a href="#sim">損切りを入れていたらどうなっていたか</a></li>
+      <li><a href="#width">では損切りは何pipsが正解なのか</a></li>
+      <li><a href="#breakeven">黒字に必要な数字は1つだけ</a></li>
+      <li><a href="#size">ロットは主犯ではなかった</a></li>
+      <li><a href="#window">唯一勝てていた時間帯</a></li>
+      <li><a href="#rule">ルールを増やすのをやめた</a></li>
+      <li><a href="#honest">正直に書いておくこと</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+<a href="../fx-record/" class="related-article">
+  <div class="related-article-text">
+    <div class="related-article-label">前回の記録</div>
+    <div class="related-article-title">FX実践記録①｜勝率70%なのに-6,014円だった話</div>
+  </div>
+  <span class="related-article-arrow">›</span>
+</a>
+
+    <h2 id="result">8月第1週の結果</h2>
+    <p>2026年8月3日から7日までの5営業日です。数字は証券会社の日別報告書に基づく確定値です。</p>
+
+    <div class="summary-stat">
+      <div class="stat-card">
+        <div class="stat-label">取引回数</div>
+        <div class="stat-value">30回</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">勝率</div>
+        <div class="stat-value plus">60%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">損益</div>
+        <div class="stat-value minus">-5,104円</div>
+      </div>
+    </div>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>日付</th><th>回数</th><th>損益</th><th>内容</th></tr>
+      <tr><td>8/3（月）</td><td>12回</td><td class="pnl-plus">+967円</td><td>8勝4敗。含み損のポジションを翌日に持ち越し</td></tr>
+      <tr><td>8/4（火）</td><td>0回</td><td>0円</td><td>取引なし。持ち越した含み損が-5,180円まで拡大</td></tr>
+      <tr><td><strong>8/5（水）</strong></td><td>4回</td><td class="pnl-minus"><strong>-2,764円</strong></td><td>46時間持ち越したポジションを-4,484円で決済</td></tr>
+      <tr><td>8/6（木）</td><td>2回</td><td class="pnl-minus">-2,267円</td><td>2回とも売り・2回とも長時間保有・2回とも負け</td></tr>
+      <tr><td>8/7（金）</td><td>12回</td><td class="pnl-minus">-1,040円</td><td>10:11開始→翌03:41まで断続17時間半</td></tr>
+    </table>
+    </div>
+
+    <div class="balance-box">
+      <div class="bl-label">口座残高の推移（2ヶ月累計）</div>
+      <div class="bl-main">50,000円 → <strong>38,882円</strong><br>（-22.2%／累計78トレード・-11,118円）</div>
+    </div>
+
+    <p><a href="../fx-record/">前回の記録①</a>では「勝率70%なのに損益比0.27で負けた」と書きました。8月は損益比が0.64まで改善し、勝率も60%を維持しています。<strong>数字の上では前月より良くなっているのに、資金は減り続けている</strong>。この矛盾が引っかかって、集計方法そのものを見直すことにしました。</p>
+
+    <h2 id="pips">なぜ「円」で振り返ると自分を誤解するのか</h2>
+    <p>2ヶ月の78トレードを並べて気づいたのは、<strong>取引数量がバラバラすぎる</strong>ことでした。</p>
+
+    <p>最小100通貨、最大5,000通貨。<strong>同じ通貨ペアなのに、1回のトレードの重みが50倍違います。</strong>この状態で「1回あたり平均-1,110円」と集計しても、それが「読みを外した」のか「たまたまロットが大きかった」のかを区別できません。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 pipsに直すと比較できる</div>
+      FXの値幅の単位が<strong>pips</strong>です。ドル円なら1pips＝0.01円。損益をロットで割れば、どんな数量のトレードも同じ物差しに乗ります。<br>
+      <strong>pips ＝ 損益 ÷ 通貨数 × 100</strong><br>
+      例：4,000通貨で-1,000円なら、-1,000 ÷ 4,000 × 100 ＝ <strong>-25pips</strong>。5,000通貨で-1,250円も同じ-25pipsです。円で見ると後者が「大きな負け」に見えますが、<strong>判断のミスとしては同じ大きさ</strong>です。
+    </div>
+
+    <p>78トレード全部をpipsに直したのが下の表です。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>期間</th><th>回数</th><th>勝率</th><th>合計</th><th>平均勝ち</th><th>平均負け</th></tr>
+      <tr><td>7月</td><td>48回</td><td>66.7%</td><td class="pnl-minus">-53.6pips</td><td class="pnl-plus">+11.2pips</td><td class="pnl-minus">-29.5pips</td></tr>
+      <tr><td>8月</td><td>30回</td><td>60.0%</td><td class="pnl-minus">-98.7pips</td><td class="pnl-plus">+13.1pips</td><td class="pnl-minus">-27.9pips</td></tr>
+      <tr><td><strong>累計</strong></td><td><strong>78回</strong></td><td><strong>64.1%</strong></td><td class="pnl-minus"><strong>-152.3pips</strong></td><td class="pnl-plus"><strong>+11.9pips</strong></td><td class="pnl-minus"><strong>-28.8pips</strong></td></tr>
+    </table>
+    </div>
+
+    <p>平均の勝ちが約12pips、平均の負けが約29pips。<strong>勝ちの2.4倍の値幅で負けている</strong>という構造が、月をまたいでまったく変わっていませんでした。</p>
+
+    <h2 id="five">損失の全額は5トレードから出ていた</h2>
+    <p>そこで負けの分布を見たところ、はっきり2つに割れました。<strong>-30pipsを超えた負けが5件だけあり、その5件が全体を沈めていました。</strong></p>
+
+    <div class="split-box">
+      <div class="split-cell bad">
+        <div class="sc-count">-30pipsを超えた負け／5件（6.4%）</div>
+        <div class="sc-main">-13,157円</div>
+        <div class="sc-sub">-316.5pips</div>
+      </div>
+      <div class="split-cell good">
+        <div class="sc-count">残り／73件（93.6%）</div>
+        <div class="sc-main">+2,039円</div>
+        <div class="sc-sub">+164.2pips</div>
+      </div>
+    </div>
+
+    <div class="verdict-box">
+      <h4>✅ 93.6%のトレードは、合計するとプラスだった</h4>
+      <p>累計-11,118円という数字は、<strong>5トレードだけで説明が付きます</strong>。残り73回を全部足すとプラスです。</p>
+      <p>つまり相場の読み方や手法を変える必要はありませんでした。直すべきなのは<strong>この5回で何をしていたか</strong>だけです。</p>
+    </div>
+
+    <p>その5件の中身です。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>損益</th><th>値幅</th><th>エントリー時刻</th><th>数量</th><th>保有時間</th></tr>
+      <tr><td class="pnl-minus">-4,484円</td><td class="pnl-minus">-89.7pips</td><td>00:07</td><td>5,000通貨</td><td><strong>46時間</strong></td></tr>
+      <tr><td class="pnl-minus">-2,641円</td><td class="pnl-minus">-66.0pips</td><td>00:10</td><td>4,000通貨</td><td>8.4時間</td></tr>
+      <tr><td class="pnl-minus">-2,432円</td><td class="pnl-minus">-60.8pips</td><td>23:46</td><td>4,000通貨</td><td><strong>22分</strong></td></tr>
+      <tr><td class="pnl-minus">-2,400円</td><td class="pnl-minus">-60.0pips</td><td>23:27</td><td>4,000通貨</td><td><strong>15分</strong></td></tr>
+      <tr><td class="pnl-minus">-1,200円</td><td class="pnl-minus">-40.0pips</td><td>19:24</td><td>3,000通貨</td><td>3.2時間</td></tr>
+    </table>
+    </div>
+
+    <h2 id="common">その5回の共通点</h2>
+    <p>共通していたのは1つだけでした。<strong>逆指値（損切り注文）を入れていなかった</strong>ことです。</p>
+
+    <p>逆に、逆指値を入れたトレードの決済幅を見ると、きれいに揃っています。勝ちの上位には<strong>ぴったり+25.0pipsが9件</strong>並んでいました。OCO注文で「+25pipsで利確・-25pipsで損切り」を設定した回は、設計どおりに機能していたわけです。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>決済幅</th><th>件数</th><th>合計</th></tr>
+      <tr><td>+23pips以上（利確ライン到達）</td><td>15回</td><td class="pnl-plus">+11,551円</td></tr>
+      <tr><td>+0〜23pips（自分で手仕舞い）</td><td>35回</td><td class="pnl-plus">+6,916円</td></tr>
+      <tr><td>-0〜23pips（浅い負け）</td><td>7回</td><td class="pnl-minus">-378円</td></tr>
+      <tr><td>-23〜30pips（損切りライン付近）</td><td>16回</td><td class="pnl-minus">-16,050円</td></tr>
+      <tr><td><strong>-30pips超（損切り不在）</strong></td><td><strong>5回</strong></td><td class="pnl-minus"><strong>-13,157円</strong></td></tr>
+    </table>
+    </div>
+
+    <p>そして今回いちばん考えを変えられたのが、上の5件のうち<strong>23:27と23:46の2件</strong>です。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 15分で-60pips。手動では間に合わない</div>
+      この2件は<strong>保有15分と22分で-60pips</strong>に達しています。寝て放置したのではなく、<strong>起きて画面を見ていたのに切れなかった</strong>トレードです。<br><br>
+      ドル円が163円台から159円台へ急落していた局面で、値動きが速すぎました。「損切りしよう」と考えている数分のあいだに、想定の2倍以上の損失になっています。<br><br>
+      つまり<strong>「深夜は取引しない」「気をつける」といった対策では防げません</strong>。あらかじめ置いた注文だけが機能します。
+    </div>
+
+    <p>私は前回、この原因を「深夜に判断力が落ちるから」だと考え、<strong>「0時以降は新規エントリー禁止」</strong>という対策を立てていました。時間帯で切る発想自体は数字と合っていたのですが、上の2件は23時台のエントリーなので、そのルールでは防げていません。原因は時間ではなく<strong>注文の置き方</strong>でした。</p>
+
+    <h2 id="sim">損切りを入れていたらどうなっていたか</h2>
+    <p>78トレード全部に機械的な損切りが入っていた場合を計算しました。それ以外の条件は実際の記録どおりです。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>損切り幅</th><th>累計損益</th><th>実績との差</th></tr>
+      <tr><td>-20pips</td><td class="pnl-plus">+1,689円</td><td class="pnl-plus">+12,807円</td></tr>
+      <tr><td><strong>-25pips</strong></td><td class="pnl-minus"><strong>-2,299円</strong></td><td class="pnl-plus"><strong>+8,819円</strong></td></tr>
+      <tr><td>-30pips</td><td class="pnl-minus">-3,961円</td><td class="pnl-plus">+7,157円</td></tr>
+      <tr><td>-40pips</td><td class="pnl-minus">-5,961円</td><td class="pnl-plus">+5,157円</td></tr>
+      <tr><td>実績（損切りなし）</td><td class="pnl-minus">-11,118円</td><td>—</td></tr>
+    </table>
+    </div>
+
+    <p>ただしこの試算には<strong>有利に出るバイアス</strong>があります。実際に損切り注文を置いていれば、一度マイナスに振れてから戻って利益になったトレードも刈られていたはずで、その分は計算に入っていません。数字は上限の見積りとして読む必要があります。</p>
+
+    <p>それでも方向は変わりません。上の5件はいずれも-40pips以上動いており、<strong>-25pipsで切られてから含み益に戻った可能性はほぼない</strong>水準です。</p>
+
+    <h2 id="width">では損切りは何pipsが正解なのか</h2>
+    <p>ここで「一番成績が良くなる幅を探せばいい」と考えたのですが、調べたら<strong>その考え方自体が間違っている</strong>ことが分かりました。順に書きます。</p>
+
+    <h3>前提が間違っていた：ドル円の日中レンジは38pipsではなく約100pips</h3>
+    <p>私は自分のルールメモに「ドル円の1日の値幅は38pips程度」と書いていて、それを根拠に「25pipsは値幅の2/3だから妥当」と判断していました。<strong>この38pipsが実データと合っていませんでした。</strong></p>
+
+    <p>自分の約定価格だけから日中の値動き幅を復元したものです。実際についた価格しか拾えないので、本当の高値・安値はこれより広くなります（＝下限値）。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>日付</th><th>観測レンジ</th><th>日付</th><th>観測レンジ</th></tr>
+      <tr><td>7/27</td><td>13pips</td><td>7/31</td><td>121pips</td></tr>
+      <tr><td>7/28</td><td>22pips</td><td>8/3</td><td>152pips</td></tr>
+      <tr><td>7/29</td><td>35pips</td><td>8/5</td><td>96pips</td></tr>
+      <tr><td><strong>7/30</strong></td><td class="pnl-minus"><strong>474pips</strong></td><td>8/6</td><td>51pips</td></tr>
+      <tr><td>—</td><td>—</td><td>8/7</td><td>115pips</td></tr>
+    </table>
+    </div>
+
+    <p><strong>中央値96pips・平均120pips。</strong>38pipsではありませんでした。さらに、<strong>-25pipsに到達するまでの時間は中央値36分</strong>。最短は<strong>1分</strong>で、7分以内が4件あります。</p>
+
+    <p>つまり<strong>±25pipsは日中レンジの1/4程度で、数十分あれば普通に往復する幅</strong>です。ノイズの内側にあります。</p>
+
+    <h3>幅をいじっても期待値は作れない</h3>
+    <p>そして、ここが決定的でした。<strong>ドリフト（方向性）のないランダムウォークでは、幅Aの利確と幅Bの損切りで挟んだとき、先に利確に触る確率は B÷(A+B) になります。</strong>これは相場観ではなく数学的に決まる値です。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>設定</th><th>損益比</th><th>理論上の勝率</th><th>期待値</th></tr>
+      <tr><td>+25 / -25</td><td>1.00</td><td>50.0%</td><td>±0</td></tr>
+      <tr><td>+25 / -20</td><td>1.25</td><td>44.4%</td><td>±0</td></tr>
+      <tr><td>+25 / -15</td><td>1.67</td><td>37.5%</td><td>±0</td></tr>
+      <tr><td>+25 / -35</td><td>0.71</td><td>58.3%</td><td>±0</td></tr>
+    </table>
+    </div>
+
+    <p><strong>どの組み合わせでも期待値はゼロです。</strong>損益比を上げれば勝率が下がり、勝率を上げれば損益比が下がる。ちょうど打ち消し合います。</p>
+
+    <div class="verdict-box">
+      <h4>✅ 実績の48.4%は「負けている」のではなく「優位性がない」</h4>
+      <p>実際に±25のラインに到達した31件は<strong>15勝16敗＝勝率48.4%</strong>でした。これは理論値50%と<strong>統計的に区別できません</strong>（31件だと標準誤差が約9%あります）。</p>
+      <p>正しい読み方は「±25で負ける設定だった」ではなく、<strong>「この時間軸では自分に優位性が検出されていない＝コインフリップ」</strong>です。</p>
+    </div>
+
+    <p>これで「損切りを狭くすれば期待値が良くなる」という発想が消えました。狭くすれば、勝率も一緒に下がるだけです。</p>
+
+    <h3>だったら何が損失を作っていたのか</h3>
+    <p>期待値ゼロの土台を、下に引き下げていた要因が2つあります。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th></th><th>内容</th><th>影響</th></tr>
+      <tr><td><strong>A. 上限のない負け</strong></td><td>5件が-40〜-90pips。そもそも挟んでいなかった</td><td class="pnl-minus"><strong>-13,157円</strong></td></tr>
+      <tr><td><strong>B. 勝ちだけ切り上げ</strong></td><td>勝ちの中央値は<strong>+8.2pips</strong>なのに、負けは-25まで走らせていた</td><td class="pnl-minus">実質損益比0.33</td></tr>
+    </table>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ Bの方が構造的に重い</div>
+      ランダムウォークで<strong>「勝ちは+8pipsで降りて、負けは-25pipsまで待つ」</strong>をやると、期待値ゼロが<strong>数学的にマイナスへ確定します</strong>。相場が悪いとか読みが外れたとかではなく、この決済のクセだけで負けが決まります。<br><br>
+      前の章で「平均勝ちが低い主因は手仕舞い」と書きましたが、深刻さを過小評価していました。<strong>幅の議論よりこちらが先です。</strong>
+    </div>
+
+    <h3>結論：幅は「期待値」ではなく「資金管理」で決める</h3>
+    <p>挟む目的は期待値を作ることではなく、<strong>Aの上限なし負けを消すこと</strong>でした。その役割なら幅が20でも25でも35でも果たせます。だったら幅は<strong>1回のリスクが資金の何%になるか</strong>から決めるのが正しい、という結論になりました。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>設定</th><th>1回のリスク</th><th>資金比</th><th>判定</th></tr>
+      <tr><td>4,000通貨 × -25pips</td><td>-1,000円</td><td>2.57%</td><td class="pnl-minus">✗ 2%ルール超過</td></tr>
+      <tr><td><strong>4,000通貨 × -20pips</strong></td><td><strong>-800円</strong></td><td><strong>2.06%</strong></td><td class="pnl-plus"><strong>◎ 採用</strong></td></tr>
+    </table>
+    </div>
+
+    <p>採用したのは<strong>-20pips</strong>です。ただし理由は「期待値が上がるから」ではなく、<strong>「1回のリスクが資金の2%に収まるから」</strong>。同じ結論に別の理由でたどり着きました。</p>
+
+    <p>そして<strong>期待値は幅ではなく「いつ入るか」で作るしかありません</strong>。実データで唯一それらしきものが出ているのは、後述する<a href="#window">22〜24時の28件</a>だけです。</p>
+
+    <p>損切り幅から適正な取引数量を逆算する計算は、自分用に作ったツールで確認しています。</p>
+
+    <a href="../../fx-calc/" class="tool-cta">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">無料ツール</div>
+        <div class="tool-cta-title">FX計算ツール</div>
+        <div class="tool-cta-sub">必要証拠金・1pipsあたりの損益・証拠金維持率・損切り幅から逆算した適正な取引数量を自動計算</div>
+      </div>
+      <div class="tool-cta-arrow">›</div>
+    </a>
+
+    <h2 id="breakeven">黒字に必要な数字は1つだけ</h2>
+    <p>勝率64.1%・平均勝ち+11.9pipsを据え置いたまま、黒字にする方法を3通りで計算しました。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>直す場所</th><th>必要な水準</th><th>現状</th><th>難易度</th></tr>
+      <tr><td><strong>平均負けを縮める</strong></td><td><strong>-21.3pips以下</strong></td><td>-28.8pips</td><td class="pnl-plus">注文を置くだけ</td></tr>
+      <tr><td>平均勝ちを伸ばす</td><td>+16.1pips以上</td><td>+11.9pips</td><td>我慢が必要</td></tr>
+      <tr><td>勝率を上げる</td><td>70.7%以上</td><td>64.1%</td><td>最も難しい</td></tr>
+    </table>
+    </div>
+
+    <p><strong>いちばん近いのは1行目です。</strong>逆指値を置けば、平均負けは自動的にその幅以下に収まります。裁量も我慢も要りません。</p>
+
+    <p>ただし注意点があります。<a href="#width">次の章で書くとおり</a>、平均負けを縮めると<strong>勝率も一緒に下がる</strong>ので、この表の1行目だけを取り出して「これで黒字になる」とは言えません。あくまで「今の数字のどこがどれだけ足りないか」を示した表として読んでください。</p>
+
+    <p>なお2行目も無理な数字ではありません。勝ち50件のうち<strong>35件は+23pipsに届く前に自分で閉じています</strong>（平均+6.9pips）。利確の指値に任せて触らなければ、平均勝ちは自然に上がります。ただしこちらは「利益が乗ると閉じたくなる」心理を相手にするので、後回しにしました。</p>
+
+    <h2 id="size">ロットは主犯ではなかった</h2>
+    <p>「4,000通貨は大きすぎるのでは」と考えていましたが、逆指値の有無で分けると見え方が変わりました。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>数量</th><th>件数</th><th>損切り不在の分</th><th>それ以外の合計</th></tr>
+      <tr><td>〜3,100通貨</td><td>39回</td><td class="pnl-minus">1件 -1,200円</td><td class="pnl-plus">+2,260円</td></tr>
+      <tr><td>4,000〜5,000通貨</td><td>39回</td><td class="pnl-minus">4件 -11,957円</td><td>-221円（ほぼトントン）</td></tr>
+    </table>
+    </div>
+
+    <p><strong>4,000通貨でも、逆指値がある回だけならほぼトントン</strong>です。ロットを半分にしても、逆指値を置かなければ-4,484円が-2,242円になるだけで、構造は何も変わりません。順番として、先に直すのは注文の方でした。</p>
+
+    <p>ポジションサイズそのものの決め方は<a href="../position-size/">ポジションサイズとリスク管理</a>、損切り幅の考え方は<a href="../stop-loss/">損切りの決め方</a>で解説しています。</p>
+
+    <h2 id="window">唯一勝てていた時間帯</h2>
+    <p>時間帯別の集計で、1つだけ明確にプラスの領域がありました。<strong>22時から24時に入り、日付が変わる前に閉じたトレード</strong>です。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>区分</th><th>件数</th><th>勝率</th><th>合計</th></tr>
+      <tr><td><strong>22〜24時に入り0時までに閉じた</strong></td><td>28回</td><td class="pnl-plus">85.7%</td><td class="pnl-plus"><strong>+3,358円</strong></td></tr>
+      <tr><td>それ以外</td><td>50回</td><td>52.0%</td><td class="pnl-minus">-14,476円</td></tr>
+    </table>
+    </div>
+
+    <p>内訳は7月+838円・8月+2,520円で<strong>両月ともプラス</strong>でした。夏時間ではニューヨーク市場が22時半ごろに開き、ロンドンと重なるこの2時間が最も流動性が高い時間帯です。会社員にとっては帰宅後に当たるので、都合も合っています。</p>
+
+    <p>ただし28件しかないので、確定した強みと呼ぶには足りません。<strong>推奨の営業時間</strong>という扱いにとどめます。</p>
+
+    <h2 id="rule">ルールを増やすのをやめた</h2>
+    <p>分析を終えて自分の記録を見返して、いちばん気まずかったのがこれです。</p>
+
+    <div class="verdict-box">
+      <h4>ルールは、すでに正しく書かれていた</h4>
+      <p>手元のルールメモには8月2日の時点で<strong>「最優先：損切り-25pipsの機械的執行」</strong>と書いてありました。<a href="../fx-record/">記録①</a>で「これが全て」と結論も出していました。</p>
+      <p>それでも8月に-4,484円を出しています。<strong>ルールが間違っていたのではなく、実行していなかっただけ</strong>です。</p>
+    </div>
+
+    <p>ここで前回のように「0時以降は禁止」という新しいルールを足すと、<strong>守れていないルールの上に、守れないルールを積むこと</strong>になります。だから今回は逆に、絶対に守る項目を1つに絞りました。</p>
+
+    <div class="rule-single">
+      <div class="rs-label">ABSOLUTE RULE</div>
+      <div class="rs-main">エントリーと同時に-20pipsの逆指値を置く。<br>置いていない状態でポジションを持たない。</div>
+      <div class="rs-sub">守るのはこれだけ。他は全部「推奨」で、破っても検証は成立する。</div>
+    </div>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th>項目</th><th>内容</th><th>位置づけ</th></tr>
+      <tr><td>損切り</td><td><strong>-20pipsの逆指値をOCOで同時発注</strong></td><td class="pnl-minus"><strong>絶対</strong></td></tr>
+      <tr><td>利確</td><td>見ていられるかで変える（下記の2モード）</td><td>推奨</td></tr>
+      <tr><td>時間帯</td><td>22:00〜24:00に入り、0時までに閉じる</td><td>推奨</td></tr>
+      <tr><td>保有時間</td><td>4時間以内（4時間超は勝率33%だった）</td><td>推奨</td></tr>
+      <tr><td>数量</td><td>4,000通貨で固定</td><td>推奨</td></tr>
+    </table>
+    </div>
+
+    <p>まず分割利確はやめました。前回は「1,000通貨を+25pips、1,000通貨を+50pips」という設計にしていたのですが、<strong>+50pipsは78トレード中1回も到達していません</strong>（勝ちの最大は+33.6pips）。注文が複雑になるほど、肝心の逆指値の執行率が落ちます。</p>
+
+    <p>ただし「+50pipsは届かない水準」と断定はできません。<strong>日中レンジが中央値96pipsある</strong>ので、+50pips自体は射程内です。到達0回だったのは<strong>早く手仕舞いしていたから</strong>という可能性が残ります。</p>
+
+    <h3>チャートを見ていられるかで、注文を2通りに分ける</h3>
+    <p>会社にいる時間と、帰宅後にチャートを見ていられる時間では、できることが違います。そこで<strong>逆指値は共通で必須にしたまま、利確側だけを切り替える</strong>形にしました。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="trade-table">
+      <tr><th></th><th>日中モード（会社にいる時）</th><th>夜モード（22〜24時）</th></tr>
+      <tr><td>逆指値</td><td class="pnl-minus"><strong>-20pips（必須）</strong></td><td class="pnl-minus"><strong>-20pips（必須）</strong></td></tr>
+      <tr><td>利確</td><td>+25pipsの指値も同時に入れて<strong>完全放置</strong></td><td><strong>裁量</strong>（自分のタイミングで決済）</td></tr>
+      <tr><td>アプリ</td><td>見ない</td><td>見ていて良い</td></tr>
+      <tr><td>期限</td><td>どちらかが約定するまで</td><td>0時までに必ず閉じる</td></tr>
+    </table>
+    </div>
+
+    <p>日中は「見られない」のではなく<strong>見てはいけない</strong>時間として扱います。仕事の合間に数十秒だけ見て判断するのが、いちばん質の低い決済になるからです。</p>
+
+    <p>ちなみに<strong>日中はそもそも成績が悪い時間帯</strong>でした。21時台までにエントリーした25件は勝率48%・-2,115円。夜モードの28件が勝率85.7%・+3,358円なので、日中は「やらない」という選択も十分あります。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 裁量利確には数字上の懸念がある（承知の上で採用）</div>
+      勝ち50件のうち<strong>35件は+23pipsに届く前に自分で閉じており、平均は+6.9pips</strong>でした。指値に任せた15件は+23pips以上です。<strong>平均勝ちが+11.9pipsしかない主因は、この手仕舞い</strong>です。<br><br>
+      ただし「持っていれば+25pipsに届いていた」証拠はありません。逆に-20pipsで刈られていた可能性も同じだけあります。<strong>断定できないので、測って決めることにしました</strong>。<br><br>
+      夜モードでは決済ごとに「何pipsで利確したか」を記録し、30件たまった時点で平均勝ちpipsを見ます。<strong>+25pipsを下回っていたら、夜も指値に切り替えます。</strong>
+    </div>
+
+    <p>凝った設計は必要ありませんでした。<a href="#width">前述のとおり</a>、損益比をいくつに設定しても期待値は理論上ゼロなので、注文を複雑にして得られるものがないからです。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 見るのは金額ではなく執行率</div>
+      次の2週間で追いかける数字は損益ではありません。<strong>「逆指値を置けた回数 ÷ 全トレード」</strong>です。<br><br>
+      金額を目標にすると、届かせるためにロットと回数を上げる動機が生まれます。それがまさに7月30日（15回・-4,532円）と8月4日（46時間の放置）の壊れ方でした。
+    </div>
+
+    <h2 id="honest">正直に書いておくこと</h2>
+
+    <h3>資金の追加は先送りにしました</h3>
+    <p>当初は8月中に5万円を追加して10万円体制にする計画でしたが、<strong>タイミングを後ろにずらしました</strong>。1トレードあたりの期待値がまだ-1.95pipsで、勝てる根拠が確認できていません。この状態で入金すると、実質的には「ロットを上げる余地」を作るだけになります。</p>
+
+    <p>そこで入金する条件を先に決めました。<strong>①直近30トレードで逆指値の執行率が100%、かつ②その30回の合計pipsがプラス</strong>。両方そろった時点で入金します。</p>
+
+    <p><strong>10万円にする方針自体は変えていません。</strong>むしろ増資は必要です。今の4,000通貨は1回の損失が-1,000円＝口座の2.57%で、自分で決めた「1トレードのリスクは資金の2%まで」というルールを超えています。資金が10万円になれば同じ4,000通貨でも1.0%に下がり、この超過が自然に解消します。<strong>増資はロットを上げるためではなく、今のロットを正しいリスク比に戻すために使うもの</strong>という位置づけです。</p>
+
+    <h3>この分析には限界があります</h3>
+    <ul>
+      <li><strong>-4,484円の1件が損失の40%を占めます。</strong>この1件が特殊事情だった可能性は残ります</li>
+      <li>「逆指値があればプラス」の根拠は73件で+2,039円です。<strong>期待値がプラスだと言い切れるサンプル数ではありません</strong></li>
+      <li>損切りのシミュレーションは前述のとおり有利に出るバイアスを含みます</li>
+      <li>買い・売りの方向による差は<strong>見つかりませんでした</strong>。7月は売りが、8月は買いが良かったのですが、これは単にその月の相場の向きを反映しているだけで、得意な方向とは言えません</li>
+    </ul>
+
+    <h3>そもそも割に合っているのか</h3>
+    <p>FXは通貨の売買なので、株のように企業が価値を生む仕組みがありません。参加者同士で奪い合う<strong>ゼロサム（コストを引くとマイナスサム）</strong>です。同じ時期に積み立てているインデックスファンドは、何もしていないのに含み益が出ています。2ヶ月で-11,118円というのは、労力に対して明らかに割に合っていません。</p>
+
+    <p>それでも続けるのは、<strong>失っていい金額の範囲で、自分の執行がどれだけ甘いかを数字で突きつけられる</strong>からです。今回の-11,118円は「損切り注文を置かないと何が起きるか」の授業料として、たぶん安い方だと思っています。</p>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>8月第1週は<strong>30トレード・勝率60%・-5,104円</strong>。累計は78トレード・-11,118円（口座5万円→38,882円／-22.2%）。</li>
+        <li>ロットが100〜5,000通貨と50倍違っていたため、円ではなく<strong>pips</strong>で数え直した。</li>
+        <li><strong>-30pipsを超えた5件（6.4%）だけで-13,157円</strong>。残り73件は合計+2,039円のプラスだった。</li>
+        <li>5件の共通点は<strong>逆指値を置いていなかったこと</strong>。うち2件は15〜22分で-60pipsに達しており、手動では間に合わない。</li>
+        <li>全トレードに-25pipsの損切りが入っていれば<strong>-11,118円→-2,299円</strong>（上限見積り）。</li>
+        <li><strong>ドル円の日中レンジは中央値96pips</strong>で、±25pipsはその1/4＝ノイズの内側。-25pipsには<strong>中央値36分</strong>で到達していた。</li>
+        <li>ランダムウォークでは損益比をどう設定しても<strong>期待値は理論上ゼロ</strong>。実測48.4%は理論値50%と区別できず、<strong>負けているのではなく優位性が検出されていない</strong>。</li>
+        <li>期待値ゼロを下へ引き下げていたのは<strong>「勝ちは+8pipsで降りて負けは-25pipsまで待つ」</strong>という決済のクセ（実質損益比0.33）。<strong>幅の議論よりこちらが重い</strong>。</li>
+        <li>損切り幅は期待値ではなく<strong>資金管理</strong>で決めた。<strong>4,000通貨×-20pips＝-800円＝資金の2.06%</strong>で2%ルールにほぼ一致。</li>
+        <li>黒字に必要なのは<strong>平均負けを-28.8→-21.3pipsにすること</strong>だけ。勝率を上げる必要はない。</li>
+        <li>4,000通貨でも逆指値がある回だけならほぼトントン。<strong>ロットは主犯ではなかった</strong>。</li>
+        <li>「22〜24時に入り0時までに閉じる」28件は勝率85.7%・+3,358円で<strong>両月プラス</strong>。</li>
+        <li>ルールは8月2日時点で正しく書けていた。問題は実行。<strong>絶対に守る項目を「逆指値」1つに絞った</strong>。</li>
+        <li>利確は<strong>日中（会社）は+25pipsの指値で完全放置、夜は裁量</strong>の2モードに。逆指値だけは両方で必須。</li>
+        <li>次に測るのは金額ではなく<strong>逆指値の執行率</strong>。10万円への増資は方針を維持したまま、条件を満たすまで先送り。</li>
+      </ul>
+    </div>
+
+    <p style="font-size:13px; color:var(--gray-500); margin-top:24px;">
+      ※ 本記事の数値はSBI証券の月次報告書・日別報告書に基づく実際の記録です。特定の投資手法や商品を推奨するものではありません。FXはレバレッジにより大きな損失を被る可能性があります。投資判断はご自身の責任でお願いします。
+    </p>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+            <li><a href="../../investment-sim/">積立投資シミュレーター</a></li>
+            <li><a href="../../position-calc/">ポジションサイズ計算ツール</a></li>
+            <li><a href="../../oco-calc/">OCO注文計算ツール</a></li>
+            <li><a href="../../profit-calc/">株式損益計算ツール</a></li>
+            <li><a href="../../nanpin-calc/">ナンピン計算ツール</a></li>
+            <li><a href="../../fx-calc/">FX計算ツール</a></li>
+            <li><a href="../../ideco-calc/">iDeCo節税額シミュレーター</a></li>
+            <li><a href="../../volume-calc/">出来高・売買代金チェック</a></li>
+          </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事は個人の取引記録であり、投資成果を保証するものではありません。FXはレバレッジにより元本を超える損失が生じる可能性があります。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>
