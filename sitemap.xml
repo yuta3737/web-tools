@@ -91,6 +91,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://yuta-tools.com/articles/stock-fx-technical/</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://yuta-tools.com/articles/fx-record-2/</loc>
     <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://yuta-tools.com/articles/stock-fx-technical/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株のテクニカル分析はFXで使えるか｜板・出来高が無い分の読み替え方 | MoneyTools</title>
+  <meta name="description" content="株のデイトレで覚えたテクニカル分析のうち、FXでそのまま使えるもの・使えないもの・読み替えが必要なものを整理します。FXに板と出来高が無い理由、寄り付きと引けの代わりに見るもの、円をpipsに換算する方法まで解説します。">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:title" content="株のテクニカル分析はFXで使えるか｜板・出来高が無い分の読み替え方 | MoneyTools">
+  <meta property="og:description" content="株のデイトレで覚えたテクニカル分析のうち、FXでそのまま使えるもの・使えないもの・読み替えが必要なものを整理します。FXに板と出来高が無い理由から解説します。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yuta-tools.com/articles/stock-fx-technical/">
+  <meta property="og:image" content="https://yuta-tools.com/ogp.png">
+  <meta property="og:site_name" content="MoneyTools">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="株のテクニカル分析はFXで使えるか｜板・出来高が無い分の読み替え方 | MoneyTools">
+  <meta name="twitter:description" content="株のデイトレで覚えたテクニカル分析のうち、FXでそのまま使えるもの・使えないもの・読み替えが必要なものを整理します。">
+  <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .verdict-box {
+      background: #eff6ff;
+      border: 2px solid var(--primary);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin: 20px 0;
+    }
+    .verdict-box h4 { font-size: 15px; font-weight: 800; color: var(--primary); margin: 0 0 12px; }
+    .verdict-box p { margin: 0 0 10px; font-size: 14px; color: var(--gray-700); line-height: 1.8; }
+    .verdict-box p:last-child { margin-bottom: 0; }
+
+    .judge-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      margin: 18px 0;
+    }
+    .judge-table th {
+      background: var(--primary);
+      color: var(--white);
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+    }
+    .judge-table th:first-child { border-radius: 8px 0 0 0; }
+    .judge-table th:last-child  { border-radius: 0 8px 0 0; }
+    .judge-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+      vertical-align: middle;
+    }
+    .judge-table tr:last-child td { border-bottom: none; }
+    .judge-table tr:nth-child(even) td { background: var(--gray-50); }
+    .ok { color: var(--success); font-weight: 800; white-space: nowrap; }
+    .ng { color: var(--danger);  font-weight: 800; white-space: nowrap; }
+    .mid{ color: #b45309;        font-weight: 800; white-space: nowrap; }
+
+    .formula-box {
+      background: var(--gray-50);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      margin: 18px 0;
+      border-radius: 0 10px 10px 0;
+    }
+    .formula-main { font-size: 16px; font-weight: 800; color: var(--gray-900); line-height: 1.7; margin-bottom: 6px; }
+    .formula-note { font-size: 12.5px; color: var(--gray-600); line-height: 1.7; }
+
+    @media (max-width: 640px) {
+      .judge-table { font-size: 12.5px; }
+      .judge-table th, .judge-table td { padding: 8px 8px; }
+      .formula-main { font-size: 14.5px; }
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "株のテクニカル分析はFXで使えるか｜板・出来高が無い分の読み替え方 | MoneyTools",
+  "description": "株のデイトレで覚えたテクニカル分析のうち、FXでそのまま使えるもの・使えないもの・読み替えが必要なものを整理します。FXに板と出来高が無い理由から解説します。",
+  "image": "https://yuta-tools.com/ogp.png",
+  "url": "https://yuta-tools.com/articles/stock-fx-technical/",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://yuta-tools.com/articles/stock-fx-technical/" },
+  "author": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "publisher": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "datePublished": "2026-08-11"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yuta-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "記事一覧", "item": "https://yuta-tools.com/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "株のテクニカル分析はFXで使えるか", "item": "https://yuta-tools.com/articles/stock-fx-technical/" }
+  ]
+}
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../">ホーム</a>
+      <a href="../../investment-sim/">積立投資</a>
+      <a href="../../position-calc/">ポジション計算</a>
+      <a href="../../oco-calc/">OCO計算</a>
+      <a href="../../profit-calc/">損益計算</a>
+      <a href="../../nanpin-calc/">ナンピン計算</a>
+      <a href="../../fx-calc/">FX計算</a>
+      <a href="../../ideco-calc/">iDeCo節税</a>
+      <a href="../../volume-calc/">出来高チェック</a>
+      <a href="../">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../">ホーム</a><span>/</span>
+  <a href="../">記事一覧</a><span>/</span>
+  <span>株のテクニカル分析はFXで使えるか</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">FX</span>
+    <span class="article-level">🔰 株経験者向け</span>
+    <span class="article-date">2026年8月</span>
+  </div>
+
+  <h1 class="article-title">株のテクニカル分析はFXで使えるか｜板・出来高が無い分の読み替え方</h1>
+
+  <p class="article-lead">
+    株のデイトレでテクニカル分析を覚えてからFXを始めると、<strong>一部の道具がそもそも存在しない</strong>ことに気づきます。板がない、出来高がない、寄り付きも引けもない。この記事では、株で覚えた知識を「そのまま使えるもの・使えないもの・読み替えが必要なもの」の3つに分けて整理します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#conclusion">結論：3つに分かれる</a></li>
+      <li><a href="#ng">使えないもの①：板・気配値</a></li>
+      <li><a href="#volume">使えないもの②：出来高</a></li>
+      <li><a href="#hours">使えないもの③：寄り付き・引け・窓</a></li>
+      <li><a href="#ok">そのまま使えるもの</a></li>
+      <li><a href="#convert">読み替えが必要なもの</a></li>
+      <li><a href="#alt">板と出来高の代わりに何を見るか</a></li>
+      <li><a href="#mistake">株経験者がやりがちな勘違い</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+<a href="../fx-basics/" class="related-article">
+  <div class="related-article-text">
+    <div class="related-article-label">関連記事</div>
+    <div class="related-article-title">FXとは？株との違いを初心者向けにわかりやすく解説</div>
+  </div>
+  <span class="related-article-arrow">›</span>
+</a>
+
+    <h2 id="conclusion">結論：3つに分かれる</h2>
+    <p>先に全体像を出します。株のデイトレで使う道具をFXに持ち込むと、こう分かれます。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="judge-table">
+      <tr><th>道具</th><th>FXでは</th><th>理由</th></tr>
+      <tr><td><a href="../support-resistance/">水平線（サポート・レジスタンス）</a></td><td class="ok">◎ 株以上に効く</td><td>キリ番に注文が溜まる</td></tr>
+      <tr><td><a href="../moving-average/">移動平均線</a></td><td class="ok">○ そのまま</td><td>価格だけで計算する指標</td></tr>
+      <tr><td><a href="../fibonacci/">フィボナッチ</a></td><td class="ok">○ そのまま</td><td>FXの方が使う人が多い</td></tr>
+      <tr><td><a href="../candlestick/">ローソク足</a></td><td class="ok">○ そのまま</td><td>価格だけで描ける</td></tr>
+      <tr><td><a href="../bollinger-band/">ボリンジャーバンド</a></td><td class="ok">○ そのまま</td><td>価格の標準偏差</td></tr>
+      <tr><td><a href="../rsi-macd/">RSI・MACD</a></td><td class="ok">○ そのまま</td><td>価格だけで計算する指標</td></tr>
+      <tr><td><a href="../volatility/">ボラティリティ</a></td><td class="mid">△ 読み替え</td><td>円 → pips。銘柄比較の部分は不要</td></tr>
+      <tr><td><a href="../stop-loss/">損切り幅</a></td><td class="mid">△ 読み替え</td><td>％や円 → pips</td></tr>
+      <tr><td><a href="../position-size/">ポジションサイズ</a></td><td class="mid">△ 読み替え</td><td>株数 → 通貨数</td></tr>
+      <tr><td><a href="../board-reading/">板・気配値</a></td><td class="ng">✗ 存在しない</td><td>取引所を通さないため</td></tr>
+      <tr><td><a href="../volume/">出来高</a></td><td class="ng">✗ 存在しない</td><td>集計する取引所がない</td></tr>
+      <tr><td><a href="../market-hours/">寄り付き・引け</a></td><td class="ng">✗ 存在しない</td><td>24時間動き続ける</td></tr>
+      <tr><td><a href="../gap-trading/">窓（ギャップ）</a></td><td class="ng">△ ほぼ無い</td><td>月曜早朝の週明けだけ</td></tr>
+      <tr><td><a href="../stock-selection/">銘柄選び</a></td><td class="ng">✗ 出番なし</td><td>通貨ペアは数種類</td></tr>
+    </table>
+    </div>
+
+    <p>ポイントは分かれ方に規則があることです。<strong>価格だけで計算できる道具は全部そのまま使えて、「取引所が集計した情報」を使う道具は全部使えません。</strong>この線引きを覚えておけば、新しい指標に出会ったときも自分で判断できます。</p>
+
+    <h2 id="ng">使えないもの①：板・気配値</h2>
+    <p>株の板は、取引所に集まった注文を価格ごとに並べたものです。「この価格に何株の買い注文が待っているか」が見えます。</p>
+
+    <p><strong>FXにはこれがありません。</strong>理由は取引の仕組みが違うからです。</p>
+
+    <div class="verdict-box">
+      <h4>なぜ板が無いのか</h4>
+      <p>国内のFX（SBI証券FXなど）は<strong>店頭取引</strong>と呼ばれる形式で、注文の相手は<strong>FX会社自身</strong>です。株のように全国の投資家の注文が1か所の取引所に集まる仕組みではありません。</p>
+      <p>集まる場所がないので、<strong>「市場全体の注文がどこに待っているか」を集計する主体が存在しません</strong>。したがって板は原理的に作れません。</p>
+    </div>
+
+    <p>FX会社が「板情報」に似た画面を出している場合もありますが、それは<strong>その会社の中の注文だけ</strong>で、市場全体ではありません。株の板と同じようには読めません。</p>
+
+    <p>例外として、東京金融取引所の<strong>「くりっく365」</strong>など取引所を通すFX（取引所FX）には板があります。ただし取り扱い会社が限られ、店頭取引が主流です。</p>
+
+    <p>したがって、板読みで培った「大口の壁を見る」「見せ板を見抜く」といった技術は、<strong>FXでは素直に諦めるのが正解</strong>です。代わりに何を見るかは<a href="#alt">後述</a>します。</p>
+
+    <h2 id="volume">使えないもの②：出来高</h2>
+    <p>出来高も同じ理由で存在しません。<strong>取引所がないので、何枚売買されたかを集計する場所がない</strong>のです。</p>
+
+    <p>ただし、ここが少し紛らわしいところで、<strong>FXのチャートにも「Volume」という項目が表示されます</strong>。これは出来高ではありません。</p>
+
+    <div class="verdict-box">
+      <h4>FXの「Volume」は出来高ではなくティック数</h4>
+      <p>表示されているのは<strong>ティックボリューム</strong>＝「その時間内に価格が何回更新されたか」の回数です。取引された量ではありません。</p>
+      <p>価格が活発に動いた時間帯は回数も増えるので<strong>「活発さの目安」としては使えます</strong>が、株の出来高のように「大量の買いが入った」と読むことはできません。しかも表示される数字はFX会社ごとに違います。</p>
+    </div>
+
+    <p>株の出来高は「参加者が増えた」「大口が入った」というサインとして使えますが、<strong>FXでは同じ読み方はできません</strong>。出来高を条件に入れた手法（出来高急増でブレイクを確認する、など）は、そのままでは持ち込めません。</p>
+
+    <h2 id="hours">使えないもの③：寄り付き・引け・窓</h2>
+    <p>日本株は9:00に始まり15:00に終わります。だから寄り付きと引けという特別な時間があり、その間の値動きに癖があります。</p>
+
+    <p><strong>FXは平日24時間動き続けるので、寄り付きも引けもありません。</strong></p>
+
+    <p>そして窓（ギャップ）もほぼ発生しません。株は毎日15時に閉まって翌朝9時に開くので、その間のニュースが窓になります。FXは連続して動いているため、<strong>窓が開くのは月曜早朝の週明けオープンだけ</strong>です。土曜朝から月曜朝まで約49時間閉まっているので、その間のニュースが窓になります。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 「指標発表で価格が飛ぶ」のは窓ではない</div>
+      経済指標の発表時に価格が一瞬で数十pips動くことがありますが、これは窓ではなく<strong>急激な値動きとスリッページ</strong>です。値は連続していて、単に速いだけです。窓（取引が無かった時間の空白）とは別の現象なので、窓を狙う手法は当てはまりません。
+    </div>
+
+    <h2 id="ok">そのまま使えるもの</h2>
+    <p>逆に、<strong>価格だけを材料にする道具は全部そのまま使えます</strong>。むしろFXの方が効くものもあります。</p>
+
+    <h3>水平線（サポート・レジスタンス）── 株以上に効く</h3>
+    <p>これが最も転用価値が高い道具です。理由は<strong>キリ番</strong>です。</p>
+
+    <p>ドル円なら <code>157.00</code> <code>157.50</code> <code>158.00</code> といった<strong>50銭・1円単位</strong>に注文が集中します。参加者の多くが同じキリの良い数字で損切りや利確を置くため、そこが実際に壁として機能します。</p>
+
+    <p>株の場合、銘柄ごとに価格帯がバラバラでキリ番の効き方も一定しません。<strong>FXは1つの通貨ペアを世界中が見ているので、節目の効き方が揃います。</strong>水平線の引き方は<a href="../support-resistance/">サポート・レジスタンスラインの引き方</a>がそのまま使えます。</p>
+
+    <h3>移動平均線・ボリンジャーバンド・RSI・MACD</h3>
+    <p>これらは全部「価格を計算式に入れて線を引く」だけなので、対象が株でも通貨でも同じです。設定期間もそのまま使えます。</p>
+
+    <p>特に<a href="../bollinger-band/">ボリンジャーバンド</a>の<strong>スクイーズ（帯が狭まる＝大きな動きの前兆）</strong>は、ブレイクを狙う手法と相性がよく、FXでもよく使われます。</p>
+
+    <h3>フィボナッチ・ローソク足</h3>
+    <p><a href="../fibonacci/">フィボナッチリトレースメント</a>は、むしろ<strong>FXの方が使う人が多い</strong>道具です。押し目の目安として38.2%・50%・61.8%が意識されます。</p>
+
+    <p><a href="../candlestick/">ローソク足</a>の形（ヒゲの長さ、包み足など）も価格だけで描けるので、読み方は同じです。</p>
+
+    <h2 id="convert">読み替えが必要なもの</h2>
+    <p>考え方は同じですが、単位の変換が必要なものです。</p>
+
+    <h3>値動きの大きさ：円 → pips</h3>
+    <p>株では「1日に何円動くか」を見ますが、FXでは<strong>pips</strong>で数えます。ドル円は<strong>1pips = 0.01円（1銭）</strong>です。</p>
+
+    <div class="formula-box">
+      <div class="formula-main">pips ＝ 値動き（円） × 100</div>
+      <div class="formula-note">例：0.25円（25銭）動いた ＝ 25pips</div>
+    </div>
+
+    <p><a href="../volatility/">株のボラティリティの調べ方</a>で解説した「1日に何円動くか」という考え方はそのまま有効です。ただし<strong>過去60日ボラティリティで銘柄を絞り込む部分は不要</strong>になります。通貨ペアは数種類しかなく、選ぶ作業がないからです。</p>
+
+    <p>代わりに見るのは、その通貨ペアの<strong>日中レンジ</strong>です。「1日にどれくらい動くか」がわかれば、利確目標が届く幅かどうかを判断できます。</p>
+
+    <h3>ポジションサイズ：株数 → 通貨数</h3>
+    <p><a href="../position-size/">ポジションサイズの考え方</a>（1回の損失を資金の何％までに抑えるか）は完全に同じです。計算式だけ変わります。</p>
+
+    <div class="formula-box">
+      <div class="formula-main">通貨数 ÷ 100 ＝ 1pipsあたりの損益（円）</div>
+      <div class="formula-note">例：4,000通貨なら1pips＝40円。25pipsの損切りで-1,000円</div>
+    </div>
+
+    <p>この換算は覚えておくと暗算できます。損切り幅から適正な通貨数を逆算する計算は、<a href="../../fx-calc/">FX計算ツール</a>で自動化しています。</p>
+
+    <a href="../../fx-calc/" class="tool-cta">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">無料ツール</div>
+        <div class="tool-cta-title">FX計算ツール</div>
+        <div class="tool-cta-sub">必要証拠金・1pipsあたりの損益・証拠金維持率・損切り幅から逆算した適正な取引数量を自動計算</div>
+      </div>
+      <div class="tool-cta-arrow">›</div>
+    </a>
+
+    <h3>時間帯：寄り付き・引け → 3つのセッション</h3>
+    <p>寄り引けの代わりに、FXでは<strong>どの国の市場が開いているか</strong>で時間帯の性格が変わります（日本時間・夏時間の目安）。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="judge-table">
+      <tr><th>時間帯</th><th>市場</th><th>性格</th></tr>
+      <tr><td>8:00〜15:00頃</td><td>東京</td><td>値動きが小さくレンジになりやすい</td></tr>
+      <tr><td>16:00〜翌1:00頃</td><td>ロンドン</td><td>参加者が増え、方向が出始める</td></tr>
+      <tr><td><strong>21:30〜翌6:00頃</strong></td><td><strong>ニューヨーク</strong></td><td><strong>最も動く。特にロンドンと重なる22:00〜24:00頃</strong></td></tr>
+    </table>
+    </div>
+
+    <p>株の「寄り付きは動く」に相当するのが、<strong>ロンドンとニューヨークが重なる時間帯</strong>です。会社員にとっては帰宅後にあたるので、都合が合うのはこの点です。時間帯ごとの癖という発想自体は<a href="../market-hours/">寄り付き・引けの記事</a>と同じ考え方です。</p>
+
+    <h2 id="alt">板と出来高の代わりに何を見るか</h2>
+    <p>使えない道具の代わりを探すのは自然ですが、<strong>完全な代替はありません</strong>。そのうえで実務的にはこう埋めます。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="judge-table">
+      <tr><th>株で見ていたもの</th><th>FXでの埋め方</th></tr>
+      <tr><td>板で「注文が待っている場所」を見る</td><td><strong>水平線＋キリ番で推測する</strong>。直近高値・安値・50銭刻みには損切り注文が溜まっている</td></tr>
+      <tr><td>出来高で「参加者の多さ」を見る</td><td><strong>時間帯で判断する</strong>。22:00〜24:00は参加者が多い時間と決まっている</td></tr>
+      <tr><td>出来高急増でブレイクを確認</td><td><strong>ボリンジャーバンドのスクイーズ→拡大</strong>や、レンジ幅の拡大で代用</td></tr>
+    </table>
+    </div>
+
+    <div class="verdict-box">
+      <h4>考え方の転換</h4>
+      <p>株は<strong>「誰がどこで待っているかを板で見る」</strong>ことができました。FXは見えないので、<strong>「どこで待っているはずかを価格から推測する」</strong>ことになります。</p>
+      <p>推測の材料は、直近の高値・安値と、キリの良い数字。この2つだけです。情報が減る代わりに、見るものがシンプルになります。</p>
+    </div>
+
+    <h2 id="mistake">株経験者がやりがちな勘違い</h2>
+
+    <h3>「出来高が無いなら騙しも無い」わけではない</h3>
+    <p>むしろFXの方がブレイクの騙しは頻繁です。キリ番に損切りが溜まっているため、そこを一度突いてから戻る動きが起きやすいからです。出来高で確認できない分、<strong>抜けた足が確定するまで待つ</strong>といった価格ベースの確認が必要になります。</p>
+
+    <h3>「24時間だからいつでも同じ」わけではない</h3>
+    <p>東京時間とニューヨーク時間では値動きの大きさが大きく違います。<strong>同じ手法でも時間帯を変えると結果が変わる</strong>ので、検証するときは時間帯を揃える必要があります。</p>
+
+    <h3>レバレッジの意味が違う</h3>
+    <p>株の<a href="../margin-trading/">信用取引</a>は最大約3.3倍ですが、FXは最大25倍です。同じ「レバレッジ」という言葉でもリスクの水準が違います。ここは読み替えではなく、<strong>別物として認識する</strong>必要があります。</p>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>分かれ方には規則がある。<strong>価格だけで計算できる道具は使えて、取引所が集計した情報を使う道具は使えない</strong>。</li>
+        <li><strong>使えない</strong>：板・気配値（店頭取引なので集計する場所がない）／出来高（同じ理由）／寄り付き・引け（24時間動く）／銘柄選び（通貨ペアは数種類）。</li>
+        <li>FXチャートの「Volume」は出来高ではなく<strong>ティック数</strong>（価格の更新回数）。活発さの目安にはなるが、株の出来高とは読み方が違う。</li>
+        <li>窓が開くのは<strong>月曜早朝の週明けだけ</strong>。指標発表時に価格が飛ぶのは窓ではなく急激な値動き。</li>
+        <li><strong>そのまま使える</strong>：水平線／移動平均線／フィボナッチ／ローソク足／ボリンジャーバンド／RSI・MACD。</li>
+        <li>水平線は<strong>株以上に効く</strong>。ドル円は50銭・1円のキリ番に世界中の注文が集中するため。</li>
+        <li><strong>読み替えが必要</strong>：値動きは円→pips（1pips＝0.01円）、ポジションサイズは株数→通貨数（<strong>通貨数÷100＝1pipsの損益</strong>）、時間帯は寄り引け→東京・ロンドン・ニューヨーク。</li>
+        <li>板の代わりは<strong>水平線＋キリ番で推測する</strong>。出来高の代わりは<strong>時間帯で判断する</strong>。完全な代替はない。</li>
+      </ul>
+    </div>
+
+    <p style="font-size:13px; color:var(--gray-500); margin-top:24px;">
+      ※ 取引時間・レバレッジ上限・取り扱い商品は証券会社や制度改正により変わります。実際の取引条件はご利用の会社の公式情報をご確認ください。本記事は特定の投資手法を推奨するものではありません。投資判断はご自身の責任でお願いします。
+    </p>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+            <li><a href="../../investment-sim/">積立投資シミュレーター</a></li>
+            <li><a href="../../position-calc/">ポジションサイズ計算ツール</a></li>
+            <li><a href="../../oco-calc/">OCO注文計算ツール</a></li>
+            <li><a href="../../profit-calc/">株式損益計算ツール</a></li>
+            <li><a href="../../nanpin-calc/">ナンピン計算ツール</a></li>
+            <li><a href="../../fx-calc/">FX計算ツール</a></li>
+            <li><a href="../../ideco-calc/">iDeCo節税額シミュレーター</a></li>
+            <li><a href="../../volume-calc/">出来高・売買代金チェック</a></li>
+          </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本サイトの情報は投資判断の参考であり、投資成果を保証するものではありません。FXはレバレッジにより元本を超える損失が生じる可能性があります。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>
