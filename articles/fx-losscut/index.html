@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://yuta-tools.com/articles/fx-losscut/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FXの強制ロスカットは何円で発動するか｜証拠金維持率の計算とマージンコール・追証の違い | MoneyTools</title>
+  <meta name="description" content="FXの強制ロスカットが発動する水準を、証拠金維持率の計算式から具体的な円・pipsに直して解説します。レバレッジ25倍での必要証拠金の出し方、維持率100%とロスカット水準の違い、マージンコールと追証の仕組み、実際に維持率125.7%まで落としたときの残り距離まで数字で確認します。">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:title" content="FXの強制ロスカットは何円で発動するか｜証拠金維持率の計算とマージンコール・追証の違い | MoneyTools">
+  <meta property="og:description" content="FXの強制ロスカットが発動する水準を、証拠金維持率の計算式から具体的な円・pipsに直して解説します。維持率100%はロスカット水準ではありません。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yuta-tools.com/articles/fx-losscut/">
+  <meta property="og:image" content="https://yuta-tools.com/ogp.png">
+  <meta property="og:site_name" content="MoneyTools">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FXの強制ロスカットは何円で発動するか｜証拠金維持率の計算とマージンコール・追証の違い | MoneyTools">
+  <meta name="twitter:description" content="強制ロスカットが発動する水準を、証拠金維持率の計算式から具体的な円・pipsに直して解説します。維持率100%はロスカット水準ではありません。">
+  <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .formula-box {
+      background: var(--gray-50);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      margin: 18px 0;
+      border-radius: 0 10px 10px 0;
+    }
+    .formula-main { font-size: 16px; font-weight: 800; color: var(--gray-900); line-height: 1.7; margin-bottom: 6px; }
+    .formula-note { font-size: 12.5px; color: var(--gray-600); line-height: 1.7; }
+
+    /* 維持率の階段 */
+    .level-ladder { margin: 20px 0; }
+    .level-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .level-row:last-child { margin-bottom: 0; }
+    .level-pct {
+      font-size: 17px;
+      font-weight: 900;
+      min-width: 74px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .level-row.safe   { background: #ecfdf5; color: #065f46; }
+    .level-row.watch  { background: var(--primary-light); color: var(--primary-dark); }
+    .level-row.warn   { background: #fef3c7; color: #92400e; }
+    .level-row.danger { background: #fef2f2; color: #991b1b; }
+
+    .verdict-box {
+      background: #eff6ff;
+      border: 2px solid var(--primary);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin: 20px 0;
+    }
+    .verdict-box h4 { font-size: 15px; font-weight: 800; color: var(--primary); margin: 0 0 12px; }
+    .verdict-box p { margin: 0 0 10px; font-size: 14px; color: var(--gray-700); line-height: 1.8; }
+    .verdict-box p:last-child { margin-bottom: 0; }
+
+    .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+    @media (max-width: 640px) {
+      .formula-main { font-size: 14.5px; }
+      .level-row { font-size: 13px; padding: 10px 12px; gap: 10px; }
+      .level-pct { font-size: 15px; min-width: 60px; }
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "FXの強制ロスカットは何円で発動するか｜証拠金維持率の計算とマージンコール・追証の違い | MoneyTools",
+  "description": "FXの強制ロスカットが発動する水準を、証拠金維持率の計算式から具体的な円・pipsに直して解説します。維持率100%はロスカット水準ではありません。",
+  "image": "https://yuta-tools.com/ogp.png",
+  "url": "https://yuta-tools.com/articles/fx-losscut/",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://yuta-tools.com/articles/fx-losscut/" },
+  "author": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "publisher": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "datePublished": "2026-08-13"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yuta-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "記事一覧", "item": "https://yuta-tools.com/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "FXの強制ロスカットは何円で発動するか", "item": "https://yuta-tools.com/articles/fx-losscut/" }
+  ]
+}
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../">ホーム</a>
+      <a href="../../investment-sim/">積立投資</a>
+      <a href="../../position-calc/">ポジション計算</a>
+      <a href="../../oco-calc/">OCO計算</a>
+      <a href="../../profit-calc/">損益計算</a>
+      <a href="../../nanpin-calc/">ナンピン計算</a>
+      <a href="../../fx-calc/">FX計算</a>
+      <a href="../../ideco-calc/">iDeCo節税</a>
+      <a href="../../volume-calc/">出来高チェック</a>
+      <a href="../">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../">ホーム</a><span>/</span>
+  <a href="../">記事一覧</a><span>/</span>
+  <span>FXの強制ロスカットは何円で発動するか</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">FX</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年8月</span>
+  </div>
+
+  <h1 class="article-title">FXの強制ロスカットは何円で発動するか｜証拠金維持率の計算とマージンコール・追証の違い</h1>
+
+  <p class="article-lead">
+    FXを始めると必ず出てくる「強制ロスカット」。<strong>怖い名前のわりに、発動する場所は計算で正確に出せます</strong>。この記事では、証拠金維持率の計算式から「あと何円逆行したらロスカットされるのか」を具体的な数字に直します。あわせて、初心者がいちばん混同しやすい<strong>「維持率100%」と「ロスカット水準」の違い</strong>、マージンコールと追証の仕組みも整理します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#conclusion">結論：ロスカットは100%では発動しない</a></li>
+      <li><a href="#formula">証拠金維持率の計算式</a></li>
+      <li><a href="#ladder">維持率の階段：どこで何が起きるか</a></li>
+      <li><a href="#distance">あと何円でロスカットされるのか</a></li>
+      <li><a href="#case">実例：維持率125.7%まで落としたとき</a></li>
+      <li><a href="#margincall">マージンコールと追証の違い</a></li>
+      <li><a href="#zerocut">ロスカットされても借金は残りうる</a></li>
+      <li><a href="#reality">実は、ロスカットは現実的な脅威ではない</a></li>
+      <li><a href="#why">では維持率は何のために見るのか</a></li>
+      <li><a href="#practice">ロスカットされないための3つ</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+<a href="../fx-basics/" class="related-article">
+  <div class="related-article-text">
+    <div class="related-article-label">関連記事</div>
+    <div class="related-article-title">FXとは？株との違いを初心者向けにわかりやすく解説</div>
+  </div>
+  <span class="related-article-arrow">›</span>
+</a>
+
+    <h2 id="conclusion">結論：ロスカットは100%では発動しない</h2>
+
+    <p>先に結論から書きます。</p>
+
+    <div class="verdict-box">
+      <h4>この記事の要点</h4>
+      <p><strong>①強制ロスカットの水準は「維持率100%」ではない。</strong>多くの国内業者は<strong>50%〜100%</strong>のあいだに設定していて、業者ごとに違います。100%を割った瞬間に決済されると思っていると、危険度を実際より大げさに見積もることになります。</p>
+      <p><strong>②ロスカットまでの距離は計算で出せる。</strong>「あと何円」「あと何pips」という形で事前に分かります。感覚で怖がる必要はありません。</p>
+      <p><strong>③そして実際には、ロスカットまでの距離はかなり遠い。</strong>資金を減らしているのは強制ロスカットではなく、たいていの場合<strong>自分で置いた損切り</strong>のほうです。</p>
+    </div>
+
+    <p>順番に確認していきます。</p>
+
+    <h2 id="formula">証拠金維持率の計算式</h2>
+
+    <p>まず土台になる2つの式です。国内FXの個人口座は<strong>レバレッジ25倍が上限</strong>なので、必要証拠金は取引金額の25分の1になります。</p>
+
+    <div class="formula-box">
+      <div class="formula-main">必要証拠金 ＝ 通貨数 × 為替レート ÷ 25</div>
+      <div class="formula-note">例：ドル円157円で4,000通貨 → 4,000 × 157 ÷ 25 ＝ <span class="num">25,120円</span></div>
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-main">証拠金維持率 ＝ 有効証拠金 ÷ 必要証拠金 × 100</div>
+      <div class="formula-note">有効証拠金 ＝ 口座の預り金 ± 保有ポジションの含み損益。<strong>含み損が増えると分子が減る</strong>ので、維持率は下がります。</div>
+    </div>
+
+    <p>ここで大事なのは、<strong>含み損は「有効証拠金」を減らすだけでなく、為替レートが動けば「必要証拠金」も同時に変える</strong>という点です。ドル円を売っていて価格が上がっていくと、分子は減り、分母は増えます。維持率は思ったより速く落ちます。</p>
+
+    <div class="callout info">
+      <div class="callout-title">用語の呼び方は業者によって違う</div>
+      有効証拠金は「実質保証金」「純資産」「有効証拠金額」など、業者ごとに呼び名が変わります。<strong>必要証拠金に対する余力の割合</strong>を見ているという中身は同じです。
+    </div>
+
+    <a href="../../fx-calc/" class="tool-cta">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">無料ツール</div>
+        <div class="tool-cta-title">FX計算ツール</div>
+        <div class="tool-cta-sub">必要証拠金・1pipsあたりの損益・証拠金維持率・損切り幅から逆算した適正な取引数量を自動計算</div>
+      </div>
+      <div class="tool-cta-arrow">›</div>
+    </a>
+
+    <h2 id="ladder">維持率の階段：どこで何が起きるか</h2>
+
+    <p>維持率が下がっていくと、段階的にイベントが起きます。以下は<strong>SBI証券のFX口座の場合</strong>（2026年8月時点で公式のロスカット率ページを確認）です。</p>
+
+    <div class="level-ladder">
+      <div class="level-row safe">
+        <div class="level-pct">300%〜</div>
+        <div>余裕がある状態。多くの解説書が「初心者はここを目安に」と書く水準</div>
+      </div>
+      <div class="level-row watch">
+        <div class="level-pct">100%</div>
+        <div><strong>ここでは何も起きない。</strong>有効証拠金と必要証拠金がちょうど同額になっただけ</div>
+      </div>
+      <div class="level-row warn">
+        <div class="level-pct">70%</div>
+        <div><strong>マージンコール。</strong>追加入金またはポジションの決済を促す警告が届く</div>
+      </div>
+      <div class="level-row danger">
+        <div class="level-pct">50%</div>
+        <div><strong>強制ロスカット。全ポジションが自動的に決済される</strong></div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">必ず自分の口座で確認すること</div>
+      ロスカット水準は<strong>業者ごとに違います</strong>。50%の業者もあれば100%の業者もあり、コース選択で変えられる業者もあります。SBI証券のFX口座では<strong>個人はロスカット率を変更できません（50%固定）</strong>。まず自分の口座の数字を確認してください。この記事の以降の計算はすべて<strong>ロスカット50%</strong>を前提にしています。
+    </div>
+
+    <h2 id="distance">あと何円でロスカットされるのか</h2>
+
+    <p>いちばん知りたいのはここだと思います。<strong>口座5万円・ドル円157円・ロスカット50%</strong>で、通貨数ごとに計算しました。ポジションを持った直後の維持率と、そこから逆行してロスカットされるまでの距離です。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>通貨数</th><th>必要証拠金</th><th>建てた直後の維持率</th><th>ロスカットまで</th></tr>
+      <tr><td>1,000通貨</td><td class="num">6,280円</td><td class="num">796%</td><td class="num tag-good">45.9円（4,594pips）</td></tr>
+      <tr><td>2,000通貨</td><td class="num">12,560円</td><td class="num">398%</td><td class="num tag-good">21.4円（2,143pips）</td></tr>
+      <tr><td>2,500通貨</td><td class="num">15,700円</td><td class="num">319%</td><td class="num tag-good">16.5円（1,653pips）</td></tr>
+      <tr><td>4,000通貨</td><td class="num">25,120円</td><td class="num">199%</td><td class="num">9.2円（918pips）</td></tr>
+      <tr><td>5,000通貨</td><td class="num">31,400円</td><td class="num">159%</td><td class="num">6.7円（673pips）</td></tr>
+      <tr><td>8,000通貨</td><td class="num">50,240円</td><td class="num">99%</td><td class="num tag-bad">3.1円（305pips）</td></tr>
+    </table>
+    </div>
+
+    <p>この表の読み方でいちばん重要なのは、<strong>いちばん下の行でも「あと3円」ある</strong>という点です。口座資金の全額を証拠金として使い切る（維持率99%）ような無茶なサイズでさえ、ロスカットまでは305pips離れています。</p>
+
+    <p>ドル円の1日の値幅は、実データで<strong>中央値96pips・平均120pips</strong>程度です（<a href="../volatility/">ボラティリティの記事</a>で詳しく扱っています）。つまり、常識的なサイズであれば<strong>ロスカットは1日の値動きで届く距離にはありません</strong>。</p>
+
+    <h2 id="case">実例：維持率125.7%まで落としたとき</h2>
+
+    <p>実際に維持率を落としたときの数字を出します。<a href="../fx-record-2/">FX実践記録②</a>で書いた期間の、2026年8月4日の話です。</p>
+
+    <div class="example-box">
+      <div class="example-box-title">2026年8月4日 朝5時30分時点</div>
+      <p>・ポジション：ドル円 <strong>売5,000通貨</strong>（深夜0時に建てて、逆指値を入れずに寝た）</p>
+      <p>・含み損：<span class="num">-5,180円</span>まで拡大</p>
+      <p>・有効証拠金 <span class="num">39,649円</span> ÷ 必要証拠金 <span class="num">31,545円</span> ＝ <strong>維持率125.7%</strong></p>
+    </div>
+
+    <p>当時これを見て「もうロスカット寸前だ」と思いました。<strong>100%を割ったら強制決済されると勘違いしていたから</strong>です。実際に計算するとこうなります。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>到達点</th><th>そこまでの逆行幅</th><th>何が起きるか</th></tr>
+      <tr><td>維持率100%</td><td class="num">1.56円（156pips）</td><td><strong>何も起きない</strong></td></tr>
+      <tr><td>維持率70%</td><td class="num">3.42円（342pips）</td><td>マージンコール（警告）</td></tr>
+      <tr><td><strong>維持率50%</strong></td><td class="num">4.68円（468pips）</td><td class="tag-bad"><strong>強制ロスカット</strong></td></tr>
+    </table>
+    </div>
+
+    <p>この期間に実際に動いたのは<strong>1.04円</strong>でした。体感では「危なかった」ですが、強制決済までは<strong>4.5倍の距離</strong>が残っていたことになります。</p>
+
+    <div class="callout bad">
+      <div class="callout-title">それでも、これは危ない状態だった</div>
+      距離があったから安全だった、という話ではありません。このポジションは最終的に<strong>-4,484円</strong>で決済しています。<a href="../stop-loss/">逆指値</a>を入れずに寝たせいで、<strong>損失の大きさを自分で決められない状態を46時間続けた</strong>のが問題でした。危険なのはロットの大きさそのものではなく、<strong>「大きいまま放置する」という組み合わせ</strong>です。
+    </div>
+
+    <h2 id="margincall">マージンコールと追証の違い</h2>
+
+    <p>この2つは混同されがちですが、別のものです。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th></th><th>マージンコール</th><th>追証（追加証拠金）</th></tr>
+      <tr><td>タイミング</td><td>維持率が警告水準を割ったとき（リアルタイム）</td><td>判定時刻に不足が確定したとき（多くは日次）</td></tr>
+      <tr><td>中身</td><td><strong>お知らせ</strong>。入金か決済を促される</td><td><strong>入金義務</strong>。期限までに入れないと強制決済される</td></tr>
+      <tr><td>放置すると</td><td>維持率がさらに下がればロスカット</td><td>期限到来で全ポジション強制決済</td></tr>
+      <tr><td>制度の有無</td><td>ほぼすべての業者にある</td><td><strong>業者による</strong>。ロスカットのみで追証制度を持たない業者もある</td></tr>
+    </table>
+    </div>
+
+    <p>デイトレのようにその日のうちに決済するスタイルであれば、実務上ぶつかるのは<strong>マージンコールとロスカットのほう</strong>です。追証はポジションを持ち越したときに関係してきます。</p>
+
+    <h2 id="zerocut">ロスカットされても借金は残りうる</h2>
+
+    <p>ここは誤解が多いところなので、はっきり書きます。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">国内業者は「追証なし」を保証していない</div>
+      海外業者が宣伝する「ゼロカット」（口座残高を超える損失を業者が負担する仕組み）は、<strong>国内の金融庁登録業者では提供されていません</strong>。相場が飛んでロスカットが間に合わなかった場合、<strong>口座残高を超えたマイナス分は利用者に請求されます</strong>。
+    </div>
+
+    <p>実際に問題になるのは、<strong>週明けの窓開け</strong>と<strong>重要指標の発表直後</strong>です。価格が飛ぶとロスカット注文が意図した水準で約定せず、はるかに悪い価格で決済されることがあります。これが「ロスカットがあるから最悪でも口座がゼロになるだけ」という理解が成立しない理由です。</p>
+
+    <p>ポジションを週末や指標をまたいで持ち越すときだけは、<strong>ロスカットを最後の砦として当てにしない</strong>方がいい、ということになります。</p>
+
+    <h2 id="reality">実は、ロスカットは現実的な脅威ではない</h2>
+
+    <p>ここまでの数字を並べると、当初の警戒が見当違いだったことが分かります。実際の取引記録78件を集計した結果はこうでした。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th></th><th>距離・金額</th></tr>
+      <tr><td>4,000通貨でのロスカットまでの距離</td><td class="num">918pips</td></tr>
+      <tr><td>1か月で実際に動いた値幅</td><td class="num">400pips</td></tr>
+      <tr><td>最大の負けトレード1件</td><td class="num">-2,641円（約66pips）</td></tr>
+      <tr><td>78件の合計</td><td class="num tag-bad">-11,118円（-152.3pips）</td></tr>
+    </table>
+    </div>
+
+    <p>最大の負けでも66pips。ロスカットまでの距離の<strong>14分の1</strong>です。そして78件の合計損失<span class="num">-11,118円</span>のうち、<strong>-30pipsを超えた大きな負け5件だけで-13,157円</strong>を占めていました。残り73件は合計でプラスです。</p>
+
+    <div class="verdict-box">
+      <h4>結論</h4>
+      <p>口座を減らしていたのは<strong>強制ロスカットではなく、自分の裁量で置いた（あるいは置かなかった）損切り</strong>でした。</p>
+      <p>ロスカットを警戒して小さく張ること自体は間違いではありません。ただ、<strong>警戒する場所が1つずれていた</strong>ということです。見るべきは業者が決済してくる水準ではなく、<strong>自分がどこで損切りを置き、それを実際に執行できているか</strong>でした。</p>
+    </div>
+
+    <h2 id="why">では維持率は何のために見るのか</h2>
+
+    <p>「ロスカットが遠いなら維持率は無視していいのか」というと、そうではありません。<strong>目的が違います</strong>。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th></th><th>誤った目的</th><th>本当の目的</th></tr>
+      <tr><td>維持率300%を保つ</td><td>ロスカットを避けるため</td><td><strong>1回の損失額を資金の2%以内に収めるため</strong></td></tr>
+    </table>
+    </div>
+
+    <p>具体的に見ます。資金5万円で4,000通貨を持つと、<strong>1pips＝40円</strong>です（覚え方：<strong>通貨数 ÷ 100 ＝ 1pipsあたりの損益</strong>）。ここで25pipsの損切りを置くと<span class="num">-1,000円</span>、資金の<strong>2.5%</strong>になります。<a href="../position-size/">資金管理の2%ルール</a>を超えています。</p>
+
+    <p>つまり<strong>維持率が薄いということは、1回の損切りが資金に対して重すぎるということ</strong>です。ロスカットまでの距離ではなく、こちらが本当の制約になります。</p>
+
+    <div class="formula-box">
+      <div class="formula-main">通貨数 ＝ 資金 × 2% ÷ 損切り幅(pips) × 100</div>
+      <div class="formula-note">例：資金5万円・損切り25pips → 50,000 × 0.02 ÷ 25 × 100 ＝ <span class="num">4,000通貨</span>…ではなく、1,000円 ÷ (25 × 0.01円) ＝ <strong>4,000通貨</strong>。この式で出した数量なら、維持率は自動的に必要な水準に収まります。</div>
+    </div>
+
+    <a href="../../fx-calc/" class="tool-cta">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">無料ツール</div>
+        <div class="tool-cta-title">FX計算ツール</div>
+        <div class="tool-cta-sub">損切り幅と許容リスクを入れると適正な取引数量を逆算。必要証拠金と証拠金維持率も同時に表示します</div>
+      </div>
+      <div class="tool-cta-arrow">›</div>
+    </a>
+
+    <h2 id="practice">ロスカットされないための3つ</h2>
+
+    <h3>① 建てる前に必要証拠金を計算する</h3>
+    <p>「口座の何割を1つのポジションで拘束するか」を先に知っておくことです。資金5万円で4,000通貨なら必要証拠金は<span class="num">25,120円</span>＝<strong>口座の約半分</strong>を1ポジションで使います。この状態で2つ目を建てれば、維持率は単純に半分になります。</p>
+
+    <div class="callout info">
+      <div class="callout-title">同時に持つポジション数も維持率で決まる</div>
+      維持率200%のポジションを2つ持てば維持率は約100%、3つ持てば約67%でマージンコール圏です。<strong>1ポジションあたりの維持率 ÷ ポジション数</strong>がおおよその実際の維持率になります。
+    </div>
+
+    <h3>② 逆指値を必ず置く（これが本丸）</h3>
+    <p>ロスカットは「業者が決めた場所での決済」です。<a href="../stop-loss/">逆指値</a>は「自分が決めた場所での決済」です。<strong>自分で決めた場所のほうが必ず手前にある</strong>ので、逆指値が機能している限りロスカットには到達しません。前述の8月4日の失敗は、この逆指値を置かずに寝たことが原因でした。</p>
+
+    <h3>③ 持ち越すときはサイズを落とす</h3>
+    <p>デイトレのように監視できる時間帯と、寝ているあいだや週末では、同じサイズでも意味が違います。<strong>見ていない時間は逆指値以外に防御手段がない</strong>ので、飛ぶリスクのある局面（週末・指標）はサイズを落とすか、そもそも持ち越さない方が安全です。</p>
+
+    <div class="callout good">
+      <div class="callout-title">株の信用取引との違い</div>
+      株の<a href="../margin-trading/">信用取引</a>もレバレッジは最大約3.3倍で、追証の仕組みがあります。FXは<strong>25倍</strong>なので、同じ「維持率」という言葉でも動く速度がまったく違います。株の感覚をそのまま持ち込まないことが大切です（<a href="../stock-fx-technical/">株のテクニカル分析はFXで使えるか</a>でも触れています）。
+    </div>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li><strong>維持率100%はロスカット水準ではない</strong>。有効証拠金と必要証拠金が同額になっただけで、何も起きない。</li>
+        <li>ロスカット水準は<strong>業者ごとに違う</strong>（50%〜100%が中心）。SBI証券のFX口座は<strong>50%固定で個人は変更できない</strong>（2026年8月時点）。まず自分の口座で確認する。</li>
+        <li>計算式は2つだけ。<strong>必要証拠金＝通貨数×レート÷25</strong>、<strong>維持率＝有効証拠金÷必要証拠金×100</strong>。</li>
+        <li>ロスカットまでの距離は事前に計算できる。口座5万円・ドル円157円なら、<strong>4,000通貨で918pips、5,000通貨でも673pips</strong>離れている。</li>
+        <li>ドル円の1日の値幅は<strong>中央値96pips</strong>。常識的なサイズなら、ロスカットは1日の値動きで届く距離にはない。</li>
+        <li>実例では維持率125.7%まで落ちたが、強制ロスカットまでは<strong>まだ4.68円（468pips）</strong>あった。「100%でロスカット」という勘違いが、危険度の見積もりを狂わせていた。</li>
+        <li><strong>マージンコールは警告、追証は入金義務</strong>。追証制度の有無は業者による。</li>
+        <li>国内業者は<strong>ゼロカットを提供していない</strong>。窓開けや指標でロスカットが間に合わなければ、口座残高を超える損失は請求される。</li>
+        <li>78件の記録では、資金を減らしていたのは<strong>強制ロスカットではなく自分の損切り</strong>だった。最大の負けでも66pipsで、ロスカット距離の14分の1。</li>
+        <li>維持率を高く保つ目的は、ロスカット回避ではなく<strong>1回の損失額を資金の2%以内に収めること</strong>。</li>
+        <li>実務でやることは3つ。<strong>建てる前に必要証拠金を計算する／逆指値を必ず置く／持ち越すときはサイズを落とす</strong>。</li>
+      </ul>
+    </div>
+
+    <a href="../fx-record-2/" class="related-article">
+      <div class="related-article-text">
+        <div class="related-article-label">関連記事</div>
+        <div class="related-article-title">FX実践記録②｜78回中5回のミスで-11,118円になった話</div>
+      </div>
+      <span class="related-article-arrow">›</span>
+    </a>
+
+    <p style="font-size:13px; color:var(--gray-500); margin-top:24px;">
+      ※ ロスカット水準・マージンコール水準・追証制度・レバレッジ上限は、証券会社や制度改正により変わります。本記事に記載した具体的な水準は2026年8月時点で確認したものです。実際の取引条件は必ずご利用の会社の公式情報をご確認ください。本記事は特定の投資手法を推奨するものではありません。投資判断はご自身の責任でお願いします。
+    </p>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+            <li><a href="../../investment-sim/">積立投資シミュレーター</a></li>
+            <li><a href="../../position-calc/">ポジションサイズ計算ツール</a></li>
+            <li><a href="../../oco-calc/">OCO注文計算ツール</a></li>
+            <li><a href="../../profit-calc/">株式損益計算ツール</a></li>
+            <li><a href="../../nanpin-calc/">ナンピン計算ツール</a></li>
+            <li><a href="../../fx-calc/">FX計算ツール</a></li>
+            <li><a href="../../ideco-calc/">iDeCo節税額シミュレーター</a></li>
+            <li><a href="../../volume-calc/">出来高・売買代金チェック</a></li>
+          </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本サイトの情報は投資判断の参考であり、投資成果を保証するものではありません。FXはレバレッジにより元本を超える損失が生じる可能性があります。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>
