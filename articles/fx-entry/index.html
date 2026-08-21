@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://yuta-tools.com/articles/fx-entry/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FXのエントリーの決め方｜78トレードで唯一プラスだった条件と入る前に決める3つ | MoneyTools</title>
+  <meta name="description" content="FXでどこからエントリーするかを実データで解説。78トレードの時間帯別集計では22〜24時に入って0時までに閉じた28回だけが勝率85.7%・+3,358円でした。水平線とキリ番という2つの根拠、損切り→通貨数→利確という決める順番、エントリーと同時にOCO注文を置く理由までまとめます。">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:title" content="FXのエントリーの決め方｜78トレードで唯一プラスだった条件と入る前に決める3つ | MoneyTools">
+  <meta property="og:description" content="78トレードの集計で明確にプラスだったのは、22〜24時に入って0時までに閉じた28回だけでした。エントリーは「場所」より「入る前に決めること」で決まります。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yuta-tools.com/articles/fx-entry/">
+  <meta property="og:image" content="https://yuta-tools.com/ogp.png">
+  <meta property="og:site_name" content="MoneyTools">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FXのエントリーの決め方｜78トレードで唯一プラスだった条件と入る前に決める3つ | MoneyTools">
+  <meta name="twitter:description" content="78トレードの集計で明確にプラスだったのは、22〜24時に入って0時までに閉じた28回だけでした。エントリーは「場所」より「入る前に決めること」で決まります。">
+  <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .verdict-box {
+      background: #eff6ff;
+      border: 2px solid var(--primary);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin: 20px 0;
+    }
+    .verdict-box h4 { font-size: 15px; font-weight: 800; color: var(--primary); margin: 0 0 12px; }
+    .verdict-box p { margin: 0 0 10px; font-size: 14px; color: var(--gray-700); line-height: 1.8; }
+    .verdict-box p:last-child { margin-bottom: 0; }
+
+    .judge-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      margin: 18px 0;
+    }
+    .judge-table th {
+      background: var(--primary);
+      color: var(--white);
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+    }
+    .judge-table th:first-child { border-radius: 8px 0 0 0; }
+    .judge-table th:last-child  { border-radius: 0 8px 0 0; }
+    .judge-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+      vertical-align: middle;
+    }
+    .judge-table tr:last-child td { border-bottom: none; }
+    .judge-table tr:nth-child(even) td { background: var(--gray-50); }
+    .ok { color: var(--success); font-weight: 800; white-space: nowrap; }
+    .ng { color: var(--danger);  font-weight: 800; white-space: nowrap; }
+    .mid{ color: #b45309;        font-weight: 800; white-space: nowrap; }
+
+    .formula-box {
+      background: var(--gray-50);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      margin: 18px 0;
+      border-radius: 0 10px 10px 0;
+    }
+    .formula-main { font-size: 16px; font-weight: 800; color: var(--gray-900); line-height: 1.7; margin-bottom: 6px; }
+    .formula-note { font-size: 12.5px; color: var(--gray-600); line-height: 1.7; }
+
+    /* エントリー前の3ステップ */
+    .step-list { margin: 20px 0; counter-reset: step; }
+    .step-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--gray-50);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 10px;
+    }
+    .step-item:last-child { margin-bottom: 0; }
+    .step-num {
+      flex: 0 0 30px;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step-body h4 { font-size: 15px; font-weight: 800; color: var(--gray-900); margin: 3px 0 6px; }
+    .step-body p { font-size: 13.5px; color: var(--gray-700); line-height: 1.8; margin: 0 0 6px; }
+    .step-body p:last-child { margin-bottom: 0; }
+
+    .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+    @media (max-width: 640px) {
+      .judge-table { font-size: 12.5px; }
+      .judge-table th, .judge-table td { padding: 8px 8px; }
+      .formula-main { font-size: 14.5px; }
+      .step-item { padding: 14px; gap: 11px; }
+      .step-num { flex-basis: 26px; width: 26px; height: 26px; font-size: 13px; }
+      .step-body h4 { font-size: 14px; }
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "FXのエントリーの決め方｜78トレードで唯一プラスだった条件と入る前に決める3つ | MoneyTools",
+  "description": "78トレードの集計で明確にプラスだったのは、22〜24時に入って0時までに閉じた28回だけでした。エントリーは「場所」より「入る前に決めること」で決まります。",
+  "image": "https://yuta-tools.com/ogp.png",
+  "url": "https://yuta-tools.com/articles/fx-entry/",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://yuta-tools.com/articles/fx-entry/" },
+  "author": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "publisher": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "datePublished": "2026-08-15"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yuta-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "記事一覧", "item": "https://yuta-tools.com/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "FXのエントリーの決め方", "item": "https://yuta-tools.com/articles/fx-entry/" }
+  ]
+}
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../">ホーム</a>
+      <a href="../../investment-sim/">積立投資</a>
+      <a href="../../position-calc/">ポジション計算</a>
+      <a href="../../oco-calc/">OCO計算</a>
+      <a href="../../profit-calc/">損益計算</a>
+      <a href="../../nanpin-calc/">ナンピン計算</a>
+      <a href="../../fx-calc/">FX計算</a>
+      <a href="../../ideco-calc/">iDeCo節税</a>
+      <a href="../../volume-calc/">出来高チェック</a>
+      <a href="../">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../">ホーム</a><span>/</span>
+  <a href="../">記事一覧</a><span>/</span>
+  <span>FXのエントリーの決め方</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">FX</span>
+    <span class="article-level">🔰 初心者向け</span>
+    <span class="article-date">2026年8月</span>
+  </div>
+
+  <h1 class="article-title">FXのエントリーの決め方｜78トレードで唯一プラスだった条件と入る前に決める3つ</h1>
+
+  <p class="article-lead">
+    「どこで入ればいいのか」はFXで最初に詰まるところです。ただ、<strong>自分の78トレードを集計して分かったのは、勝ち負けを分けていたのがチャート上の場所ではなかった</strong>ということでした。明確にプラスだったのは<strong>ある時間帯に入って、その日のうちに閉じた28回だけ</strong>です。この記事では、実データで残った条件と、エントリーボタンを押す前に決めておく3つを順番に整理します。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#conclusion">結論：入る場所より「入る前に決めること」</a></li>
+      <li><a href="#timing">実データ：唯一プラスだった時間帯</a></li>
+      <li><a href="#why-night">なぜ22〜24時なのか</a></li>
+      <li><a href="#where">どこで入るか：根拠は2つだけ</a></li>
+      <li><a href="#before">入る前に決める3つ（順番が決まっている）</a></li>
+      <li><a href="#order">エントリーと同時に注文を置く</a></li>
+      <li><a href="#ng">入ってはいけない5つの場面</a></li>
+      <li><a href="#mode">日中モードと夜モード</a></li>
+      <li><a href="#measure">エントリーの質は損益では測れない</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <div class="article-body">
+
+<a href="../stock-fx-technical/" class="related-article">
+  <div class="related-article-text">
+    <div class="related-article-label">関連記事</div>
+    <div class="related-article-title">株のテクニカル分析はFXで使えるか｜板・出来高が無い分の読み替え方</div>
+  </div>
+  <span class="related-article-arrow">›</span>
+</a>
+
+    <h2 id="conclusion">結論：入る場所より「入る前に決めること」</h2>
+
+    <p>先に結論を書きます。</p>
+
+    <div class="verdict-box">
+      <h4>この記事の要点</h4>
+      <p><strong>①エントリーの精度を上げても損益はほとんど動かない。</strong>78トレードのうち損失の全額は5回から出ていて、その5回に共通していたのは「エントリーが下手だったこと」ではなく<strong>逆指値を置いていなかったこと</strong>でした。</p>
+      <p><strong>②実データで残った条件は、場所ではなく時間帯だった。</strong>22〜24時に入って0時までに閉じた28回だけが勝率85.7%・<span class="num">+3,358円</span>。それ以外の50回は勝率52.0%・<span class="num">-14,476円</span>です。</p>
+      <p><strong>③入る前に決める順番は、損切り→通貨数→利確。</strong>この順で決めると、ロットが自動的に決まります。逆にエントリー価格から考え始めると、必ずロットが大きくなります。</p>
+    </div>
+
+    <p>「エントリーポイントの見つけ方」を期待して来た方には、拍子抜けする結論かもしれません。ただ、実際に自分の取引記録を数えてみると、こうなりました。順番に見ていきます。</p>
+
+    <h2 id="timing">実データ：唯一プラスだった時間帯</h2>
+
+    <p><a href="../fx-record-2/">FX実践記録②</a>で、累計78トレードを時間帯別に集計しました。1つだけ明確にプラスの領域があります。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>区分</th><th>件数</th><th>勝率</th><th>合計</th></tr>
+      <tr><td><strong>22〜24時に入り0時までに閉じた</strong></td><td class="num">28回</td><td class="num">85.7%</td><td class="num tag-good">+3,358円</td></tr>
+      <tr><td>それ以外</td><td class="num">50回</td><td class="num">52.0%</td><td class="num tag-bad">-14,476円</td></tr>
+    </table>
+    </div>
+
+    <p>内訳は7月<span class="num">+838円</span>・8月<span class="num">+2,520円</span>で、両月ともプラスでした。逆に、<strong>21時台までにエントリーした25件は勝率48%・<span class="num">-2,115円</span></strong>です。同じ手法・同じ通貨ペアでも、入る時刻を変えるだけで結果がここまで変わりました。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">28件では「確定した強み」とは呼べない</div>
+      サンプル数が少ないので、これは検証済みのエッジではなく<strong>「推奨の営業時間」</strong>という扱いです。同じ数字が次の100件でも出るかは分かりません。ただ、<strong>やらない時間帯を決める根拠としては十分</strong>だと考えています。プラス材料が無い時間に入る理由はないからです。
+    </div>
+
+    <h2 id="why-night">なぜ22〜24時なのか</h2>
+
+    <p>理由ははっきりしています。<strong>参加者がいちばん多い時間だから</strong>です。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="judge-table">
+      <tr><th>時間帯</th><th>市場</th><th>エントリー先としては</th></tr>
+      <tr><td>8:00〜15:00頃</td><td>東京</td><td class="mid">△ 値動きが小さくレンジになりやすい</td></tr>
+      <tr><td>16:00〜21:00頃</td><td>ロンドン</td><td class="mid">△ 方向は出始めるが、まだ試される</td></tr>
+      <tr><td><strong>22:00〜24:00頃</strong></td><td><strong>ロンドン＋ニューヨーク</strong></td><td class="ok">◎ 最も流動性が高い</td></tr>
+      <tr><td>0:00〜6:00頃</td><td>ニューヨーク</td><td class="ng">✗ 判断力が落ちる時間帯</td></tr>
+    </table>
+    </div>
+
+    <p>夏時間ではニューヨーク市場が22時半ごろに開き、まだ開いているロンドンと重なります。<a href="../stock-fx-technical/">株のテクニカル分析はFXで使えるか</a>で書いたとおり、FXには出来高がありません。<strong>「参加者が多いかどうか」を判断する材料が時計しかない</strong>ので、時間帯そのものが情報になります。</p>
+
+    <p>株でいう寄り付きに相当するのがこの2時間です。会社員にとっては帰宅後にあたるので、都合が合うのも実務的な利点でした（時間帯ごとの癖という発想は<a href="../market-hours/">寄り付き・引けの記事</a>と同じです）。</p>
+
+    <h2 id="where">どこで入るか：根拠は2つだけ</h2>
+
+    <p>時間帯を決めたうえで、実際にどこで入るか。FXで使える根拠は、突き詰めると2つしかありません。</p>
+
+    <div class="verdict-box">
+      <h4>板が見えない以上、材料は価格だけ</h4>
+      <p>株なら板を見て「どこに注文が待っているか」を確認できました。FXは店頭取引なので板が存在せず、<strong>「どこで待っているはずか」を価格から推測する</strong>しかありません。</p>
+      <p>推測の材料は、<strong>①直近の高値・安値</strong>と<strong>②キリの良い数字</strong>。この2つだけです。</p>
+    </div>
+
+    <h3>① 直近の高値・安値（水平線）</h3>
+
+    <p><a href="../support-resistance/">サポート・レジスタンスラインの引き方</a>はFXにそのまま持ち込めます。むしろ株より効きます。世界中が同じ1本のチャートを見ているので、意識される場所が揃うからです。</p>
+
+    <h3>② キリ番（50銭・1円刻み）</h3>
+
+    <p>ドル円なら <code>157.00</code> <code>157.50</code> <code>158.00</code> といった数字に注文が集中します。<strong>ここには他人の損切り注文が溜まっている</strong>と考えて、2通りの入り方があります。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="judge-table">
+      <tr><th>入り方</th><th>考え方</th><th>注意点</th></tr>
+      <tr><td><strong>反発を狙う</strong></td><td>キリ番や直近安値まで落ちてきたところで買う。押し目の目安は<a href="../fibonacci/">フィボナッチ</a>の38.2%・50%・61.8%</td><td>そのまま抜けたら即撤退。逆指値は節目のすぐ外側</td></tr>
+      <tr><td><strong>ブレイクを狙う</strong></td><td>節目を明確に抜けたところで、抜けた方向に乗る</td><td><strong>抜けた足が確定するまで待つ</strong>。FXは騙しが頻繁</td></tr>
+    </table>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ ブレイクの騙しは株より多い</div>
+      キリ番に損切りが溜まっているということは、<strong>そこを一度突いてから戻る動きが起きやすい</strong>ということでもあります。株なら出来高急増でブレイクの本物さを確認できましたが、FXにはその手段がありません。<strong>抜けた足が確定するまで待つ</strong>という価格ベースの確認で代用します。
+    </div>
+
+    <p>移動平均線やRSI・MACDを重ねることもできますが、<a href="../fx-record-2/">実践記録②</a>ではルールを増やすのをやめました。条件を足すほど、後から「なぜ入ったのか」を検証できなくなるからです。<strong>根拠は1つか2つで足ります。</strong></p>
+
+    <h2 id="before">入る前に決める3つ（順番が決まっている）</h2>
+
+    <p>ここが本題です。エントリーボタンを押す前に、3つを<strong>この順番で</strong>決めます。</p>
+
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>損切りを置く場所を決める</h4>
+          <p>入る場所ではなく、<strong>間違っていたと判断する場所</strong>を先に決めます。反発狙いなら節目のすぐ外側、ブレイク狙いなら抜けた節目の内側。ここまでの距離がpipsになります。</p>
+          <p>例：エントリー157.20円 / 損切り156.95円 → <strong>25pips</strong></p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>損切り幅から通貨数を逆算する</h4>
+          <p>ロットは「いくら儲けたいか」ではなく、<strong>1で決めた幅に当たったときいくら失うか</strong>から決まります。資金5万円なら1回の損失は<a href="../position-size/">2%ルール</a>で<span class="num">1,000円</span>まで。</p>
+          <p>25pipsで<span class="num">-1,000円</span>に収まる数量は<strong>4,000通貨</strong>です。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>利確の場所を決める</h4>
+          <p>最後に利確です。<a href="../risk-reward/">損益比率（RR比）</a>を1以上にするなら、損切りと同じか、それより遠い場所に置きます。実践記録では<strong>+25pips利確・-25pips損切り</strong>のOCO注文を使いました。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-main">通貨数 ÷ 100 ＝ 1pipsあたりの損益（円）</div>
+      <div class="formula-note">ドル円の場合。4,000通貨なら1pips＝40円。25pipsの損切りで<span class="num">-1,000円</span>。この暗算ができると、チャートを見ながらロットを決められます。</div>
+    </div>
+
+    <div class="callout bad">
+      <div class="callout-title">この順番を逆にすると必ずロットが膨らむ</div>
+      「157.20円で買おう、じゃあ5,000通貨で」と数量から決めると、損切り幅が後付けになります。すると<strong>決めた金額に収めるために損切りを不自然に近づける</strong>か、<strong>損失額の方を黙って受け入れる</strong>かのどちらかになります。どちらも、負けが偶然の大きさになるということです。
+    </div>
+
+    <a href="../../fx-calc/" class="tool-cta">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">無料ツール</div>
+        <div class="tool-cta-title">FX計算ツール</div>
+        <div class="tool-cta-sub">損切り幅と許容リスクを入れると適正な取引数量を逆算。必要証拠金・1pipsあたりの損益・証拠金維持率も同時に表示します</div>
+      </div>
+      <div class="tool-cta-arrow">›</div>
+    </a>
+
+    <h2 id="order">エントリーと同時に注文を置く</h2>
+
+    <p>3つを決めたら、<strong>エントリーと同時に決済注文まで入れます</strong>。後で入れる、ではありません。理由は実データにあります。</p>
+
+    <p>78トレードのうち、損失の全額を作っていたのは<strong>-30pipsを超えた5件（合計 <span class="num">-13,157円</span>）</strong>でした。この5件の共通点は1つだけ、<strong>逆指値を入れていなかったこと</strong>です。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th>決済幅</th><th>件数</th><th>合計</th></tr>
+      <tr><td>+23pips以上（利確ライン到達）</td><td class="num">15回</td><td class="num tag-good">+11,551円</td></tr>
+      <tr><td>+0〜23pips（自分で手仕舞い）</td><td class="num">35回</td><td class="num tag-good">+6,916円</td></tr>
+      <tr><td>-0〜23pips（浅い負け）</td><td class="num">7回</td><td class="num">-378円</td></tr>
+      <tr><td>-23〜30pips（損切りライン付近）</td><td class="num">16回</td><td class="num">-16,050円</td></tr>
+      <tr><td><strong>-30pips超（損切り不在）</strong></td><td class="num">5回</td><td class="num tag-bad">-13,157円</td></tr>
+    </table>
+    </div>
+
+    <p>注目したいのは上から2行目までです。OCO注文で「+25pipsで利確・-25pipsで損切り」を設定した回は、<strong>勝ちの上位にぴったり+25.0pipsが9件並んでいました</strong>。設計どおりに機能していたということです。</p>
+
+    <div class="callout bad">
+      <div class="callout-title">⚠️ 15分で-60pips。手動では間に合わない</div>
+      5件のうち2件は、保有<strong>15分と22分で-60pips</strong>に達しています。寝て放置したのではなく、<strong>起きて画面を見ていたのに切れなかった</strong>トレードです。ドル円が4円規模で急落していた局面で、値動きが速すぎました。「損切りしよう」と考えているあいだに想定の2倍以上の損失になっています。
+      <br><br>
+      つまり<strong>「深夜は取引しない」「気をつける」といった対策では防げません</strong>。あらかじめ置いた注文だけが機能します。
+    </div>
+
+    <p>この2件はどちらも23時台のエントリーです。前述の「22〜24時が良い」という時間帯ルールでも防げていません。<strong>時間帯は入る条件、逆指値は入った後の防御</strong>で、役割が別なのだと分かります。</p>
+
+    <a href="../../oco-calc/" class="tool-cta">
+      <div class="tool-cta-left">
+        <div class="tool-cta-label">無料ツール</div>
+        <div class="tool-cta-title">OCO注文計算ツール</div>
+        <div class="tool-cta-sub">エントリー価格・損切り幅・利確幅から、実際に発注する2つの価格と損益比率を同時に計算</div>
+      </div>
+      <div class="tool-cta-arrow">›</div>
+    </a>
+
+    <h2 id="ng">入ってはいけない5つの場面</h2>
+
+    <p>エントリーの改善で効いたのは、良い場所を増やすことより<strong>入らない場面を決めること</strong>でした。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="judge-table">
+      <tr><th>場面</th><th>理由</th></tr>
+      <tr><td><strong>根拠が「上がりそう」だけ</strong></td><td>後から検証できない。水平線かキリ番か、言葉にできないなら見送る</td></tr>
+      <tr><td><strong>負けた直後の取り返し</strong></td><td>回数とロットが同時に上がる。7月30日の15回・<span class="num">-4,532円</span>がこの形だった</td></tr>
+      <tr><td><strong>重要指標の発表直前</strong></td><td>価格が一瞬で飛び、逆指値が想定価格で約定しない</td></tr>
+      <tr><td><strong>0時以降の新規</strong></td><td>集計でマイナス領域。翌朝まで持つ理由がないなら入らない</td></tr>
+      <tr><td><strong>仕事の合間に数十秒だけ見て</strong></td><td>いちばん質の低い判断になる。見るなら見る、見ないなら触らない</td></tr>
+    </table>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">週末・指標をまたぐなら、そもそも入らない</div>
+      金曜の夜と指標発表の前後は、<a href="../fx-losscut/">強制ロスカット</a>が想定どおりに機能しない可能性がある局面です。国内業者はゼロカットを提供していないので、<strong>飛んだ分は自分の負担</strong>になります。またぐ前提のエントリーは、サイズを落とすか見送るのが安全です。
+    </div>
+
+    <h2 id="mode">日中モードと夜モード</h2>
+
+    <p>会社にいる時間と、帰宅後にチャートを見ていられる時間ではできることが違います。そこで<strong>逆指値は共通で必須にしたまま、利確側だけを切り替える</strong>形にしました。</p>
+
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <table class="compare-table">
+      <tr><th></th><th>日中モード（会社にいる時）</th><th>夜モード（22〜24時）</th></tr>
+      <tr><td>逆指値</td><td><strong>-1,000円（必須）</strong></td><td><strong>-1,000円（必須）</strong></td></tr>
+      <tr><td>利確</td><td>+25pipsの指値も同時に入れて完全放置</td><td>裁量（自分のタイミングで決済）</td></tr>
+      <tr><td>アプリ</td><td>見ない</td><td>見ていて良い</td></tr>
+      <tr><td>期限</td><td>どちらかが約定するまで</td><td>0時までに必ず閉じる</td></tr>
+    </table>
+    </div>
+
+    <p>日中は「見られない」のではなく<strong>見てはいけない時間</strong>として扱います。そもそも日中は成績が悪い時間帯だったので、<strong>「日中はやらない」という選択も十分あります</strong>。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">裁量利確には数字上の懸念がある（承知の上で採用）</div>
+      勝ち50件のうち35件は+23pipsに届く前に自分で閉じており、平均は<strong>+6.9pips</strong>でした。指値に任せた15件は+23pips以上です。平均勝ちが+11.9pipsしかない主因は、この手仕舞いです。
+      <br><br>
+      ただし「持っていれば+25pipsに届いていた」証拠はありません。逆に損切りに刈られていた可能性も同じだけあります。断定できないので、<strong>夜モードでは決済ごとに利確pipsを記録し、30件たまった時点で平均を見て判断する</strong>ことにしました。
+    </div>
+
+    <h2 id="measure">エントリーの質は損益では測れない</h2>
+
+    <p>最後に、エントリーが良くなっているかを何で確認するかです。<strong>金額ではありません。</strong></p>
+
+    <div class="formula-box">
+      <div class="formula-main">追う数字 ＝ 逆指値を置けた回数 ÷ 全トレード</div>
+      <div class="formula-note">損益ではなく執行率を見る。100%を維持できていれば、エントリーの巧拙にかかわらず1回の負けは設計値に収まります。</div>
+    </div>
+
+    <p>金額を目標にすると、届かせるためにロットと回数を上げる動機が生まれます。それがまさに<strong>7月30日（15回・<span class="num">-4,532円</span>）</strong>と<strong>8月4日（逆指値を入れずに46時間放置）</strong>の壊れ方でした。</p>
+
+    <div class="verdict-box">
+      <h4>エントリーの上達とは何か</h4>
+      <p>勝率を上げることではありませんでした。<a href="../fx-record/">実践記録①</a>では<strong>勝率70%で<span class="num">-6,014円</span></strong>です。当たっている割合はすでに十分でした。</p>
+      <p>変えるべきだったのは、<strong>入る前に3つを決め、注文として置いてから入る</strong>という手順のほうです。エントリーの質とは、チャートの読みの鋭さではなく<strong>手順を毎回同じにできる率</strong>のことでした。</p>
+    </div>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>78トレードの集計で明確にプラスだったのは<strong>22〜24時に入り0時までに閉じた28回（勝率85.7%・<span class="num">+3,358円</span>）</strong>だけ。それ以外の50回は勝率52.0%・<span class="num">-14,476円</span>。</li>
+        <li>21時台までのエントリー25件は勝率48%・<span class="num">-2,115円</span>。<strong>入る時刻を変えるだけで結果が変わる</strong>。</li>
+        <li>ただし28件では確定した強みと呼べない。<strong>「推奨の営業時間」</strong>という扱いにとどめる。</li>
+        <li>22〜24時が良いのは<strong>ロンドンとニューヨークが重なり参加者が最も多いから</strong>。FXには出来高が無いので、参加者の多さを知る手がかりは時計しかない。</li>
+        <li>入る場所の根拠は2つだけ。<strong>①直近の高値・安値（水平線）②キリ番（50銭・1円刻み）</strong>。板が無い以上、材料は価格しかない。</li>
+        <li>ブレイク狙いは<strong>抜けた足が確定するまで待つ</strong>。キリ番に損切りが溜まっている分、騙しは株より頻繁。</li>
+        <li>入る前に決める順番は<strong>①損切りの場所 →②通貨数 →③利確</strong>。逆にすると必ずロットが膨らむ。</li>
+        <li>暗算式は<strong>通貨数÷100＝1pipsあたりの損益</strong>。資金5万円・25pips損切りなら4,000通貨で<span class="num">-1,000円</span>（2%）。</li>
+        <li>決済注文は<strong>エントリーと同時に置く</strong>。損失の全額は逆指値の無い5件（<span class="num">-13,157円</span>）から出ていた。うち2件は<strong>15分で-60pips</strong>、画面を見ていても手動では間に合わなかった。</li>
+        <li>入らない場面を決める方が効く。<strong>根拠が言葉にできない／負けた直後／指標直前／0時以降／仕事の合間</strong>。</li>
+        <li>追う数字は損益ではなく<strong>逆指値を置けた率</strong>。金額を目標にするとロットと回数が上がる。</li>
+      </ul>
+    </div>
+
+    <a href="../fx-record-2/" class="related-article">
+      <div class="related-article-text">
+        <div class="related-article-label">関連記事</div>
+        <div class="related-article-title">FX実践記録②｜78回中5回のミスで-11,118円になった話</div>
+      </div>
+      <span class="related-article-arrow">›</span>
+    </a>
+
+    <p style="font-size:13px; color:var(--gray-500); margin-top:24px;">
+      ※ 本記事の数値は筆者個人の取引記録（累計78トレード）を集計したもので、将来の成績を示すものではありません。サンプル数が限られるため、統計的に確定した優位性を示すものではない点にご留意ください。取引時間・注文方法・レバレッジ上限は証券会社や制度改正により変わります。本記事は特定の投資手法を推奨するものではありません。投資判断はご自身の責任でお願いします。
+    </p>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+            <li><a href="../../investment-sim/">積立投資シミュレーター</a></li>
+            <li><a href="../../position-calc/">ポジションサイズ計算ツール</a></li>
+            <li><a href="../../oco-calc/">OCO注文計算ツール</a></li>
+            <li><a href="../../profit-calc/">株式損益計算ツール</a></li>
+            <li><a href="../../nanpin-calc/">ナンピン計算ツール</a></li>
+            <li><a href="../../fx-calc/">FX計算ツール</a></li>
+            <li><a href="../../ideco-calc/">iDeCo節税額シミュレーター</a></li>
+            <li><a href="../../volume-calc/">出来高・売買代金チェック</a></li>
+          </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/">免責事項</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本サイトの情報は投資判断の参考であり、投資成果を保証するものではありません。FXはレバレッジにより元本を超える損失が生じる可能性があります。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>
