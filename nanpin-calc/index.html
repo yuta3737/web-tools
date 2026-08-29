@@ -167,6 +167,23 @@
       .field input { font-size: 16px; padding: 9px 10px; }
       .info-table { display: block; overflow-x: auto; }
     }
+
+    /* アフィリエイトCTA（profit-calc と同一定義。共通CSSに無いためインラインで持つ） */
+    .broker-cta {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      background: var(--primary);
+      color: var(--white);
+      transition: opacity 0.2s;
+      margin: 6px 0;
+    }
+    .broker-cta:hover { opacity: 0.85; text-decoration: none; }
+    .broker-cta.sub { background: var(--gray-700); }
   </style>
   <script type="application/ld+json">
 {
@@ -356,6 +373,13 @@
 
     <h3>Q. ナンピンは何回までやっていい？</h3>
     <p>決まった正解はありませんが、<strong>買い増しの上限と撤退ラインを事前に決めておく</strong>ことが重要です。ナンピンは下落が続くと投資額と含み損が加速度的に増える手法で、回数を重ねるほど1回の下落インパクトが大きくなります。詳しくは<a href="../articles/average-price/">株の平均取得単価の計算方法</a>と<a href="../articles/position-size/">ポジションサイズとリスク管理</a>を参照してください。</p>
+  </div>
+
+  <div style="margin-top:32px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius-lg); padding:20px 24px;">
+    <p style="font-size:13px; font-weight:700; color:var(--gray-700); margin-bottom:4px;">💡 ナンピンは「買う回数」が増えるぶん、手数料も重なります</p>
+    <p style="font-size:13px; color:var(--gray-500); margin-bottom:16px;">買い増しを繰り返す手法では、1回あたりの手数料が利益を削ります。条件付きで手数料が0円になる証券会社なら、この分を丸ごと減らせます。口座開設は無料です。</p>
+    <a href="https://h.accesstrade.net/sp/cc?rk=01000t2900os8p" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta">松井証券 口座開設（1日50万円まで手数料0円・無料）</a>
+    <a href="https://ad2.trafficgate.net/t/r/1190/738/317787_397122" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub">楽天証券 口座開設（100万円まで手数料0円・無料）</a>
   </div>
 
   <div class="info-card">
