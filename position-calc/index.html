@@ -412,6 +412,14 @@
     ⚠️ 購入金額が口座残高を超えています。信用取引でない場合は実行できません。
   </div>
 
+  <!-- 警告（単元株の下限で許容リスクを超える時） -->
+  <div class="warn-box" id="warn-risk" style="display:none;">
+    ⚠️ <strong>この条件では、許容損失に収まる株数が1単元（100株）未満です。</strong>
+    表示している100株で取引すると、最大損失は<strong id="warn-risk-loss">—</strong>となり、
+    設定した許容損失<strong id="warn-risk-allow">—</strong>を<strong id="warn-risk-times">—</strong>超えます。
+    損切り幅を狭くするか、より株価の低い銘柄を選ぶか、1回のリスク許容度を見直してください。
+  </div>
+
   <!-- 結果 -->
   <div class="result-card">
     <div class="result-card-header">計算結果</div>
@@ -525,6 +533,16 @@
 
     // 残高超過警告
     document.getElementById('warn-box').style.display = cost > balance ? 'block' : 'none';
+
+    // リスク超過警告：単元株（100株）の下限に切り上げた結果、許容損失を超える場合
+    // ※ rawShares が 100 未満のときにだけ起きる。リスク管理ツールとして見逃してはいけないケース
+    const riskOver = maxLoss > allowance + 0.5;
+    document.getElementById('warn-risk').style.display = riskOver ? 'block' : 'none';
+    if (riskOver) {
+      document.getElementById('warn-risk-loss').textContent  = fmt(Math.round(maxLoss));
+      document.getElementById('warn-risk-allow').textContent = fmt(Math.round(allowance));
+      document.getElementById('warn-risk-times').textContent = '約' + (maxLoss / allowance).toFixed(1) + '倍';
+    }
 
     // OCOリンク
     const ocoUrl = `../oco-calc/index.html?price=${price}&shares=${shares}`;
