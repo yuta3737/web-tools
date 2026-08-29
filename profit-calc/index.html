@@ -16,19 +16,19 @@
   <link rel="canonical" href="https://yuta-tools.com/profit-calc/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>株の利益計算ツール｜売却損益・含み益・税金まで自動計算 | MoneyTools</title>
-  <meta name="description" content="株の売却益・含み益をその場で自動計算。手数料と税金（20.315%）を差し引いた税引後の手取り利益、損益分岐点までまとめて確認できる無料ツールです。">
+  <title>株の利益計算ツール｜損益・含み益・税金を自動計算 | MoneyTools</title>
+  <meta name="description" content="株の損益をその場で自動計算。売却益・含み益から手数料と税金（20.315%）を引いた税引後の手取りと、損益分岐点までまとめて分かります。買値・売値・株数を入れるだけの無料計算ツールです。">
   <!-- OGP / Twitter Card -->
-  <meta property="og:title" content="株の利益計算ツール｜売却損益・含み益・税金まで自動計算 | MoneyTools">
-  <meta property="og:description" content="株の売却益・含み益をその場で自動計算。手数料と税金（20.315%）を差し引いた税引後の手取り利益、損益分岐点までまとめて確認できる無料ツールです。">
+  <meta property="og:title" content="株の利益計算ツール｜損益・含み益・税金を自動計算 | MoneyTools">
+  <meta property="og:description" content="株の損益をその場で自動計算。売却益・含み益から手数料と税金（20.315%）を引いた税引後の手取りと、損益分岐点までまとめて分かります。買値・売値・株数を入れるだけの無料計算ツールです。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://yuta-tools.com/profit-calc/">
   <meta property="og:image" content="https://yuta-tools.com/ogp.png">
   <meta property="og:site_name" content="MoneyTools">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="株の利益計算ツール｜売却損益・含み益・税金まで自動計算 | MoneyTools">
-  <meta name="twitter:description" content="株の売却益・含み益をその場で自動計算。手数料と税金（20.315%）を差し引いた税引後の手取り利益、損益分岐点までまとめて確認できる無料ツールです。">
+  <meta name="twitter:title" content="株の利益計算ツール｜損益・含み益・税金を自動計算 | MoneyTools">
+  <meta name="twitter:description" content="株の損益をその場で自動計算。売却益・含み益から手数料と税金（20.315%）を引いた税引後の手取りと、損益分岐点までまとめて分かります。買値・売値・株数を入れるだけの無料計算ツールです。">
   <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
@@ -319,6 +319,51 @@
     .breadcrumb span { color: var(--gray-300); }
 
     /* アフィリエイトボタン */
+    .explain {
+      margin-top: 44px;
+      padding-top: 8px;
+    }
+    .explain h2 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin: 32px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .explain h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin: 20px 0 6px;
+    }
+    .explain p, .explain li {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--gray-700);
+    }
+    .explain p { margin-bottom: 12px; }
+    .explain ol { padding-left: 22px; margin-bottom: 14px; }
+    .explain ol li { margin-bottom: 6px; }
+    .explain a { color: var(--primary); text-decoration: underline; }
+
+    .fee-section > summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .fee-section > summary::-webkit-details-marker { display: none; }
+    .fee-section > summary::before {
+      content: "▶";
+      font-size: 10px;
+      color: var(--gray-500);
+      transition: transform 0.2s;
+    }
+    .fee-section[open] > summary::before { transform: rotate(90deg); }
+    .fee-section > summary:hover { color: var(--primary); }
+
     .broker-cta {
       display: block;
       text-align: center;
@@ -349,7 +394,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "株の利益計算ツール（売却損益・含み益・税金対応） | MoneyTools",
-  "description": "株の売却益・含み益をその場で自動計算。手数料と税金（20.315%）を差し引いた税引後の手取り利益、損益分岐点までまとめて確認できる無料ツールです。",
+  "description": "株の損益をその場で自動計算。売却益・含み益から手数料と税金（20.315%）を引いた税引後の手取りと、損益分岐点までまとめて分かります。買値・売値・株数を入れるだけの無料計算ツールです。",
   "url": "https://yuta-tools.com/profit-calc/",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Web",
@@ -385,6 +430,46 @@
       "position": 2,
       "name": "株の利益・損益計算ツール",
       "item": "https://yuta-tools.com/profit-calc/"
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "買い増し（ナンピン）したときはどう計算しますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "複数回に分けて買った場合は、まず平均取得単価を出してから「購入株価」に入力してください。平均取得単価はナンピン計算ツールで自動計算できます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "株の税金は必ず20.315%ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "特定口座・一般口座での売却益にかかる税率です。内訳は所得税15%・復興特別所得税0.315%・住民税5%。NISA口座での利益は非課税なので、この計算は不要です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "損が出た場合、税金はどうなりますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "損失には課税されません。損益がマイナスのときは税金は0円です。なお損失は確定申告をすれば3年間繰り越して、翌年以降の利益と相殺できます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "手数料が分からないときはどうすればいいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "0円のままで構いません。ネット証券は条件付きで手数料無料のプランが多く、少額取引なら実際に0円のことがあります。"
+      }
     }
   ]
 }
@@ -429,7 +514,7 @@
       <div class="form-group">
         <label>購入株価</label>
         <div class="input-inner">
-          <input type="number" id="inp-buy" value="1000" min="0.1" step="0.1">
+          <input type="number" inputmode="decimal" id="inp-buy" value="1000" min="0.1" step="0.1">
           <span class="input-unit">円</span>
         </div>
         <div class="hint">1株あたりの買った値段</div>
@@ -438,7 +523,7 @@
       <div class="form-group">
         <label>売却株価</label>
         <div class="input-inner">
-          <input type="number" id="inp-sell" value="1050" min="0.1" step="0.1">
+          <input type="number" inputmode="decimal" id="inp-sell" value="1050" min="0.1" step="0.1">
           <span class="input-unit">円</span>
         </div>
         <div class="hint">1株あたりの売った（または売りたい）値段</div>
@@ -447,16 +532,16 @@
       <div class="form-group">
         <label>株数</label>
         <div class="input-inner">
-          <input type="number" id="inp-shares" value="100" min="1" step="100">
+          <input type="number" inputmode="decimal" id="inp-shares" value="100" min="1" step="100">
           <span class="input-unit">株</span>
         </div>
         <div class="hint">日本株は通常100株単位（1単元）で売買します</div>
       </div>
     </div>
 
-    <!-- 手数料 -->
-    <div class="fee-section">
-      <div class="fee-section-title">手数料（任意）</div>
+    <!-- 手数料（折りたたみ：初期状態では閉じて、計算結果を1画面目に収める） -->
+    <details class="fee-section">
+      <summary class="fee-section-title">手数料を入力する（任意）</summary>
       <div class="fee-section-hint">
         証券会社に払う取引コストです。SBI・楽天・松井などのネット証券は条件付きで0円のプランもあります。不明な場合は0のままでもOK。
       </div>
@@ -464,19 +549,19 @@
         <div class="form-group">
           <label>購入時手数料</label>
           <div class="input-inner">
-            <input type="number" id="inp-fee-buy" value="0" min="0" step="0.1">
+            <input type="number" inputmode="decimal" id="inp-fee-buy" value="0" min="0" step="0.1">
             <span class="input-unit">円</span>
           </div>
         </div>
         <div class="form-group">
           <label>売却時手数料</label>
           <div class="input-inner">
-            <input type="number" id="inp-fee-sell" value="0" min="0" step="0.1">
+            <input type="number" inputmode="decimal" id="inp-fee-sell" value="0" min="0" step="0.1">
             <span class="input-unit">円</span>
           </div>
         </div>
       </div>
-    </div>
+    </details>
   </div>
 
   <!-- 結果 -->
@@ -528,6 +613,41 @@
       <div class="breakeven-hint">手数料を含めたコストを回収できる最低の売値です</div>
     </div>
     <div class="breakeven-value" id="res-breakeven">---</div>
+  </div>
+
+  <div class="explain">
+    <h2>株の損益計算のやり方</h2>
+    <p>株の損益は、次の3ステップで求められます。上のツールはこの計算を自動で行っています。</p>
+    <ol>
+      <li><strong>売買差益を出す</strong>：（売却株価 − 購入株価）× 株数</li>
+      <li><strong>手数料を引く</strong>：購入時手数料 ＋ 売却時手数料</li>
+      <li><strong>税金を引く</strong>：利益が出た場合のみ、利益の20.315%</li>
+    </ol>
+    <p>たとえば1,000円で100株買い、1,050円で売った場合。売買差益は<strong>（1,050 − 1,000）× 100 ＝ 5,000円</strong>です。手数料が0円なら、ここから税金20.315%の1,015円が引かれ、手取りは<strong>3,984円</strong>になります。</p>
+    <p>この「税金を引いたあとの実際の手取り」を出すのが、株価計算でいちばん間違えやすいところです。<strong>画面に表示される評価損益は税引き前の金額</strong>なので、実際に手元に残る額とは差が出ます。</p>
+
+    <h2>損益分岐点とは</h2>
+    <p>損益分岐点は、<strong>手数料を含めたコストをちょうど回収できる売値</strong>です。この価格を1円でも上回れば黒字、下回れば赤字になります。</p>
+    <p>手数料が0円なら損益分岐点は購入株価と同じですが、手数料がかかる場合はその分だけ上がります。買った値段で売っても損をするのは、この差があるためです。</p>
+
+    <h2>含み益・含み損の計算にも使えます</h2>
+    <p>まだ売っていない株でも、「売却株価」の欄に<strong>現在の株価</strong>を入れれば、いま売った場合の手取りが分かります。</p>
+    <p>ただし<strong>含み益の段階では税金はかかりません</strong>。課税されるのは実際に売却して利益が確定したときだけです。上の計算結果は「いま売ったらいくら残るか」を示しています。</p>
+
+    <h2>よくある質問</h2>
+    <div class="faq">
+      <h3>Q. 買い増し（ナンピン）したときはどう計算しますか？</h3>
+      <p>複数回に分けて買った場合は、まず平均取得単価を出してから「購入株価」に入力してください。平均取得単価は<a href="../nanpin-calc/">ナンピン計算ツール</a>で自動計算できます。</p>
+
+      <h3>Q. 税金は必ず20.315%ですか？</h3>
+      <p>特定口座・一般口座での売却益にかかる税率です。内訳は所得税15%・復興特別所得税0.315%・住民税5%。<strong>NISA口座での利益は非課税</strong>なので、この計算は不要です。</p>
+
+      <h3>Q. 損が出た場合、税金はどうなりますか？</h3>
+      <p>損失には課税されません。上のツールも、損益がマイナスのときは税金を0円として計算します。なお損失は<a href="../articles/tax-filing/">確定申告をすれば3年間繰り越せます</a>。</p>
+
+      <h3>Q. 手数料が分からないときは？</h3>
+      <p>0円のままで構いません。ネット証券は条件付きで手数料無料のプランが多く、少額取引なら実際に0円のことがあります。</p>
+    </div>
   </div>
 
   <div style="margin-top:40px; padding:20px 0; border-top:1px solid var(--gray-200);">
