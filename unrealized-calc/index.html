@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6919722649745195"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://yuta-tools.com/unrealized-calc/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>含み益・含み損の計算ツール｜評価損益と損益率を自動計算 | MoneyTools</title>
+  <meta name="description" content="保有株の含み益・含み損をその場で計算。平均取得単価・株数・現在の株価を入れると、評価損益の金額と損益率（%）、今売った場合の税引後の手取りまで分かります。最大5銘柄をまとめて集計できる無料ツールです。">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:title" content="含み益・含み損の計算ツール｜評価損益と損益率を自動計算 | MoneyTools">
+  <meta property="og:description" content="保有株の含み益・含み損をその場で計算。平均取得単価・株数・現在の株価を入れると、評価損益の金額と損益率（%）、今売った場合の税引後の手取りまで分かります。最大5銘柄をまとめて集計できる無料ツールです。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yuta-tools.com/unrealized-calc/">
+  <meta property="og:image" content="https://yuta-tools.com/ogp.png">
+  <meta property="og:site_name" content="MoneyTools">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="含み益・含み損の計算ツール｜評価損益と損益率を自動計算 | MoneyTools">
+  <meta name="twitter:description" content="保有株の含み益・含み損をその場で計算。平均取得単価・株数・現在の株価を入れると、評価損益の金額と損益率（%）、今売った場合の税引後の手取りまで分かります。最大5銘柄をまとめて集計できる無料ツールです。">
+  <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .pos-wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+    .page-title { font-size: 22px; font-weight: 800; color: var(--gray-900); margin: 0 0 4px; letter-spacing: -0.5px; }
+    .page-sub { font-size: 13px; color: var(--gray-500); margin-bottom: 28px; }
+
+    .concept-box {
+      background: var(--primary-light); border-radius: var(--radius);
+      padding: 14px 18px; font-size: 13px; color: var(--primary-dark);
+      line-height: 1.8; margin-bottom: 24px;
+    }
+    .concept-box strong { font-weight: 800; }
+
+    .input-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); padding: 28px;
+      box-shadow: var(--shadow); margin-bottom: 20px;
+    }
+    .input-card h2 {
+      font-size: 14px; font-weight: 800; color: var(--gray-700);
+      margin-bottom: 6px; padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .buy-hint { font-size: 11.5px; color: var(--gray-500); margin: 10px 0 16px; }
+
+    .buy-row {
+      display: grid; grid-template-columns: 62px 1fr 1fr; gap: 10px;
+      align-items: center; margin-bottom: 12px;
+    }
+    .buy-label {
+      font-size: 11px; font-weight: 800; color: var(--gray-600);
+      background: var(--gray-50); border-radius: 6px;
+      padding: 8px 6px; text-align: center; white-space: nowrap;
+    }
+    .buy-row.first .buy-label { background: var(--primary-light); color: var(--primary-dark); }
+    .field { display: flex; align-items: center; gap: 5px; min-width: 0; }
+    .field input {
+      flex: 1; padding: 10px 12px; border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius-sm); font-size: 16px; font-weight: 700;
+      font-family: var(--font); color: var(--gray-900); outline: none;
+      transition: border-color .15s; min-width: 0; width: 100%;
+    }
+    .field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,86,219,.1); }
+    .field span { font-size: 12px; font-weight: 700; color: var(--gray-500); white-space: nowrap; }
+    .col-head {
+      display: grid; grid-template-columns: 62px 1fr 1fr; gap: 10px;
+      font-size: 11px; font-weight: 700; color: var(--gray-500);
+      text-transform: uppercase; letter-spacing: .8px; margin-bottom: 6px;
+    }
+    .col-head span:first-child { visibility: hidden; }
+
+    .now-block { margin-top: 22px; padding-top: 18px; border-top: 1px dashed var(--gray-200); }
+    .now-block label { font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .8px; }
+    .now-block .hint { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+
+    .result-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--shadow); margin-bottom: 20px;
+    }
+    .result-card-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white); padding: 16px 24px; font-size: 14px; font-weight: 800;
+    }
+    .result-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+    .result-item {
+      padding: 20px 24px; border-bottom: 1px solid var(--gray-100);
+      border-right: 1px solid var(--gray-100);
+    }
+    .result-item:nth-child(even) { border-right: none; }
+    .result-item:nth-last-child(-n+2) { border-bottom: none; }
+    .result-label {
+      font-size: 11px; font-weight: 700; color: var(--gray-500);
+      text-transform: uppercase; letter-spacing: .8px; margin-bottom: 6px;
+    }
+    .result-value { font-size: 22px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; line-height: 1; }
+    .result-value.primary { color: var(--primary); }
+    .result-value.danger  { color: var(--danger); }
+    .result-value.success { color: var(--success); }
+    .result-sub { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+
+    .warn-box {
+      background: #fef3c7; border-radius: var(--radius); padding: 12px 16px;
+      font-size: 12px; color: var(--accent-dark); line-height: 1.7; margin-bottom: 20px;
+    }
+
+    .oco-cta {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--white); border: 1.5px solid var(--primary);
+      border-radius: var(--radius-lg); padding: 20px 24px; text-decoration: none;
+      transition: background .15s, box-shadow .15s; box-shadow: var(--shadow-sm); margin-bottom: 20px;
+    }
+    .oco-cta:hover { background: var(--primary-light); box-shadow: var(--shadow); text-decoration: none; }
+    .oco-cta-left { display: flex; flex-direction: column; gap: 4px; }
+    .oco-cta-label { font-size: 11px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .8px; }
+    .oco-cta-title { font-size: 15px; font-weight: 800; color: var(--gray-900); }
+    .oco-cta-sub { font-size: 12px; color: var(--gray-500); }
+    .oco-cta-arrow { font-size: 22px; color: var(--primary); font-weight: 900; }
+
+    .info-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); padding: 24px 28px;
+      box-shadow: var(--shadow-sm); margin-bottom: 20px;
+    }
+    .info-card h2 { font-size: 15px; font-weight: 800; color: var(--gray-900); margin: 0 0 14px; }
+    .info-card h3 { font-size: 13px; font-weight: 800; color: var(--gray-700); margin: 20px 0 8px; }
+    .info-card p { font-size: 13px; color: var(--gray-700); line-height: 1.9; margin: 0 0 10px; }
+    .formula {
+      background: var(--gray-50); border-left: 3px solid var(--primary);
+      padding: 12px 16px; font-size: 13px; font-weight: 700;
+      color: var(--gray-800); margin: 10px 0; border-radius: 0 8px 8px 0; line-height: 1.8;
+    }
+    .info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+    .info-table th {
+      background: var(--gray-50); padding: 9px 12px; text-align: left;
+      font-weight: 700; color: var(--gray-600); font-size: 11px; border-bottom: 1px solid var(--gray-200);
+    }
+    .info-table td { padding: 9px 12px; border-bottom: 1px solid var(--gray-100); color: var(--gray-700); }
+    .info-table tr:last-child td { border-bottom: none; }
+
+    .breadcrumb {
+      max-width: 760px; margin: 0 auto; padding: 16px 20px 0;
+      font-size: 12px; color: var(--gray-500); display: flex; gap: 8px; align-items: center;
+    }
+    .breadcrumb a { color: var(--gray-500); }
+    .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
+    .breadcrumb span { color: var(--gray-300); }
+
+    @media (max-width: 640px) {
+      .pos-wrap { padding: 24px 12px 60px; }
+      .input-card { padding: 16px; }
+      .info-card { padding: 18px 16px; }
+      .result-grid { grid-template-columns: 1fr; }
+      .result-item { border-right: none; }
+      .result-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--gray-100); }
+      .result-item:last-child { border-bottom: none; }
+      .buy-row, .col-head { grid-template-columns: 52px 1fr 1fr; gap: 7px; }
+      .field input { font-size: 16px; padding: 9px 10px; }
+      .info-table { display: block; overflow-x: auto; }
+    }
+
+    /* アフィリエイトCTA（profit-calc と同一定義。共通CSSに無いためインラインで持つ） */
+    .broker-cta {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      background: var(--primary);
+      color: var(--white);
+      transition: opacity 0.2s;
+      margin: 6px 0;
+    }
+    .broker-cta:hover { opacity: 0.85; text-decoration: none; }
+    .broker-cta.sub { background: var(--gray-700); }
+
+    /* ── 含み益ツール固有 ── */
+    .col-head.u4 { grid-template-columns: 62px 1fr 1fr 1fr; }
+    .buy-row.u4  { grid-template-columns: 62px 1fr 1fr 1fr; }
+    .pl-big { font-size: 30px; font-weight: 900; letter-spacing: -0.5px; }
+    .pl-plus  { color: #059669; }
+    .pl-minus { color: #dc2626; }
+    .pl-zero  { color: var(--gray-600); }
+    .rate-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 999px;
+      font-size: 13px; font-weight: 800; margin-left: 8px; vertical-align: middle;
+    }
+    .rate-plus  { background: #d1fae5; color: #065f46; }
+    .rate-minus { background: #fee2e2; color: #991b1b; }
+    .rate-zero  { background: var(--gray-100); color: var(--gray-600); }
+    .row-result {
+      font-size: 12px; color: var(--gray-600); text-align: right;
+      padding: 2px 2px 8px; min-height: 16px;
+    }
+    .tax-note {
+      margin-top: 14px; padding: 12px 14px; border-radius: 10px;
+      background: #eff6ff; border: 1px solid #bfdbfe;
+      font-size: 13px; line-height: 1.8; color: #1e40af;
+    }
+
+    /* 4列は幅が足りないので、狭い画面ではラベルを上段へ逃がす */
+    @media (max-width: 640px) {
+      .buy-row.u4, .col-head.u4 { grid-template-columns: 52px 1fr 1fr 1fr; gap: 6px; }
+    }
+    @media (max-width: 480px) {
+      .buy-row.u4, .col-head.u4 { grid-template-columns: 1fr 1fr 1fr; gap: 7px; }
+      .buy-row.u4 .buy-label {
+        grid-column: 1 / -1; text-align: left; margin-bottom: 2px;
+        padding: 5px 8px; justify-self: start;
+      }
+      .col-head.u4 span:first-child { display: none; }
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "含み益・含み損の計算ツール",
+  "description": "保有株の含み益・含み損と損益率を自動計算する無料ツール。最大5銘柄まで合計できます。",
+  "url": "https://yuta-tools.com/unrealized-calc/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "JPY"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MoneyTools",
+    "url": "https://yuta-tools.com/"
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "https://yuta-tools.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "含み益・含み損の計算ツール",
+      "item": "https://yuta-tools.com/unrealized-calc/"
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "含み益に税金はかかりますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "かかりません。株の税金（20.315%）は実際に売却して利益が確定したときにだけ発生します。保有したままの含み益は課税対象外です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "含み損益率はどう計算しますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "含み損益 ÷ 取得金額 × 100 で求めます。取得金額は平均取得単価×株数です。金額だけでなく率で見ると、銘柄ごとの比較ができます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "含み損から建値に戻すには何%上がればいいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "下落率が大きいほど、回復に必要な上昇率は加速度的に大きくなります。10%下落なら約11.1%、30%下落なら約42.9%、50%下落なら100%の上昇が必要です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "買い増し（ナンピン）した場合の平均取得単価は？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "投資総額÷保有株数で求めます。複数回に分けて買った場合はナンピン計算ツールで自動計算できます。"
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../">ホーム</a>
+      <a href="../investment-sim/">積立投資</a>
+      <a href="../position-calc/">ポジション計算</a>
+      <a href="../oco-calc/">OCO計算</a>
+      <a href="../profit-calc/">損益計算</a>
+      <a href="./" class="active">ナンピン計算</a>
+      <a href="../fx-calc/">FX計算</a>
+      <a href="../ideco-calc/">iDeCo節税</a>
+      <a href="../volume-calc/">出来高チェック</a>
+      <a href="./">含み益計算</a>
+      <a href="../articles/">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+
+<div class="breadcrumb">
+  <a href="../">ホーム</a>
+  <span>/</span>
+  <span>含み益・含み損の計算ツール</span>
+</div>
+
+<div class="pos-wrap">
+  <h1 class="page-title">含み益・含み損の計算ツール</h1>
+  <p class="page-sub">平均取得単価・株数・現在の株価を入れると、評価損益の金額と損益率が出ます。最大5銘柄まで合計できます。</p>
+
+  <div class="input-card">
+    <h2>保有している株を入力</h2>
+    <div class="buy-hint">使わない行は空欄のままでOKです。複数の銘柄を入れると、下に合計が出ます。</div>
+
+    <div class="col-head u4"><span></span><span>平均取得単価</span><span>保有株数</span><span>現在の株価</span></div>
+
+    <div class="buy-row u4 first">
+      <div class="buy-label">銘柄1</div>
+      <div class="field"><input type="number" id="c1" inputmode="decimal" placeholder="2000" value="2000"><span>円</span></div>
+      <div class="field"><input type="number" id="s1" inputmode="numeric" placeholder="100" value="100"><span>株</span></div>
+      <div class="field"><input type="number" id="n1" inputmode="decimal" placeholder="2400" value="2400"><span>円</span></div>
+    </div>
+    <div class="row-result" id="rr1"></div>
+    <div class="buy-row u4">
+      <div class="buy-label">銘柄2</div>
+      <div class="field"><input type="number" id="c2" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
+      <div class="field"><input type="number" id="s2" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
+      <div class="field"><input type="number" id="n2" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
+    </div>
+    <div class="row-result" id="rr2"></div>
+    <div class="buy-row u4">
+      <div class="buy-label">銘柄3</div>
+      <div class="field"><input type="number" id="c3" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
+      <div class="field"><input type="number" id="s3" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
+      <div class="field"><input type="number" id="n3" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
+    </div>
+    <div class="row-result" id="rr3"></div>
+    <div class="buy-row u4">
+      <div class="buy-label">銘柄4</div>
+      <div class="field"><input type="number" id="c4" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
+      <div class="field"><input type="number" id="s4" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
+      <div class="field"><input type="number" id="n4" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
+    </div>
+    <div class="row-result" id="rr4"></div>
+    <div class="buy-row u4">
+      <div class="buy-label">銘柄5</div>
+      <div class="field"><input type="number" id="c5" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
+      <div class="field"><input type="number" id="s5" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
+      <div class="field"><input type="number" id="n5" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
+    </div>
+    <div class="row-result" id="rr5"></div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-card-header">合計の含み損益</div>
+    <div class="result-grid">
+      <div class="result-item" style="grid-column:1/-1;">
+        <div class="result-label">評価損益（含み益・含み損）</div>
+        <div class="result-value pl-big pl-zero" id="r-pl">—</div>
+        <div class="result-sub" id="r-pl-sub">取得金額と評価額の差です</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">取得金額</div>
+        <div class="result-value" id="r-cost">—</div>
+        <div class="result-sub">平均取得単価 × 株数 の合計</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">現在の評価額</div>
+        <div class="result-value" id="r-value">—</div>
+        <div class="result-sub">現在の株価 × 株数 の合計</div>
+      </div>
+    </div>
+    <div class="tax-note" id="tax-note">
+      含み益には税金がかかりません。課税されるのは<strong>売却して利益が確定したとき</strong>だけです。
+    </div>
+  </div>
+
+  <div class="result-card" id="sell-card" style="display:none;">
+    <div class="result-card-header">いま全部売った場合</div>
+    <div class="result-grid">
+      <div class="result-item">
+        <div class="result-label">税金（20.315%）</div>
+        <div class="result-value" id="r-tax">—</div>
+        <div class="result-sub" id="r-tax-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">税引後の手取り利益</div>
+        <div class="result-value" id="r-net">—</div>
+        <div class="result-sub">手数料は含みません</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card" id="recover-card" style="display:none;">
+    <div class="result-card-header">建値に戻すには</div>
+    <div class="result-grid">
+      <div class="result-item">
+        <div class="result-label">必要な上昇率</div>
+        <div class="result-value" id="r-need">—</div>
+        <div class="result-sub" id="r-need-sub"></div>
+      </div>
+    </div>
+  </div>
+
+  <a href="../profit-calc/" class="oco-cta">
+    <div class="oco-cta-left">
+      <div class="oco-cta-label">無料ツール</div>
+      <div class="oco-cta-title">株の利益計算ツール</div>
+      <div class="oco-cta-sub">売却したときの手数料・税金を引いた実際の手取りを、1銘柄ずつ詳しく計算できます</div>
+    </div>
+    <div class="oco-cta-arrow">›</div>
+  </a>
+
+  <div class="info-card">
+    <h2>含み益・含み損とは</h2>
+    <p><strong>含み益</strong>は、保有している株の評価額が取得金額を上回っている状態の差額です。逆に下回っていれば<strong>含み損</strong>になります。まだ売っていないので、利益も損失も確定していません。</p>
+    <div class="formula">含み損益 ＝（現在の株価 − 平均取得単価）× 保有株数</div>
+    <p>たとえば平均2,000円で100株持っていて、現在2,400円なら <strong>(2,400 − 2,000) × 100 ＝ +40,000円</strong> の含み益です。</p>
+
+    <h2>含み損益率の出し方</h2>
+    <p>金額だけでは銘柄同士を比べられないので、<strong>率</strong>でも見ます。</p>
+    <div class="formula">含み損益率 ＝ 含み損益 ÷ 取得金額 × 100</div>
+    <p>上の例なら 40,000 ÷ 200,000 × 100 ＝ <strong>+20.0%</strong> です。同じ「+4万円」でも、取得金額20万円なら+20%、100万円なら+4%と意味がまったく違います。</p>
+
+    <h2>含み益に税金はかかりません</h2>
+    <p>株の税金20.315%（所得税15%＋復興特別所得税0.315%＋住民税5%）は、<strong>売却して利益が確定したときにだけ</strong>かかります。保有したままの含み益は課税されません。</p>
+    <p>このツールの「いま全部売った場合」は、その時点で確定させたらいくら残るかの概算です。手数料は含んでいないので、正確に出したい場合は<a href="../profit-calc/">株の利益計算ツール</a>を使ってください。</p>
+
+    <h2>含み損は「戻すのに必要な上昇率」で見る</h2>
+    <p>含み損は下落率が大きくなるほど、建値に戻すのに必要な上昇率が加速度的に大きくなります。</p>
+    <table class="info-table">
+      <tr><th>下落率</th><th>建値回復に必要な上昇率</th></tr>
+      <tr><td>-10%</td><td>+11.1%</td></tr>
+      <tr><td>-20%</td><td>+25.0%</td></tr>
+      <tr><td>-30%</td><td>+42.9%</td></tr>
+      <tr><td>-50%</td><td>+100.0%</td></tr>
+      <tr><td>-70%</td><td>+233.3%</td></tr>
+    </table>
+    <p><strong>半値になった株を取り戻すには、2倍にする必要があります。</strong>損切りが早いほうがいいと言われるのは、この非対称性があるからです。基準の決め方は<a href="../articles/stop-loss/">損切りの記事</a>にまとめています。</p>
+
+    <h2>よくある質問</h2>
+    <h3>Q. 買い増し（ナンピン）した場合の平均取得単価は？</h3>
+    <p>投資総額 ÷ 保有株数 で求めます。複数回に分けて買った場合は<a href="../nanpin-calc/">ナンピン計算ツール</a>で自動計算できます。</p>
+    <h3>Q. 証券会社アプリの評価損益と数字が合いません</h3>
+    <p>証券会社の表示は購入時手数料を取得単価に含めていることがあります。また単元未満株や配当を含む表示もあるため、概算として使ってください。</p>
+    <h3>Q. NISA口座の場合は？</h3>
+    <p>NISA口座での利益は非課税です。「いま全部売った場合」の税金は0円として考えてください。</p>
+  </div>
+
+  <div style="margin-top:32px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius-lg); padding:20px 24px;">
+    <p style="font-size:13px; font-weight:700; color:var(--gray-700); margin-bottom:4px;">💡 含み益を確定させるとき、手数料で目減りしていませんか</p>
+    <p style="font-size:13px; color:var(--gray-500); margin-bottom:16px;">売買のたびにかかる手数料は、条件付きで0円にできる証券会社があります。口座開設は無料です。</p>
+    <a href="https://h.accesstrade.net/sp/cc?rk=01000t2900os8p" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta">松井証券 口座開設（1日50万円まで手数料0円・無料）</a>
+    <a href="https://ad2.trafficgate.net/t/r/1190/738/317787_397122" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub">楽天証券 口座開設（100万円まで手数料0円・無料）</a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Money<span>Tools</span></div>
+        <p>資産形成に役立つ無料計算ツール</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="../investment-sim/">積立投資シミュレーター</a></li>
+            <li><a href="../position-calc/">ポジションサイズ計算ツール</a></li>
+            <li><a href="../oco-calc/">OCO注文計算ツール</a></li>
+            <li><a href="../profit-calc/">株式損益計算ツール</a></li>
+            <li><a href="./">ナンピン計算ツール</a></li>
+            <li><a href="../fx-calc/">FX計算ツール</a></li>
+            <li><a href="../ideco-calc/">iDeCo節税額シミュレーター</a></li>
+            <li><a href="../volume-calc/">出来高・売買代金チェック</a></li>
+            <li><a href="./">含み益・含み損計算</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>情報</h4>
+          <ul>
+            <li><a href="../privacy/">プライバシーポリシー</a></li>
+            <li><a href="../disclaimer/">免責事項</a></li>
+            <li><a href="../about/">運営者情報</a></li>
+            <li><a href="../contact/">お問い合わせ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本ツールの計算結果は手数料を含まない参考値です。実際の平均取得単価は証券会社の画面をご確認ください。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+
+
+<script>
+(function () {
+  const $ = id => document.getElementById(id);
+  const num = id => { const v = parseFloat($(id).value); return isNaN(v) ? null : v; };
+  const yen = n => (n >= 0 ? '+' : '−') + Math.abs(Math.round(n)).toLocaleString() + '円';
+  const plain = n => Math.round(n).toLocaleString() + '円';
+  const TAX = 0.20315;
+
+  function render() {
+    let cost = 0, value = 0, filled = 0;
+
+    for (let i = 1; i <= 5; i++) {
+      const c = num('c' + i), s = num('s' + i), n = num('n' + i);
+      const out = $('rr' + i);
+      if (c !== null && s !== null && n !== null && c > 0 && s > 0 && n > 0) {
+        const rowCost = c * s, rowVal = n * s, rowPl = rowVal - rowCost;
+        const rowRate = rowCost > 0 ? rowPl / rowCost * 100 : 0;
+        cost += rowCost; value += rowVal; filled++;
+        out.textContent = `${yen(rowPl)}（${rowRate >= 0 ? '+' : ''}${rowRate.toFixed(1)}%）`;
+        out.style.color = rowPl > 0 ? '#059669' : (rowPl < 0 ? '#dc2626' : '');
+      } else {
+        out.textContent = '';
+      }
+    }
+
+    if (!filled) {
+      $('r-pl').textContent = '—';
+      $('r-pl').className = 'result-value pl-big pl-zero';
+      $('r-pl-sub').textContent = '取得金額と評価額の差です';
+      $('r-cost').textContent = '—';
+      $('r-value').textContent = '—';
+      $('sell-card').style.display = 'none';
+      $('recover-card').style.display = 'none';
+      return;
+    }
+
+    const pl = value - cost;
+    const rate = cost > 0 ? pl / cost * 100 : 0;
+    const cls = pl > 0 ? 'pl-plus' : (pl < 0 ? 'pl-minus' : 'pl-zero');
+    const badge = pl > 0 ? 'rate-plus' : (pl < 0 ? 'rate-minus' : 'rate-zero');
+
+    $('r-pl').className = 'result-value pl-big ' + cls;
+    $('r-pl').innerHTML = yen(pl) +
+      `<span class="rate-badge ${badge}">${rate >= 0 ? '+' : ''}${rate.toFixed(1)}%</span>`;
+    $('r-pl-sub').textContent = filled > 1
+      ? `${filled}銘柄の合計（取得 ${plain(cost)} → 評価 ${plain(value)}）`
+      : `取得 ${plain(cost)} → 評価 ${plain(value)}`;
+    $('r-cost').textContent = plain(cost);
+    $('r-value').textContent = plain(value);
+
+    // 含み益がある場合だけ「いま売ったら」を出す（損失には課税されない）
+    if (pl > 0) {
+      const tax = pl * TAX;
+      $('sell-card').style.display = '';
+      $('r-tax').textContent = '−' + plain(tax);
+      $('r-tax-sub').textContent = `${plain(pl)} × 20.315%`;
+      $('r-net').textContent = '+' + plain(pl - tax);
+    } else {
+      $('sell-card').style.display = 'none';
+    }
+
+    // 含み損の場合だけ「建値に戻すには」を出す
+    if (pl < 0 && value > 0) {
+      const need = (cost / value - 1) * 100;
+      $('recover-card').style.display = '';
+      $('r-need').textContent = '+' + need.toFixed(1) + '%';
+      $('r-need-sub').textContent =
+        `現在の評価額 ${plain(value)} が ${plain(cost)} に戻るまで（${rate.toFixed(1)}% の下落に対して）`;
+    } else {
+      $('recover-card').style.display = 'none';
+    }
+  }
+
+  for (let i = 1; i <= 5; i++) {
+    ['c', 's', 'n'].forEach(k => $(k + i).addEventListener('input', render));
+  }
+  render();
+})();
+</script>
+<script src="../js/nav.js"></script>
+</body>
+</html>

@@ -86,6 +86,7 @@
       <a href="fx-calc/">FX計算</a>
       <a href="ideco-calc/">iDeCo節税</a>
       <a href="volume-calc/">出来高チェック</a>
+      <a href="unrealized-calc/">含み益計算</a>
       <a href="articles/">記事一覧</a>
     </nav>
     <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
@@ -121,9 +122,6 @@
       <!-- 積立投資シミュレーター -->
       <div class="tool-card">
         <div class="tool-icon">📈</div>
-        <div>
-          <span class="tool-tag new">NEW</span>
-        </div>
         <h3>積立投資シミュレーター</h3>
         <p>毎月の積立額・年利・運用期間を入力するだけで、将来の資産額を複利計算でシミュレーション。元本と運用益の内訳もグラフで確認できます。</p>
         <a href="investment-sim/" class="tool-btn">シミュレーターを使う →</a>
@@ -132,9 +130,6 @@
       <!-- OCO注文計算ツール -->
       <div class="tool-card">
         <div class="tool-icon">🎯</div>
-        <div>
-          <span class="tool-tag new">NEW</span>
-        </div>
         <h3>OCO注文計算ツール</h3>
         <p>購入株価と株数を入力するだけで、利確・損切ラインの株価と損益を自動計算。税引後の手取り利益も確認できます。</p>
         <a href="oco-calc/" class="tool-btn">計算ツールを使う →</a>
@@ -143,9 +138,6 @@
       <!-- ポジションサイズ計算ツール -->
       <div class="tool-card">
         <div class="tool-icon">📊</div>
-        <div>
-          <span class="tool-tag new">NEW</span>
-        </div>
         <h3>ポジションサイズ計算ツール</h3>
         <p>口座残高・許容損失・損切りラインから最適な株数を自動計算。リスク管理に基づいた株数を確認してOCO計算ツールへ連携できます。</p>
         <a href="position-calc/" class="tool-btn">計算ツールを使う →</a>
@@ -154,9 +146,6 @@
       <!-- 株式損益計算ツール -->
       <div class="tool-card">
         <div class="tool-icon">🧾</div>
-        <div>
-          <span class="tool-tag new">NEW</span>
-        </div>
         <h3>株式損益計算ツール</h3>
         <p>買値・売値・株数を入力するだけで、手数料・税金（20.315%）を差し引いた実質的な利益・損失を計算。損益分岐点も確認できます。</p>
         <a href="profit-calc/" class="tool-btn">計算ツールを使う →</a>
@@ -165,9 +154,6 @@
       <!-- ナンピン計算ツール -->
       <div class="tool-card">
         <div class="tool-icon">⚖️</div>
-        <div>
-          <span class="tool-tag new">NEW</span>
-        </div>
         <h3>ナンピン計算ツール</h3>
         <p>買い増し・ナンピン後の平均取得単価を最大5回分まで自動計算。損益分岐点や、建値回復に必要な値上がり率もわかります。</p>
         <a href="nanpin-calc/" class="tool-btn">計算ツールを使う →</a>
@@ -176,9 +162,6 @@
       <!-- FX計算ツール -->
       <div class="tool-card">
         <div class="tool-icon">💱</div>
-        <div>
-          <span class="tool-tag new">NEW</span>
-        </div>
         <h3>FX計算ツール</h3>
         <p>必要証拠金・1pipsあたりの損益・証拠金維持率をまとめて自動計算。損切り幅から逆算した適正な取引数量もわかります。</p>
         <a href="fx-calc/" class="tool-btn">計算ツールを使う →</a>
@@ -187,9 +170,6 @@
       <!-- iDeCo節税額シミュレーター -->
       <div class="tool-card">
         <div class="tool-icon">🏛️</div>
-        <div>
-          <span class="tool-tag new">NEW</span>
-        </div>
         <h3>iDeCo節税額シミュレーター</h3>
         <p>職業区分・年収・掛金を入力するだけで、年間と拠出期間累計の節税額を自動計算。専業主婦(夫)など節税メリットが出にくいケースの注意点もわかります。</p>
         <a href="ideco-calc/" class="tool-btn">計算ツールを使う →</a>
@@ -198,12 +178,20 @@
       <!-- 出来高・売買代金チェックツール -->
       <div class="tool-card">
         <div class="tool-icon">📶</div>
-        <div>
-          <span class="tool-tag new">NEW</span>
-        </div>
         <h3>出来高・売買代金チェックツール</h3>
         <p>株価と出来高を入力するだけで売買代金を自動計算し、デイトレに向いている流動性かどうかを判定。自分の売買予定株数の市場インパクトもわかります。</p>
         <a href="volume-calc/" class="tool-btn">計算ツールを使う →</a>
+      </div>
+
+      <!-- 含み益・含み損の計算ツール -->
+      <div class="tool-card">
+        <div class="tool-icon">📊</div>
+        <div>
+          <span class="tool-tag new">NEW</span>
+        </div>
+        <h3>含み益・含み損の計算ツール</h3>
+        <p>平均取得単価・株数・現在の株価を入れるだけで、評価損益の金額と損益率が出ます。最大5銘柄まで合計でき、含み損なら建値に戻すのに必要な上昇率もわかります。</p>
+        <a href="unrealized-calc/" class="tool-btn">計算ツールを使う →</a>
       </div>
 
     </div>
@@ -293,6 +281,7 @@
             <li><a href="fx-calc/">FX計算ツール</a></li>
             <li><a href="ideco-calc/">iDeCo節税額シミュレーター</a></li>
             <li><a href="volume-calc/">出来高・売買代金チェック</a></li>
+            <li><a href="unrealized-calc/">含み益・含み損計算</a></li>
           </ul>
         </div>
         <div>
