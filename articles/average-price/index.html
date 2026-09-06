@@ -135,6 +135,19 @@
     .mini-calc-result-row.main { border-top: 1px dashed var(--gray-200); margin-top: 6px; padding-top: 10px; }
     .mini-calc-result-row.main strong { font-size: 20px; color: var(--primary); font-weight: 900; }
     .mini-calc-note { font-size: 12px; color: var(--gray-500); margin-top: 10px; line-height: 1.7; }
+    .ap-fig {
+      margin: 24px 0;
+      padding: 18px 12px 12px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+    }
+    .ap-fig svg { display: block; width: 100%; height: auto; }
+    .ap-fig figcaption {
+      margin-top: 12px; padding-top: 10px;
+      border-top: 1px solid var(--gray-200);
+      font-size: 13px; line-height: 1.8; color: var(--gray-600);
+    }
   </style>
   <script type="application/ld+json">
 {
@@ -333,6 +346,67 @@
       <div class="callout-title">💡 「買値の平均」ではなく「金額で加重した平均」</div>
       1,000円と800円を単純に平均して900円になったのは、<strong>同じ株数ずつ買ったから</strong>です。株数が違う場合は単純平均になりません。たとえば1,000円×100株＋800円×300株なら、(100,000＋240,000)÷400株＝<strong>850円</strong>。多く買ったほうの株価に引っ張られます。
     </div>
+
+
+    <figure class="ap-fig">
+      <svg viewBox="0 0 640 340" role="img"
+           aria-label="同じ株数ずつ買った場合は平均取得単価が単純平均の900円になるが、株数が違う場合は多く買ったほうに引っ張られて850円になることを、面積で示した図。">
+        <text x="20" y="22" font-size="13" font-weight="700" fill="#1f2937">株数が同じなら真ん中</text>
+        <text x="340" y="22" font-size="13" font-weight="700" fill="#1f2937">株数が違うと引っ張られる</text>
+
+        <!-- ============ 左：100株 + 100株 ============ -->
+        <!-- 1,000円 × 100株 -->
+        <rect x="30" y="60" width="90" height="100" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="75" y="105" font-size="12" font-weight="700" fill="#1e40af" text-anchor="middle">1,000円</text>
+        <text x="75" y="122" font-size="11" fill="#3b82f6" text-anchor="middle">100株</text>
+        <text x="75" y="176" font-size="11" fill="#6b7280" text-anchor="middle">10万円</text>
+
+        <!-- 800円 × 100株 -->
+        <rect x="130" y="100" width="90" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="175" y="128" font-size="12" font-weight="700" fill="#1e40af" text-anchor="middle">800円</text>
+        <text x="175" y="145" font-size="11" fill="#3b82f6" text-anchor="middle">100株</text>
+        <text x="175" y="176" font-size="11" fill="#6b7280" text-anchor="middle">8万円</text>
+
+        <!-- 平均線 -->
+        <line x1="20" y1="80" x2="240" y2="80" stroke="#d97706" stroke-width="2" stroke-dasharray="6 4"/>
+        <text x="20" y="72" font-size="12" font-weight="700" fill="#d97706">平均 900円</text>
+
+        <text x="30" y="212" font-size="11.5" fill="#4b5563">18万円 ÷ 200株 = 900円</text>
+        <text x="30" y="232" font-size="11.5" font-weight="700" fill="#059669">1,000と800のちょうど真ん中</text>
+
+        <!-- ============ 右：100株 + 300株 ============ -->
+        <!-- 1,000円 × 100株 -->
+        <rect x="350" y="60" width="45" height="100" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+        <text x="372" y="105" font-size="11" font-weight="700" fill="#9a3412" text-anchor="middle">1,000円</text>
+        <text x="372" y="121" font-size="10.5" fill="#ea580c" text-anchor="middle">100株</text>
+        <text x="372" y="176" font-size="11" fill="#6b7280" text-anchor="middle">10万円</text>
+
+        <!-- 800円 × 300株（幅3倍） -->
+        <rect x="405" y="100" width="135" height="60" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+        <text x="472" y="128" font-size="12" font-weight="700" fill="#9a3412" text-anchor="middle">800円</text>
+        <text x="472" y="145" font-size="11" fill="#ea580c" text-anchor="middle">300株（3倍）</text>
+        <text x="472" y="176" font-size="11" fill="#6b7280" text-anchor="middle">24万円</text>
+
+        <!-- 平均線（下にずれる） -->
+        <line x1="340" y1="90" x2="560" y2="90" stroke="#d97706" stroke-width="2" stroke-dasharray="6 4"/>
+        <text x="340" y="82" font-size="12" font-weight="700" fill="#d97706">平均 850円</text>
+
+        <!-- ずれを示す矢印 -->
+        <line x1="572" y1="80" x2="572" y2="90" stroke="#dc2626" stroke-width="1.5"/>
+        <polygon points="572,92 569,85 575,85" fill="#dc2626"/>
+        <text x="580" y="88" font-size="10.5" fill="#dc2626">50円下がる</text>
+
+        <text x="350" y="212" font-size="11.5" fill="#4b5563">34万円 ÷ 400株 = 850円</text>
+        <text x="350" y="232" font-size="11.5" font-weight="700" fill="#ea580c">800円のほうを多く買ったので、そちら寄りに</text>
+
+        <!-- 下部の説明 -->
+        <line x1="20" y1="258" x2="620" y2="258" stroke="#e5e7eb" stroke-width="1"/>
+        <text x="20" y="282" font-size="12" fill="#4b5563">四角形の<tspan font-weight="700">面積が投資金額</tspan>。横幅が株数、高さが株価にあたります。</text>
+        <text x="20" y="304" font-size="12" fill="#4b5563">平均取得単価は<tspan font-weight="700">面積の合計 ÷ 横幅の合計</tspan>なので、<tspan font-weight="700">幅の広いほう（＝多く買った株価）に近づきます。</tspan></text>
+        <text x="20" y="326" font-size="11.5" fill="#6b7280">「買値を足して2で割る」ではない、というのがここでのポイントです。</text>
+      </svg>
+      <figcaption>同じ株数ずつなら単純平均と一致しますが、株数が違うと多く買ったほうの株価に引っ張られます。</figcaption>
+    </figure>
 
     <h2 id="table">ナンピン後の単価 早見表</h2>
     <p>「1,000円で100株持っている状態から、下がったところで100株買い増した（ナンピンした）」場合の平均取得単価の早見表です。</p>
