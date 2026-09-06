@@ -139,6 +139,16 @@
       line-height: 1.7;
     }
     .screen-step-body strong { color: var(--gray-900); }
+    .ss-fig {
+      margin: 24px 0; padding: 18px 12px 12px;
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+    }
+    .ss-fig svg { display: block; width: 100%; height: auto; }
+    .ss-fig figcaption {
+      margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--gray-200);
+      font-size: 13px; line-height: 1.8; color: var(--gray-600);
+    }
   </style>
   <script type="application/ld+json">
 {
@@ -295,6 +305,38 @@
       <div class="callout-title">💡 出来高ランキングが出発点</div>
       証券会社のツールや株探（kabutan.jp）の「出来高ランキング」を毎朝確認するのが基本です。その日動いている銘柄が一目でわかります。
     </div>
+
+
+    <figure class="ss-fig">
+      <svg viewBox="0 0 620 380" role="img"
+           aria-label="デイトレ向きの銘柄は、出来高100万株以上、1日の値幅が株価の2から5パーセント、株価500円から2000円という3つの条件がすべて重なる範囲。どれか1つでも外れると避けるべき銘柄になる。">
+        <text x="310" y="26" font-size="13.5" font-weight="700" fill="#1f2937" text-anchor="middle">3つが重なったところだけが対象</text>
+
+        <!-- 3つの円 -->
+        <circle cx="240" cy="150" r="105" fill="#2563eb" fill-opacity="0.13" stroke="#2563eb" stroke-width="1.8"/>
+        <circle cx="380" cy="150" r="105" fill="#059669" fill-opacity="0.13" stroke="#059669" stroke-width="1.8"/>
+        <circle cx="310" cy="252" r="105" fill="#d97706" fill-opacity="0.13" stroke="#d97706" stroke-width="1.8"/>
+
+        <!-- 各円のラベル -->
+        <text x="168" y="96" font-size="12.5" font-weight="700" fill="#1e40af" text-anchor="middle">出来高</text>
+        <text x="168" y="113" font-size="11.5" fill="#2563eb" text-anchor="middle">100万株以上</text>
+
+        <text x="452" y="96" font-size="12.5" font-weight="700" fill="#065f46" text-anchor="middle">値動き</text>
+        <text x="452" y="113" font-size="11.5" fill="#059669" text-anchor="middle">株価の2〜5%</text>
+
+        <text x="310" y="335" font-size="12.5" font-weight="700" fill="#92400e" text-anchor="middle">株価</text>
+        <text x="310" y="352" font-size="11.5" fill="#d97706" text-anchor="middle">500〜2,000円</text>
+
+        <!-- 中央の重なり -->
+        <circle cx="310" cy="178" r="24" fill="#1f2937"/>
+        <text x="310" y="175" font-size="10.5" font-weight="700" fill="#fff" text-anchor="middle">ここが</text>
+        <text x="310" y="188" font-size="10.5" font-weight="700" fill="#fff" text-anchor="middle">狙い目</text>
+
+        <!-- 補足 -->
+        <text x="20" y="372" font-size="11.5" fill="#6b7280">どれか1つでも外れると「避けるべき銘柄」になります。3つ揃って初めて対象です。</text>
+      </svg>
+      <figcaption>3条件はどれか1つを満たせばいいのではなく、すべて同時に満たす必要があります。</figcaption>
+    </figure>
 
     <h2 id="volume">出来高の目安</h2>
     <p>出来高はデイトレにおいて最も重要な指標です。出来高が多いと以下のメリットがあります。</p>
