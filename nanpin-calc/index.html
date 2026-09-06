@@ -14,10 +14,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="https://yuta-tools.com/nanpin-calc/">
-  <title>ナンピン計算ツール｜買い増し後の平均取得単価と損益分岐点 | MoneyTools</title>
+  <title>ナンピン計算ツール（計算機）｜買い増し後の平均取得単価 | MoneyTools</title>
   <meta name="description" content="ナンピン（買い増し）後の平均取得単価と損益分岐点を最大5回分まで自動計算する無料の計算機。投資総額・保有株数に加え、現在値を入れれば評価損益と建値回復に必要な値上がり率もわかります。株数と単価を入れるだけです。">
   <!-- OGP / Twitter Card -->
-  <meta property="og:title" content="ナンピン計算ツール｜買い増し後の平均取得単価と損益分岐点 | MoneyTools">
+  <meta property="og:title" content="ナンピン計算ツール（計算機）｜買い増し後の平均取得単価 | MoneyTools">
   <meta property="og:description" content="ナンピン（買い増し）後の平均取得単価と損益分岐点を最大5回分まで自動計算。投資総額・保有株数・評価損益までまとめて確認できます。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://yuta-tools.com/nanpin-calc/">
@@ -25,7 +25,7 @@
   <meta property="og:site_name" content="MoneyTools">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ナンピン計算ツール｜買い増し後の平均取得単価と損益分岐点 | MoneyTools">
+  <meta name="twitter:title" content="ナンピン計算ツール（計算機）｜買い増し後の平均取得単価 | MoneyTools">
   <meta name="twitter:description" content="ナンピン（買い増し）後の平均取得単価と損益分岐点を最大5回分まで自動計算。評価損益までまとめて確認できます。">
   <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -211,6 +211,54 @@
   ]
 }
   </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "証券会社の表示と計算結果がずれます",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "証券会社の画面では売買手数料を含めた金額で計算されていたり、円未満が切り上げ処理されていることがあります。このツールは手数料を含まない単純計算なので、数円程度の差が出ることがあります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "何回まで買い増しを入力できますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "最大5回分まで入力できます。それ以上の回数を計算したい場合は、すでに保有している分をまとめて1行（平均取得単価と合計株数）として入力すると、同じ結果が得られます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ナンピン計算機とナンピン計算ツールは違うものですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "同じものです。呼び方が違うだけで、いずれも買い増し後の平均取得単価を自動で計算するツールを指します。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "株のナンピンと平均取得単価はどう関係しますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ナンピン買いをすると投資総額と保有株数の両方が増えます。平均取得単価は投資総額÷保有株数なので、買い増した価格が現在の平均より安ければ単価が下がります。逆に高い価格で買い増すと単価は上がります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ナンピンは何回までやっていいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "決まった正解はありませんが、買い増しの上限と撤退ラインを事前に決めておくことが重要です。ナンピンは下落が続くと投資額と含み損が加速度的に増える手法で、回数を重ねるほど1回の下落インパクトが大きくなります。"
+      }
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 <header class="site-header">
@@ -343,6 +391,11 @@
   </a>
 
   <div class="info-card">
+    <h2>ナンピンとは（難平買い）</h2>
+    <p><strong>ナンピン</strong>とは、買った株が下がったときに<strong>さらに買い増して平均取得単価を下げる</strong>手法です。漢字では「難平」と書き、「難（＝損失）を平らにならす」という意味からきています。<strong>ナンピン買い</strong>とも呼ばれます。</p>
+    <p>たとえば1,000円で100株買ったあと、800円で100株買い増すと、平均取得単価は900円に下がります。株価が900円まで戻れば損失がゼロになるので、<strong>回復に必要な値上がり幅が小さくなる</strong>のが利点です。</p>
+    <p>ただし投資額と保有株数が増えるため、<strong>さらに下がったときの損失も大きくなります</strong>。上のナンピン計算機で、買い増し後の平均取得単価と評価損益を先に確認してから判断してください。</p>
+
     <h2>平均取得単価の計算方法</h2>
     <p>ナンピン（買い増し）をすると、平均取得単価は「それまでの投資総額と新しい買い付けを合算して、保有株数で割った値」になります。</p>
     <div class="formula">平均取得単価 = 投資総額 ÷ 保有株数</div>
@@ -374,6 +427,12 @@
 
     <h3>Q. 何回まで買い増しを入力できますか？</h3>
     <p>このツールでは<strong>最大5回分</strong>まで入力できます。それ以上の回数を計算したい場合は、すでに保有している分をまとめて1行（平均取得単価と合計株数）として入力すると、同じ結果が得られます。</p>
+
+    <h3>Q. ナンピン計算機とナンピン計算ツールは違うものですか？</h3>
+    <p>同じものです。呼び方が違うだけで、いずれも<strong>買い増し後の平均取得単価を自動で計算するツール</strong>を指します。このページの計算機がそれにあたります。</p>
+
+    <h3>Q. 株のナンピンと平均取得単価はどう関係しますか？</h3>
+    <p>ナンピン買いをすると、投資総額と保有株数の両方が増えます。平均取得単価は<strong>投資総額 ÷ 保有株数</strong>なので、買い増した価格が現在の平均より安ければ単価が下がります。逆に高い価格で買い増すと単価は上がります。</p>
 
     <h3>Q. ナンピンは何回までやっていい？</h3>
     <p>決まった正解はありませんが、<strong>買い増しの上限と撤退ラインを事前に決めておく</strong>ことが重要です。ナンピンは下落が続くと投資額と含み損が加速度的に増える手法で、回数を重ねるほど1回の下落インパクトが大きくなります。詳しくは<a href="../articles/average-price/">株の平均取得単価の計算方法</a>と<a href="../articles/position-size/">ポジションサイズとリスク管理</a>を参照してください。</p>
