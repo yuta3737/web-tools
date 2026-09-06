@@ -120,6 +120,16 @@
       color: var(--gray-600);
       line-height: 1.6;
     }
+    .mh-fig {
+      margin: 24px 0; padding: 18px 12px 12px;
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+    }
+    .mh-fig svg { display: block; width: 100%; height: auto; }
+    .mh-fig figcaption {
+      margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--gray-200);
+      font-size: 13px; line-height: 1.8; color: var(--gray-600);
+    }
   </style>
   <script type="application/ld+json">
 {
@@ -310,6 +320,58 @@
         <div class="timeline-body">1日の取引終了。最後に成立した価格が「終値（引け値）」。デイトレはすべてのポジションをここまでに決済する。</div>
       </div>
     </div>
+
+
+    <figure class="mh-fig">
+      <svg viewBox="0 0 640 300" role="img"
+           aria-label="東証の1日の流れ。9時の寄り付きと15時30分の大引け前に出来高が増え、9時30分から11時30分の前場中盤は値動きが落ち着いて初心者が狙いやすい時間帯になる。11時30分から12時30分は昼休みで取引がない。">
+        <text x="70" y="26" font-size="13" font-weight="700" fill="#1f2937">1日の出来高の波（イメージ）</text>
+
+        <!-- 初心者向きゾーン -->
+        <rect x="110" y="52" width="160" height="158" fill="#059669" fill-opacity="0.10"/>
+        <text x="190" y="70" font-size="11.5" font-weight="700" fill="#059669" text-anchor="middle">狙いやすい</text>
+
+        <!-- 昼休み -->
+        <rect x="270" y="52" width="80" height="158" fill="#9ca3af" fill-opacity="0.18"/>
+        <text x="310" y="140" font-size="11" fill="#6b7280" text-anchor="middle">昼休み</text>
+        <text x="310" y="156" font-size="10.5" fill="#9ca3af" text-anchor="middle">取引なし</text>
+
+        <!-- リスク高ゾーン -->
+        <rect x="70" y="52" width="40" height="158" fill="#dc2626" fill-opacity="0.10"/>
+        <text x="90" y="70" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle">荒い</text>
+
+        <rect x="550" y="52" width="40" height="158" fill="#d97706" fill-opacity="0.10"/>
+
+        <!-- 出来高の曲線 -->
+        <polyline points="70,115 110,148 150,168 230,176 270,162 350,165 430,178 510,176 550,152 590,120" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+
+        <!-- 時間軸 -->
+        <line x1="70" y1="210" x2="590" y2="210" stroke="#1f2937" stroke-width="1.5"/>
+        <g font-size="11" fill="#4b5563" text-anchor="middle">
+          <text x="70" y="228">9:00</text>
+          <text x="270" y="228">11:30</text>
+          <text x="350" y="228">12:30</text>
+          <text x="590" y="228">15:30</text>
+        </g>
+
+        <!-- 節目のラベル -->
+        <line x1="70" y1="115" x2="70" y2="210" stroke="#2563eb" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="74" y="110" font-size="11.5" font-weight="700" fill="#1e40af">寄り付き</text>
+
+        <line x1="590" y1="120" x2="590" y2="210" stroke="#2563eb" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="586" y="115" font-size="11.5" font-weight="700" fill="#1e40af" text-anchor="end">大引け</text>
+
+        <!-- 前場・後場 -->
+        <line x1="70" y1="240" x2="270" y2="240" stroke="#6b7280" stroke-width="1.5"/>
+        <text x="170" y="256" font-size="11.5" fill="#4b5563" text-anchor="middle">前場 9:00〜11:30</text>
+        <line x1="350" y1="240" x2="590" y2="240" stroke="#6b7280" stroke-width="1.5"/>
+        <text x="470" y="256" font-size="11.5" fill="#4b5563" text-anchor="middle">後場 12:30〜15:30</text>
+
+        <text x="70" y="286" font-size="11.5" fill="#6b7280">出来高は寄り付きと大引け前に山ができ、中盤は落ち着きます。</text>
+        <text x="70" y="304" font-size="11.5" fill="#6b7280">初心者が狙いやすいのは、荒さが収まってトレンドが出る 9:30〜11:30 です。</text>
+      </svg>
+      <figcaption>出来高の高さはイメージです。時間の位置関係と、山ができる場所を示しています。</figcaption>
+    </figure>
 
     <h2 id="characteristics">時間帯別の値動きの特徴</h2>
 
