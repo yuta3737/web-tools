@@ -116,6 +116,16 @@
       color: var(--gray-500);
       margin-top: 4px;
     }
+    .rr-fig {
+      margin: 24px 0; padding: 18px 12px 12px;
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+    }
+    .rr-fig svg { display: block; width: 100%; height: auto; }
+    .rr-fig figcaption {
+      margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--gray-200);
+      font-size: 13px; line-height: 1.8; color: var(--gray-600);
+    }
   </style>
   <script type="application/ld+json">
 {
@@ -312,6 +322,60 @@
       <div class="callout-title">⚠️ 「勝率」だけ見ていると危険</div>
       「勝率80%」でも、負けるときに大きく損して勝つときは少額、というパターンでは資産は減ります。勝率とRR比をセットで管理することが重要です。
     </div>
+
+
+    <figure class="rr-fig">
+      <svg viewBox="0 0 640 340" role="img"
+           aria-label="RR比が高いほど必要な勝率が下がることを示す曲線。RR比1対1なら勝率50パーセント、1対2なら33パーセント、1対3なら25パーセントで損益ゼロになる。">
+        <text x="80" y="30" font-size="13" font-weight="700" fill="#1f2937">損益ゼロに必要な勝率</text>
+
+        <!-- 目盛 -->
+        <g stroke="#e5e7eb" stroke-width="1">
+          <line x1="80.0" y1="88.6" x2="560.0" y2="88.6"/>
+          <line x1="80.0" y1="145.7" x2="560.0" y2="145.7"/>
+          <line x1="80.0" y1="202.9" x2="560.0" y2="202.9"/>
+        </g>
+        <g font-size="11" fill="#9ca3af" text-anchor="end">
+          <text x="72.0" y="92.6">60%</text>
+          <text x="72.0" y="149.7">40%</text>
+          <text x="72.0" y="206.9">20%</text>
+        </g>
+
+        <!-- 軸 -->
+        <line x1="80.0" y1="60.0" x2="80.0" y2="260.0" stroke="#1f2937" stroke-width="1.5"/>
+        <line x1="80.0" y1="260.0" x2="560.0" y2="260.0" stroke="#1f2937" stroke-width="1.5"/>
+
+        <!-- 曲線 -->
+        <polyline points="80.0,69.5 88.0,78.6 96.0,86.8 104.0,94.4 112.0,101.3 120.0,107.6 128.0,113.5 136.0,118.9 144.0,123.9 152.0,128.6 160.0,133.0 168.0,137.1 176.0,141.0 184.0,144.6 192.0,148.0 200.0,151.2 208.0,154.2 216.0,157.0 224.0,159.7 232.0,162.3 240.0,164.8 248.0,167.1 256.0,169.3 264.0,171.4 272.0,173.4 280.0,175.3 288.0,177.2 296.0,178.9 304.0,180.6 312.0,182.3 320.0,183.8 328.0,185.3 336.0,186.7 344.0,188.1 352.0,189.5 360.0,190.7 368.0,192.0 376.0,193.2 384.0,194.3 392.0,195.4 400.0,196.5 408.0,197.5 416.0,198.6 424.0,199.5 432.0,200.5 440.0,201.4 448.0,202.3 456.0,203.1 464.0,204.0 472.0,204.8 480.0,205.6 488.0,206.3 496.0,207.1 504.0,207.8 512.0,208.5 520.0,209.2 528.0,209.9 536.0,210.5 544.0,211.2 552.0,211.8 560.0,212.4" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+        
+        <circle cx="133.3" cy="117.1" r="4" fill="#2563eb"/>
+        <text x="133.3" y="106.1" font-size="11.5" font-weight="700" fill="#2563eb" text-anchor="middle">50%</text>
+        <circle cx="186.7" cy="145.7" r="5" fill="#d97706"/>
+        <text x="186.7" y="134.7" font-size="11.5" font-weight="700" fill="#d97706" text-anchor="middle">40%</text>
+        <circle cx="240.0" cy="164.9" r="4" fill="#2563eb"/>
+        <text x="240.0" y="153.9" font-size="11.5" font-weight="700" fill="#2563eb" text-anchor="middle">33%</text>
+        <circle cx="346.7" cy="188.6" r="4" fill="#2563eb"/>
+        <text x="346.7" y="177.6" font-size="11.5" font-weight="700" fill="#2563eb" text-anchor="middle">25%</text>
+
+        <!-- 1:1.5 の推奨ライン -->
+        <line x1="186.7" y1="145.7" x2="186.7" y2="260.0" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <text x="186.7" y="294" font-size="11" font-weight="700" fill="#d97706" text-anchor="middle">記事の推奨ライン</text>
+
+        <!-- x軸ラベル -->
+        <g font-size="11.5" fill="#4b5563" text-anchor="middle">
+          <text x="133.3" y="278">1:1</text>
+          <text x="186.7" y="278">1:1.5</text>
+          <text x="240.0" y="278">1:2</text>
+          <text x="346.7" y="278">1:3</text>
+          <text x="453.3" y="278">1:4</text>
+          <text x="560.0" y="278">1:5</text>
+        </g>
+        <text x="320" y="320" font-size="12" font-weight="700" fill="#374151" text-anchor="middle">RR比（損失1に対する利益）</text>
+
+        <text x="80" y="342" font-size="11.5" fill="#6b7280">必要勝率 ＝ 1 ÷（1 ＋ RR比）。曲線より上の勝率なら利益が残ります。</text>
+      </svg>
+      <figcaption>RR比を上げるほど、必要な勝率は急に下がります。1:1では50%必要ですが、1:3なら25%で足ります。</figcaption>
+    </figure>
 
     <h2 id="howto">トレードでの使い方</h2>
     <p>エントリーする前に、損切り・利確の価格を決めてRR比を計算する習慣をつけましょう。<strong>RR比が1:1.5未満のトレードは見送る</strong>のが基本です。</p>
