@@ -379,6 +379,16 @@
       .order-flow { flex-direction: column; align-items: flex-start; }
       .tool-cta { flex-direction: column; align-items: flex-start; }
     }
+    .ot-fig {
+      margin: 24px 0; padding: 18px 12px 12px;
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+    }
+    .ot-fig svg { display: block; width: 100%; height: auto; }
+    .ot-fig figcaption {
+      margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--gray-200);
+      font-size: 13px; line-height: 1.8; color: var(--gray-600);
+    }
   </style>
   <script type="application/ld+json">
 {
@@ -668,6 +678,51 @@
     </a>
 
     <!-- 6. まとめ -->
+
+    <figure class="ot-fig">
+      <svg viewBox="0 0 640 330" role="img"
+           aria-label="1000円で買った株にOCO注文を設定した図。1050円まで上がれば指値で利確し、970円まで下がれば逆指値で損切りされる。どちらか一方が約定すると、もう片方は自動でキャンセルされる。">
+        <text x="40" y="26" font-size="13" font-weight="700" fill="#1f2937">1,000円で買ったあとにOCOを置く</text>
+
+        <!-- 利確ライン -->
+        <line x1="120" y1="70" x2="500" y2="70" stroke="#059669" stroke-width="2"/>
+        <text x="112" y="66" font-size="12.5" font-weight="700" fill="#059669" text-anchor="end">1,050円</text>
+        <text x="112" y="82" font-size="11" fill="#059669" text-anchor="end">指値（利確）</text>
+        <text x="508" y="74" font-size="12" font-weight="700" fill="#059669">+5,000円</text>
+
+        <!-- 買値 -->
+        <line x1="120" y1="182" x2="500" y2="182" stroke="#1f2937" stroke-width="2" stroke-dasharray="7 4"/>
+        <text x="112" y="186" font-size="12.5" font-weight="700" fill="#1f2937" text-anchor="end">1,000円</text>
+        <text x="508" y="186" font-size="11.5" fill="#6b7280">買った値段</text>
+
+        <!-- 損切りライン -->
+        <line x1="120" y1="250" x2="500" y2="250" stroke="#dc2626" stroke-width="2"/>
+        <text x="112" y="246" font-size="12.5" font-weight="700" fill="#dc2626" text-anchor="end">970円</text>
+        <text x="112" y="262" font-size="11" fill="#dc2626" text-anchor="end">逆指値（損切り）</text>
+        <text x="508" y="254" font-size="12" font-weight="700" fill="#dc2626">−3,000円</text>
+
+        <!-- 分岐の矢印 -->
+        <circle cx="230" cy="182" r="6" fill="#1f2937"/>
+        <path d="M 230 182 L 300 138 L 380 70"
+              fill="none" stroke="#059669" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="380,70 372,74 374,64" fill="#059669"/>
+        <path d="M 230 182 L 300 216 L 380 250"
+              fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="380,250 372,246 374,256" fill="#dc2626"/>
+
+        <text x="392" y="60" font-size="11.5" font-weight="700" fill="#059669">上がったら</text>
+        <text x="392" y="272" font-size="11.5" font-weight="700" fill="#dc2626">下がったら</text>
+
+        <!-- 片方が約定したら他方はキャンセル -->
+        <line x1="40" y1="278" x2="600" y2="278" stroke="#e5e7eb" stroke-width="1"/>
+        <text x="40" y="300" font-size="12" fill="#374151">
+          <tspan font-weight="700">どちらか一方が約定すると、もう片方は自動でキャンセル。</tspan>
+        </text>
+        <text x="40" y="320" font-size="11.5" fill="#6b7280">先に置いておけば、画面を見ていなくても利確と損切りが実行されます。</text>
+      </svg>
+      <figcaption>指値は「上がったら売る」、逆指値は「下がったら売る」。向きが逆なので、この2つをセットにするのがOCOです。</figcaption>
+    </figure>
+
     <h2 id="summary">まとめ：どの注文をいつ使うか</h2>
 
     <table class="compare-table">
