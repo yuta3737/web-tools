@@ -320,6 +320,18 @@
       .oco-table tbody td { padding: 10px 8px; font-size: 12px; }
       .oco-table thead th { padding: 8px 8px; }
     }
+    .explain { margin-top: 44px; }
+    .explain h2 {
+      font-size: 18px; font-weight: 800; color: var(--gray-900);
+      margin: 32px 0 12px; padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .explain h3 { font-size: 15px; font-weight: 700; color: var(--gray-900); margin: 20px 0 6px; }
+    .explain p, .explain li { font-size: 14px; line-height: 1.9; color: var(--gray-700); }
+    .explain p { margin-bottom: 12px; }
+    .explain ul { padding-left: 22px; margin-bottom: 14px; }
+    .explain li { margin-bottom: 6px; }
+    .explain a { color: var(--primary); text-decoration: underline; }
   </style>
   <script type="application/ld+json">
 {
@@ -362,6 +374,46 @@
       "position": 2,
       "name": "OCO注文計算ツール",
       "item": "https://yuta-tools.com/oco-calc/"
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "損切りにも税金はかかりますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "かかりません。税金は利益が出た場合にのみ発生します。なお損失は確定申告をすれば3年間繰り越して翌年以降の利益と相殺できます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "指値と逆指値の違いは？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "向きが逆です。指値は「この値段まで下がったら買う／上がったら売る」、逆指値は「この値段まで下がったら売る」。損切りに使うのは逆指値のほうです。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "OCO注文は指定した価格で必ず約定しますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "必ずとは限りません。相場が急変したときは指定価格を飛び越えて約定すること（スリッページ）があります。出来高の少ない銘柄や決算発表の前後は特に注意が必要です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "表示される税引後の利益は正確ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "税率20.315%で計算した概算です。売買手数料は含んでいないため、手数料まで含めた実際の手取りは株の利益計算ツールで計算できます。"
+      }
     }
   ]
 }
@@ -474,6 +526,43 @@
   <div style="margin-top:40px; padding:20px 0; border-top:1px solid var(--gray-200);">
     <p style="font-size:13px; color:var(--gray-600); margin-bottom:12px;">OCO注文の仕組みをもっと詳しく知りたい方はこちら</p>
     <a href="../articles/order-types/" style="display:inline-block; font-size:14px; font-weight:700; color:var(--primary); text-decoration:underline;">デイトレの注文の種類を図解で解説｜成行・指値・逆指値・OCOの違いとは？</a>
+  </div>
+
+  <div class="explain">
+    <h2>OCO注文とは</h2>
+    <p><strong>OCO（One Cancels the Other）注文</strong>とは、2つの注文を同時に出しておき、<strong>どちらか一方が約定したら、もう片方が自動でキャンセルされる</strong>注文方法です。</p>
+    <p>株を買ったあとに「利益確定の指値」と「損切りの逆指値」をセットで置くのが代表的な使い方です。1,000円で買った株に対して、1,050円で利確・970円で損切りを同時にセットしておくイメージです。</p>
+    <p>1,050円に届けば利確が約定し、970円の損切り注文は自動で消えます。逆に970円まで下がれば損切りが発動し、利確注文が消えます。<strong>両方が同時に約定することはありません。</strong></p>
+
+    <h2>なぜOCOを使うのか</h2>
+    <p>最大の利点は、<strong>画面を見ていなくても決済が実行される</strong>ことです。仕事中や就寝中でも、あらかじめ決めた価格で自動的に売買が行われます。</p>
+    <p>もう1つの利点は<strong>感情を排除できる</strong>ことです。含み損を抱えると「もう少し待てば戻るかも」と考えてしまい、損切りが遅れがちになります。先に注文として置いておけば、その判断の余地がなくなります。</p>
+    <p>逆に含み益が出たときも、「まだ上がるかも」と欲張って利益を逃すことを防げます。<strong>エントリーする前に出口を決めてしまうのがOCOの本質</strong>です。</p>
+
+    <h2>利確幅と損切り幅の決め方</h2>
+    <p>このツールでは利確・損切りを<strong>%で指定</strong>します。目安として、損切りは3〜5%、利確は損切り幅と同じかそれ以上に設定することが多くあります。</p>
+    <p>重要なのは<strong>損益比率（RR比）</strong>です。損切り1に対して利確がいくらかという比率で、これが高いほど低い勝率でも利益が残ります。</p>
+    <ul>
+      <li>RR比 1:1 → 損益ゼロに<strong>勝率50%</strong>が必要</li>
+      <li>RR比 1:2 → <strong>勝率33%</strong>で足りる</li>
+      <li>RR比 1:3 → <strong>勝率25%</strong>で足りる</li>
+    </ul>
+    <p>詳しくは<a href="../articles/risk-reward/">損益比率（RR比）とは</a>で解説しています。株数から適正な損切り幅を逆算したい場合は<a href="../position-calc/">ポジションサイズ計算ツール</a>も使えます。</p>
+
+    <h2>よくある質問</h2>
+    <div class="faq">
+      <h3>Q. 損切りにも税金はかかりますか？</h3>
+      <p>かかりません。税金は利益が出た場合にのみ発生します。なお損失は確定申告をすれば<strong>3年間繰り越して</strong>翌年以降の利益と相殺できます（<a href="../articles/tax-filing/">確定申告と損益通算</a>）。</p>
+
+      <h3>Q. 指値と逆指値の違いは？</h3>
+      <p>向きが逆です。<strong>指値は「この値段まで下がったら買う／上がったら売る」</strong>、<strong>逆指値は「この値段まで下がったら売る」</strong>。損切りに使うのは逆指値のほうです。詳しくは<a href="../articles/order-types/">注文の種類の解説</a>をご覧ください。</p>
+
+      <h3>Q. 指定した価格で必ず約定しますか？</h3>
+      <p>必ずとは限りません。相場が急変したときは、指定価格を飛び越えて約定すること（スリッページ）があります。特に<strong>出来高の少ない銘柄</strong>や、決算発表の前後は注意が必要です。</p>
+
+      <h3>Q. 表示される税引後の利益は正確ですか？</h3>
+      <p>税率20.315%で計算した概算です。売買手数料は含んでいません。手数料まで含めた実際の手取りは<a href="../profit-calc/">株の利益計算ツール</a>で計算できます。</p>
+    </div>
   </div>
 
   <div style="margin-top:32px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius-lg); padding:20px 24px;">

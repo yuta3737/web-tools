@@ -287,6 +287,18 @@
       .result-item:last-child { border-bottom: none; }
       .input-inner input[type="number"] { font-size: 16px; }
     }
+    .explain { margin-top: 44px; }
+    .explain h2 {
+      font-size: 18px; font-weight: 800; color: var(--gray-900);
+      margin: 32px 0 12px; padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .explain h3 { font-size: 15px; font-weight: 700; color: var(--gray-900); margin: 20px 0 6px; }
+    .explain p, .explain li { font-size: 14px; line-height: 1.9; color: var(--gray-700); }
+    .explain p { margin-bottom: 12px; }
+    .explain ol, .explain ul { padding-left: 22px; margin-bottom: 14px; }
+    .explain li { margin-bottom: 6px; }
+    .explain a { color: var(--primary); text-decoration: underline; }
   </style>
   <script type="application/ld+json">
 {
@@ -329,6 +341,46 @@
       "position": 2,
       "name": "ポジションサイズ計算ツール｜何株買うかを自動計算",
       "item": "https://yuta-tools.com/position-calc/"
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "購入金額が口座残高を超えてしまいます",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "現物取引では実行できません。株価の低い銘柄を選ぶか、損切り幅を広げて必要株数を減らしてください。信用取引なら保証金の約3.3倍まで取引できますが、損失も同じ倍率で拡大します。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "損切りラインは何%が適切ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "銘柄の値動きの大きさによります。1日に2〜3%動く銘柄に1%の損切りを置くと、通常の値動きだけで切られてしまいます。その銘柄が1日にどれくらい動くかを確認してから決めてください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "計算した株数で必ず買うべきですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "これは上限です。これより少なく買うのは問題ありません。自信がない場面では減らす、という使い方が適切です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "損切りを置かない場合はどうなりますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ポジションサイズの計算が意味を持ちません。「最大でもこれだけしか損しない」という前提が損切り注文によって担保されているためです。OCO注文で利確とセットにして置いておくのが確実です。"
+      }
     }
   ]
 }
@@ -457,6 +509,50 @@
     </div>
     <div class="oco-cta-arrow">→</div>
   </a>
+
+  <div class="explain">
+    <h2>ポジションサイズの決め方</h2>
+    <p>ポジションサイズとは「1回のトレードで何株買うか」のことです。決め方には順番があり、これを逆にすると必ずロットが膨らみます。</p>
+    <ol>
+      <li><strong>1回の許容損失額を決める</strong>：口座残高 × 許容損失率（一般に1〜2%）</li>
+      <li><strong>損切りラインを決める</strong>：購入価格から何%下で撤退するか</li>
+      <li><strong>株数を逆算する</strong>：許容損失額 ÷ 1株あたりの損失額</li>
+    </ol>
+    <p>具体例で見てみます。口座残高50万円・許容損失率2%なら、1回で失っていいのは<strong>1万円</strong>。株価1,000円で損切りを3%（＝30円）に置くなら、<strong>1万円 ÷ 30円 ＝ 333株</strong>。単元株単位に切り捨てて<strong>300株</strong>が答えです。</p>
+    <p>このとき購入金額は30万円、損切りに当たったときの損失は<strong>9,000円</strong>で、許容した1万円に収まります。</p>
+
+    <h2>なぜ「いくら儲かるか」から決めてはいけないのか</h2>
+    <p>「1,000円の株を500株買おう」と<strong>株数から先に決める</strong>と、損切り幅が後付けになります。すると2つのうちどちらかが起きます。</p>
+    <ul>
+      <li>決めた損失額に収めるため、<strong>損切りを不自然に近づける</strong>（本来の想定と無関係な位置になる）</li>
+      <li>あるいは<strong>損失額のほうを黙って受け入れる</strong>（リスク管理が機能しない）</li>
+    </ul>
+    <p>どちらも「1回の負けの大きさが、その場の都合で決まる」ということです。<strong>負けの大きさを先に固定するのがポジションサイズの目的</strong>です。</p>
+
+    <h2>許容損失率は何%にすべきか</h2>
+    <p>一般的には<strong>1トレードあたり資金の1〜2%</strong>が目安とされます。理由は、連敗しても口座が致命傷を負わないためです。</p>
+    <p>2%なら、10連敗しても資金の減少は約18%に収まります。一方10%に設定していると、<strong>10連敗で資金の約65%を失います</strong>。相場では連敗が普通に起きるので、1回あたりを小さく保つことが生き残る条件になります。</p>
+
+    <h2>単元株の下限に注意</h2>
+    <p>日本株は通常100株単位でしか買えません。そのため<strong>計算上の株数が100株を下回るケース</strong>があります。</p>
+    <p>たとえば残高100万円・許容0.5%（＝5,000円）で、株価2,000円・損切り10%（＝200円）なら、計算上は25株。しかし100株でしか買えないため、実際の最大損失は<strong>2万円</strong>となり、許容額の4倍になります。</p>
+    <p>このツールはそうした場合に<strong>警告を表示</strong>します。損切り幅を狭くするか、より株価の低い銘柄を選ぶか、許容損失率を見直してください。</p>
+
+    <h2>よくある質問</h2>
+    <div class="faq">
+      <h3>Q. 購入金額が口座残高を超えてしまいます</h3>
+      <p>現物取引では実行できません。株価の低い銘柄を選ぶか、損切り幅を広げて必要株数を減らしてください。なお<a href="../articles/margin-trading/">信用取引</a>なら保証金の約3.3倍まで取引できますが、損失も同じ倍率で拡大します。</p>
+
+      <h3>Q. 損切りラインは何%が適切ですか？</h3>
+      <p>銘柄の値動きの大きさによります。1日に2〜3%動く銘柄に1%の損切りを置くと、通常の値動きだけで切られてしまいます。<a href="../articles/volatility/">ボラティリティの調べ方</a>で、その銘柄が1日にどれくらい動くかを確認してから決めてください。</p>
+
+      <h3>Q. 計算した株数で必ず買うべきですか？</h3>
+      <p>これは<strong>上限</strong>です。これより少なく買うのは問題ありません。自信がない場面では減らす、という使い方が適切です。</p>
+
+      <h3>Q. 損切りを置かない場合はどうなりますか？</h3>
+      <p>ポジションサイズの計算が意味を持ちません。「最大でもこれだけしか損しない」という前提が、損切り注文によって担保されているからです。<a href="../oco-calc/">OCO注文</a>で利確とセットにして置いておくのが確実です。</p>
+    </div>
+  </div>
 </div>
 
 <footer class="site-footer">

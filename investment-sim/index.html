@@ -509,6 +509,22 @@
       .summary-grid .summary-card:last-child { grid-column: span 2; }
       .chart-container { height: 220px; }
     }
+    .explain {
+      max-width: 760px;
+      margin: 44px auto 0;
+      padding: 0 4px;
+    }
+    .explain h2 {
+      font-size: 18px; font-weight: 800; color: var(--gray-900);
+      margin: 32px 0 12px; padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .explain h3 { font-size: 15px; font-weight: 700; color: var(--gray-900); margin: 20px 0 6px; }
+    .explain p, .explain li { font-size: 14px; line-height: 1.9; color: var(--gray-700); }
+    .explain p { margin-bottom: 12px; }
+    .explain ol, .explain ul { padding-left: 22px; margin-bottom: 14px; }
+    .explain li { margin-bottom: 6px; }
+    .explain a { color: var(--primary); text-decoration: underline; }
   </style>
   <script type="application/ld+json">
 {
@@ -551,6 +567,46 @@
       "position": 2,
       "name": "積立投資シミュレーター｜複利計算で資産額を自動計算",
       "item": "https://yuta-tools.com/investment-sim/"
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "毎月いくら積み立てればいいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "正解はありませんが、生活に影響が出ない範囲が原則です。相場が下がったときに続けられる金額かどうかで判断してください。積立投資は途中でやめると効果が出ないので、少額でも続けられる額のほうが結果的に有利になります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "積立投資で元本割れすることはありますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "あります。実際の相場は上下するため、特に期間が短いうちは投資額を下回ることが珍しくありません。長期で持つほど、そのブレは平均化されやすくなります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "NISAと積立投資の違いは？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "NISAは口座の種類であって投資方法ではありません。同じ積立投資でも、NISA口座なら運用益に税金がかかりません。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "一括投資と積立投資はどちらが有利ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "理論上は右肩上がりの相場なら一括投資のほうが有利ですが、高値でまとめて買ってしまうリスクがあります。積立は購入時期を分散するため、値動きの影響を平準化できます。"
+      }
     }
   ]
 }
@@ -714,6 +770,50 @@
       </div>
     </div>
 
+
+  <div class="explain">
+    <h2>積立投資シミュレーターの使い方</h2>
+    <p>4つの数字を入れるだけで、将来の資産額が計算できます。</p>
+    <ol>
+      <li><strong>初期投資額</strong>：最初にまとめて投資する金額。ゼロでも構いません</li>
+      <li><strong>毎月の積立額</strong>：毎月いくら積み立てるか</li>
+      <li><strong>想定年利</strong>：年あたり何%で運用できると仮定するか</li>
+      <li><strong>運用期間</strong>：何年間続けるか</li>
+    </ol>
+    <p>「シミュレーションを実行」を押すと、最終資産額・投資元本・運用益に加えて、資産推移のグラフと年別の内訳表が出ます。</p>
+
+    <h2>複利とは何か</h2>
+    <p>複利とは、<strong>運用で増えた分にもさらに利息がつく</strong>仕組みです。元本にしか利息がつかない単利と違い、時間が経つほど増え方が加速します。</p>
+    <p>たとえば毎月3万円を年利5%で20年間積み立てた場合。投資した元本は<strong>720万円</strong>ですが、最終資産額は<strong>約1,233万円</strong>になります。増えた<strong>約513万円</strong>が運用益です。</p>
+    <p>同じ条件で10年なら約466万円（元本360万円・運用益約106万円）。<strong>期間が2倍になると、運用益は約4.8倍</strong>になります。これが複利の効果で、積立投資が「早く始めるほど有利」と言われる理由です。</p>
+
+    <h2>想定年利はどう決めるか</h2>
+    <p>年利は将来を保証するものではないので、あくまで仮定です。目安として、全世界株式や米国株式のインデックスファンドは、長期の実績から<strong>年3〜7%</strong>で試算されることが多くあります。</p>
+    <p>ただし実際の相場は毎年同じように増えるわけではありません。<strong>大きく下がる年もあれば、大きく上がる年もあります</strong>。このシミュレーターは毎年一定の利回りで計算しているので、現実の値動きとは異なります。<strong>複数の利回りで試して、幅で捉えてください。</strong></p>
+
+    <h2>このツールで考慮していないもの</h2>
+    <p>結果は<strong>税金・手数料を差し引く前の金額</strong>です。実際には次のものが影響します。</p>
+    <ul>
+      <li><strong>税金</strong>：売却時の利益に20.315%（<a href="../articles/tax-calculation/">株の税金の計算方法</a>）。ただし<a href="../articles/nisa-basics/">NISA口座</a>なら非課税です</li>
+      <li><strong>信託報酬</strong>：投資信託を保有している間ずっとかかる費用。年0.1%程度の低コストな商品もあります</li>
+      <li><strong>インフレ</strong>：物価が上がると、同じ金額で買えるものは減ります</li>
+    </ul>
+
+    <h2>よくある質問</h2>
+    <div class="faq">
+      <h3>Q. 毎月いくら積み立てればいいですか？</h3>
+      <p>正解はありませんが、<strong>生活に影響が出ない範囲</strong>が原則です。相場が下がったときに続けられる金額かどうかで判断してください。積立投資は途中でやめると効果が出ないので、少額でも続けられる額のほうが結果的に有利になります。</p>
+
+      <h3>Q. 元本割れすることはありますか？</h3>
+      <p>あります。このシミュレーターは毎年一定の利回りで計算していますが、実際の相場は上下します。<strong>特に期間が短いうちは、投資額を下回ることが珍しくありません</strong>。長期で持つほど、そのブレは平均化されやすくなります。</p>
+
+      <h3>Q. NISAとの違いは？</h3>
+      <p>NISAは口座の種類であって、投資方法ではありません。同じ積立投資でも、NISA口座なら<strong>運用益に税金がかかりません</strong>。詳しくは<a href="../articles/nisa-basics/">NISAとは何か</a>で解説しています。</p>
+
+      <h3>Q. 一括投資と積立投資はどちらが有利ですか？</h3>
+      <p>理論上は、右肩上がりの相場なら一括投資のほうが有利です。ただし<strong>高値でまとめて買ってしまうリスク</strong>があります。積立は購入時期を分散するため、値動きの影響を平準化できます（<a href="../articles/dollar-cost-averaging/">ドルコスト平均法</a>）。</p>
+    </div>
+  </div>
 
   </main>
 </div>
