@@ -388,6 +388,20 @@
       .result-main-value { font-size: 28px; }
       .input-inner input[type="number"] { font-size: 16px; }
     }
+      /* 比較テーブル（articles/article.css と同等のものをインラインで持つ） */
+    .compare-table { width:100%; border-collapse:collapse; font-size:13px; margin:16px 0; }
+    .compare-table th { background:var(--primary); color:var(--white); padding:10px 14px;
+                        text-align:left; font-weight:700; }
+    .compare-table th:first-child { border-radius:8px 0 0 0; }
+    .compare-table th:last-child  { border-radius:0 8px 0 0; }
+    .compare-table td { padding:10px 14px; border-bottom:1px solid var(--gray-100);
+                        color:var(--gray-700); vertical-align:top; line-height:1.7; }
+    .compare-table tr:last-child td { border-bottom:none; }
+    .compare-table tr:nth-child(even) td { background:var(--gray-50); }
+    @media (max-width:640px) {
+      .compare-table { font-size:12px; }
+      .compare-table th, .compare-table td { padding:8px 10px; }
+    }
   </style>
   <script type="application/ld+json">
 {
@@ -469,6 +483,30 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "0円のままで構いません。ネット証券は条件付きで手数料無料のプランが多く、少額取引なら実際に0円のことがあります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "譲渡益・譲渡所得とは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "株を売って出た利益のことです。給与所得などとは分けて計算する申告分離課税の対象で、税率は20.315%。計算式は「売却代金 −（取得費 ＋ 譲渡費用）」で、取得費には買うときの手数料、譲渡費用には売るときの手数料が含まれます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "特定口座（源泉徴収あり）なら確定申告は不要ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "原則として不要です。売却のたびに証券会社が税金を差し引いて納めてくれます。ただし損失を翌年以降に繰り越したい場合や、複数の証券会社にまたがる損益通算をしたい場合は確定申告が必要です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "現物取引と信用取引で税率は違いますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "どちらも20.315%で同じです。「上場株式等の譲渡所得等」としてまとめて計算するため、現物の利益と信用の損失を相殺できます。"
       }
     }
   ]
@@ -635,6 +673,23 @@
     <p>まだ売っていない株でも、「売却株価」の欄に<strong>現在の株価</strong>を入れれば、いま売った場合の手取りが分かります。</p>
     <p>ただし<strong>含み益の段階では税金はかかりません</strong>。課税されるのは実際に売却して利益が確定したときだけです。上の計算結果は「いま売ったらいくら残るか」を示しています。</p>
 
+    <h2>株の利益は「譲渡所得」として課税される</h2>
+    <p>株を売って出た利益は、税法上は<strong>譲渡益（譲渡所得）</strong>と呼ばれます。給与などとは分けて計算する<strong>申告分離課税</strong>の対象で、税率は一律20.315%です。</p>
+    <p>譲渡所得は次の式で求めます。上の利益計算ツールは、これをそのまま計算しています。</p>
+    <p><strong>譲渡所得 ＝ 売却代金 −（取得費 ＋ 譲渡費用）</strong></p>
+    <p>取得費には買うときの手数料が、譲渡費用には売るときの手数料が含まれます。どちらも利益から差し引けるため、手数料を入力すると税額も下がります。</p>
+
+    <h3>口座の種類で変わるのは「手続き」だけ</h3>
+    <table class="compare-table">
+      <tr><th>口座の種類</th><th>税金の納め方</th></tr>
+      <tr><td>特定口座（源泉徴収あり）</td><td>売却のたびに証券会社が差し引いて納める。原則、確定申告は不要</td></tr>
+      <tr><td>特定口座（源泉徴収なし）</td><td>年間取引報告書は作られるが、確定申告は自分で行う</td></tr>
+      <tr><td>一般口座</td><td>損益の計算から確定申告まで自分で行う</td></tr>
+      <tr><td>NISA口座</td><td>利益は非課税。この計算は不要</td></tr>
+    </table>
+    <p>NISAを除けば、どの口座でも<strong>税率20.315%は同じ</strong>です。違うのは誰がいつ納めるかだけなので、上のシミュレーションの結果は口座の種類にかかわらず使えます。</p>
+    <p>現物取引と信用取引も、譲渡益にかかる税率は同じ20.315%です。どちらも「上場株式等の譲渡所得等」としてまとめて計算するため、現物の利益と信用の売却損を相殺することもできます。</p>
+
     <h2>よくある質問</h2>
     <div class="faq">
       <h3>Q. 買い増し（ナンピン）したときはどう計算しますか？</h3>
@@ -648,6 +703,15 @@
 
       <h3>Q. 手数料が分からないときは？</h3>
       <p>0円のままで構いません。ネット証券は条件付きで手数料無料のプランが多く、少額取引なら実際に0円のことがあります。</p>
+
+      <h3>Q. 譲渡益・譲渡所得とは何ですか？</h3>
+      <p>株を売って出た利益のことです。給与所得などとは分けて計算する<strong>申告分離課税</strong>の対象で、税率は20.315%。計算式は「売却代金 −（取得費 ＋ 譲渡費用）」で、取得費には買うときの手数料、譲渡費用には売るときの手数料が含まれます。</p>
+
+      <h3>Q. 特定口座（源泉徴収あり）なら確定申告は不要ですか？</h3>
+      <p>原則として不要です。売却のたびに証券会社が税金を差し引いて納めてくれます。ただし<strong>損失を翌年以降に繰り越したい場合</strong>や、<strong>複数の証券会社にまたがる損益通算をしたい場合</strong>は確定申告が必要です。</p>
+
+      <h3>Q. 現物取引と信用取引で税率は違いますか？</h3>
+      <p>どちらも20.315%で同じです。「上場株式等の譲渡所得等」としてまとめて計算するため、現物の利益と信用の損失を相殺できます。</p>
     </div>
   </div>
 
