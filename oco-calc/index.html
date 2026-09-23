@@ -315,6 +315,13 @@
       .total-cost { margin-left: 0; }
       .input-field input[type="number"] { width: 130px; font-size: 16px; }
       .table-scroll { overflow-x: auto; }
+    .cmp-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
+    .cmp-table th { background: var(--gray-50); padding: 9px 12px; text-align: left;
+      font-weight: 700; color: var(--gray-600); font-size: 11px; border-bottom: 1px solid var(--gray-200); }
+    .cmp-table td { padding: 10px 12px; border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700); line-height: 1.8; vertical-align: top; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    @media (max-width: 640px) { .cmp-table { display: block; overflow-x: auto; } }
       .oco-table { min-width: 420px; }
       .pct-input { font-size: 16px; width: 58px; }
       .oco-table tbody td { padding: 10px 8px; font-size: 12px; }
@@ -405,6 +412,30 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "必ずとは限りません。相場が急変したときは指定価格を飛び越えて約定すること（スリッページ）があります。出来高の少ない銘柄や決算発表の前後は特に注意が必要です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "IFD・IFDOCOとOCOの違いは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "含むものが違います。OCOは決済の2つ（利確の指値＋損切りの逆指値）、IFD（イフダン）は新規1つ＋決済1つ、IFDOCO（IFO）は新規1つ＋決済2つです。IFDはIf Done（もし約定したら）の略で、IFDOCOはIFDの決済側をOCOに置き換えたものです。このツールで出した利確・損切り価格は、どの注文方法でもそのまま使えます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "OCO注文の計算ツールはFXでも使えますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "使えます。株数の欄に通貨数（ロット数）を入れれば、利確・損切りの価格は同じように計算できます。ただし税金は株とFXで課税の区分が違い、損益通算はできません。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "使っている証券会社にOCO注文がない場合はどうすればいいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "「逆指値付通常注文」「ツイン指値」など別の名前で提供されていることがあります。見当たらない場合は、利確の指値と損切りの逆指値を別々に出し、どちらかが約定したらもう一方を自分で取り消してください。取り消し忘れると後日いきなり約定することがあります。"
       }
     },
     {
@@ -540,6 +571,24 @@
     <p>もう1つの利点は<strong>感情を排除できる</strong>ことです。含み損を抱えると「もう少し待てば戻るかも」と考えてしまい、損切りが遅れがちになります。先に注文として置いておけば、その判断の余地がなくなります。</p>
     <p>逆に含み益が出たときも、「まだ上がるかも」と欲張って利益を逃すことを防げます。<strong>エントリーする前に出口を決めてしまうのがOCOの本質</strong>です。</p>
 
+    <h2>IFD・IFDOCO（イフダン）との違い</h2>
+    <p>OCOと一緒に説明されることが多いのが<strong>IFD（イフダン）</strong>と<strong>IFDOCO（イフダン・オーシーオー）</strong>です。違いは「新規注文を含むかどうか」だけで、決済側の考え方は同じです。</p>
+    <table class="cmp-table">
+      <tr><th>注文方法</th><th>まとめて出すもの</th><th>使う場面</th></tr>
+      <tr><td><strong>OCO</strong><br>（オーシーオー）</td><td>決済2つ<br>利確の指値 ＋ 損切りの逆指値</td><td>すでに持っている株の出口を決める</td></tr>
+      <tr><td><strong>IFD</strong><br>（イフダン）</td><td>新規1つ ＋ 決済1つ</td><td>「この値段で買えたら、この値段で売る」</td></tr>
+      <tr><td><strong>IFDOCO</strong><br>（IFO）</td><td>新規1つ ＋ 決済2つ<br>利確 ＋ 損切り</td><td>買いも出口もまとめて置く</td></tr>
+    </table>
+    <p>IFDは<strong>If Done</strong>（もし約定したら）の略です。IFDOCOはそのIFDの決済側をOCOに置き換えたもので、<strong>IFO</strong>とも呼ばれます。新規・利確・損切りの3つを一度に置けるので、<strong>エントリーする前に出口まで確定できる</strong>のが利点です。</p>
+    <p>このツールで出した利確・損切りの価格は、<strong>OCOでもIFDOCOでもそのまま使えます。</strong>違うのは新規注文を一緒に出すかどうかだけで、出口の価格は変わりません。</p>
+
+    <h3>証券会社によって呼び方が違う</h3>
+    <p>同じ仕組みでも名前が違うことがあります。<strong>「逆指値付通常注文」「ツイン指値」</strong>といった名前で提供されていたら、OCOと同じものだと考えて構いません。国内株ではOCOを扱っていない証券会社もあるので、使う前に注文画面で確認してください。</p>
+
+    <h2>FXでも同じように使えます</h2>
+    <p>このツールは株価と株数で入力しますが、<strong>OCO・IFD・IFDOCOの仕組みはFXでも同じ</strong>です。株数の欄に通貨数（ロット数）を入れれば、利確・損切りの価格はそのまま計算できます。FXのほうがこれらの注文を標準で備えている業者が多く、IFDOCOは特によく使われます。</p>
+    <p>⚠️ 税率は同じ20.315%ですが、<strong>課税の区分が違います</strong>。株は「上場株式等の譲渡所得等」、FXは「先物取引に係る雑所得等」で、<strong>この2つは損益通算できません</strong>。株の損とFXの利益を相殺することはできない点に注意してください。</p>
+
     <h2>利確幅と損切り幅の決め方</h2>
     <p>このツールでは利確・損切りを<strong>%で指定</strong>します。目安として、損切りは3〜5%、利確は損切り幅と同じかそれ以上に設定することが多くあります。</p>
     <p>重要なのは<strong>損益比率（RR比）</strong>です。損切り1に対して利確がいくらかという比率で、これが高いほど低い勝率でも利益が残ります。</p>
@@ -560,6 +609,15 @@
 
       <h3>Q. 指定した価格で必ず約定しますか？</h3>
       <p>必ずとは限りません。相場が急変したときは、指定価格を飛び越えて約定すること（スリッページ）があります。特に<strong>出来高の少ない銘柄</strong>や、決算発表の前後は注意が必要です。</p>
+
+      <h3>Q. IFD・IFDOCOとOCOの違いは？</h3>
+      <p>含むものが違います。<strong>OCOは決済の2つ（利確＋損切り）</strong>、<strong>IFD（イフダン）は新規1つ＋決済1つ</strong>、<strong>IFDOCO（IFO）は新規1つ＋決済2つ</strong>です。このツールで出した利確・損切り価格は、どの注文方法でもそのまま使えます。</p>
+
+      <h3>Q. FXでも使えますか？</h3>
+      <p>使えます。株数の欄に通貨数（ロット数）を入れれば、利確・損切りの価格は同じように計算できます。ただし税金は株とFXで<strong>課税の区分が違い、損益通算はできません</strong>。</p>
+
+      <h3>Q. 使っている証券会社にOCOがありません</h3>
+      <p>「逆指値付通常注文」「ツイン指値」など別の名前で提供されていることがあります。それも見当たらない場合は、利確の指値と損切りの逆指値を別々に出し、<strong>どちらかが約定したらもう一方を自分で取り消してください</strong>。取り消し忘れると、後日いきなり約定することがあります。</p>
 
       <h3>Q. 表示される税引後の利益は正確ですか？</h3>
       <p>税率20.315%で計算した概算です。売買手数料は含んでいません。手数料まで含めた実際の手取りは<a href="../profit-calc/">株の利益計算ツール</a>で計算できます。</p>
