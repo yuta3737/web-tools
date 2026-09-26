@@ -72,7 +72,7 @@
 
 .toc ol { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
 .toc li { font-size: 13px; }
-.toc a { color: var(--primary); font-weight: 600; }
+.toc a { color: var(--primary); font-weight: 700; }
 .toc a:hover { text-decoration: underline; }
 
 /* 本文 */
