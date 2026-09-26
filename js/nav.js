@@ -50,6 +50,8 @@ document.addEventListener('click', (e) => {
     link_url: a.href,
     link_domain: host,
     link_text: (a.textContent || '').trim().slice(0, 100),
-    page_path: location.pathname
+    page_path: location.pathname,
+    // 別タブで開かない経路が残っていても取りこぼさないよう sendBeacon を明示する
+    transport_type: 'beacon'
   });
 }, true);
