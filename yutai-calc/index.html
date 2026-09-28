@@ -322,7 +322,20 @@
       .info-card { padding: 20px 16px; }
       .info-table { display: block; overflow-x: auto; }
     }
-  </style>
+  
+    /* アフィリエイトボタン（2026-09-26追加。従来このページには収益導線が無かった） */
+    .broker-cta {
+      display: block; text-align: center; padding: 14px; border-radius: 10px;
+      font-size: 14px; font-weight: 700; text-decoration: none;
+      background: var(--primary); color: var(--white);
+      transition: opacity 0.2s; margin: 6px 0;
+    }
+    .broker-cta:hover { opacity: 0.85; text-decoration: none; }
+    .broker-cta.sub { background: var(--gray-700); }
+    .result-cta { margin-top: 24px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 20px 24px; }
+    .result-cta-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 4px; }
+    .result-cta-note { font-size: 13px; line-height: 1.8; color: var(--gray-500); margin-bottom: 16px; }
+</style>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -521,6 +534,13 @@
     </div>
     <div class="oco-cta-arrow">›</div>
   </a>
+
+  <div class="result-cta">
+    <p class="result-cta-title">💡 優待狙いは買付手数料が、そのまま利回りを削ります</p>
+    <p class="result-cta-note">優待は年1〜2回の受け取りなので、購入時にかかった手数料のぶんだけ実際の利回りは上で計算した数字より下がります。条件付きで売買手数料が0円になる証券会社なら、計算した利回りがそのまま残ります。口座開設は無料です。</p>
+    <a href="https://h.accesstrade.net/sp/cc?rk=01000t2900os8p" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta">松井証券 口座開設（1日50万円まで手数料0円・無料）</a>
+    <a href="https://ad2.trafficgate.net/t/r/1190/738/317787_397122" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub">楽天証券 口座開設（100万円まで手数料0円・無料）</a>
+  </div>
 
   <div class="info-card">
     <h2>優待利回り・配当利回り・総合利回りの計算方法</h2>

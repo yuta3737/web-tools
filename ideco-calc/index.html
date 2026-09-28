@@ -159,7 +159,20 @@
       .field input, .field select { font-size: 16px; padding: 9px 10px; }
       .info-table { display: block; overflow-x: auto; }
     }
-  </style>
+  
+    /* アフィリエイトボタン（2026-09-26追加。従来このページには収益導線が無かった） */
+    .broker-cta {
+      display: block; text-align: center; padding: 14px; border-radius: 10px;
+      font-size: 14px; font-weight: 700; text-decoration: none;
+      background: var(--primary); color: var(--white);
+      transition: opacity 0.2s; margin: 6px 0;
+    }
+    .broker-cta:hover { opacity: 0.85; text-decoration: none; }
+    .broker-cta.sub { background: var(--gray-700); }
+    .result-cta { margin-top: 24px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 20px 24px; }
+    .result-cta-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 4px; }
+    .result-cta-note { font-size: 13px; line-height: 1.8; color: var(--gray-500); margin-bottom: 16px; }
+</style>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -325,6 +338,13 @@
     </div>
     <div class="oco-cta-arrow">→</div>
   </a>
+
+  <div class="result-cta">
+    <p class="result-cta-title">💡 節税額は同じでも、口座管理手数料は金融機関で変わります</p>
+    <p class="result-cta-note">上で計算した節税額は、どの金融機関で始めても同じです。違うのは毎月かかる運営管理手数料で、20〜30年の積立では数万円の差になります。運営管理手数料が0円の金融機関を選んでください。</p>
+    <a href="https://h.accesstrade.net/sp/cc?rk=0100mnur00os8p" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta">松井証券でiDeCoを始める（無料）</a>
+    <a href="https://h.accesstrade.net/sp/cc?rk=0100ln6u00os8p" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub">マネックス証券でiDeCoを始める（無料）</a>
+  </div>
 
   <div class="info-card">
     <h2>節税額の計算方法</h2>

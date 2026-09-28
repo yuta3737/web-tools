@@ -163,7 +163,20 @@
       .field input { font-size: 16px; padding: 9px 10px; }
       .info-table { display: block; overflow-x: auto; }
     }
-  </style>
+  
+    /* アフィリエイトボタン（2026-09-26追加。従来このページには収益導線が無かった） */
+    .broker-cta {
+      display: block; text-align: center; padding: 14px; border-radius: 10px;
+      font-size: 14px; font-weight: 700; text-decoration: none;
+      background: var(--primary); color: var(--white);
+      transition: opacity 0.2s; margin: 6px 0;
+    }
+    .broker-cta:hover { opacity: 0.85; text-decoration: none; }
+    .broker-cta.sub { background: var(--gray-700); }
+    .result-cta { margin-top: 24px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 20px 24px; }
+    .result-cta-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 4px; }
+    .result-cta-note { font-size: 13px; line-height: 1.8; color: var(--gray-500); margin-bottom: 16px; }
+</style>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -322,6 +335,13 @@
     </div>
     <div class="oco-cta-arrow">→</div>
   </a>
+
+  <div class="result-cta">
+    <p class="result-cta-title">💡 出来高が薄い銘柄ほど、手数料負けしやすくなります</p>
+    <p class="result-cta-note">売買代金が小さい銘柄は希望の価格で約定しにくく、想定より不利な値段で売買が成立しがちです。そこへ往復の手数料が乗ると、小さな値幅では利益が残りません。条件付きで手数料が0円になる証券会社なら、そのぶん不利が減ります。口座開設は無料です。</p>
+    <a href="https://h.accesstrade.net/sp/cc?rk=01000t2900os8p" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta">松井証券 口座開設（1日50万円まで手数料0円・無料）</a>
+    <a href="https://h.accesstrade.net/sp/cc?rk=0100h3p700os8p" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub">マネックス証券 口座開設（無料）</a>
+  </div>
 
   <div class="info-card">
     <h2>出来高・売買代金の判定基準</h2>

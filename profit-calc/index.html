@@ -381,6 +381,11 @@
     .broker-cta:hover { opacity: 0.85; text-decoration: none; }
     .broker-cta.sub { background: var(--gray-700); }
 
+    /* 結果直下のCTA（2026-09-26追加。従来CTAはページ84%地点にしか無く到達されていなかった） */
+    .result-cta { margin-top: 16px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 16px 20px; }
+    .result-cta-title { font-size: 14px; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
+    .result-cta-note { font-size: 12.5px; line-height: 1.8; color: var(--gray-500); margin-bottom: 14px; }
+
     @media (max-width: 640px) {
       .wrap { padding: 24px 12px 60px; }
       .card { padding: 16px; }
@@ -656,6 +661,14 @@
     <div class="breakeven-value" id="res-breakeven">---</div>
   </div>
 
+  <!-- 結果直下のCTA -->
+  <div class="result-cta">
+    <p class="result-cta-title" id="result-cta-title">💡 この税金、NISA口座なら0円です</p>
+    <p class="result-cta-note" id="result-cta-note">NISAの成長投資枠（年240万円まで）での売却益は非課税なので、上の「税金」の行が0円になります。ただしNISAでの損失は損益通算・繰越控除ができません。</p>
+    <a href="https://h.accesstrade.net/sp/cc?rk=01000t2900os8p" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta">松井証券 口座開設（1日50万円まで手数料0円・無料）</a>
+    <a href="https://h.accesstrade.net/sp/cc?rk=0100h3p700os8p" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub">マネックス証券 口座開設（無料）</a>
+  </div>
+
   <div class="explain">
     <h2>株の損益計算のやり方</h2>
     <p>株の損益は、次の3ステップで求められます。上のツールはこの計算を自動で行っています。</p>
@@ -828,6 +841,20 @@
 
     // 損益分岐点
     document.getElementById('res-breakeven').textContent = Math.ceil(breakeven).toLocaleString() + '円';
+
+    // 結果直下CTAの文面を計算結果に合わせる
+    const ctaTitle = document.getElementById('result-cta-title');
+    const ctaNote  = document.getElementById('result-cta-note');
+    if (tax > 0) {
+      ctaTitle.textContent = `💡 この税金 ${fmtAbs(tax)}、NISA口座なら0円です`;
+      ctaNote.textContent  = 'NISAの成長投資枠（年240万円まで）での売却益は非課税なので、上の「税金」の行がまるごと0円になります。ただしNISAでの損失は損益通算・繰越控除ができません。';
+    } else if (totalFee > 0) {
+      ctaTitle.textContent = `💡 手数料 ${fmtAbs(totalFee)} が利益を削っています`;
+      ctaNote.textContent  = '損益分岐点が買値より上にあるのは、この手数料のぶんです。条件付きで売買手数料が0円になる証券会社なら、買値で売ればトントンになります。口座開設は無料です。';
+    } else {
+      ctaTitle.textContent = '💡 手数料が0円なら、損益分岐点は買値と同じになります';
+      ctaNote.textContent  = '手数料がかかる口座では、買値で売っても手数料のぶんだけマイナスです。条件付きで売買手数料が0円になる証券会社なら、そのロスがありません。口座開設は無料です。';
+    }
   }
 
   ids.forEach(id => document.getElementById(id).addEventListener('input', render));
