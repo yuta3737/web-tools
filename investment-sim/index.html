@@ -32,9 +32,10 @@
   <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800;900&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800;900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800;900&display=swap" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800;900&display=swap"></noscript>
   <link rel="stylesheet" href="../css/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     /* ===== Sim Page Specific ===== */
     .sim-layout {
@@ -884,6 +885,9 @@
   </div>
 </footer>
 
+  <!-- Chart.js はこのインラインスクリプトが依存するため直前に置く。
+       head に置くとレンダーブロッキングになり、defer だと実行順が逆転して壊れる -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
   // ===== スライダー ↔ 数値入力 双方向連動 =====
   const inputs = {
