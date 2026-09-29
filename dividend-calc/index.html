@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VPXV9BMEY');
+  </script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6919722649745195"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://yuta-tools.com/dividend-calc/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>配当金計算ツール｜税引後の受取額と配当利回りを自動計算 | MoneyTools</title>
+  <meta name="description" content="保有株数と1株あたり年間配当を入れるだけで、年間の配当金・税金（20.315%）を引いた税引後の受取額・配当利回りが分かります。目標の配当額から必要な株数を逆算する機能つき。NISA対応の無料ツールです。">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:title" content="配当金計算ツール｜税引後の受取額と配当利回りを自動計算 | MoneyTools">
+  <meta property="og:description" content="保有株数と1株あたり年間配当を入れるだけで、年間の配当金・税金（20.315%）を引いた税引後の受取額・配当利回りが分かります。目標の配当額から必要な株数を逆算する機能つき。NISA対応の無料ツールです。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yuta-tools.com/dividend-calc/">
+  <meta property="og:image" content="https://yuta-tools.com/ogp.png">
+  <meta property="og:site_name" content="MoneyTools">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="配当金計算ツール｜税引後の受取額と配当利回りを自動計算 | MoneyTools">
+  <meta name="twitter:description" content="保有株数と1株あたり年間配当を入れるだけで、年間の配当金・税金（20.315%）を引いた税引後の受取額・配当利回りが分かります。目標の配当額から必要な株数を逆算する機能つき。NISA対応の無料ツールです。">
+  <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800;900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800;900&display=swap" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800;900&display=swap"></noscript>
+  <link rel="stylesheet" href="../css/style.css">
+<style>
+    .pos-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .page-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin: 0 0 4px;
+      letter-spacing: -0.5px;
+    }
+
+    .page-sub {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 28px;
+    }
+
+    .concept-box {
+      background: var(--primary-light);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      font-size: 13px;
+      color: var(--primary-dark);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .concept-box strong { font-weight: 800; }
+
+    /* Input card */
+    .input-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .input-card h2 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gray-700);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .form-group label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .form-group .hint {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-top: 2px;
+    }
+
+    .input-inner {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .input-inner input[type="number"] {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: var(--radius-sm);
+      font-size: 17px;
+      font-weight: 800;
+      font-family: var(--font);
+      color: var(--gray-900);
+      outline: none;
+      transition: border-color .15s;
+      min-width: 0;
+    }
+
+    .input-inner input[type="number"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(26,86,219,.1);
+    }
+
+    .input-unit {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-500);
+      white-space: nowrap;
+    }
+
+    /* Results card */
+    .result-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .result-card-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      padding: 16px 24px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+
+    .result-item {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--gray-100);
+      border-right: 1px solid var(--gray-100);
+    }
+
+    .result-item:nth-child(even) { border-right: none; }
+    .result-item:nth-last-child(-n+2) { border-bottom: none; }
+
+    .result-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 6px;
+    }
+
+    .result-value {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--gray-900);
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    .result-value.primary { color: var(--primary); }
+    .result-value.danger  { color: var(--danger); }
+
+    .result-sub {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-top: 4px;
+    }
+
+    /* CTA to OCO */
+    .oco-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--white);
+      border: 1.5px solid var(--primary);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      text-decoration: none;
+      transition: background .15s, box-shadow .15s;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .oco-cta:hover {
+      background: var(--primary-light);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+    }
+
+    .oco-cta-left { display: flex; flex-direction: column; gap: 4px; }
+
+    .oco-cta-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .oco-cta-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--gray-900);
+    }
+
+    .oco-cta-sub {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .oco-cta-arrow {
+      font-size: 22px;
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    /* Warning */
+    .warn-box {
+      background: #fef3c7;
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-size: 12px;
+      color: var(--accent-dark);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .breadcrumb {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 16px 20px 0;
+      font-size: 12px;
+      color: var(--gray-500);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .breadcrumb a { color: var(--gray-500); }
+    .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
+    .breadcrumb span { color: var(--gray-300); }
+
+    @media (max-width: 640px) {
+      .pos-wrap { padding: 24px 12px 60px; }
+      .card { padding: 16px; }
+      .input-card { padding: 16px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .result-grid { grid-template-columns: 1fr; }
+      .result-item { border-right: none; }
+      .result-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--gray-100); }
+      .result-item:last-child { border-bottom: none; }
+      .input-inner input[type="number"] { font-size: 16px; }
+    }
+    .explain { margin-top: 44px; }
+    .explain h2 {
+      font-size: 18px; font-weight: 800; color: var(--gray-900);
+      margin: 32px 0 12px; padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .explain h3 { font-size: 15px; font-weight: 700; color: var(--gray-900); margin: 20px 0 6px; }
+    .explain p, .explain li { font-size: 14px; line-height: 1.9; color: var(--gray-700); }
+    .explain p { margin-bottom: 12px; }
+    .explain ol, .explain ul { padding-left: 22px; margin-bottom: 14px; }
+    .explain li { margin-bottom: 6px; }
+    .explain a { color: var(--primary); text-decoration: underline; }
+  </style>
+  <style>
+    .hint { font-size: 11.5px; color: var(--gray-500); margin-top: 6px; line-height: 1.6; }
+    .info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
+    .info-table th { background: var(--gray-50); padding: 9px 12px; text-align: left;
+      font-weight: 700; color: var(--gray-600); font-size: 11px; border-bottom: 1px solid var(--gray-200); }
+    .info-table td { padding: 9px 12px; border-bottom: 1px solid var(--gray-100); color: var(--gray-700); line-height: 1.7; }
+    .info-table tr:last-child td { border-bottom: none; }
+    .info-card { background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg); padding: 28px; margin-top: 20px; }
+    .info-card h2 { font-size: 15px; font-weight: 800; color: var(--gray-800); margin: 28px 0 10px; }
+    .info-card h2:first-child { margin-top: 0; }
+    .info-card h3 { font-size: 13.5px; font-weight: 800; color: var(--gray-700); margin: 20px 0 8px; }
+    .info-card p { font-size: 13.5px; color: var(--gray-700); line-height: 1.9; margin-bottom: 12px; }
+    .formula { background: var(--gray-50); border-left: 3px solid var(--primary);
+      padding: 12px 16px; font-size: 13px; font-weight: 700; color: var(--gray-800);
+      margin: 12px 0; border-radius: 0 6px 6px 0; line-height: 1.8; }
+    .nisa-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; font-size: 13px; color: var(--gray-700); }
+    .nisa-row input { width: 16px; height: 16px; }
+    @media (max-width: 640px) {
+      .info-card { padding: 20px 16px; }
+      .info-table { display: block; overflow-x: auto; }
+    }
+  
+    /* アフィリエイトボタン（2026-09-26追加。従来このページには収益導線が無かった） */
+    .broker-cta {
+      display: block; text-align: center; padding: 14px; border-radius: 10px;
+      font-size: 14px; font-weight: 700; text-decoration: none;
+      background: var(--primary); color: var(--white);
+      transition: opacity 0.2s; margin: 6px 0;
+    }
+    .broker-cta:hover { opacity: 0.85; text-decoration: none; }
+    .broker-cta.sub { background: var(--gray-700); }
+    .result-cta { margin-top: 24px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 20px 24px; }
+    .result-cta-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 4px; }
+    .result-cta-note { font-size: 13px; line-height: 1.8; color: var(--gray-500); margin-bottom: 16px; }
+</style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "配当金計算ツール",
+  "description": "保有株数と1株あたり年間配当から、税引後の配当金・配当利回り・1回あたりの受取額を自動計算する無料ツール。目標の配当額から必要株数の逆算もできます。",
+  "url": "https://yuta-tools.com/dividend-calc/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+  "publisher": { "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/" }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yuta-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "配当金計算ツール", "item": "https://yuta-tools.com/dividend-calc/" }
+  ]
+}
+  </script>
+
+<style>
+    .sel { flex:1; padding:10px 14px; border:1.5px solid var(--gray-300);
+      border-radius:var(--radius-sm); font-size:15px; font-weight:700;
+      font-family:var(--font); color:var(--gray-900); outline:none;
+      min-width:0; background:var(--white); }
+    .sel:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(26,86,219,.1); }
+    .nisa-label { font-size:13px; font-weight:400; text-transform:none;
+      letter-spacing:0; color:var(--gray-700); cursor:pointer; }
+    .plain-out { flex:1; font-size:17px; font-weight:800; color:var(--gray-700); padding:10px 0; }
+    .rev-grid { margin-top:16px; border-top:1px solid var(--gray-100); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../">ホーム</a>
+      <a href="../investment-sim/">積立投資</a>
+      <a href="../position-calc/">ポジション計算</a>
+      <a href="../oco-calc/">OCO計算</a>
+      <a href="../profit-calc/">損益計算</a>
+      <a href="../nanpin-calc/">ナンピン計算</a>
+      <a href="../fx-calc/">FX計算</a>
+      <a href="../ideco-calc/">iDeCo節税</a>
+      <a href="../volume-calc/">出来高チェック</a>
+      <a href="../unrealized-calc/">含み益計算</a>
+      <a href="../yutai-calc/">優待利回り</a>
+      <a href="./" class="active">配当計算</a>
+      <a href="../articles/">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="breadcrumb">
+  <a href="../">ホーム</a>
+  <span>/</span>
+  <span>配当金計算ツール</span>
+</div>
+
+<div class="pos-wrap">
+  <h1 class="page-title">配当金計算ツール</h1>
+  <div class="page-sub">保有株数と1株あたりの年間配当を入れると、税引後にいくら受け取れるかが出ます。</div>
+
+  <div class="concept-box">
+    💡 <strong>配当は「もらえる額」と「手元に残る額」が違います。</strong><br>
+    特定口座では受け取るときに<strong>20.315%が源泉徴収</strong>されます。証券会社に表示されている配当利回りは税引前なので、実際の手取りはそれより約2割少なくなります。NISA口座ならこの税金がかかりません。
+  </div>
+
+  <div class="input-card">
+    <h2>保有している株を入力</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>株価</label>
+        <div class="input-inner">
+          <input type="number" id="inp-price" inputmode="decimal" value="1500" min="0" step="1">
+          <span class="input-unit">円</span>
+        </div>
+        <div class="hint">現在の株価。利回りの計算に使います</div>
+      </div>
+      <div class="form-group">
+        <label>保有株数</label>
+        <div class="input-inner">
+          <input type="number" id="inp-shares" inputmode="numeric" value="100" min="0" step="1">
+          <span class="input-unit">株</span>
+        </div>
+        <div class="hint">単元未満株（1株単位）でも計算できます</div>
+      </div>
+      <div class="form-group">
+        <label>1株あたり年間配当</label>
+        <div class="input-inner">
+          <input type="number" id="inp-dps" inputmode="decimal" value="45" min="0" step="0.1">
+          <span class="input-unit">円</span>
+        </div>
+        <div class="hint">証券会社では「1株配当」「年間配当金」と表示されます</div>
+      </div>
+      <div class="form-group">
+        <label>年間の配当回数</label>
+        <div class="input-inner">
+          <select id="inp-freq" class="sel">
+            <option value="2" selected>年2回（中間・期末）</option>
+            <option value="1">年1回（期末のみ）</option>
+            <option value="4">年4回（四半期）</option>
+          </select>
+        </div>
+        <div class="hint">日本株は年2回が最も多いです</div>
+        <div class="nisa-row">
+          <input type="checkbox" id="inp-nisa">
+          <label for="inp-nisa" class="nisa-label">NISA口座で保有している（配当が非課税）</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-card-header">受け取れる配当金</div>
+    <div class="result-grid">
+      <div class="result-item">
+        <div class="result-label">年間の配当（税引後）</div>
+        <div class="result-value primary" id="r-net">—</div>
+        <div class="result-sub" id="r-net-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">1回あたりの受取額</div>
+        <div class="result-value" id="r-once">—</div>
+        <div class="result-sub" id="r-once-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">年間の配当（税引前）</div>
+        <div class="result-value" id="r-gross">—</div>
+        <div class="result-sub">1株配当 × 保有株数</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">差し引かれる税金</div>
+        <div class="result-value danger" id="r-tax">—</div>
+        <div class="result-sub" id="r-tax-sub">配当の20.315%（源泉徴収）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-card-header">配当利回り</div>
+    <div class="result-grid">
+      <div class="result-item">
+        <div class="result-label">配当利回り（税引前）</div>
+        <div class="result-value" id="r-yield">—</div>
+        <div class="result-sub">証券会社に表示されるのはこちら</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">配当利回り（税引後）</div>
+        <div class="result-value primary" id="r-yield-net">—</div>
+        <div class="result-sub" id="r-yield-net-sub">実際に手元に残る利回り</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">投資金額</div>
+        <div class="result-value" id="r-cost">—</div>
+        <div class="result-sub">株価 × 保有株数</div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">月あたりに直すと</div>
+        <div class="result-value" id="r-month">—</div>
+        <div class="result-sub">税引後の年間配当 ÷ 12</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-card" style="margin-top:20px;">
+    <h2>目標の配当額から逆算する</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>ほしい年間配当（税引後）</label>
+        <div class="input-inner">
+          <input type="number" id="inp-target" inputmode="numeric" value="100000" min="0" step="1000">
+          <span class="input-unit">円</span>
+        </div>
+        <div class="hint">上で入れた銘柄を買い増す前提で計算します</div>
+      </div>
+      <div class="form-group">
+        <label>目標まであと</label>
+        <div class="input-inner">
+          <div class="plain-out" id="r-gap">—</div>
+        </div>
+        <div class="hint">いま足りていない配当額（税引後）</div>
+      </div>
+    </div>
+    <div class="result-grid rev-grid">
+      <div class="result-item">
+        <div class="result-label">必要な保有株数（合計）</div>
+        <div class="result-value primary" id="r-need-shares">—</div>
+        <div class="result-sub" id="r-need-shares-sub"></div>
+      </div>
+      <div class="result-item">
+        <div class="result-label">必要な投資金額（合計）</div>
+        <div class="result-value" id="r-need-cost">—</div>
+        <div class="result-sub" id="r-need-cost-sub"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="warn-box" style="margin-top:20px;">
+    ⚠️ 配当は<strong>会社の業績で増減し、無配になることもあります</strong>。過去の実績や予想配当をもとにした計算なので、将来この金額が受け取れると決まったものではありません。また<strong>株価が下がれば利回りは上がって見えます</strong>。高利回りの銘柄ほど、なぜ高いのかを確認してください。
+  </div>
+
+  <div class="result-cta">
+    <p class="result-cta-title">💡 配当の税金 20.315%、NISA口座なら0円です</p>
+    <p class="result-cta-note">上の「差し引かれる税金」は、NISA口座（成長投資枠・年240万円まで）で保有していればまるごとかかりません。配当が厚い銘柄ほど差が大きくなります。口座開設は無料です。</p>
+    <a href="https://h.accesstrade.net/sp/cc?rk=01000t2900os8p" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta">松井証券 口座開設（1日50万円まで手数料0円・無料）</a>
+    <a href="https://ad2.trafficgate.net/t/r/1190/738/317787_397122" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub">楽天証券 口座開設（100万円まで手数料0円・無料）</a>
+  </div>
+
+  <a href="../yutai-calc/" class="oco-cta" style="margin-top:20px;">
+    <div class="oco-cta-left">
+      <div class="oco-cta-label">次のステップ</div>
+      <div class="oco-cta-title">株主優待の利回り計算ツール</div>
+      <div class="oco-cta-sub">優待がある銘柄なら、配当と合わせた総合利回りで比べられます</div>
+    </div>
+    <div class="oco-cta-arrow">›</div>
+  </a>
+
+  <div class="info-card">
+    <h2>配当金の計算方法</h2>
+    <p>受け取れる配当金は、1株あたりの年間配当に保有株数を掛けるだけで求められます。</p>
+    <div class="formula">年間の配当金（税引前） ＝ 1株あたり年間配当 × 保有株数</div>
+    <p>ただしこれは<strong>税金を引く前</strong>の金額です。特定口座・一般口座では、配当が支払われる時点で20.315%が差し引かれます。</p>
+    <div class="formula">年間の配当金（税引後） ＝ 税引前の配当 × 0.79685</div>
+
+    <h3>計算例</h3>
+    <p>株価1,500円の銘柄を100株（投資金額15万円）、1株あたり年間配当45円のケースです。</p>
+    <table class="info-table">
+      <tr><th>項目</th><th>計算</th><th>結果</th></tr>
+      <tr><td>年間の配当（税引前）</td><td>45円 × 100株</td><td><strong>4,500円</strong></td></tr>
+      <tr><td>税金</td><td>4,500円 × 20.315%</td><td>914円</td></tr>
+      <tr><td>年間の配当（税引後）</td><td>4,500円 − 914円</td><td><strong>3,586円</strong></td></tr>
+      <tr><td>配当利回り（税引前）</td><td>4,500円 ÷ 150,000円</td><td>3.00%</td></tr>
+      <tr><td>配当利回り（税引後）</td><td>3,586円 ÷ 150,000円</td><td><strong>2.39%</strong></td></tr>
+    </table>
+    <p>税引前の利回り3.00%が、手元では<strong>2.39%</strong>になります。この0.61%の差が、配当狙いの投資では効いてきます。</p>
+
+    <h2>配当にかかる税金は20.315%</h2>
+    <p>内訳は所得税15%・復興特別所得税0.315%・住民税5%です。株の売却益と同じ税率で、<strong>受け取るときに自動的に差し引かれます</strong>（源泉徴収）。そのため通常は確定申告が不要です。</p>
+    <p>NISA口座で保有している株の配当は非課税です。ただし<strong>受取方法を「株式数比例配分方式」にしていないと課税されます</strong>。証券口座で配当金の受取方法を確認してください。銀行振込や郵便局受取を選んでいると、NISAでも20.315%が引かれます。</p>
+
+    <h2>配当利回りの見方</h2>
+    <div class="formula">配当利回り（%） ＝ 年間の配当 ÷ 投資金額 × 100</div>
+    <p>投資金額は「株価 × 株数」です。分母が株価なので、<strong>株価が下がると利回りは上がります</strong>。利回りが高い銘柄を見つけたときは、配当が増えたのか、株価が下がったのかを先に確認してください。</p>
+    <p>後者の場合、業績悪化で株価が売られている可能性があります。そのまま減配・無配になれば、高いはずだった利回りは消えます。</p>
+
+    <h3>自分の買値で見ると利回りは変わる</h3>
+    <p>このツールでは「現在の株価」で計算していますが、<strong>すでに保有している人にとっての本当の利回りは、自分が買った値段で計算したもの</strong>です。買値のほうが安ければ、実際の利回りは表示より高くなります。平均取得単価は<a href="../nanpin-calc/">ナンピン計算ツール</a>で出せます。</p>
+
+    <h2>配当をもらうには「権利確定日」に持っている必要がある</h2>
+    <p>配当をもらう権利は、<strong>権利付最終日</strong>の取引終了時点で株を持っている人に与えられます。この翌営業日（権利落ち日）に売っても配当はもらえます。</p>
+    <p>ただし権利落ち日には、<strong>配当のぶんだけ株価が下がりやすい</strong>という性質があります。配当4,500円をもらっても株価が同じだけ下がれば、手元の資産は増えていません。さらに配当には税金がかかるぶん、短期で配当だけを取りにいく戦略は不利になりがちです。</p>
+  </div>
+
+  <div class="info-card">
+    <h2>よくある質問</h2>
+    <h3>Q. 配当金はいつ受け取れますか？</h3>
+    <p>権利確定日のおおむね2〜3か月後です。日本企業は3月末と9月末が権利確定日になることが多く、その場合の入金は6月頃と12月頃になります。</p>
+
+    <h3>Q. 100株持っていないと配当はもらえませんか？</h3>
+    <p>もらえます。配当は<strong>1株から受け取れます</strong>（株主優待は100株以上などの条件があることが多いですが、配当は株数に比例します）。単元未満株（S株・ワン株など）で1株だけ持っていても、1株ぶんの配当が入ります。</p>
+
+    <h3>Q. 税引後の配当利回りはどう計算しますか？</h3>
+    <p>税引前の配当利回りに0.79685を掛けます。たとえば税引前3.00%なら、税引後は約2.39%です。NISA口座なら税金がかからないので、税引前の利回りがそのまま手取りの利回りになります。</p>
+
+    <h3>Q. NISAなのに配当から税金が引かれていました</h3>
+    <p>配当金の受取方法が「株式数比例配分方式」以外になっている可能性が高いです。この方式でないと、NISA口座の株でも配当は課税されます。証券会社の設定画面から変更できます。</p>
+
+    <h3>Q. 配当利回りは何%あればいいですか？</h3>
+    <p>目安を示すことはできますが、利回りだけで決めないでください。東証プライムの平均は2%台で推移することが多く、4%を超えると高配当と呼ばれます。ただし<strong>利回りが高い理由が株価下落なら、配当が続く保証はありません</strong>。配当性向（利益のうち配当に回す割合）が高すぎないか、業績が安定しているかを併せて見てください。</p>
+
+    <h3>Q. 配当金で確定申告したほうが得ですか？</h3>
+    <p>課税所得が低い場合は、総合課税を選んで配当控除を使うと有利になることがあります。一方で申告すると国民健康保険料などに影響する場合もあります。金額が大きいときは税務署か税理士に確認してください。</p>
+  </div>
+
+  <div class="info-card">
+    <h2>関連ページ</h2>
+    <p><a href="../yutai-calc/">株主優待の利回り計算ツール</a><br>優待と配当を足した総合利回りで銘柄を比べられます。</p>
+    <p><a href="../profit-calc/">株の利益計算ツール</a><br>売ったときの手取りを、手数料と税金（20.315%）込みで計算できます。</p>
+    <p><a href="../unrealized-calc/">含み益・含み損の計算ツール</a><br>いま売ったらいくらになるかを確認できます。</p>
+    <p><a href="../articles/tax-calculation/">株の税金はいくら？売却益にかかる20.315%の計算方法</a><br>税率の内訳と口座ごとの扱いを解説しています。</p>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Money<span>Tools</span></div>
+        <p>資産形成に役立つ無料計算ツール</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="../investment-sim/">積立投資シミュレーター</a></li>
+            <li><a href="../position-calc/">ポジションサイズ計算ツール</a></li>
+            <li><a href="../oco-calc/">OCO注文計算ツール</a></li>
+            <li><a href="../profit-calc/">株式損益計算ツール</a></li>
+            <li><a href="../nanpin-calc/">ナンピン計算ツール</a></li>
+            <li><a href="../fx-calc/">FX計算ツール</a></li>
+            <li><a href="../ideco-calc/">iDeCo節税額シミュレーター</a></li>
+            <li><a href="../volume-calc/">出来高・売買代金チェック</a></li>
+            <li><a href="../unrealized-calc/">含み益・含み損計算</a></li>
+            <li><a href="../yutai-calc/">株主優待利回り計算</a></li>
+            <li><a href="./">配当金計算ツール</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>情報</h4>
+          <ul>
+            <li><a href="../privacy/">プライバシーポリシー</a></li>
+            <li><a href="../disclaimer/">免責事項</a></li>
+            <li><a href="../about/">運営者情報</a></li>
+            <li><a href="../contact/">お問い合わせ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本ツールの計算結果は情報提供を目的とした概算であり、投資助言を目的とするものではありません。投資の判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../js/nav.js"></script>
+<script>
+(function(){
+  var TAX = 0.20315;
+  var ids = ['inp-price','inp-shares','inp-dps','inp-target'];
+
+  function num(id){ var v = parseFloat(document.getElementById(id).value); return (isNaN(v) || v < 0) ? 0 : v; }
+  function yen(n){ return Math.round(n).toLocaleString('ja-JP') + '円'; }
+  function pct(n){ return n.toLocaleString('ja-JP', {minimumFractionDigits:2, maximumFractionDigits:2}) + '%'; }
+  function set(id, v){ document.getElementById(id).textContent = v; }
+
+  function calc(){
+    var price  = num('inp-price');
+    var shares = num('inp-shares');
+    var dps    = num('inp-dps');
+    var target = num('inp-target');
+    var freq   = parseInt(document.getElementById('inp-freq').value, 10) || 1;
+    var nisa   = document.getElementById('inp-nisa').checked;
+
+    var rate  = nisa ? 0 : TAX;          // 実効の課税率
+    var keep  = 1 - rate;                // 手元に残る割合
+    var cost  = price * shares;
+    var gross = dps * shares;
+    var tax   = gross * rate;
+    var net   = gross - tax;
+
+    if (shares <= 0 || dps <= 0) {
+      ['r-net','r-once','r-gross','r-tax','r-yield','r-yield-net','r-cost','r-month',
+       'r-gap','r-need-shares','r-need-cost'].forEach(function(id){ set(id,'—'); });
+      set('r-net-sub','株数と1株配当を入力してください');
+      set('r-once-sub',''); set('r-need-shares-sub',''); set('r-need-cost-sub','');
+      set('r-tax-sub', nisa ? 'NISA口座のため非課税' : '配当の20.315%（源泉徴収）');
+      return;
+    }
+
+    set('r-net',   yen(net));
+    set('r-gross', yen(gross));
+    set('r-tax',   nisa ? '0円' : yen(tax));
+    set('r-once',  yen(net / freq));
+    set('r-month', yen(net / 12));
+    set('r-cost',  cost > 0 ? yen(cost) : '—');
+    set('r-net-sub', nisa ? 'NISA口座のため非課税' : '税引前 ' + yen(gross) + ' − 税金 ' + yen(tax));
+    set('r-once-sub', '年' + freq + '回で受け取る場合');
+    set('r-tax-sub', nisa ? 'NISA口座のため非課税' : '配当の20.315%（源泉徴収）');
+
+    if (cost > 0) {
+      var y = gross / cost * 100;
+      set('r-yield',     pct(y));
+      set('r-yield-net', pct(y * keep));
+      set('r-yield-net-sub', nisa ? 'NISAなので税引前と同じ' : '実際に手元に残る利回り');
+    } else {
+      set('r-yield','—'); set('r-yield-net','—');
+    }
+
+    // ── 目標からの逆算 ──
+    var perShareNet = dps * keep;              // 1株あたりの税引後配当
+    if (target > 0 && perShareNet > 0) {
+      var needShares = Math.ceil(target / perShareNet);
+      var needCost   = needShares * price;
+      var gap        = target - net;
+      set('r-gap', gap > 0 ? yen(gap) : '達成済み');
+      set('r-need-shares', needShares.toLocaleString('ja-JP') + '株');
+      set('r-need-cost',   yen(needCost));
+      var add = needShares - shares;
+      set('r-need-shares-sub', add > 0
+            ? 'いまの保有からあと ' + add.toLocaleString('ja-JP') + '株'
+            : 'すでに足りています');
+      set('r-need-cost-sub', add > 0
+            ? '追加で約 ' + yen(add * price) + ' 必要'
+            : '追加の買い付けは不要');
+    } else {
+      set('r-gap','—'); set('r-need-shares','—'); set('r-need-cost','—');
+      set('r-need-shares-sub',''); set('r-need-cost-sub','');
+    }
+  }
+
+  ids.forEach(function(id){ document.getElementById(id).addEventListener('input', calc); });
+  document.getElementById('inp-freq').addEventListener('change', calc);
+  document.getElementById('inp-nisa').addEventListener('change', calc);
+  calc();
+})();
+</script>
+</body>
+</html>
