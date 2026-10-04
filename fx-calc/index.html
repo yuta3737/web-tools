@@ -14,19 +14,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="https://yuta-tools.com/fx-calc/">
-  <title>FX計算ツール｜必要証拠金・pips損益・ロット数を自動計算 | MoneyTools</title>
-  <meta name="description" content="FXの必要証拠金・1pipsあたりの損益・証拠金維持率・適正ロット数をまとめて自動計算。通貨ペアの価格と通貨数を入力するだけ。損切り幅から逆算した適正な取引数量もわかります。">
+  <title>FX計算ツール（計算機）｜必要証拠金・pips損益・ロット計算 | MoneyTools</title>
+  <meta name="description" content="FXの必要証拠金・1pipsあたりの損益・証拠金維持率・適正ロット数をまとめて自動計算する無料の計算機。通貨数と価格を入れるだけでpips計算とロット計算ができ、いくらから始められるかの証拠金シミュレーションにも使えます。">
   <!-- OGP / Twitter Card -->
-  <meta property="og:title" content="FX計算ツール｜必要証拠金・pips損益・ロット数を自動計算 | MoneyTools">
-  <meta property="og:description" content="FXの必要証拠金・1pipsあたりの損益・証拠金維持率・適正ロット数をまとめて自動計算。通貨ペアの価格と通貨数を入力するだけ。">
+  <meta property="og:title" content="FX計算ツール（計算機）｜必要証拠金・pips損益・ロット計算 | MoneyTools">
+  <meta property="og:description" content="FXの必要証拠金・pips損益・証拠金維持率・適正ロットをまとめて自動計算する無料の計算機。pips計算もロット計算もこれ1つで。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://yuta-tools.com/fx-calc/">
   <meta property="og:image" content="https://yuta-tools.com/ogp.png">
   <meta property="og:site_name" content="MoneyTools">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="FX計算ツール｜必要証拠金・pips損益・ロット数を自動計算 | MoneyTools">
-  <meta name="twitter:description" content="FXの必要証拠金・1pipsあたりの損益・証拠金維持率・適正ロット数をまとめて自動計算。">
+  <meta name="twitter:title" content="FX計算ツール（計算機）｜必要証拠金・pips損益・ロット計算 | MoneyTools">
+  <meta name="twitter:description" content="FXの必要証拠金・pips計算・ロット計算をまとめて自動計算する無料の計算機。">
   <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -251,6 +251,22 @@
         "@type": "Answer",
         "text": "このツールはクロス円（米ドル/円・ユーロ/円など、円が絡む通貨ペア）を前提にしています。ユーロ/米ドルのような通貨ペアは1pipsの価値が異なるため、そのままの数値では使えません。"
       }
+    },
+    {
+      "@type": "Question",
+      "name": "FXのpips計算はどうやりますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "クロス円なら「通貨数 ÷ 100」が1pipsあたりの円額です。3,400通貨なら34円、10,000通貨なら100円。損切り25pipsで3,400通貨なら34×25＝850円の損失になります。ユーロ/米ドルのようなドルストレートは1pipsが0.0001ドルのため、円に直すには為替レートが必要です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "FXはいくらから始められますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "1,000通貨なら必要証拠金は約6,280円です（1ドル157円・レバレッジ25倍）。ただしこれは建てられる最低ラインで、この金額ちょうどだと証拠金維持率100%になり、わずかな逆行でロスカットへ向かいます。実際には、どこまで逆行に耐えられるかから必要な資金を逆算してください。"
+      }
     }
   ]
 }
@@ -455,6 +471,45 @@
   </div>
 
   <div class="info-card">
+    <h2>pips計算の基本</h2>
+    <p>pipsは値動きの単位です。<strong>通貨ペアによって1pipsの大きさが違う</strong>ため、同じ「10pips動いた」でも金額が変わります。</p>
+
+    <table class="info-table">
+      <tr><th>通貨ペア</th><th>1pips</th><th>10,000通貨なら</th></tr>
+      <tr><td>クロス円（米ドル/円など）</td><td>0.01円</td><td>100円</td></tr>
+      <tr><td>ドルストレート（ユーロ/米ドルなど）</td><td>0.0001ドル</td><td>1ドル（円換算は為替レート次第）</td></tr>
+    </table>
+
+    <p>クロス円のpips計算は暗算できます。</p>
+    <div class="formula">1pipsあたりの損益（円） ＝ 通貨数 ÷ 100</div>
+    <p>1,000通貨なら10円、3,400通貨なら34円、10,000通貨なら100円です。損切り25pipsで3,400通貨なら <strong>34円 × 25 ＝ 850円</strong> の損失になります。ロット計算をするときは、この「1pipsいくらか」を先に押さえておくと早いです。</p>
+
+    <h3>ゴールド（XAUUSD）など通貨ペア以外の場合</h3>
+    <p>ゴールドやシルバー、原油などは<strong>1pipsの定義が業者によって違います</strong>。同じ金価格でも「0.01を1pips」とする業者と「0.1を1pips」とする業者があり、片方の感覚で計算すると10倍ずれます。</p>
+    <p>確かめ方は単純で、業者の取引要綱にある<strong>最小変動単位</strong>を見るか、最小数量で実際に建てて1ティックいくら動くか確認するのが確実です。このツールはクロス円を前提にしているため、商品CFDにはそのまま使えません。</p>
+  </div>
+
+  <div class="info-card">
+    <h2>証拠金シミュレーション：いくらから始められるか</h2>
+    <p>「FXは少額から始められる」と言われますが、<strong>必要証拠金だけ用意しても足りません</strong>。必要証拠金ちょうどだと維持率100%で建てることになり、1pips逆行した時点でロスカットへ向かって進み始めます。</p>
+
+    <table class="info-table">
+      <tr><th>取引数量</th><th>必要証拠金（25倍・1ドル157円）</th><th>1pipsの損益</th></tr>
+      <tr><td>1,000通貨</td><td>6,280円</td><td>10円</td></tr>
+      <tr><td>3,400通貨</td><td>21,352円</td><td>34円</td></tr>
+      <tr><td>10,000通貨（1Lot）</td><td>62,800円</td><td>100円</td></tr>
+    </table>
+
+    <p>この証拠金計算は「建てられるかどうか」の最低ラインです。実際には<strong>どこまで逆行に耐えられるか</strong>から逆算します。</p>
+
+    <div class="formula">耐えられる値幅(pips) ＝ （有効証拠金 − 必要証拠金 × ロスカット水準） ÷ 1pipsの損益</div>
+
+    <p>例：残高10万円で3,400通貨（必要証拠金21,352円）、ロスカット水準50%の業者なら、ロスカットされる有効証拠金は10,676円。耐えられるのは（100,000 − 10,676）÷ 34 ＝ <strong>約2,627pips</strong>です。</p>
+    <p>同じ数量でも残高が3万円なら（30,000 − 10,676）÷ 34 ＝ <strong>約568pips</strong>まで縮みます。<strong>資金が少ないほど退場までの距離が短くなる</strong>ということです。上の計算機に口座資金を入れると、この維持率がその場で出ます。</p>
+    <p>なおロスカット水準は業者ごとに違い、50%〜100%程度が一般的です。使っている業者の数字を必ず確認してください。詳しくは<a href="../articles/fx-losscut/">FXの強制ロスカットは何円で発動するか</a>で解説しています。</p>
+  </div>
+
+  <div class="info-card">
     <h2>よくある質問</h2>
     <h3>Q. 1Lotは何通貨ですか？</h3>
     <p>業者によって異なります。国内では<strong>1Lot＝1万通貨</strong>が一般的ですが、1Lot＝1,000通貨としている業者もあります。また最低取引単位も業者により1通貨・100通貨・1,000通貨と差があるので、口座のルールを確認してください。</p>
@@ -467,6 +522,12 @@
 
     <h3>Q. クロス円以外の通貨ペアでも使えますか？</h3>
     <p>このツールは<strong>クロス円（米ドル/円・ユーロ/円など、円が絡む通貨ペア）</strong>を前提にしています。ユーロ/米ドルのような通貨ペアは1pipsの価値が異なるため、そのままの数値では使えません。</p>
+
+    <h3>Q. pips計算はどうやりますか？</h3>
+    <p>クロス円なら<strong>通貨数 ÷ 100</strong> が1pipsあたりの円額です。3,400通貨なら34円。損切り25pipsなら34×25＝850円の損失になります。ドルストレートは1pipsが0.0001ドルなので、円換算に為替レートが必要です。</p>
+
+    <h3>Q. いくらから始められますか？</h3>
+    <p>1,000通貨なら必要証拠金は約6,280円（1ドル157円・レバレッジ25倍）です。ただしこれは建てられる最低ラインで、この金額ちょうどだと維持率100%になり、すぐロスカット方向へ進みます。証拠金シミュレーションの節で、どこまで逆行に耐えられるかの計算を載せています。</p>
   </div>
 
   <div class="info-card">
