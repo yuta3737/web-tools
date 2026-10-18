@@ -537,10 +537,20 @@
     }
     .broker-cta:hover { opacity: 0.85; text-decoration: none; }
     .broker-cta.sub { background: var(--gray-700); }
+    .next-tools { margin-top: 16px; border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 16px 20px; }
+    .next-tools-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 11px; }
+    .next-tools ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
+    .next-tools li { display: flex; flex-direction: column; gap: 2px; }
+    .next-tools a { font-size: 14px; font-weight: 700; color: var(--primary); text-decoration: none; }
+    .next-tools a:hover { text-decoration: underline; }
+    .next-tools span { font-size: 12px; line-height: 1.6; color: var(--gray-500); }
     .result-cta { margin-top: 24px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 20px 24px; }
     .result-cta-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 4px; }
     .result-cta-note { font-size: 13px; line-height: 1.8; color: var(--gray-500); margin-bottom: 16px; }
-</style>
+    .info-table { width: 100%; min-width: 0; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+    .info-table th { background: var(--gray-50); padding: 9px 12px; text-align: left; font-weight: 700; color: var(--gray-700); border-bottom: 1px solid var(--gray-200); }
+    .info-table td { padding: 9px 12px; border-bottom: 1px solid var(--gray-100); color: var(--gray-700); }
+  </style>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -643,7 +653,7 @@
       <a href="../fx-calc/">FX計算</a>
       <a href="../ideco-calc/">iDeCo節税</a>
       <a href="../volume-calc/">出来高チェック</a>
-      <a href="../unrealized-calc/">含み益計算</a>
+      <a href="../unrealized-calc/">評価損益計算</a>
       <a href="../yutai-calc/">優待利回り</a>
       <a href="../dividend-calc/">配当計算</a>
       <a href="../articles/">記事一覧</a>
@@ -795,6 +805,17 @@
     <a href="https://h.accesstrade.net/sp/cc?rk=0100h3p700os8p" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub">マネックス証券 口座開設（無料）</a>
   </div>
 
+  <!-- 次に計算するもの（回遊導線・2026-10-18追加） -->
+  <div class="next-tools">
+    <p class="next-tools-title">積み立てる前に、確かめておけること</p>
+    <ul>
+      <li><a href="../ideco-calc/">iDeCoなら同じ積立で税金が戻ります</a><span>年収と掛金から、1年あたりの節税額を出せます</span></li>
+      <li><a href="../articles/nisa-vs-ideco/">NISAとiDeCo、どちらを先に埋めるか</a><span>引き出せる時期と節税のしかたが違います</span></li>
+      <li><a href="../dividend-calc/">配当を受け取る形で増やす場合</a><span>税引後の受取額と、目標額に必要な株数</span></li>
+      <li><a href="../profit-calc/">増えた分にかかる税金を確かめる</a><span>売却益20.315%を引いた手取り額</span></li>
+    </ul>
+  </div>
+
   <div class="explain">
     <h2>積立投資シミュレーターの使い方</h2>
     <p>4つの数字を入れるだけで、将来の資産額が計算できます。</p>
@@ -822,6 +843,33 @@
       <li><strong>信託報酬</strong>：投資信託を保有している間ずっとかかる費用。年0.1%程度の低コストな商品もあります</li>
       <li><strong>インフレ</strong>：物価が上がると、同じ金額で買えるものは減ります</li>
     </ul>
+
+
+    <h2>積立額・利回り・期間、どれを動かすのが一番効くか</h2>
+    <p>将来の金額を増やしたいとき、動かせるものは3つしかありません。<strong>毎月いくら積むか・何%で回るか・何年続けるか</strong>です。どれが一番効くかは、実際に計算すると順位がはっきりします。</p>
+    <p>基準を「月3万円・年利5%・20年」とすると、20年後は<strong>約1,233万円</strong>（元本720万円）です。ここから1つずつ条件を変えます。</p>
+    <table class="info-table">
+      <tr><th>変えるもの</th><th>20年後</th><th>基準との差</th></tr>
+      <tr><td>基準（月3万・5%・20年）</td><td>1,233万円</td><td>—</td></tr>
+      <tr><td>積立額を月4万に（+33%）</td><td>1,644万円</td><td>+33.3%</td></tr>
+      <tr><td>利回りを6%に（+1ポイント）</td><td>1,386万円</td><td>+12.4%</td></tr>
+      <tr><td><strong>期間を25年に（+5年）</strong></td><td><strong>1,787万円</strong></td><td><strong>+44.9%</strong></td></tr>
+    </table>
+    <p>注目すべきは<strong>利回りが一番効かない</strong>ことです。年利を5%から6%に上げるのは、商品選びとしてはかなり大きな違いですが、結果は+12.4%にしかなりません。しかも<strong>高い利回りを狙うほど、下振れの幅も大きくなります</strong>。</p>
+    <p>対して<strong>期間を5年延ばすだけで+44.9%</strong>です。積立額を33%増やすより効きます。追加のお金も、リスクを取る判断も要りません。<strong>「早く始める」が最も確実な手段である</strong>というのは、この計算から出てくる結論です。</p>
+    <p>裏を返すと、<strong>続けられない金額で始めるのが一番まずい</strong>ということでもあります。月5万円を3年で止めるより、月2万円を20年続けるほうが最終的な金額は大きくなります。</p>
+
+    <h2>同じ平均リターンでも、順番で結果が変わります</h2>
+    <p>上のシミュレーションは毎年同じ利回りで計算していますが、実際の相場は上下します。そして<strong>積立の場合、同じ平均リターンでも「どの順番で起きたか」で結果が変わります</strong>。</p>
+    <p>3年間・月3万円を積み立てて、年ごとのリターンが「+20% / −10% / +5%」だった場合と、同じ3つが逆順「+5% / −10% / +20%」で来た場合を比べます。</p>
+    <table class="info-table">
+      <tr><th>リターンの順番</th><th>3年後の残高</th></tr>
+      <tr><td>+20% → −10% → +5%（最初に良い）</td><td>1,110,140円</td></tr>
+      <tr><td>+5% → −10% → +20%（最後に良い）</td><td><strong>1,225,359円</strong></td></tr>
+    </table>
+    <p>平均リターンは同じなのに、<strong>11万円以上の差</strong>が出ます。しかも<strong>最初に下がって後から上がったほうが有利</strong>です。</p>
+    <p>理由は、積立では<strong>後になるほど元本が大きい</strong>からです。残高が大きい後半に高いリターンが来るほうが、金額としては大きく効きます。逆に、序盤の下落は残高が小さいうちに起きるため損失額が小さく、その安い価格でその後も買い続けられます。</p>
+    <p><strong>積み立てている期間の下落は、必ずしも悪いことではありません。</strong>ただしこれは積立を止めなかった場合の話で、下落中に積立を停止すると安く買える分を取り逃がします。</p>
 
     <h2>よくある質問</h2>
     <div class="faq">
@@ -862,7 +910,7 @@
             <li><a href="../fx-calc/">FX計算ツール</a></li>
             <li><a href="../ideco-calc/">iDeCo節税額シミュレーター</a></li>
             <li><a href="../volume-calc/">出来高・売買代金チェック</a></li>
-            <li><a href="../unrealized-calc/">含み益・含み損計算</a></li>
+            <li><a href="../unrealized-calc/">保有株の評価損益</a></li>
             <li><a href="../yutai-calc/">株主優待利回り計算</a></li>
             <li><a href="../dividend-calc/">配当金計算ツール</a></li>
           </ul>

@@ -171,6 +171,13 @@
     }
     .broker-cta:hover { opacity: 0.85; text-decoration: none; }
     .broker-cta.sub { background: var(--gray-700); }
+    .next-tools { margin-top: 16px; border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 16px 20px; }
+    .next-tools-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 11px; }
+    .next-tools ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
+    .next-tools li { display: flex; flex-direction: column; gap: 2px; }
+    .next-tools a { font-size: 14px; font-weight: 700; color: var(--primary); text-decoration: none; }
+    .next-tools a:hover { text-decoration: underline; }
+    .next-tools span { font-size: 12px; line-height: 1.6; color: var(--gray-500); }
     .result-cta { margin-top: 24px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 20px 24px; }
     .result-cta-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 4px; }
     .result-cta-note { font-size: 13px; line-height: 1.8; color: var(--gray-500); margin-bottom: 16px; }
@@ -245,7 +252,7 @@
       <a href="../fx-calc/">FX計算</a>
       <a href="./" class="active">iDeCo節税</a>
       <a href="../volume-calc/">出来高チェック</a>
-      <a href="../unrealized-calc/">含み益計算</a>
+      <a href="../unrealized-calc/">評価損益計算</a>
       <a href="../yutai-calc/">優待利回り</a>
       <a href="../dividend-calc/">配当計算</a>
       <a href="../articles/">記事一覧</a>
@@ -349,6 +356,16 @@
     <a href="https://h.accesstrade.net/sp/cc?rk=0100ln6u00os8p" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub">マネックス証券でiDeCoを始める（無料）</a>
   </div>
 
+  <!-- 次に計算するもの（回遊導線・2026-10-18追加） -->
+  <div class="next-tools">
+    <p class="next-tools-title">節税額が分かったら、次に決めること</p>
+    <ul>
+      <li><a href="../articles/nisa-vs-ideco/">NISAとiDeCo、どちらを先に使うか</a><span>60歳まで引き出せない点をどう考えるか</span></li>
+      <li><a href="../investment-sim/">同じ掛金を積み立てたらいくらになるか</a><span>利回りと年数から将来の資産額を試算</span></li>
+      <li><a href="../dividend-calc/">課税口座で配当を受け取る場合</a><span>iDeCoと違い20.315%が引かれます</span></li>
+    </ul>
+  </div>
+
   <div class="info-card">
     <h2>節税額の計算方法</h2>
     <p>iDeCoの掛金は<strong>全額が「小規模企業共済等掛金控除」として所得控除</strong>されます。控除された分だけ課税所得が下がるため、その年の所得税・住民税がその場で軽くなります。</p>
@@ -377,6 +394,38 @@
   </div>
 
   <div class="info-card">
+  </div>
+
+  <div class="info-card">
+
+    <h2>口座管理手数料が、節税額を食うことがあります</h2>
+    <p>iDeCoには<strong>掛金とは別に口座管理手数料がかかります</strong>。内訳は次の2種類です。</p>
+    <ul>
+      <li><strong>どこで始めても必ずかかる分</strong> … 国民年金基金連合会 105円/月 ＋ 事務委託先金融機関 66円/月 ＝ <strong>月171円（年2,052円）</strong></li>
+      <li><strong>金融機関ごとに違う分</strong> … 運営管理機関手数料。<strong>0円の金融機関もあれば、月450円前後かかるところもある</strong></li>
+    </ul>
+    <p>この差が節税額にどう効くかを、掛金別に計算すると次のようになります。</p>
+    <table class="info-table">
+      <tr><th>掛金</th><th>年の節税額<br>（税率15%の場合）</th><th>手数料0円の<br>金融機関</th><th>月450円かかる<br>金融機関</th></tr>
+      <tr><td>5,000円/月</td><td>9,000円</td><td>6,948円</td><td><strong>1,548円</strong></td></tr>
+      <tr><td>23,000円/月</td><td>41,400円</td><td>39,348円</td><td>33,948円</td></tr>
+    </table>
+    <p><strong>掛金が小さいほど、手数料の影響が致命的になります。</strong>掛金5,000円・税率15%の人が運営管理機関手数料450円の金融機関を選ぶと、年9,000円の節税が<strong>実質1,548円まで減ります</strong>。60歳まで引き出せない制約を受け入れる見返りとしては割に合いません。</p>
+    <p>一方、掛金が上限に近く税率も高い人なら、手数料の差は誤差の範囲です。<strong>掛金が小さい人ほど、金融機関選びを慎重にすべき</strong>ということになります。</p>
+
+    <h2>受け取るときには税金がかかります</h2>
+    <p>iDeCoは「非課税」と説明されることがありますが、正確ではありません。<strong>課税が先送りされているだけ</strong>で、受け取るときに課税対象になります。</p>
+    <p>受け取り方は3通りで、適用される控除が変わります。</p>
+    <table class="info-table">
+      <tr><th>受け取り方</th><th>扱い</th><th>使える控除</th></tr>
+      <tr><td>一時金（一括）</td><td>退職所得</td><td>退職所得控除</td></tr>
+      <tr><td>年金（分割）</td><td>雑所得</td><td>公的年金等控除</td></tr>
+      <tr><td>併用</td><td>両方</td><td>両方</td></tr>
+    </table>
+    <p>多くの場合は控除の枠に収まって実際の税負担は小さくなりますが、<strong>注意が必要なのは会社から退職金が出る人</strong>です。退職所得控除は勤続年数で決まる1つの枠で、<strong>会社の退職金とiDeCoの一時金が同じ枠を奪い合います</strong>。退職金だけで枠を使い切る人は、iDeCoの一時金に課税される可能性があります。</p>
+    <p>この場合は、受け取る年をずらす・年金形式で分割して受け取るといった調整で負担を抑えられます。<strong>積み立てるときの節税額（上のツールが出している金額）だけで判断せず、出口まで含めて考える必要がある</strong>ということです。</p>
+    <p>なお、NISAには出口課税がありません。どちらを先に使うべきかは<a href="../articles/nisa-vs-ideco/">NISAとiDeCoの比較記事</a>にまとめています。</p>
+
     <h2>よくある質問</h2>
     <h3>Q. 掛金の上限を超えて入力するとどうなりますか？</h3>
     <p>職業区分ごとの上限を超えて入力すると警告が表示されます。<strong>実際の上限を超えて拠出することはできません</strong>ので、上限内で金額を調整してください。</p>
@@ -414,7 +463,7 @@
             <li><a href="../fx-calc/">FX計算ツール</a></li>
             <li><a href="./">iDeCo節税額シミュレーター</a></li>
             <li><a href="../volume-calc/">出来高・売買代金チェック</a></li>
-            <li><a href="../unrealized-calc/">含み益・含み損計算</a></li>
+            <li><a href="../unrealized-calc/">保有株の評価損益</a></li>
             <li><a href="../yutai-calc/">株主優待利回り計算</a></li>
             <li><a href="../dividend-calc/">配当金計算ツール</a></li>
           </ul>

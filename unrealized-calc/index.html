@@ -10,11 +10,11 @@
   <meta charset="UTF-8">
   <link rel="canonical" href="https://yuta-tools.com/unrealized-calc/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>含み益・含み損の計算ツール｜評価損益と損益率を自動計算 | MoneyTools</title>
-  <meta name="description" content="保有株の含み益・含み損をその場で計算。平均取得単価・株数・現在の株価を入れると、評価損益の金額と損益率（%）、今売った場合の税引後の手取りまで分かります。最大5銘柄をまとめて集計できる無料ツールです。">
+  <title>保有株の評価損益をまとめて計算｜複数銘柄の含み益・含み損を一覧集計 | MoneyTools</title>
+  <meta name="description" content="保有している複数の銘柄の評価損益を一覧で集計。最大5銘柄まで、平均取得単価・株数・現在の株価を入れるだけで、銘柄ごとの含み益・含み損と損益率、ポートフォリオ全体の合計損益、いま全部売った場合の税引後の手取りまで分かります。">
   <!-- OGP / Twitter Card -->
-  <meta property="og:title" content="含み益・含み損の計算ツール｜評価損益と損益率を自動計算 | MoneyTools">
-  <meta property="og:description" content="保有株の含み益・含み損をその場で計算。平均取得単価・株数・現在の株価を入れると、評価損益の金額と損益率（%）、今売った場合の税引後の手取りまで分かります。最大5銘柄をまとめて集計できる無料ツールです。">
+  <meta property="og:title" content="保有株の評価損益をまとめて計算｜複数銘柄の含み益・含み損を一覧集計 | MoneyTools">
+  <meta property="og:description" content="保有している複数の銘柄の評価損益を一覧で集計。最大5銘柄まで、平均取得単価・株数・現在の株価を入れるだけで、銘柄ごとの含み益・含み損と損益率、ポートフォリオ全体の合計損益、いま全部売った場合の税引後の手取りまで分かります。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://yuta-tools.com/unrealized-calc/">
   <meta property="og:image" content="https://yuta-tools.com/ogp.png">
@@ -22,7 +22,7 @@
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="含み益・含み損の計算ツール｜評価損益と損益率を自動計算 | MoneyTools">
-  <meta name="twitter:description" content="保有株の含み益・含み損をその場で計算。平均取得単価・株数・現在の株価を入れると、評価損益の金額と損益率（%）、今売った場合の税引後の手取りまで分かります。最大5銘柄をまとめて集計できる無料ツールです。">
+  <meta name="twitter:description" content="保有している複数の銘柄の評価損益を一覧で集計。最大5銘柄まで、平均取得単価・株数・現在の株価を入れるだけで、銘柄ごとの含み益・含み損と損益率、ポートフォリオ全体の合計損益、いま全部売った場合の税引後の手取りまで分かります。">
   <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -228,7 +228,7 @@
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "含み益・含み損の計算ツール",
+  "name": "保有株の評価損益をまとめて計算",
   "description": "保有株の含み益・含み損と損益率を自動計算する無料ツール。最大5銘柄まで合計できます。",
   "url": "https://yuta-tools.com/unrealized-calc/",
   "applicationCategory": "FinanceApplication",
@@ -259,7 +259,7 @@
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "含み益・含み損の計算ツール",
+      "name": "保有株の評価損益をまとめて計算",
       "item": "https://yuta-tools.com/unrealized-calc/"
     }
   ]
@@ -320,7 +320,7 @@
       <a href="../fx-calc/">FX計算</a>
       <a href="../ideco-calc/">iDeCo節税</a>
       <a href="../volume-calc/">出来高チェック</a>
-      <a href="./" class="active">含み益計算</a>
+      <a href="./" class="active">評価損益計算</a>
       <a href="../yutai-calc/">優待利回り</a>
       <a href="../dividend-calc/">配当計算</a>
       <a href="../articles/">記事一覧</a>
@@ -337,7 +337,7 @@
 </div>
 
 <div class="pos-wrap">
-  <h1 class="page-title">含み益・含み損の計算ツール</h1>
+  <h1 class="page-title">保有株の評価損益をまとめて計算</h1>
   <p class="page-sub">平均取得単価・株数・現在の株価を入れると、評価損益の金額と損益率が出ます。最大5銘柄まで合計できます。</p>
 
   <div class="input-card">
@@ -461,6 +461,33 @@
     <div class="formula">含み損益率 ＝ 含み損益 ÷ 取得金額 × 100</div>
     <p>上の例なら 40,000 ÷ 200,000 × 100 ＝ <strong>+20.0%</strong> です。同じ「+4万円」でも、取得金額20万円なら+20%、100万円なら+4%と意味がまったく違います。</p>
 
+
+    <h2>1銘柄ずつ見ると、判断を誤ります</h2>
+    <p>証券会社のアプリは銘柄ごとの損益を縦に並べて表示します。これだけを見ていると、<strong>赤字の銘柄にばかり目が行って、全体では勝っていることに気づけません</strong>。逆に、1つの大きな含み益に隠れて、他の4銘柄がじわじわ負けていることにも気づけません。</p>
+    <p>たとえば次のような保有状況を考えます。</p>
+    <table class="info-table">
+      <tr><th>銘柄</th><th>取得金額</th><th>評価額</th><th>含み損益</th><th>損益率</th></tr>
+      <tr><td>A</td><td>200,000円</td><td>260,000円</td><td>+60,000円</td><td>+30.0%</td></tr>
+      <tr><td>B</td><td>150,000円</td><td>138,000円</td><td>−12,000円</td><td>−8.0%</td></tr>
+      <tr><td>C</td><td>300,000円</td><td>279,000円</td><td>−21,000円</td><td>−7.0%</td></tr>
+      <tr><td>D</td><td>100,000円</td><td>91,000円</td><td>−9,000円</td><td>−9.0%</td></tr>
+      <tr><th>合計</th><th>750,000円</th><th>768,000円</th><th>+18,000円</th><th>+2.4%</th></tr>
+    </table>
+    <p>4銘柄のうち3銘柄が含み損で、見た目には負けているように感じます。しかし<strong>合計では+18,000円のプラス</strong>です。このとき「3つも負けているから損切りしよう」と動くと、全体のプラスを自分で削ることになります。</p>
+    <p>逆のケースもあります。Aが+60,000円ではなく+200,000円だったとしたら、合計は+158,000円となり、B・C・Dの負けはほぼ見えなくなります。<strong>1銘柄の勝ちが他の失敗を覆い隠している状態</strong>で、これも合計だけ見ていると気づけません。だから<strong>金額は合計で、率は銘柄ごとに</strong>見る必要があります。</p>
+
+    <h2>売る順番で手取りが変わります</h2>
+    <p>複数の銘柄をまとめて見るべき実務上の理由がもう1つあります。<strong>損益通算</strong>です。</p>
+    <p>株の利益には20.315%の税金がかかりますが、同じ年に出した損失と相殺できます。上の例で、含み益のAだけを売った場合と、Aと含み損のCを同じ年に売った場合を比べます。</p>
+    <table class="info-table">
+      <tr><th>売り方</th><th>確定損益</th><th>税金</th><th>手取り</th></tr>
+      <tr><td>Aだけ売る</td><td>+60,000円</td><td>12,189円</td><td>47,811円</td></tr>
+      <tr><td>AとCを同じ年に売る</td><td>+39,000円</td><td>7,922円</td><td>31,078円＋Cの元本</td></tr>
+    </table>
+    <p>Cを一緒に売ると、課税対象が60,000円から39,000円に下がり、<strong>税金が4,267円減ります</strong>。どのみちCを手放すつもりなら、年をまたがずに同じ年に売ったほうが得だということです。</p>
+    <p>これは<strong>全銘柄の含み損益を並べて見ないと判断できません</strong>。1銘柄ずつ眺めていると、「今年はいくら利益が確定していて、あといくら損失をぶつけられるか」が分からないためです。</p>
+    <p>なお、損益通算は確定申告が必要な場合と、特定口座（源泉徴収あり）内で自動的に行われる場合があります。別々の証券会社にまたがる場合は確定申告が必要です。税額の詳細は<a href="../articles/tax-calculation/">株の税金の記事</a>にまとめています。</p>
+
     <h2>含み益に税金はかかりません</h2>
     <p>株の税金20.315%（所得税15%＋復興特別所得税0.315%＋住民税5%）は、<strong>売却して利益が確定したときにだけ</strong>かかります。保有したままの含み益は課税されません。</p>
     <p>このツールの「いま全部売った場合」は、その時点で確定させたらいくら残るかの概算です。手数料は含んでいないので、正確に出したい場合は<a href="../profit-calc/">株の利益計算ツール</a>を使ってください。</p>
@@ -482,6 +509,12 @@
     <p>投資総額 ÷ 保有株数 で求めます。複数回に分けて買った場合は<a href="../nanpin-calc/">ナンピン計算ツール</a>で自動計算できます。</p>
     <h3>Q. 証券会社アプリの評価損益と数字が合いません</h3>
     <p>証券会社の表示は購入時手数料を取得単価に含めていることがあります。また単元未満株や配当を含む表示もあるため、概算として使ってください。</p>
+    <h3>Q. 1銘柄だけ計算したいときは？</h3>
+    <p>このツールは1銘柄でも使えますが、売却手数料まで含めて手取りを厳密に出したい場合は<a href="../profit-calc/">株の利益計算ツール</a>のほうが向いています。こちらは複数銘柄の合計を出すことに特化しています。</p>
+    <h3>Q. 証券会社が複数に分かれている場合も合算していい？</h3>
+    <p>評価損益を把握する目的なら合算して問題ありません。ただし<strong>損益通算は口座ごとに自動では行われません</strong>。特定口座（源泉徴収あり）を複数の証券会社に持っていて、片方で利益・片方で損失が出た場合は、確定申告をしないと相殺されず、払いすぎた税金が戻りません。</p>
+    <h3>Q. 配当は含まれますか？</h3>
+    <p>含まれません。このツールは株価の変動による評価損益だけを計算します。配当を含めた受取額は<a href="../dividend-calc/">配当金計算ツール</a>で出せます。</p>
     <h3>Q. NISA口座の場合は？</h3>
     <p>NISA口座での利益は非課税です。「いま全部売った場合」の税金は0円として考えてください。</p>
   </div>
@@ -507,7 +540,7 @@
             <li><a href="../fx-calc/">FX計算ツール</a></li>
             <li><a href="../ideco-calc/">iDeCo節税額シミュレーター</a></li>
             <li><a href="../volume-calc/">出来高・売買代金チェック</a></li>
-            <li><a href="./">含み益・含み損計算</a></li>
+            <li><a href="./">保有株の評価損益</a></li>
             <li><a href="../yutai-calc/">株主優待利回り計算</a></li>
             <li><a href="../dividend-calc/">配当金計算ツール</a></li>
           </ul>

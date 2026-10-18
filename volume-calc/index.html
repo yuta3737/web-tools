@@ -175,6 +175,13 @@
     }
     .broker-cta:hover { opacity: 0.85; text-decoration: none; }
     .broker-cta.sub { background: var(--gray-700); }
+    .next-tools { margin-top: 16px; border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 16px 20px; }
+    .next-tools-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 11px; }
+    .next-tools ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
+    .next-tools li { display: flex; flex-direction: column; gap: 2px; }
+    .next-tools a { font-size: 14px; font-weight: 700; color: var(--primary); text-decoration: none; }
+    .next-tools a:hover { text-decoration: underline; }
+    .next-tools span { font-size: 12px; line-height: 1.6; color: var(--gray-500); }
     .result-cta { margin-top: 24px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 20px 24px; }
     .result-cta-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 4px; }
     .result-cta-note { font-size: 13px; line-height: 1.8; color: var(--gray-500); margin-bottom: 16px; }
@@ -249,7 +256,7 @@
       <a href="../fx-calc/">FX計算</a>
       <a href="../ideco-calc/">iDeCo節税</a>
       <a href="./" class="active">出来高チェック</a>
-      <a href="../unrealized-calc/">含み益計算</a>
+      <a href="../unrealized-calc/">評価損益計算</a>
       <a href="../yutai-calc/">優待利回り</a>
       <a href="../dividend-calc/">配当計算</a>
       <a href="../articles/">記事一覧</a>
@@ -346,6 +353,16 @@
     <a href="https://h.accesstrade.net/sp/cc?rk=0100h3p700os8p" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub">マネックス証券 口座開設（無料）</a>
   </div>
 
+  <!-- 次に計算するもの（回遊導線・2026-10-18追加） -->
+  <div class="next-tools">
+    <p class="next-tools-title">この銘柄で実際に売買する前に</p>
+    <ul>
+      <li><a href="../position-calc/">この銘柄を何株まで買っていいか</a><span>許容できる損失額から株数を逆算します</span></li>
+      <li><a href="../oco-calc/">買う前に出口を決めておく</a><span>利確と損切りを同時に置くOCOの価格計算</span></li>
+      <li><a href="../articles/board-reading/">板から出来高の偏りを読む</a><span>薄い板で成行を出すと滑る理由</span></li>
+    </ul>
+  </div>
+
   <div class="info-card">
     <h2>出来高・売買代金の判定基準</h2>
     <p><strong>出来高</strong>は株数ベース、<strong>売買代金</strong>は金額ベースの指標です。株価500円の銘柄が300万株売買されたなら、出来高300万株・売買代金15億円になります。</p>
@@ -376,6 +393,38 @@
   </div>
 
   <div class="info-card">
+  </div>
+
+  <div class="info-card">
+
+    <h2>出来高が薄いと、手数料より大きく損をします</h2>
+    <p>出来高を気にする理由は「約定しないと困るから」だけではありません。<strong>約定はするが、思った値段より不利な価格で成立する</strong>ことのほうが多く、しかもこちらのほうが金額は大きくなります。</p>
+    <p>株価2,000円・1日の出来高50万株の銘柄で、1万株（出来高の2%）を成行で買う場面を考えます。板に並んでいる売り注文が1円刻みで数百株ずつだとすると、1万株を埋めるには2,000円では足りず、2,001円・2,002円…と上の板まで食い上がります。</p>
+    <table class="info-table">
+      <tr><th>項目</th><th>金額</th></tr>
+      <tr><td>想定どおり2,000円で買えた場合</td><td>20,000,000円</td></tr>
+      <tr><td>平均2,003円で約定した場合</td><td>20,030,000円</td></tr>
+      <tr><td><strong>差額（スリッページ）</strong></td><td><strong>30,000円</strong></td></tr>
+      <tr><td>参考：同じ金額の売買手数料</td><td>0〜1,000円程度</td></tr>
+    </table>
+    <p><strong>たった3円のズレで、手数料の30倍のコストが発生します。</strong>しかも売るときにも同じことが起きるため、往復では6万円です。手数料0円の証券会社を選ぶことより、<strong>滑らない銘柄を選ぶことのほうが効果が大きい</strong>のはこのためです。</p>
+    <p>この「食い上がる量」は、自分の注文が出来高に占める割合で決まります。上のツールが出している<strong>出来高に占める割合</strong>は、そのための数字です。目安として<strong>1%を超えたら要注意、5%を超えると自分の注文で値段が動きます</strong>。</p>
+
+    <h2>出来高は1日の中で大きく偏っています</h2>
+    <p>「1日の出来高が500万株ある」としても、それが9時から15時まで均等に出ているわけではありません。<strong>寄り付き（9:00〜9:30）と引け（14:30〜15:00）に集中し、昼前後は極端に薄くなります</strong>。</p>
+    <p>日中の薄い時間帯に大きめの注文を出すと、1日の出来高では十分に見えた銘柄でも滑ります。<strong>1日の出来高で判断していい前提は「寄り付きか引けで売買すること」</strong>です。</p>
+    <p>逆に、寄り付き直後は値動きも荒くなります。出来高があることと、値段が安定していることは別の話です。注文の出し方そのものは<a href="../articles/order-types/">注文の種類の記事</a>にまとめています。</p>
+
+    <h2>出来高が急増した銘柄は、むしろ危険です</h2>
+    <p>出来高が前日の10倍になっている銘柄は、スクリーニングでは魅力的に見えます。しかし急増の中身は次のどれかで、意味がまったく違います。</p>
+    <ul>
+      <li><strong>好材料で買いが集まった</strong> — 翌日以降も出来高が続くことが多い</li>
+      <li><strong>悪材料で投げ売りが出た</strong> — 下落の初日である可能性がある</li>
+      <li><strong>仕手・短期資金が入った</strong> — <strong>数日で出来高ごと消える</strong></li>
+    </ul>
+    <p>一番危ないのは3つめです。出来高が急増した日に買い、数日後に売ろうとしたときには出来高が元の水準に戻っていて、<strong>買うときは滑らなかったのに売るときだけ滑る</strong>という状態になります。</p>
+    <p>対策はシンプルで、<strong>急増した1日ではなく、直近5日〜20日の平均で見る</strong>ことです。平常時の出来高が十分にある銘柄なら、急増が収まっても売り抜けられます。</p>
+
     <h2>よくある質問</h2>
     <h3>Q. 出来高と売買代金、どちらを重視すべきですか？</h3>
     <p>両方確認するのが理想です。<strong>低位株（株価が安い銘柄）は出来高が多くても売買代金が小さくなりがち</strong>で、逆に<strong>値がさ株（株価が高い銘柄）は出来高が少なくても売買代金は大きい</strong>ことがあります。片方だけでは流動性を見誤ることがあります。</p>
@@ -383,6 +432,10 @@
     <h3>Q. 「出来高に占める割合」が高いと何が問題ですか？</h3>
     <p>自分の注文が出来高の数%以上を占めると、<strong>希望の価格で約定しにくくなったり、自分の売買自体が株価を動かしてしまう</strong>ことがあります。目安として1%を超えたら慎重に、5%を超える場合は分割して発注することを検討してください。</p>
 
+    <h3>Q. 何日分の出来高を見ればいいですか？</h3>
+    <p>直近5日の平均と、20日の平均の両方を見るのが実務的です。5日平均が20日平均を大きく上回っていれば「今だけ出来高がある」状態で、売るときに流動性が消えている可能性があります。逆に5日平均が20日平均を下回っていれば、人気が離れつつある銘柄です。</p>
+    <h3>Q. 出来高が十分でも値動きがない銘柄はどう見ますか？</h3>
+    <p>デイトレでは値幅が必要なので、出来高と値動き（ボラティリティ）は別に確認します。出来高が大きくても1日の値幅が0.5%しかなければ、手数料とスリッページで利益が消えます。<a href="../position-calc/">ポジションサイズ計算ツール</a>で、その値幅なら何株必要かを逆算できます。</p>
     <h3>Q. 出来高が「急に増えた」銘柄はどう判断すればいいですか？</h3>
     <p>普段より出来高が急増している場合は、ニュースや材料が出ているサインです。急騰後の高値づかみに注意してください。</p>
   </div>
@@ -412,7 +465,7 @@
             <li><a href="../fx-calc/">FX計算ツール</a></li>
             <li><a href="../ideco-calc/">iDeCo節税額シミュレーター</a></li>
             <li><a href="./">出来高・売買代金チェック</a></li>
-            <li><a href="../unrealized-calc/">含み益・含み損計算</a></li>
+            <li><a href="../unrealized-calc/">保有株の評価損益</a></li>
             <li><a href="../yutai-calc/">株主優待利回り計算</a></li>
             <li><a href="../dividend-calc/">配当金計算ツール</a></li>
           </ul>

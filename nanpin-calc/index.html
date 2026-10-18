@@ -190,6 +190,13 @@
     }
     .broker-cta:hover { opacity: 0.85; text-decoration: none; }
     .broker-cta.sub { background: var(--gray-700); }
+      .next-tools { margin-top: 16px; border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 16px 20px; }
+    .next-tools-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 11px; }
+    .next-tools ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
+    .next-tools li { display: flex; flex-direction: column; gap: 2px; }
+    .next-tools a { font-size: 14px; font-weight: 700; color: var(--primary); text-decoration: none; }
+    .next-tools a:hover { text-decoration: underline; }
+    .next-tools span { font-size: 12px; line-height: 1.6; color: var(--gray-500); }
   </style>
   <script type="application/ld+json">
 {
@@ -301,7 +308,7 @@
       <a href="../fx-calc/">FX計算</a>
       <a href="../ideco-calc/">iDeCo節税</a>
       <a href="../volume-calc/">出来高チェック</a>
-      <a href="../unrealized-calc/">含み益計算</a>
+      <a href="../unrealized-calc/">評価損益計算</a>
       <a href="../yutai-calc/">優待利回り</a>
       <a href="../dividend-calc/">配当計算</a>
       <a href="../articles/">記事一覧</a>
@@ -426,6 +433,16 @@
     <a href="https://ad2.trafficgate.net/t/r/1190/738/317787_397122" target="_blank" rel="nofollow noopener" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub">楽天証券 口座開設（100万円まで手数料0円・無料）</a>
   </div>
 
+  <!-- 次に計算するもの（回遊導線・2026-10-18追加） -->
+  <div class="next-tools">
+    <p class="next-tools-title">平均取得単価が出たら、次に見ること</p>
+    <ul>
+      <li><a href="../unrealized-calc/">買い増した後の含み損益はいくらか</a><span>複数銘柄の評価損益をまとめて集計</span></li>
+      <li><a href="../profit-calc/">この単価で売ったときの手取り</a><span>手数料と税金を引いた金額と損益分岐点</span></li>
+      <li><a href="../articles/average-price/">平均取得単価の考え方をもう少し詳しく</a><span>手数料を含めるかどうかで数字が変わります</span></li>
+    </ul>
+  </div>
+
   <div class="info-card">
     <h2>ナンピンとは（難平買い）</h2>
     <p><strong>ナンピン</strong>とは、買った株が下がったときに<strong>さらに買い増して平均取得単価を下げる</strong>手法です。漢字では「難平」と書き、「難（＝損失）を平らにならす」という意味からきています。<strong>ナンピン買い</strong>とも呼ばれます。</p>
@@ -534,7 +551,7 @@
             <li><a href="../fx-calc/">FX計算ツール</a></li>
             <li><a href="../ideco-calc/">iDeCo節税額シミュレーター</a></li>
             <li><a href="../volume-calc/">出来高・売買代金チェック</a></li>
-            <li><a href="../unrealized-calc/">含み益・含み損計算</a></li>
+            <li><a href="../unrealized-calc/">保有株の評価損益</a></li>
             <li><a href="../yutai-calc/">株主優待利回り計算</a></li>
             <li><a href="../dividend-calc/">配当金計算ツール</a></li>
           </ul>

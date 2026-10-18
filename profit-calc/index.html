@@ -384,6 +384,13 @@
     .broker-cta.sub { background: var(--gray-700); }
 
     /* 結果直下のCTA（2026-09-26追加。従来CTAはページ84%地点にしか無く到達されていなかった） */
+    .next-tools { margin-top: 16px; border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 16px 20px; }
+    .next-tools-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 11px; }
+    .next-tools ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
+    .next-tools li { display: flex; flex-direction: column; gap: 2px; }
+    .next-tools a { font-size: 14px; font-weight: 700; color: var(--primary); text-decoration: none; }
+    .next-tools a:hover { text-decoration: underline; }
+    .next-tools span { font-size: 12px; line-height: 1.6; color: var(--gray-500); }
     .result-cta { margin-top: 16px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 16px 20px; }
     .result-cta-title { font-size: 14px; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
     .result-cta-note { font-size: 12.5px; line-height: 1.8; color: var(--gray-500); margin-bottom: 14px; }
@@ -536,7 +543,7 @@
       <a href="../fx-calc/">FX計算</a>
       <a href="../ideco-calc/">iDeCo節税</a>
       <a href="../volume-calc/">出来高チェック</a>
-      <a href="../unrealized-calc/">含み益計算</a>
+      <a href="../unrealized-calc/">評価損益計算</a>
       <a href="../yutai-calc/">優待利回り</a>
       <a href="../dividend-calc/">配当計算</a>
       <a href="../articles/">記事一覧</a>
@@ -672,6 +679,17 @@
     <a href="https://h.accesstrade.net/sp/cc?rk=0100h3p700os8p" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub">マネックス証券 口座開設（無料）</a>
   </div>
 
+  <!-- 次に計算するもの（回遊導線・2026-10-18追加） -->
+  <div class="next-tools">
+    <p class="next-tools-title">この銘柄について、次に計算できること</p>
+    <ul>
+      <li><a href="../unrealized-calc/">保有中の銘柄をまとめて集計する</a><span>最大5銘柄の含み益・含み損を一覧で出せます</span></li>
+      <li><a href="../dividend-calc/">配当金は年にいくら受け取れるか</a><span>税引後の受取額と、目標額に必要な株数の逆算</span></li>
+      <li><a href="../yutai-calc/">優待を含めた利回りを出す</a><span>配当利回りに優待の価値を足した総合利回り</span></li>
+      <li><a href="../nanpin-calc/">買い増したあとの平均取得単価</a><span>ナンピン後の取得単価と損益分岐点</span></li>
+    </ul>
+  </div>
+
   <div class="explain">
     <h2>株の損益計算のやり方</h2>
     <p>株の損益は、次の3ステップで求められます。上のツールはこの計算を自動で行っています。</p>
@@ -689,6 +707,7 @@
 
     <h2>含み益・含み損の計算にも使えます</h2>
     <p>まだ売っていない株でも、「売却株価」の欄に<strong>現在の株価</strong>を入れれば、いま売った場合の手取りが分かります。</p>
+    <p>複数の銘柄を持っていて<strong>合計の含み損益を知りたい場合</strong>は、<a href="../unrealized-calc/">保有株の評価損益をまとめて計算</a>のほうが向いています。最大5銘柄を入れて、1銘柄ごとの損益と合計をまとめて出せます。</p>
     <p>ただし<strong>含み益の段階では税金はかかりません</strong>。課税されるのは実際に売却して利益が確定したときだけです。上の計算結果は「いま売ったらいくら残るか」を示しています。</p>
 
     <h2>株の利益は「譲渡所得」として課税される</h2>
@@ -772,7 +791,7 @@
             <li><a href="../fx-calc/">FX計算ツール</a></li>
             <li><a href="../ideco-calc/">iDeCo節税額シミュレーター</a></li>
             <li><a href="../volume-calc/">出来高・売買代金チェック</a></li>
-            <li><a href="../unrealized-calc/">含み益・含み損計算</a></li>
+            <li><a href="../unrealized-calc/">保有株の評価損益</a></li>
             <li><a href="../yutai-calc/">株主優待利回り計算</a></li>
             <li><a href="../dividend-calc/">配当金計算ツール</a></li>
           </ul>
