@@ -142,6 +142,9 @@
       <li><a href="#example">具体的な計算例</a></li>
       <li><a href="#why-important">なぜこれが重要なのか</a></li>
       <li><a href="#summary">まとめ</a></li>
+      <li><a href="#real">残高が減るとポジションサイズは自動的に下がる</a></li>
+      <li><a href="#compound">最大まで建てると、どこで退場するか</a></li>
+      <li><a href="#lesson">減らしてから分かったこと</a></li>
     </ol>
   </nav>
 
@@ -242,6 +245,55 @@
     <a href="https://h.accesstrade.net/sp/cc?rk=01000t2900os8p" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta">松井証券 口座開設（無料）</a>
     <a href="https://h.accesstrade.net/sp/cc?rk=0100h3p700os8p" rel="nofollow noopener" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="broker-cta sub" style="margin-bottom:24px;">マネックス証券 口座開設（無料）</a>
 
+    <h2 id="real">残高が減ると、ポジションサイズは自動的に下がる</h2>
+    <p>ポジションサイズの話で見落とされやすいのが、<strong>「残高が減ったら、建てられる量も減る」</strong>という点です。筆者のFX口座で実際に起きたことを書きます。</p>
+    <p>口座が5万円から2万円まで減ったとき、それまで建てていた4,000通貨が<strong>建てられなくなりました</strong>。必要証拠金が足りなくなったためです。</p>
+
+    <table class="compare-table">
+      <tr><th>取引数量</th><th>必要証拠金</th><th>残高2万円での維持率</th><th>判定</th></tr>
+      <tr><td>1,000通貨</td><td>6,332円</td><td>315.9%</td><td class="tag-good">余裕あり</td></tr>
+      <tr><td>2,000通貨</td><td>12,664円</td><td>157.9%</td><td class="tag-good">建てられる</td></tr>
+      <tr><td>3,000通貨</td><td>18,996円</td><td>105.3%</td><td>ギリギリ</td></tr>
+      <tr><td>4,000通貨</td><td>25,328円</td><td>79.0%</td><td class="tag-bad">証拠金不足で建てられない</td></tr>
+    </table>
+    <p>※1ドル158.3円・レバレッジ25倍で計算</p>
+
+    <div class="callout good">
+      <div class="callout-title">✅ これは実は安全装置として働く</div>
+      最初は「ロットが下げられて不便だ」と感じました。ただよく考えると、<strong>負けているときに自動でリスクが小さくなる</strong>仕組みです。残高が減るほど建てられる量が減るので、同じペースで負け続けても損失額は小さくなっていきます。<br>
+      逆に言えば、<strong>ここで入金して無理にロットを戻すのが一番危ない</strong>ということです。安全装置を自分で外すことになります。
+    </div>
+
+    <h2 id="compound">最大まで建てると、どこで退場するか</h2>
+    <p>「建てられる最大まで使う」という運用をする人もいます。その場合、<strong>どこで強制ロスカットになるのか</strong>は先に計算しておくべきです。</p>
+
+    <table class="compare-table">
+      <tr><th>項目</th><th>数字</th></tr>
+      <tr><td>残高</td><td>20,000円</td></tr>
+      <tr><td>建てられる最大</td><td>3,159通貨（維持率100%）</td></tr>
+      <tr><td>1pipsあたりの損益</td><td>32円</td></tr>
+      <tr><td>ロスカット水準（維持率50%の業者）</td><td>10,000円</td></tr>
+      <tr><td><strong>耐えられる値幅</strong></td><td><strong>317pips</strong></td></tr>
+    </table>
+
+    <p>317pipsまで耐えられる計算です。筆者が使っている手法の過去検証では、<strong>最大ドローダウンが133〜161pips</strong>だったので、倍くらいの余裕があることになります。</p>
+    <p>ただしこれは<strong>1回のトレードしか持たない前提</strong>です。維持率100%ちょうどで建てると、2つ目は建てられません。「チャンスが重なったから2つ持つ」ができない状態で運用することになります。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 最大ロットは「余裕ゼロ」とセット</div>
+      建てられる最大まで使うと、<strong>維持率100%＝その瞬間から下げる余地がない</strong>状態です。含み損が出た時点で追加のポジションは取れません。<br>
+      株でいえば「買付余力をゼロまで使い切る」のと同じで、次の機会が来ても何もできなくなります。余力を2〜3割残す考え方は、FXでも株でも同じです。
+    </div>
+
+    <h2 id="lesson">減らしてから分かったこと</h2>
+    <p>5万円から2万円まで減らして分かったのは、<strong>ポジションサイズの計算式そのものより、「資金が減ったときにどう振る舞うか」のほうが効く</strong>ということでした。</p>
+    <ul>
+      <li><strong>減ったぶんロットを落とす</strong> … 自動的にそうなる。逆らわない</li>
+      <li><strong>負けを入金で埋めない</strong> … 口座の数字は戻るが、失った額は戻らない。次も埋めることになる</li>
+      <li><strong>取り返そうとしてロットを上げない</strong> … 連敗が1回来たら終わる</li>
+    </ul>
+    <p>計算式は記事の前半に書いたとおりで、難しくありません。守れるかどうかは、負けているときに試されます。</p>
+
     <p>実際にこの考え方で運用した記録も公開しています。</p>
 
 <a href="../daytrade-record/" class="related-article">
@@ -253,7 +305,7 @@
 </a>
 
     <div class="summary-box">
-      <h3>まとめ</h3>
+      <h3 id="summary">まとめ</h3>
       <ul>
         <li>ポジションサイズとは「1回のトレードで何株買うか」の量のこと。</li>
         <li>1回の損失は口座全体の<strong>1〜2%以内</strong>に抑えるのが基本。</li>
