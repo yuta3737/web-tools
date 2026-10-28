@@ -559,3 +559,32 @@ img { max-width: 100%; }
   .tools-grid { grid-template-columns: 1fr; }
   .footer-links { gap: 24px; }
 }
+
+/* ===== 入力値の復元バナー（js/remember.js・2026-10-28追加） ===== */
+.restore-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0 0 16px;
+  padding: 11px 16px;
+  background: var(--primary-light);
+  border: 1px solid #bfdbfe;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--primary-dark);
+}
+.restore-note button {
+  flex-shrink: 0;
+  background: var(--white);
+  border: 1px solid #bfdbfe;
+  border-radius: 6px;
+  padding: 6px 13px;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  cursor: pointer;
+}
+.restore-note button:hover { background: var(--gray-50); }
