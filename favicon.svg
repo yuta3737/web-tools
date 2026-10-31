@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="MoneyTools">
+  <rect width="64" height="64" rx="14" fill="#1a56db"/>
+  <!-- 右肩上がりの折れ線。16px でも形が潰れないよう太め・頂点4つに絞っている -->
+  <polyline points="13,44 25,32 35,39 51,19"
+            fill="none" stroke="#ffffff" stroke-width="6"
+            stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 到達点をアクセントカラーで示す -->
+  <circle cx="51" cy="19" r="6.5" fill="#f59e0b"/>
+</svg>

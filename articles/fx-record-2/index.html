@@ -10,6 +10,9 @@
   <link rel="canonical" href="https://yuta-tools.com/articles/fx-record-2/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="../../favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
   <title>FX実践記録②｜78回中5回のミスで-11,118円になった話 | MoneyTools</title>
   <meta name="description" content="FX2ヶ月目の全記録。累計78トレードを損益ではなくpipsで数え直したら、損失の全額がたった5トレードから出ていました。残り73回は合計プラス。損切り注文の有無だけで何が変わるかを実データで検証します。">
   <!-- OGP / Twitter Card -->
@@ -55,8 +58,8 @@
     }
     .trade-table tr:last-child td { border-bottom: none; }
     .trade-table tr:nth-child(even) td { background: var(--gray-50); }
-    .pnl-plus  { color: var(--success); font-weight: 800; }
-    .pnl-minus { color: var(--danger);  font-weight: 800; }
+    .pnl-plus  { color: var(--success-text); font-weight: 800; }
+    .pnl-minus { color: var(--danger-text);  font-weight: 800; }
 
     .summary-stat {
       display: grid;
@@ -74,8 +77,8 @@
     }
     .stat-label { font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
     .stat-value { font-size: 22px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; }
-    .stat-value.plus  { color: var(--success); }
-    .stat-value.minus { color: var(--danger); }
+    .stat-value.plus  { color: var(--success-text); }
+    .stat-value.minus { color: var(--danger-text); }
 
     .verdict-box {
       background: #eff6ff;
@@ -98,7 +101,7 @@
     }
     .balance-box .bl-label { font-size: 12px; font-weight: 700; color: var(--gray-600); margin-bottom: 8px; }
     .balance-box .bl-main { font-size: 15px; font-weight: 800; color: var(--gray-800); line-height: 1.9; }
-    .balance-box .bl-main strong { font-size: 26px; color: var(--danger); }
+    .balance-box .bl-main strong { font-size: 26px; color: var(--danger-text); }
 
     /* 5件 vs 73件の対比 */
     .split-box {
@@ -116,8 +119,8 @@
     .split-cell.good { background: #f0fdf4; border: 2px solid var(--success); }
     .split-cell .sc-count { font-size: 12px; font-weight: 700; color: var(--gray-600); margin-bottom: 6px; }
     .split-cell .sc-main  { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; line-height: 1.3; }
-    .split-cell.bad  .sc-main { color: var(--danger); }
-    .split-cell.good .sc-main { color: var(--success); }
+    .split-cell.bad  .sc-main { color: var(--danger-text); }
+    .split-cell.good .sc-main { color: var(--success-text); }
     .split-cell .sc-sub { font-size: 12px; color: var(--gray-600); margin-top: 6px; font-weight: 700; }
 
     .rule-single {

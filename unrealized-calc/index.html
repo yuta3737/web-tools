@@ -10,6 +10,9 @@
   <meta charset="UTF-8">
   <link rel="canonical" href="https://yuta-tools.com/unrealized-calc/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <title>保有株の評価損益をまとめて計算｜複数銘柄の含み益・含み損を一覧集計 | MoneyTools</title>
   <meta name="description" content="保有している複数の銘柄の評価損益を一覧で集計。最大5銘柄まで、平均取得単価・株数・現在の株価を入れるだけで、銘柄ごとの含み益・含み損と損益率、ポートフォリオ全体の合計損益、いま全部売った場合の税引後の手取りまで分かります。">
   <!-- OGP / Twitter Card -->
@@ -82,7 +85,7 @@
 
     .now-block { margin-top: 22px; padding-top: 18px; border-top: 1px dashed var(--gray-200); }
     .now-block label { font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .8px; }
-    .now-block .hint { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+    .now-block .hint { font-size: 11px; color: var(--gray-500); margin-top: 4px; }
 
     .result-card {
       background: var(--white); border: 1px solid var(--gray-200);
@@ -106,13 +109,13 @@
     }
     .result-value { font-size: 22px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; line-height: 1; }
     .result-value.primary { color: var(--primary); }
-    .result-value.danger  { color: var(--danger); }
-    .result-value.success { color: var(--success); }
-    .result-sub { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+    .result-value.danger  { color: var(--danger-text); }
+    .result-value.success { color: var(--success-text); }
+    .result-sub { font-size: 11px; color: var(--gray-500); margin-top: 4px; }
 
     .warn-box {
       background: #fef3c7; border-radius: var(--radius); padding: 12px 16px;
-      font-size: 12px; color: var(--accent-dark); line-height: 1.7; margin-bottom: 20px;
+      font-size: 12px; color: var(--accent-text); line-height: 1.7; margin-bottom: 20px;
     }
 
     .oco-cta {
@@ -155,7 +158,7 @@
     }
     .breadcrumb a { color: var(--gray-500); }
     .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
-    .breadcrumb span { color: var(--gray-300); }
+    .breadcrumb span { color: var(--gray-500); }
 
     @media (max-width: 640px) {
       .pos-wrap { padding: 24px 12px 60px; }
@@ -191,7 +194,7 @@
     .col-head.u4 { grid-template-columns: 62px 1fr 1fr 1fr; }
     .buy-row.u4  { grid-template-columns: 62px 1fr 1fr 1fr; }
     .pl-big { font-size: 30px; font-weight: 900; letter-spacing: -0.5px; }
-    .pl-plus  { color: #059669; }
+    .pl-plus  { color: #047857; }
     .pl-minus { color: #dc2626; }
     .pl-zero  { color: var(--gray-600); }
     .rate-badge {
@@ -348,37 +351,37 @@
 
     <div class="buy-row u4 first">
       <div class="buy-label">銘柄1</div>
-      <div class="field"><input type="number" id="c1" inputmode="decimal" placeholder="2000" value="2000"><span>円</span></div>
-      <div class="field"><input type="number" id="s1" inputmode="numeric" placeholder="100" value="100"><span>株</span></div>
-      <div class="field"><input type="number" id="n1" inputmode="decimal" placeholder="2400" value="2400"><span>円</span></div>
+      <div class="field"><input type="number" id="c1" inputmode="decimal" placeholder="2000" value="2000" aria-label="銘柄1の平均取得単価（円）"><span>円</span></div>
+      <div class="field"><input type="number" id="s1" inputmode="numeric" placeholder="100" value="100" aria-label="銘柄1の保有株数（株）"><span>株</span></div>
+      <div class="field"><input type="number" id="n1" inputmode="decimal" placeholder="2400" value="2400" aria-label="銘柄1の現在の株価（円）"><span>円</span></div>
     </div>
     <div class="row-result" id="rr1"></div>
     <div class="buy-row u4">
       <div class="buy-label">銘柄2</div>
-      <div class="field"><input type="number" id="c2" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
-      <div class="field"><input type="number" id="s2" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
-      <div class="field"><input type="number" id="n2" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
+      <div class="field"><input type="number" id="c2" inputmode="decimal" placeholder="空欄可" aria-label="銘柄2の平均取得単価（円）"><span>円</span></div>
+      <div class="field"><input type="number" id="s2" inputmode="numeric" placeholder="空欄可" aria-label="銘柄2の保有株数（株）"><span>株</span></div>
+      <div class="field"><input type="number" id="n2" inputmode="decimal" placeholder="空欄可" aria-label="銘柄2の現在の株価（円）"><span>円</span></div>
     </div>
     <div class="row-result" id="rr2"></div>
     <div class="buy-row u4">
       <div class="buy-label">銘柄3</div>
-      <div class="field"><input type="number" id="c3" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
-      <div class="field"><input type="number" id="s3" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
-      <div class="field"><input type="number" id="n3" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
+      <div class="field"><input type="number" id="c3" inputmode="decimal" placeholder="空欄可" aria-label="銘柄3の平均取得単価（円）"><span>円</span></div>
+      <div class="field"><input type="number" id="s3" inputmode="numeric" placeholder="空欄可" aria-label="銘柄3の保有株数（株）"><span>株</span></div>
+      <div class="field"><input type="number" id="n3" inputmode="decimal" placeholder="空欄可" aria-label="銘柄3の現在の株価（円）"><span>円</span></div>
     </div>
     <div class="row-result" id="rr3"></div>
     <div class="buy-row u4">
       <div class="buy-label">銘柄4</div>
-      <div class="field"><input type="number" id="c4" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
-      <div class="field"><input type="number" id="s4" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
-      <div class="field"><input type="number" id="n4" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
+      <div class="field"><input type="number" id="c4" inputmode="decimal" placeholder="空欄可" aria-label="銘柄4の平均取得単価（円）"><span>円</span></div>
+      <div class="field"><input type="number" id="s4" inputmode="numeric" placeholder="空欄可" aria-label="銘柄4の保有株数（株）"><span>株</span></div>
+      <div class="field"><input type="number" id="n4" inputmode="decimal" placeholder="空欄可" aria-label="銘柄4の現在の株価（円）"><span>円</span></div>
     </div>
     <div class="row-result" id="rr4"></div>
     <div class="buy-row u4">
       <div class="buy-label">銘柄5</div>
-      <div class="field"><input type="number" id="c5" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
-      <div class="field"><input type="number" id="s5" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
-      <div class="field"><input type="number" id="n5" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
+      <div class="field"><input type="number" id="c5" inputmode="decimal" placeholder="空欄可" aria-label="銘柄5の平均取得単価（円）"><span>円</span></div>
+      <div class="field"><input type="number" id="s5" inputmode="numeric" placeholder="空欄可" aria-label="銘柄5の保有株数（株）"><span>株</span></div>
+      <div class="field"><input type="number" id="n5" inputmode="decimal" placeholder="空欄可" aria-label="銘柄5の現在の株価（円）"><span>円</span></div>
     </div>
     <div class="row-result" id="rr5"></div>
   </div>
@@ -581,7 +584,7 @@
         const rowRate = rowCost > 0 ? rowPl / rowCost * 100 : 0;
         cost += rowCost; value += rowVal; filled++;
         out.textContent = `${yen(rowPl)}（${rowRate >= 0 ? '+' : ''}${rowRate.toFixed(1)}%）`;
-        out.style.color = rowPl > 0 ? '#059669' : (rowPl < 0 ? '#dc2626' : '');
+        out.style.color = rowPl > 0 ? '#047857' : (rowPl < 0 ? '#dc2626' : '');
       } else {
         out.textContent = '';
       }

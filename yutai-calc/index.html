@@ -15,6 +15,9 @@
   <meta charset="UTF-8">
   <link rel="canonical" href="https://yuta-tools.com/yutai-calc/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <title>株主優待の利回り計算ツール｜優待・配当・総合利回りを自動計算 | MoneyTools</title>
   <meta name="description" content="株主優待の利回りをその場で計算。株価・保有株数・年間配当・優待の金額換算を入れると、優待利回り・配当利回り・総合利回りと、配当の税金（20.315%）を引いた税引後の利回りまで分かります。NISA口座にも対応した無料の計算ツールです。">
   <!-- OGP / Twitter Card -->
@@ -110,7 +113,7 @@
 
     .form-group .hint {
       font-size: 11px;
-      color: var(--gray-400);
+      color: var(--gray-500);
       margin-top: 2px;
     }
 
@@ -197,11 +200,11 @@
     }
 
     .result-value.primary { color: var(--primary); }
-    .result-value.danger  { color: var(--danger); }
+    .result-value.danger  { color: var(--danger-text); }
 
     .result-sub {
       font-size: 11px;
-      color: var(--gray-400);
+      color: var(--gray-500);
       margin-top: 4px;
     }
 
@@ -258,7 +261,7 @@
       border-radius: var(--radius);
       padding: 12px 16px;
       font-size: 12px;
-      color: var(--accent-dark);
+      color: var(--accent-text);
       line-height: 1.7;
       margin-bottom: 20px;
     }
@@ -276,7 +279,7 @@
 
     .breadcrumb a { color: var(--gray-500); }
     .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
-    .breadcrumb span { color: var(--gray-300); }
+    .breadcrumb span { color: var(--gray-500); }
 
     @media (max-width: 640px) {
       .pos-wrap { padding: 24px 12px 60px; }
@@ -449,14 +452,14 @@
     <h2>条件を入力</h2>
     <div class="form-grid">
       <div class="form-group">
-        <label>株価</label>
+        <label for="inp-price">株価</label>
         <div class="input-inner">
           <input type="number" id="inp-price" value="1500" min="0.1" step="1">
           <span class="input-unit">円</span>
         </div>
       </div>
       <div class="form-group">
-        <label>保有株数</label>
+        <label for="inp-shares">保有株数</label>
         <div class="input-inner">
           <input type="number" id="inp-shares" value="100" min="1" step="100">
           <span class="input-unit">株</span>
@@ -464,7 +467,7 @@
         <div class="hint">優待をもらえる最低株数（多くは100株）</div>
       </div>
       <div class="form-group">
-        <label>年間配当（1株あたり）</label>
+        <label for="inp-div">年間配当（1株あたり）</label>
         <div class="input-inner">
           <input type="number" id="inp-div" value="30" min="0" step="1">
           <span class="input-unit">円</span>
@@ -472,7 +475,7 @@
         <div class="hint">配当が無い銘柄は0のままで構いません</div>
       </div>
       <div class="form-group">
-        <label>年間の優待額</label>
+        <label for="inp-yutai">年間の優待額</label>
         <div class="input-inner">
           <input type="number" id="inp-yutai" value="3000" min="0" step="100">
           <span class="input-unit">円</span>
@@ -481,7 +484,7 @@
       </div>
     </div>
     <label class="nisa-row">
-      <input type="checkbox" id="inp-nisa">
+      <input type="checkbox" id="inp-nisa" aria-label="NISA口座で保有している（配当が非課税になります）">
       NISA口座で保有している（配当が非課税になります）
     </label>
   </div>

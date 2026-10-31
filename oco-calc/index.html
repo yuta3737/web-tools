@@ -16,6 +16,9 @@
   <link rel="canonical" href="https://yuta-tools.com/oco-calc/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <title>OCO注文計算ツール｜利確・損切りラインを自動計算 | MoneyTools</title>
   <meta name="description" content="購入株価と株数を入力するだけで、OCO注文の利確・損切り価格と損益を自動計算する無料ツール。複数の目標ラインを同時に比較でき、税引後の手取り額も確認できます。デイトレの注文設定にすぐ使えます。">
   <!-- OGP / Twitter Card -->
@@ -233,8 +236,8 @@
       font-weight: 800;
     }
 
-    .profit .pct-sign { color: var(--success); }
-    .loss .pct-sign { color: var(--danger); }
+    .profit .pct-sign { color: var(--success-text); }
+    .loss .pct-sign { color: var(--danger-text); }
 
     .pct-input {
       width: 52px;
@@ -250,18 +253,18 @@
       transition: border-color .15s;
     }
 
-    .profit .pct-input:focus { border-color: var(--success); box-shadow: 0 0 0 2px rgba(16,185,129,.15); }
-    .loss   .pct-input:focus { border-color: var(--danger);  box-shadow: 0 0 0 2px rgba(239,68,68,.15); }
+    .profit .pct-input:focus { border-color: var(--success-text); box-shadow: 0 0 0 2px rgba(16,185,129,.15); }
+    .loss   .pct-input:focus { border-color: var(--danger-text);  box-shadow: 0 0 0 2px rgba(239,68,68,.15); }
 
     .td-price { font-weight: 800; color: var(--gray-900); }
-    .td-profit { color: var(--success); font-weight: 800; }
-    .td-loss   { color: var(--danger);  font-weight: 800; }
+    .td-profit { color: var(--success-text); font-weight: 800; }
+    .td-loss   { color: var(--danger-text);  font-weight: 800; }
     .td-aftertax { font-size: 12px; color: var(--gray-500); }
 
     .remove-btn {
       background: none;
       border: none;
-      color: var(--gray-300);
+      color: var(--gray-500);
       cursor: pointer;
       font-size: 13px;
       padding: 2px 4px;
@@ -270,7 +273,7 @@
       line-height: 1;
     }
 
-    .remove-btn:hover { color: var(--danger); }
+    .remove-btn:hover { color: var(--danger-text); }
 
     .card-note {
       font-size: 11px;
@@ -293,7 +296,7 @@
 
     .breadcrumb a { color: var(--gray-500); }
     .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
-    .breadcrumb span { color: var(--gray-300); }
+    .breadcrumb span { color: var(--gray-500); }
 
     /* アフィリエイトボタン */
     .broker-cta {
@@ -490,14 +493,14 @@
   <!-- 入力エリア -->
   <div class="input-row">
     <div class="input-field">
-      <label>購入株価</label>
+      <label for="inp-price">購入株価</label>
       <div class="input-field-inner">
         <input type="number" id="inp-price" value="1000" min="0.1" step="0.1">
         <span class="input-unit">円</span>
       </div>
     </div>
     <div class="input-field">
-      <label>株数</label>
+      <label for="inp-shares">株数</label>
       <div class="input-field-inner">
         <input type="number" id="inp-shares" value="100" min="1" step="100">
         <span class="input-unit">株</span>
@@ -624,7 +627,7 @@
     </table>
     <p>注目してほしいのは2点です。</p>
     <p>1つめは、<strong>損切りを浅くするほど成績が悪くなっている</strong>こと。−8pipsまで詰めると−79.9pipsで、最も悪い結果になりました。勝ったトレードですら途中で平均10pips前後は沈んでから戻っているため、浅い損切りは<strong>本来勝てたはずの取引を先に切ってしまいます</strong>。利確幅を広く取るために損切りを詰める、という発想は逆効果になりがちです。</p>
-    <p>2つめは、<strong>この表が30件時点ではまったく違う形をしていた</strong>こと。30件の時点では−25pipsの合計は「+57.0pips」で、唯一のプラスでした。そこに6件足しただけで −30.1pips に反転しています。</p>
+    <p>2つめは、<strong>この表が30件時点ではまったく違う形をしていた</strong>こと。30件の時点では−25pipsの合計は「+57.0pips」で、唯一のプラスでした。そこに6件足しただけで −30.1pips に反転しています（最大逆行を記録した30件での値です。1件目は記録を取り始める前なので母数に入っていません）。</p>
     <p>つまり<strong>「損切りは◯%が正解」という数字は、少ないサンプルから出ていればいつでもひっくり返ります</strong>。幅を細かくチューニングするより、決めた幅をOCOで先に置いて機械的に執行するほうが現実的です。検証の詳細は<a href="../articles/stop-loss/">損切りラインの決め方の記事</a>にまとめています。</p>
 
     <h2>逆指値は「その価格で売れる」保証ではありません</h2>
@@ -729,7 +732,7 @@
         <td class="pct-cell">
           <div class="pct-input-wrap">
             <span class="pct-sign">+</span>
-            <input class="pct-input" type="number" value="${pct}" min="0.1" step="0.1" data-i="${i}" data-t="profit">
+            <input class="pct-input" type="number" value="${pct}" min="0.1" step="0.1" data-i="${i}" data-t="profit" aria-label="利確ライン${i + 1}の上昇率（%）">
             <span class="pct-sign">%</span>
           </div>
         </td>
@@ -751,7 +754,7 @@
         <td class="pct-cell">
           <div class="pct-input-wrap">
             <span class="pct-sign">−</span>
-            <input class="pct-input" type="number" value="${pct}" min="0.1" step="0.1" data-i="${i}" data-t="loss">
+            <input class="pct-input" type="number" value="${pct}" min="0.1" step="0.1" data-i="${i}" data-t="loss" aria-label="損切りライン${i + 1}の下落率（%）">
             <span class="pct-sign">%</span>
           </div>
         </td>

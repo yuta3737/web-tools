@@ -16,6 +16,9 @@
   <link rel="canonical" href="https://yuta-tools.com/articles/order-types/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="../../favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
   <title>デイトレの注文の種類を図解で解説｜成行・指値・逆指値・OCO | MoneyTools</title>
   <meta name="description" content="デイトレード初心者向けに、成行・指値・逆指値・OCO注文の違いをわかりやすく解説。具体的な数字を使った例で、実際のトレードで迷わない知識が身につきます。">
   <!-- OGP / Twitter Card -->
@@ -69,7 +72,7 @@
 
     .article-level {
       background: #fef3c7;
-      color: var(--accent-dark);
+      color: var(--accent-text);
       border-radius: 20px;
       padding: 3px 12px;
       font-size: 12px;
@@ -252,8 +255,8 @@
     .compare-table tr:last-child td { border-bottom: none; }
     .compare-table tr:nth-child(even) td { background: var(--gray-50); }
 
-    .tag-good { color: var(--success); font-weight: 700; }
-    .tag-bad  { color: var(--danger);  font-weight: 700; }
+    .tag-good { color: var(--success-text); font-weight: 700; }
+    .tag-bad  { color: var(--danger-text);  font-weight: 700; }
 
     /* 注文フロー図 */
     .order-flow {
@@ -285,7 +288,7 @@
     }
 
     .flow-arrow {
-      color: var(--gray-400);
+      color: var(--gray-500);
       font-size: 18px;
     }
 
@@ -376,7 +379,7 @@
 
     .breadcrumb a { color: var(--gray-500); }
     .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
-    .breadcrumb span { color: var(--gray-300); }
+    .breadcrumb span { color: var(--gray-500); }
 
     @media (max-width: 640px) {
       .order-flow { flex-direction: column; align-items: flex-start; }

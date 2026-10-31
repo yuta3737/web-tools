@@ -13,6 +13,9 @@
      crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <link rel="canonical" href="https://yuta-tools.com/fx-calc/">
   <title>FX計算ツール（計算機）｜必要証拠金・pips損益・ロット計算 | MoneyTools</title>
   <meta name="description" content="FXの必要証拠金・1pipsあたりの損益・証拠金維持率・適正ロット数をまとめて自動計算する無料の計算機。通貨数と価格を入れるだけでpips計算とロット計算ができ、いくらから始められるかの証拠金シミュレーションにも使えます。">
@@ -66,7 +69,7 @@
       font-size: 11px; font-weight: 700; color: var(--gray-500);
       text-transform: uppercase; letter-spacing: .8px;
     }
-    .form-group .hint { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+    .form-group .hint { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
 
     .input-inner { display: flex; align-items: center; gap: 6px; }
     .input-inner input[type="number"], .input-inner select {
@@ -106,13 +109,13 @@
       letter-spacing: -0.5px; line-height: 1;
     }
     .result-value.primary { color: var(--primary); }
-    .result-value.danger  { color: var(--danger); }
-    .result-value.success { color: var(--success); }
-    .result-sub { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+    .result-value.danger  { color: var(--danger-text); }
+    .result-value.success { color: var(--success-text); }
+    .result-sub { font-size: 11px; color: var(--gray-500); margin-top: 4px; }
 
     .warn-box {
       background: #fef3c7; border-radius: var(--radius); padding: 12px 16px;
-      font-size: 12px; color: var(--accent-dark); line-height: 1.7; margin-bottom: 20px;
+      font-size: 12px; color: var(--accent-text); line-height: 1.7; margin-bottom: 20px;
     }
     .good-box {
       background: #ecfdf5; border-radius: var(--radius); padding: 12px 16px;
@@ -173,7 +176,7 @@
     }
     .breadcrumb a { color: var(--gray-500); }
     .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
-    .breadcrumb span { color: var(--gray-300); }
+    .breadcrumb span { color: var(--gray-500); }
 
     @media (max-width: 640px) {
       .pos-wrap { padding: 24px 12px 60px; }
@@ -322,7 +325,7 @@
     <h2>条件を入力</h2>
     <div class="form-grid">
       <div class="form-group">
-        <label>口座資金</label>
+        <label for="inp-capital">口座資金</label>
         <div class="input-inner">
           <input type="number" id="inp-capital" value="100000" min="1000" step="10000">
           <span class="input-unit">円</span>
@@ -330,7 +333,7 @@
         <div class="hint">FX口座に入れている金額</div>
       </div>
       <div class="form-group">
-        <label>現在レート</label>
+        <label for="inp-rate">現在レート</label>
         <div class="input-inner">
           <input type="number" id="inp-rate" value="150.000" min="0.01" step="0.001">
           <span class="input-unit">円</span>
@@ -338,7 +341,7 @@
         <div class="hint">米ドル/円などクロス円の価格</div>
       </div>
       <div class="form-group">
-        <label>取引数量</label>
+        <label for="inp-units">取引数量</label>
         <div class="input-inner">
           <input type="number" id="inp-units" value="10000" min="1" step="1000">
           <span class="input-unit">通貨</span>
@@ -346,7 +349,7 @@
         <div class="hint">1万通貨＝1Lot（業者による）</div>
       </div>
       <div class="form-group">
-        <label>レバレッジ</label>
+        <label for="inp-lev">レバレッジ</label>
         <div class="input-inner">
           <select id="inp-lev">
             <option value="25" selected>25倍（国内上限）</option>
@@ -359,7 +362,7 @@
         <div class="hint">口座のレバレッジコース</div>
       </div>
       <div class="form-group">
-        <label>損切り幅</label>
+        <label for="inp-stop">損切り幅</label>
         <div class="input-inner">
           <input type="number" id="inp-stop" value="25" min="1" step="1">
           <span class="input-unit">pips</span>
@@ -367,7 +370,7 @@
         <div class="hint">何pips逆行したら損切りするか</div>
       </div>
       <div class="form-group">
-        <label>許容損失率</label>
+        <label for="inp-risk">許容損失率</label>
         <div class="input-inner">
           <input type="number" id="inp-risk" value="2" min="0.1" max="100" step="0.1">
           <span class="input-unit">%</span>

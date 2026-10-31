@@ -10,6 +10,9 @@
   <link rel="canonical" href="https://yuta-tools.com/articles/fx-record/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="../../favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
   <title>FX実践記録①｜勝率70%なのに-6,014円だった話 | MoneyTools</title>
   <meta name="description" content="FXを5万円で始めた初月の全記録。48トレードで勝率70%を出しながら-6,014円（-12.0%）で終わりました。なぜ勝率が高いのに負けたのか、全取引と損益比の数字を公開して原因を分析します。">
   <!-- OGP / Twitter Card -->
@@ -55,8 +58,8 @@
     }
     .trade-table tr:last-child td { border-bottom: none; }
     .trade-table tr:nth-child(even) td { background: var(--gray-50); }
-    .pnl-plus  { color: var(--success); font-weight: 800; }
-    .pnl-minus { color: var(--danger);  font-weight: 800; }
+    .pnl-plus  { color: var(--success-text); font-weight: 800; }
+    .pnl-minus { color: var(--danger-text);  font-weight: 800; }
 
     .summary-stat {
       display: grid;
@@ -74,8 +77,8 @@
     }
     .stat-label { font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
     .stat-value { font-size: 22px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; }
-    .stat-value.plus  { color: var(--success); }
-    .stat-value.minus { color: var(--danger); }
+    .stat-value.plus  { color: var(--success-text); }
+    .stat-value.minus { color: var(--danger-text); }
 
     .verdict-box {
       background: #eff6ff;
@@ -98,7 +101,7 @@
     }
     .balance-box .bl-label { font-size: 12px; font-weight: 700; color: var(--gray-600); margin-bottom: 8px; }
     .balance-box .bl-main { font-size: 15px; font-weight: 800; color: var(--gray-800); line-height: 1.9; }
-    .balance-box .bl-main strong { font-size: 26px; color: var(--danger); }
+    .balance-box .bl-main strong { font-size: 26px; color: var(--danger-text); }
 
     @media (max-width: 640px) {
       .summary-stat { grid-template-columns: repeat(2, 1fr); }

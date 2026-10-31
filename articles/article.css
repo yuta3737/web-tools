@@ -27,7 +27,7 @@
 
 .article-level {
   background: #fef3c7;
-  color: var(--accent-dark);
+  color: var(--accent-text);
   border-radius: 20px;
   padding: 3px 12px;
   font-size: 12px;
@@ -177,8 +177,8 @@
 .compare-table tr:last-child td { border-bottom: none; }
 .compare-table tr:nth-child(even) td { background: var(--gray-50); }
 
-.tag-good { color: var(--success); font-weight: 700; }
-.tag-bad  { color: var(--danger);  font-weight: 700; }
+.tag-good { color: var(--success-text); font-weight: 700; }
+.tag-bad  { color: var(--danger-text);  font-weight: 700; }
 
 /* フロー図 */
 .order-flow {
@@ -202,7 +202,7 @@
 
 .flow-box.trigger { background: #fef3c7; color: #92400e; }
 .flow-box.action  { background: #ecfdf5; color: #065f46; }
-.flow-arrow { color: var(--gray-400); font-size: 18px; }
+.flow-arrow { color: var(--gray-500); font-size: 18px; }
 
 /* ツールCTA */
 .tool-cta {
@@ -253,7 +253,7 @@
 
 .breadcrumb a { color: var(--gray-500); }
 .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
-.breadcrumb span { color: var(--gray-300); }
+.breadcrumb span { color: var(--gray-500); }
 
 /* アフィリエイトボタン */
 .broker-cta {
@@ -302,7 +302,7 @@
   color: var(--gray-900);
   line-height: 1.5;
 }
-.related-article-arrow { color: var(--gray-400); font-size: 20px; font-weight: 900; flex-shrink: 0; }
+.related-article-arrow { color: var(--gray-500); font-size: 20px; font-weight: 900; flex-shrink: 0; }
 
 @media (max-width: 640px) {
   .order-flow { flex-direction: column; align-items: flex-start; }

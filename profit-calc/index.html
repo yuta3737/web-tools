@@ -16,6 +16,9 @@
   <link rel="canonical" href="https://yuta-tools.com/profit-calc/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <title>株の利益計算ツール｜損益・含み益・税金を自動計算 | MoneyTools</title>
   <meta name="description" content="株の損益をその場で自動計算。売却益・含み益から手数料と税金（20.315%）を引いた税引後の手取りと、損益分岐点までまとめて分かります。買値・売値・株数を入れるだけの無料計算ツールです。">
   <!-- OGP / Twitter Card -->
@@ -98,7 +101,7 @@
 
     .form-group .hint {
       font-size: 11px;
-      color: var(--gray-400);
+      color: var(--gray-500);
       line-height: 1.5;
     }
 
@@ -150,7 +153,7 @@
 
     .fee-section-hint {
       font-size: 11px;
-      color: var(--gray-400);
+      color: var(--gray-500);
       margin-bottom: 14px;
       line-height: 1.6;
     }
@@ -206,13 +209,13 @@
       line-height: 1;
     }
 
-    .result-main-value.profit { color: var(--success); }
-    .result-main-value.loss   { color: var(--danger); }
+    .result-main-value.profit { color: var(--success-text); }
+    .result-main-value.loss   { color: var(--danger-text); }
     .result-main-value.zero   { color: var(--gray-500); }
 
     .result-main-sub {
       font-size: 12px;
-      color: var(--gray-400);
+      color: var(--gray-500);
       margin-top: 6px;
     }
 
@@ -251,7 +254,7 @@
 
     .breakdown-label .bd-hint {
       font-size: 11px;
-      color: var(--gray-400);
+      color: var(--gray-500);
     }
 
     .breakdown-value {
@@ -260,8 +263,8 @@
       text-align: right;
     }
 
-    .breakdown-value.minus { color: var(--danger); }
-    .breakdown-value.profit { color: var(--success); }
+    .breakdown-value.minus { color: var(--danger-text); }
+    .breakdown-value.profit { color: var(--success-text); }
 
     /* 損益分岐点 */
     .breakeven-card {
@@ -282,7 +285,7 @@
     .breakeven-label {
       font-size: 12px;
       font-weight: 800;
-      color: var(--accent-dark);
+      color: var(--accent-text);
       text-transform: uppercase;
       letter-spacing: .5px;
     }
@@ -295,13 +298,14 @@
 
     .breakeven-hint {
       font-size: 11px;
-      color: var(--gray-500);
+      /* 背景が #fef3c7 なので --gray-500 だと 4.34:1 で AA にわずかに届かない */
+      color: var(--gray-700);
     }
 
     .breakeven-value {
       font-size: 26px;
       font-weight: 900;
-      color: var(--accent-dark);
+      color: var(--accent-text);
       letter-spacing: -0.5px;
       white-space: nowrap;
     }
@@ -319,7 +323,7 @@
 
     .breadcrumb a { color: var(--gray-500); }
     .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
-    .breadcrumb span { color: var(--gray-300); }
+    .breadcrumb span { color: var(--gray-500); }
 
     /* アフィリエイトボタン */
     .explain {
@@ -568,7 +572,7 @@
 
     <div class="form-grid">
       <div class="form-group">
-        <label>購入株価</label>
+        <label for="inp-buy">購入株価</label>
         <div class="input-inner">
           <input type="number" inputmode="decimal" id="inp-buy" value="1000" min="0.1" step="0.1">
           <span class="input-unit">円</span>
@@ -577,7 +581,7 @@
       </div>
 
       <div class="form-group">
-        <label>売却株価</label>
+        <label for="inp-sell">売却株価</label>
         <div class="input-inner">
           <input type="number" inputmode="decimal" id="inp-sell" value="1050" min="0.1" step="0.1">
           <span class="input-unit">円</span>
@@ -586,7 +590,7 @@
       </div>
 
       <div class="form-group">
-        <label>株数</label>
+        <label for="inp-shares">株数</label>
         <div class="input-inner">
           <input type="number" inputmode="decimal" id="inp-shares" value="100" min="1" step="100">
           <span class="input-unit">株</span>
@@ -603,14 +607,14 @@
       </div>
       <div class="fee-grid">
         <div class="form-group">
-          <label>購入時手数料</label>
+          <label for="inp-fee-buy">購入時手数料</label>
           <div class="input-inner">
             <input type="number" inputmode="decimal" id="inp-fee-buy" value="0" min="0" step="0.1">
             <span class="input-unit">円</span>
           </div>
         </div>
         <div class="form-group">
-          <label>売却時手数料</label>
+          <label for="inp-fee-sell">売却時手数料</label>
           <div class="input-inner">
             <input type="number" inputmode="decimal" id="inp-fee-sell" value="0" min="0" step="0.1">
             <span class="input-unit">円</span>

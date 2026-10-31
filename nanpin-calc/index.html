@@ -13,6 +13,9 @@
      crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <link rel="canonical" href="https://yuta-tools.com/nanpin-calc/">
   <title>ナンピン計算ツール（計算機）｜買い増し後の平均取得単価 | MoneyTools</title>
   <meta name="description" content="ナンピン（買い増し）後の平均取得単価と損益分岐点を最大5回分まで自動計算する無料の計算機。投資総額・保有株数に加え、現在値を入れれば評価損益と建値回復に必要な値上がり率もわかります。株数と単価を入れるだけです。">
@@ -86,7 +89,7 @@
 
     .now-block { margin-top: 22px; padding-top: 18px; border-top: 1px dashed var(--gray-200); }
     .now-block label { font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .8px; }
-    .now-block .hint { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+    .now-block .hint { font-size: 11px; color: var(--gray-500); margin-top: 4px; }
 
     .result-card {
       background: var(--white); border: 1px solid var(--gray-200);
@@ -110,13 +113,13 @@
     }
     .result-value { font-size: 22px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; line-height: 1; }
     .result-value.primary { color: var(--primary); }
-    .result-value.danger  { color: var(--danger); }
-    .result-value.success { color: var(--success); }
-    .result-sub { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+    .result-value.danger  { color: var(--danger-text); }
+    .result-value.success { color: var(--success-text); }
+    .result-sub { font-size: 11px; color: var(--gray-500); margin-top: 4px; }
 
     .warn-box {
       background: #fef3c7; border-radius: var(--radius); padding: 12px 16px;
-      font-size: 12px; color: var(--accent-dark); line-height: 1.7; margin-bottom: 20px;
+      font-size: 12px; color: var(--accent-text); line-height: 1.7; margin-bottom: 20px;
     }
 
     .oco-cta {
@@ -159,7 +162,7 @@
     }
     .breadcrumb a { color: var(--gray-500); }
     .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
-    .breadcrumb span { color: var(--gray-300); }
+    .breadcrumb span { color: var(--gray-500); }
 
     @media (max-width: 640px) {
       .pos-wrap { padding: 24px 12px 60px; }
@@ -340,32 +343,32 @@
 
     <div class="buy-row first">
       <div class="buy-label">初回</div>
-      <div class="field"><input type="number" id="p1" inputmode="decimal" placeholder="1000" value="1000"><span>円</span></div>
-      <div class="field"><input type="number" id="q1" inputmode="numeric" placeholder="100" value="100"><span>株</span></div>
+      <div class="field"><input type="number" id="p1" inputmode="decimal" placeholder="1000" value="1000" aria-label="1回目の購入株価（円）"><span>円</span></div>
+      <div class="field"><input type="number" id="q1" inputmode="numeric" placeholder="100" value="100" aria-label="1回目の購入株数（株）"><span>株</span></div>
     </div>
     <div class="buy-row">
       <div class="buy-label">2回目</div>
-      <div class="field"><input type="number" id="p2" inputmode="decimal" placeholder="800"><span>円</span></div>
-      <div class="field"><input type="number" id="q2" inputmode="numeric" placeholder="100"><span>株</span></div>
+      <div class="field"><input type="number" id="p2" inputmode="decimal" placeholder="800" aria-label="2回目の購入株価（円）"><span>円</span></div>
+      <div class="field"><input type="number" id="q2" inputmode="numeric" placeholder="100" aria-label="2回目の購入株数（株）"><span>株</span></div>
     </div>
     <div class="buy-row">
       <div class="buy-label">3回目</div>
-      <div class="field"><input type="number" id="p3" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
-      <div class="field"><input type="number" id="q3" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
+      <div class="field"><input type="number" id="p3" inputmode="decimal" placeholder="空欄可" aria-label="3回目の購入株価（円）"><span>円</span></div>
+      <div class="field"><input type="number" id="q3" inputmode="numeric" placeholder="空欄可" aria-label="3回目の購入株数（株）"><span>株</span></div>
     </div>
     <div class="buy-row">
       <div class="buy-label">4回目</div>
-      <div class="field"><input type="number" id="p4" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
-      <div class="field"><input type="number" id="q4" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
+      <div class="field"><input type="number" id="p4" inputmode="decimal" placeholder="空欄可" aria-label="4回目の購入株価（円）"><span>円</span></div>
+      <div class="field"><input type="number" id="q4" inputmode="numeric" placeholder="空欄可" aria-label="4回目の購入株数（株）"><span>株</span></div>
     </div>
     <div class="buy-row">
       <div class="buy-label">5回目</div>
-      <div class="field"><input type="number" id="p5" inputmode="decimal" placeholder="空欄可"><span>円</span></div>
-      <div class="field"><input type="number" id="q5" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
+      <div class="field"><input type="number" id="p5" inputmode="decimal" placeholder="空欄可" aria-label="5回目の購入株価（円）"><span>円</span></div>
+      <div class="field"><input type="number" id="q5" inputmode="numeric" placeholder="空欄可" aria-label="5回目の購入株数（株）"><span>株</span></div>
     </div>
 
     <div class="now-block">
-      <label>現在の株価（任意）</label>
+      <label for="now">現在の株価（任意）</label>
       <div class="field" style="margin-top:6px;">
         <input type="number" id="now" inputmode="decimal" placeholder="例：900"><span>円</span>
       </div>

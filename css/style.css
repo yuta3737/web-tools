@@ -29,6 +29,15 @@
   --radius-sm: 8px;
   --radius-lg: 16px;
   --font: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
+  /* 文字色用の濃い版（2026-10-31追加）。
+     --success/--danger/--accent は背景やボーダーには十分でも、白地の文字に使うと
+     WCAG AA（通常サイズ4.5:1）に届かない（#10b981=2.54 / #ef4444=3.76 / #d97706 on #fef3c7=2.86）。
+     背景・ボーダー用の色はそのまま残し、文字にはこちらを使う。 */
+  --success-text: #047857;   /* 白地で 5.48:1 */
+  --danger-text:  #dc2626;   /* 白地で 4.83:1 */
+  --accent-text:  #b45309;   /* #fef3c7 の上で 4.51:1 */
+  --on-dark:      #9ca3af;   /* --gray-900 の上で 6.99:1 */
+
 }
 
 html { scroll-behavior: smooth; }
@@ -276,7 +285,7 @@ img { max-width: 100%; }
 
 .tool-tag.new {
   background: #fef3c7;
-  color: var(--accent-dark);
+  color: var(--accent-text);
 }
 
 .tool-btn {
@@ -361,7 +370,7 @@ img { max-width: 100%; }
 
 .aff-points li::before {
   content: "✓ ";
-  color: var(--success);
+  color: var(--success-text);
   font-weight: 700;
 }
 
@@ -385,7 +394,7 @@ img { max-width: 100%; }
 .aff-badge {
   display: inline-block;
   background: #fef3c7;
-  color: var(--accent-dark);
+  color: var(--accent-text);
   border-radius: 4px;
   padding: 2px 7px;
   font-size: 10px;
@@ -395,7 +404,7 @@ img { max-width: 100%; }
 /* ===== Footer ===== */
 .site-footer {
   background: var(--gray-900);
-  color: var(--gray-300);
+  color: var(--on-dark);
   padding: 40px 20px 24px;
 }
 
@@ -423,7 +432,7 @@ img { max-width: 100%; }
 
 .footer-brand p {
   font-size: 12px;
-  color: var(--gray-500);
+  color: var(--on-dark);
   margin-top: 6px;
   max-width: 260px;
 }
@@ -451,7 +460,7 @@ img { max-width: 100%; }
 }
 
 .footer-links a {
-  color: var(--gray-500);
+  color: var(--on-dark);
   font-size: 13px;
   transition: color .15s;
 }
@@ -473,12 +482,12 @@ img { max-width: 100%; }
 
 .footer-bottom p {
   font-size: 12px;
-  color: var(--gray-500);
+  color: var(--on-dark);
 }
 
 .footer-disclaimer {
   font-size: 11px;
-  color: var(--gray-500);
+  color: var(--on-dark);
   margin-top: 16px;
   line-height: 1.8;
   border-top: 1px solid #374151;

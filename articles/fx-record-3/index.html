@@ -10,11 +10,14 @@
   <link rel="canonical" href="https://yuta-tools.com/articles/fx-record-3/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="../../favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
   <title>FX実践記録③｜13連勝の正体【2026年9月】 | MoneyTools</title>
-  <meta name="description" content="2026年9月17日〜28日の21トレード全記録。ルールを作り直して13連勝しましたが、勝った14件のうち7件は−10pips以上逆行してから勝ちに変わっていました。平均の勝ち+9.19pipsに対し平均の負けは−21.27pips。損益分岐勝率69.8%という危うい形の中身を数字で分解します。">
+  <meta name="description" content="2026年9月17日〜28日の21トレード全記録。13連勝しましたが、勝った14件のうち7件は−10pips以上逆行してから勝ちに変わっていました。平均の勝ち+9.19pipsに対し平均の負けは−21.27pipsです。">
   <!-- OGP / Twitter Card -->
   <meta property="og:title" content="FX実践記録③｜13連勝の正体【2026年9月】 | MoneyTools">
-  <meta property="og:description" content="2026年9月17日〜28日の21トレード全記録。ルールを作り直して13連勝しましたが、勝った14件のうち7件は−10pips以上逆行してから勝ちに変わっていました。平均の勝ち+9.19pipsに対し平均の負けは−21.27pips。損益分岐勝率69.8%という危うい形の中身を数字で分解します。">
+  <meta property="og:description" content="2026年9月17日〜28日の21トレード全記録。13連勝しましたが、勝った14件のうち7件は−10pips以上逆行してから勝ちに変わっていました。平均の勝ち+9.19pipsに対し平均の負けは−21.27pipsです。">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://yuta-tools.com/articles/fx-record-3/">
   <meta property="og:image" content="https://yuta-tools.com/ogp.png">
@@ -22,7 +25,7 @@
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FX実践記録③｜13連勝の正体【2026年9月】 | MoneyTools">
-  <meta name="twitter:description" content="2026年9月17日〜28日の21トレード全記録。ルールを作り直して13連勝しましたが、勝った14件のうち7件は−10pips以上逆行してから勝ちに変わっていました。平均の勝ち+9.19pipsに対し平均の負けは−21.27pips。損益分岐勝率69.8%という危うい形の中身を数字で分解します。">
+  <meta name="twitter:description" content="2026年9月17日〜28日の21トレード全記録。13連勝しましたが、勝った14件のうち7件は−10pips以上逆行してから勝ちに変わっていました。平均の勝ち+9.19pipsに対し平均の負けは−21.27pipsです。">
   <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,8 +58,8 @@
     }
     .trade-table tr:last-child td { border-bottom: none; }
     .trade-table tr:nth-child(even) td { background: var(--gray-50); }
-    .pnl-plus  { color: var(--success); font-weight: 800; }
-    .pnl-minus { color: var(--danger);  font-weight: 800; }
+    .pnl-plus  { color: var(--success-text); font-weight: 800; }
+    .pnl-minus { color: var(--danger-text);  font-weight: 800; }
 
     .summary-stat {
       display: grid;
@@ -74,8 +77,8 @@
     }
     .stat-label { font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
     .stat-value { font-size: 22px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; }
-    .stat-value.plus  { color: var(--success); }
-    .stat-value.minus { color: var(--danger); }
+    .stat-value.plus  { color: var(--success-text); }
+    .stat-value.minus { color: var(--danger-text); }
 
     .verdict-box {
       background: #eff6ff;
@@ -98,7 +101,7 @@
     }
     .balance-box .bl-label { font-size: 12px; font-weight: 700; color: var(--gray-600); margin-bottom: 8px; }
     .balance-box .bl-main { font-size: 15px; font-weight: 800; color: var(--gray-800); line-height: 1.9; }
-    .balance-box .bl-main strong { font-size: 26px; color: var(--danger); }
+    .balance-box .bl-main strong { font-size: 26px; color: var(--danger-text); }
 
     /* 5件 vs 73件の対比 */
     .split-box {
@@ -116,8 +119,8 @@
     .split-cell.good { background: #f0fdf4; border: 2px solid var(--success); }
     .split-cell .sc-count { font-size: 12px; font-weight: 700; color: var(--gray-600); margin-bottom: 6px; }
     .split-cell .sc-main  { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; line-height: 1.3; }
-    .split-cell.bad  .sc-main { color: var(--danger); }
-    .split-cell.good .sc-main { color: var(--success); }
+    .split-cell.bad  .sc-main { color: var(--danger-text); }
+    .split-cell.good .sc-main { color: var(--success-text); }
     .split-cell .sc-sub { font-size: 12px; color: var(--gray-600); margin-top: 6px; font-weight: 700; }
 
     .rule-single {
@@ -146,7 +149,7 @@
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "FX実践記録③｜13連勝の正体【2026年9月】",
-  "description": "2026年9月17日〜28日の21トレード全記録。ルールを作り直して13連勝しましたが、勝った14件のうち7件は−10pips以上逆行してから勝ちに変わっていました。平均の勝ち+9.19pipsに対し平均の負けは−21.27pips。損益分岐勝率69.8%という危うい形の中身を数字で分解します。",
+  "description": "2026年9月17日〜28日の21トレード全記録。13連勝しましたが、勝った14件のうち7件は−10pips以上逆行してから勝ちに変わっていました。平均の勝ち+9.19pipsに対し平均の負けは−21.27pipsです。",
   "image": "https://yuta-tools.com/ogp.png",
   "url": "https://yuta-tools.com/articles/fx-record-3/",
   "mainEntityOfPage": { "@type": "WebPage", "@id": "https://yuta-tools.com/articles/fx-record-3/" },

@@ -13,6 +13,9 @@
      crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <link rel="canonical" href="https://yuta-tools.com/volume-calc/">
   <title>出来高・売買代金チェックツール｜デイトレ向きの銘柄か判定 | MoneyTools</title>
   <meta name="description" content="株価と出来高を入力するだけで売買代金を自動計算し、デイトレに向いている流動性かどうかを判定。自分の売買予定株数が出来高に占める割合（市場インパクト）もチェックできる無料ツールです。">
@@ -95,21 +98,21 @@
     }
     .result-value { font-size: 22px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; line-height: 1; }
     .result-value.primary { color: var(--primary); }
-    .result-value.danger  { color: var(--danger); }
-    .result-value.success { color: var(--success); }
-    .result-sub { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+    .result-value.danger  { color: var(--danger-text); }
+    .result-value.success { color: var(--success-text); }
+    .result-sub { font-size: 11px; color: var(--gray-500); margin-top: 4px; }
 
     .verdict-box {
       border-radius: var(--radius); padding: 14px 18px; font-size: 13px;
       line-height: 1.8; margin-bottom: 20px; font-weight: 700;
     }
-    .verdict-box.v-good { background: #ecfdf5; color: var(--success); }
+    .verdict-box.v-good { background: #ecfdf5; color: var(--success-text); }
     .verdict-box.v-mid  { background: var(--gray-50); color: var(--gray-700); }
-    .verdict-box.v-bad  { background: #fef2f2; color: var(--danger); }
+    .verdict-box.v-bad  { background: #fef2f2; color: var(--danger-text); }
 
     .warn-box {
       background: #fef3c7; border-radius: var(--radius); padding: 12px 16px;
-      font-size: 12px; color: var(--accent-dark); line-height: 1.7; margin-bottom: 20px;
+      font-size: 12px; color: var(--accent-text); line-height: 1.7; margin-bottom: 20px;
     }
 
     .oco-cta {
@@ -152,7 +155,7 @@
     }
     .breadcrumb a { color: var(--gray-500); }
     .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
-    .breadcrumb span { color: var(--gray-300); }
+    .breadcrumb span { color: var(--gray-500); }
 
     @media (max-width: 640px) {
       .pos-wrap { padding: 24px 12px 60px; }
@@ -284,18 +287,18 @@
     <h2>銘柄の情報を入力</h2>
 
     <div class="form-row">
-      <label>株価</label>
+      <label for="price">株価</label>
       <div class="field"><input type="number" id="price" inputmode="decimal" placeholder="500" value="500"><span>円</span></div>
     </div>
 
     <div class="form-row">
-      <label>出来高（本日 or 平均）</label>
+      <label for="volume">出来高（本日 or 平均）</label>
       <div class="field"><input type="number" id="volume" inputmode="numeric" placeholder="3000000" value="3000000"><span>株</span></div>
       <div class="form-hint">証券会社の銘柄詳細ページや株探（kabutan.jp）で確認できます。</div>
     </div>
 
     <div class="form-row">
-      <label>自分の売買予定株数（任意）</label>
+      <label for="qty">自分の売買予定株数（任意）</label>
       <div class="field"><input type="number" id="qty" inputmode="numeric" placeholder="空欄可"><span>株</span></div>
       <div class="form-hint">入力すると、自分の注文が出来高の何%を占めるかを計算します。</div>
     </div>

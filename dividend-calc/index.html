@@ -15,6 +15,9 @@
   <meta charset="UTF-8">
   <link rel="canonical" href="https://yuta-tools.com/dividend-calc/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <title>配当金計算ツール｜税引後の受取額と配当利回りを自動計算 | MoneyTools</title>
   <meta name="description" content="保有株数と1株あたり年間配当を入れるだけで、年間の配当金・税金（20.315%）を引いた税引後の受取額・配当利回りが分かります。目標の配当額から必要な株数を逆算する機能つき。NISA対応の無料ツールです。">
   <!-- OGP / Twitter Card -->
@@ -110,7 +113,7 @@
 
     .form-group .hint {
       font-size: 11px;
-      color: var(--gray-400);
+      color: var(--gray-500);
       margin-top: 2px;
     }
 
@@ -197,11 +200,11 @@
     }
 
     .result-value.primary { color: var(--primary); }
-    .result-value.danger  { color: var(--danger); }
+    .result-value.danger  { color: var(--danger-text); }
 
     .result-sub {
       font-size: 11px;
-      color: var(--gray-400);
+      color: var(--gray-500);
       margin-top: 4px;
     }
 
@@ -258,7 +261,7 @@
       border-radius: var(--radius);
       padding: 12px 16px;
       font-size: 12px;
-      color: var(--accent-dark);
+      color: var(--accent-text);
       line-height: 1.7;
       margin-bottom: 20px;
     }
@@ -276,7 +279,7 @@
 
     .breadcrumb a { color: var(--gray-500); }
     .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
-    .breadcrumb span { color: var(--gray-300); }
+    .breadcrumb span { color: var(--gray-500); }
 
     @media (max-width: 640px) {
       .pos-wrap { padding: 24px 12px 60px; }
@@ -416,7 +419,7 @@
     <h2>保有している株を入力</h2>
     <div class="form-grid">
       <div class="form-group">
-        <label>株価</label>
+        <label for="inp-price">株価</label>
         <div class="input-inner">
           <input type="number" id="inp-price" inputmode="decimal" value="1500" min="0" step="1">
           <span class="input-unit">円</span>
@@ -424,7 +427,7 @@
         <div class="hint">現在の株価。利回りの計算に使います</div>
       </div>
       <div class="form-group">
-        <label>保有株数</label>
+        <label for="inp-shares">保有株数</label>
         <div class="input-inner">
           <input type="number" id="inp-shares" inputmode="numeric" value="100" min="0" step="1">
           <span class="input-unit">株</span>
@@ -432,7 +435,7 @@
         <div class="hint">単元未満株（1株単位）でも計算できます</div>
       </div>
       <div class="form-group">
-        <label>1株あたり年間配当</label>
+        <label for="inp-dps">1株あたり年間配当</label>
         <div class="input-inner">
           <input type="number" id="inp-dps" inputmode="decimal" value="45" min="0" step="0.1">
           <span class="input-unit">円</span>
@@ -440,7 +443,7 @@
         <div class="hint">証券会社では「1株配当」「年間配当金」と表示されます</div>
       </div>
       <div class="form-group">
-        <label>年間の配当回数</label>
+        <label for="inp-freq">年間の配当回数</label>
         <div class="input-inner">
           <select id="inp-freq" class="sel">
             <option value="2" selected>年2回（中間・期末）</option>
@@ -450,7 +453,7 @@
         </div>
         <div class="hint">日本株は年2回が最も多いです</div>
         <div class="nisa-row">
-          <input type="checkbox" id="inp-nisa">
+          <input type="checkbox" id="inp-nisa" aria-label="NISA口座で保有している（配当が非課税）">
           <label for="inp-nisa" class="nisa-label">NISA口座で保有している（配当が非課税）</label>
         </div>
       </div>
@@ -513,7 +516,7 @@
     <h2>目標の配当額から逆算する</h2>
     <div class="form-grid">
       <div class="form-group">
-        <label>ほしい年間配当（税引後）</label>
+        <label for="inp-target">ほしい年間配当（税引後）</label>
         <div class="input-inner">
           <input type="number" id="inp-target" inputmode="numeric" value="100000" min="0" step="1000">
           <span class="input-unit">円</span>

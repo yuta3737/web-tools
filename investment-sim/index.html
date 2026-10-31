@@ -16,6 +16,9 @@
   <link rel="canonical" href="https://yuta-tools.com/investment-sim/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <title>積立投資シミュレーター｜複利計算で資産額を自動計算 | MoneyTools</title>
   <meta name="description" content="毎月の積立額・年利・運用期間を入力するだけで将来の資産額を複利計算する無料ツール。元本と運用益の内訳をグラフで可視化し、年別のシミュレーション結果も確認できます。NISAの積立額を決める際にも使えます。">
   <!-- OGP / Twitter Card -->
@@ -253,7 +256,7 @@
     .gain-rate {
       display: inline-block;
       background: #d1fae5;
-      color: var(--success);
+      color: var(--success-text);
       border-radius: 20px;
       padding: 3px 10px;
       font-size: 12px;
@@ -375,7 +378,7 @@
       color: var(--gray-900);
     }
 
-    .td-gain { color: var(--success); }
+    .td-gain { color: var(--success-text); }
     .td-total { font-weight: 900; color: var(--primary); }
 
     /* Affiliate in sim */
@@ -489,7 +492,7 @@
 
     .breadcrumb a { color: var(--gray-500); }
     .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
-    .breadcrumb span { color: var(--gray-300); }
+    .breadcrumb span { color: var(--gray-500); }
 
     .sim-page-title {
       max-width: 1100px;
@@ -682,10 +685,10 @@
     <div class="form-group">
       <div class="form-label"><span>初期投資額</span></div>
       <div class="num-input-row">
-        <input type="number" class="num-input" id="num-initial" value="0" min="0" max="5000000" step="10000">
+        <input type="number" class="num-input" id="num-initial" value="0" min="0" max="5000000" step="10000" aria-label="初期投資額（円）">
         <span class="num-unit">円</span>
       </div>
-      <input type="range" id="range-initial" min="0" max="5000000" step="100000" value="0">
+      <input type="range" id="range-initial" min="0" max="5000000" step="100000" value="0" aria-label="初期投資額のスライダー">
       <div class="range-hints"><span>0円</span><span>500万円</span></div>
     </div>
 
@@ -693,10 +696,10 @@
     <div class="form-group">
       <div class="form-label"><span>毎月の積立額</span></div>
       <div class="num-input-row">
-        <input type="number" class="num-input" id="num-monthly" value="30000" min="1000" max="500000" step="1000">
+        <input type="number" class="num-input" id="num-monthly" value="30000" min="1000" max="500000" step="1000" aria-label="毎月の積立額（円）">
         <span class="num-unit">円</span>
       </div>
-      <input type="range" id="range-monthly" min="1000" max="200000" step="1000" value="30000">
+      <input type="range" id="range-monthly" min="1000" max="200000" step="1000" value="30000" aria-label="毎月の積立額のスライダー">
       <div class="range-hints"><span>1,000円</span><span>20万円</span></div>
     </div>
 
@@ -704,10 +707,10 @@
     <div class="form-group">
       <div class="form-label"><span>想定年利（税引前）</span></div>
       <div class="num-input-row">
-        <input type="number" class="num-input" id="num-rate" value="5" min="0.1" max="30" step="0.1">
+        <input type="number" class="num-input" id="num-rate" value="5" min="0.1" max="30" step="0.1" aria-label="想定利回り（年率％）">
         <span class="num-unit">%</span>
       </div>
-      <input type="range" id="range-rate" min="0.1" max="15" step="0.1" value="5">
+      <input type="range" id="range-rate" min="0.1" max="15" step="0.1" value="5" aria-label="想定利回りのスライダー">
       <div class="range-hints"><span>0.1%</span><span>15%</span></div>
     </div>
 
@@ -715,10 +718,10 @@
     <div class="form-group">
       <div class="form-label"><span>運用期間</span></div>
       <div class="num-input-row">
-        <input type="number" class="num-input" id="num-years" value="20" min="1" max="60" step="1">
+        <input type="number" class="num-input" id="num-years" value="20" min="1" max="60" step="1" aria-label="積立期間（年）">
         <span class="num-unit">年</span>
       </div>
-      <input type="range" id="range-years" min="1" max="50" step="1" value="20">
+      <input type="range" id="range-years" min="1" max="50" step="1" value="20" aria-label="積立期間のスライダー">
       <div class="range-hints"><span>1年</span><span>50年</span></div>
     </div>
 
@@ -748,7 +751,7 @@
       </div>
       <div class="summary-card">
         <div class="summary-label">運用益</div>
-        <div class="summary-value" id="res-gain" style="color:var(--success);">---</div>
+        <div class="summary-value" id="res-gain" style="color: var(--success-text);">---</div>
         <div class="summary-sub" id="res-gain-sub">-</div>
         <div class="gain-rate" id="res-rate" style="display:none;"></div>
       </div>
@@ -864,8 +867,8 @@
     <p>3年間・月3万円を積み立てて、年ごとのリターンが「+20% / −10% / +5%」だった場合と、同じ3つが逆順「+5% / −10% / +20%」で来た場合を比べます。</p>
     <table class="info-table">
       <tr><th>リターンの順番</th><th>3年後の残高</th></tr>
-      <tr><td>+20% → −10% → +5%（最初に良い）</td><td>1,110,140円</td></tr>
-      <tr><td>+5% → −10% → +20%（最後に良い）</td><td><strong>1,225,359円</strong></td></tr>
+      <tr><td>+20% → −10% → +5%（最初に良い）</td><td>1,105,361円</td></tr>
+      <tr><td>+5% → −10% → +20%（最後に良い）</td><td><strong>1,220,580円</strong></td></tr>
     </table>
     <p>平均リターンは同じなのに、<strong>11万円以上の差</strong>が出ます。しかも<strong>最初に下がって後から上がったほうが有利</strong>です。</p>
     <p>理由は、積立では<strong>後になるほど元本が大きい</strong>からです。残高が大きい後半に高いリターンが来るほうが、金額としては大きく効きます。逆に、序盤の下落は残高が小さいうちに起きるため損失額が小さく、その安い価格でその後も買い続けられます。</p>
