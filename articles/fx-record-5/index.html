@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VPXV9BMEY"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-7VPXV9BMEY');</script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6919722649745195"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <link rel="canonical" href="https://yuta-tools.com/articles/fx-record-5/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="../../favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+  <title>FX実践記録⑤｜勝ちと負けは入った直後に決まっていた【2026年10月】 | MoneyTools</title>
+  <meta name="description" content="2026年10月12日〜28日の20トレード全記録。負けた7件のうち6件は最大含み益が+3.0pips以下で、入った直後から一度も伸びていませんでした。1分足から機械的に算出した最大逆行と最大含み益で検証します。">
+  <!-- OGP / Twitter Card -->
+  <meta property="og:title" content="FX実践記録⑤｜勝ちと負けは入った直後に決まっていた【2026年10月】 | MoneyTools">
+  <meta property="og:description" content="負けた7件のうち6件は最大含み益が+3.0pips以下。入った直後に伸びないトレードはそのまま沈む、という傾向が20件で再現しました。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://yuta-tools.com/articles/fx-record-5/">
+  <meta property="og:image" content="https://yuta-tools.com/ogp.png">
+  <meta property="og:site_name" content="MoneyTools">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FX実践記録⑤｜勝ちと負けは入った直後に決まっていた【2026年10月】 | MoneyTools">
+  <meta name="twitter:description" content="負けた7件のうち6件は最大含み益が+3.0pips以下。入った直後に伸びないトレードはそのまま沈む、という傾向が20件で再現しました。">
+  <meta name="twitter:image" content="https://yuta-tools.com/ogp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800;900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800;900&display=swap" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800;900&display=swap"></noscript>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../article.css">
+  <style>
+    .trade-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 16px 0;
+    }
+    .trade-table th {
+      background: var(--primary);
+      color: var(--white);
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+    }
+    .trade-table th:first-child { border-radius: 8px 0 0 0; }
+    .trade-table th:last-child  { border-radius: 0 8px 0 0; }
+    .trade-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+      vertical-align: middle;
+    }
+    .trade-table tr:last-child td { border-bottom: none; }
+    .trade-table tr:nth-child(even) td { background: var(--gray-50); }
+    .pnl-plus  { color: var(--success-text); font-weight: 800; }
+    .pnl-minus { color: var(--danger-text);  font-weight: 800; }
+
+    .summary-stat {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-label { font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+    .stat-value { font-size: 22px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; }
+    .stat-value.plus  { color: var(--success-text); }
+    .stat-value.minus { color: var(--danger-text); }
+
+    .verdict-box {
+      background: #eff6ff;
+      border: 2px solid var(--primary);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin: 20px 0;
+    }
+    .verdict-box h4 { font-size: 15px; font-weight: 800; color: var(--primary); margin: 0 0 12px; }
+    .verdict-box p { margin: 0 0 10px; font-size: 14px; color: var(--gray-700); line-height: 1.8; }
+    .verdict-box p:last-child { margin-bottom: 0; }
+
+    .balance-box {
+      background: #fef2f2;
+      border: 2px solid var(--danger);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .balance-box .bl-label { font-size: 12px; font-weight: 700; color: var(--gray-600); margin-bottom: 8px; }
+    .balance-box .bl-main { font-size: 15px; font-weight: 800; color: var(--gray-800); line-height: 1.9; }
+    .balance-box .bl-main strong { font-size: 26px; color: var(--danger-text); }
+
+    /* 5件 vs 73件の対比 */
+    .split-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 22px 0;
+    }
+    .split-cell {
+      border-radius: 14px;
+      padding: 18px 16px;
+      text-align: center;
+    }
+    .split-cell.bad  { background: #fef2f2; border: 2px solid var(--danger); }
+    .split-cell.good { background: #f0fdf4; border: 2px solid var(--success); }
+    .split-cell .sc-count { font-size: 12px; font-weight: 700; color: var(--gray-600); margin-bottom: 6px; }
+    .split-cell .sc-main  { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; line-height: 1.3; }
+    .split-cell.bad  .sc-main { color: var(--danger-text); }
+    .split-cell.good .sc-main { color: var(--success-text); }
+    .split-cell .sc-sub { font-size: 12px; color: var(--gray-600); margin-top: 6px; font-weight: 700; }
+
+    .rule-single {
+      background: var(--gray-900);
+      color: var(--white);
+      border-radius: 14px;
+      padding: 24px 22px;
+      margin: 22px 0;
+      text-align: center;
+    }
+    .rule-single .rs-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; opacity: .7; margin-bottom: 10px; }
+    .rule-single .rs-main { font-size: 19px; font-weight: 900; line-height: 1.6; }
+    .rule-single .rs-sub { font-size: 13px; opacity: .85; margin-top: 12px; line-height: 1.8; }
+
+    @media (max-width: 640px) {
+      .summary-stat { grid-template-columns: repeat(2, 1fr); }
+      .trade-table { font-size: 12px; }
+      .trade-table th, .trade-table td { padding: 8px 8px; }
+      .balance-box .bl-main strong { font-size: 22px; }
+      .split-box { grid-template-columns: 1fr; }
+      .rule-single .rs-main { font-size: 17px; }
+    }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "FX実践記録⑤｜勝ちと負けは入った直後に決まっていた【2026年10月】 | MoneyTools",
+  "description": "負けた7件のうち6件は最大含み益が+3.0pips以下。入った直後に伸びないトレードはそのまま沈む、という傾向が20件で再現しました。",
+  "image": "https://yuta-tools.com/ogp.png",
+  "url": "https://yuta-tools.com/articles/fx-record-5/",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://yuta-tools.com/articles/fx-record-5/" },
+  "author": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "publisher": {
+    "@type": "Organization", "name": "MoneyTools", "url": "https://yuta-tools.com/",
+    "logo": { "@type": "ImageObject", "url": "https://yuta-tools.com/ogp.png" }
+  },
+  "datePublished": "2026-10-31",
+  "dateModified": "2026-10-31"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yuta-tools.com/" },
+    { "@type": "ListItem", "position": 2, "name": "記事一覧", "item": "https://yuta-tools.com/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "FX実践記録⑤｜2026年10月", "item": "https://yuta-tools.com/articles/fx-record-5/" }
+  ]
+}
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../" class="site-logo">Money<span>Tools</span></a>
+    <nav class="header-nav">
+      <a href="../../">ホーム</a>
+      <a href="../../investment-sim/">積立投資</a>
+      <a href="../../position-calc/">ポジション計算</a>
+      <a href="../../oco-calc/">OCO計算</a>
+      <a href="../../profit-calc/">損益計算</a>
+      <a href="../../nanpin-calc/">ナンピン計算</a>
+      <a href="../../fx-calc/">FX計算</a>
+      <a href="../../ideco-calc/">iDeCo節税</a>
+      <a href="../../volume-calc/">出来高チェック</a>
+      <a href="../../unrealized-calc/">評価損益計算</a>
+      <a href="../../yutai-calc/">優待利回り</a>
+      <a href="../../dividend-calc/">配当計算</a>
+      <a href="../">記事一覧</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../">ホーム</a><span>/</span>
+  <a href="../">記事一覧</a><span>/</span>
+  <span>FX実践記録⑤｜2026年10月</span>
+</div>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">実践記録</span>
+    <span class="article-level">📒 実体験</span>
+    <span class="article-date">2026年10月</span>
+  </div>
+
+  <h1 class="article-title">FX実践記録⑤｜勝ちと負けは入った直後に決まっていた【2026年10月】</h1>
+
+  <p class="article-lead">
+    対象期間：2026年10月12日〜10月28日／20トレード（前回は9月29日〜10月6日）。これでルール変更後57件になりました。
+    今回は<strong>最大逆行と最大含み益を、自分の目ではなく1分足のデータから機械的に計算しています</strong>。
+    そうしたら、負けた7件のうち6件が「入った直後から一度も伸びていない」という共通点を持っていました。
+  </p>
+
+  <nav class="toc">
+    <div class="toc-title">この記事の目次</div>
+    <ol>
+      <li><a href="#period">この記事が対象にしている期間</a></li>
+      <li><a href="#result">先に結果：20件で+464円</a></li>
+      <li><a href="#core">負けた7件のうち6件は、一度も伸びていなかった</a></li>
+      <li><a href="#exception">たった1件の例外が教えてくれること</a></li>
+      <li><a href="#flip">損切りの「最適値」がまた逆になった</a></li>
+      <li><a href="#howmae">最大逆行をどうやって測ったか</a></li>
+      <li><a href="#excluded">ルールを守れなかった6件を分けた</a></li>
+      <li><a href="#account">口座全体は−2,213円</a></li>
+      <li><a href="#honest">正直に書いておくこと</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+
+  <a href="../fx-record-4/" class="related-article">
+    <div class="related-article-text">
+      <div class="related-article-label">前回の記事</div>
+      <div class="related-article-title">FX実践記録④｜13連勝の次に起きたこと【2026年9〜10月・30件到達】</div>
+    </div>
+    <span class="related-article-arrow">›</span>
+  </a>
+
+  <div class="article-body">
+
+    <h2 id="period">この記事が対象にしている期間</h2>
+    <p>前回（④）は9月29日〜10月6日でした。今回はその続きです。</p>
+
+    <div class="table-wrap">
+    <table class="trade-table">
+      <tr><th>期間</th><th>件数</th><th>結果</th><th>記事</th></tr>
+      <tr><td>9月21日〜9月28日</td><td>17件</td><td class="pnl-plus">+2,115円</td><td>③</td></tr>
+      <tr><td>9月29日〜10月6日</td><td>13件</td><td class="pnl-plus">+113円</td><td>④</td></tr>
+      <tr><td>10月12日〜10月28日</td><td>20件</td><td class="pnl-plus">+464円</td><td>この記事</td></tr>
+      <tr><td><strong>新ルール通算</strong></td><td><strong>57件</strong></td><td class="pnl-minus"><strong>−1,283円</strong></td><td>—</td></tr>
+    </table>
+    </div>
+
+    <p>10月7日〜11日は取引していません。また、この20件は<strong>ルールどおりに入れたものだけ</strong>です。同じ期間にルール外で入った6件は<a href="#excluded">別に分けて</a>書きます。</p>
+
+    <h2 id="result">先に結果：20件で+464円</h2>
+
+    <div class="summary-stat">
+      <div class="stat-card">
+        <div class="stat-label">今回の20件</div>
+        <div class="stat-value plus">+464円</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">pips</div>
+        <div class="stat-value plus">+16.5</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">勝率</div>
+        <div class="stat-value">65.0%</div>
+      </div>
+    </div>
+
+    <p>前回（13件・PF 1.031）からは改善しました。ただし<strong>中身の変わり方が意外</strong>でした。</p>
+
+    <div class="table-wrap">
+    <table class="trade-table">
+      <tr><th>項目</th><th>前回（13件）</th><th>今回（20件）</th></tr>
+      <tr><td>勝率</td><td>61.5%</td><td>65.0%</td></tr>
+      <tr><td>プロフィットファクター</td><td>1.031</td><td><strong>1.206</strong></td></tr>
+      <tr><td>平均の勝ち</td><td>+11.95pips</td><td class="pnl-minus">+7.44pips</td></tr>
+      <tr><td>平均の負け</td><td>−18.54pips</td><td class="pnl-plus">−11.46pips</td></tr>
+      <tr><td>合計</td><td>+2.9pips</td><td>+16.5pips</td></tr>
+    </table>
+    </div>
+
+    <p><strong>勝ちは小さくなりました</strong>（+11.95 → +7.44pips）。それでもPFが上がったのは、<strong>負けがそれ以上に小さくなった</strong>からです（−18.54 → −11.46pips）。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 「大きく勝つ」より「小さく負ける」が効いている</div>
+      記事③の頃は平均の負けが−21.27pipsでした。そこから−11.46pipsまで半分近くに縮んでいます。
+      勝ちを伸ばす工夫は何もしていません。変わったのは負け方だけです。
+    </div>
+
+    <h2 id="core">負けた7件のうち6件は、一度も伸びていなかった</h2>
+
+    <p>ここが今回いちばん大きい発見です。負けた7件について、<strong>保有中に最大でどれだけプラスになったか（最大含み益）</strong>を並べます。</p>
+
+    <div class="table-wrap">
+    <table class="trade-table">
+      <tr><th>日付</th><th>結果</th><th>最大含み益</th><th>最大逆行</th><th>保有</th></tr>
+      <tr><td>10/20</td><td class="pnl-minus">−10.7pips</td><td><strong>+0.0pips</strong></td><td>−11.0pips</td><td>11分</td></tr>
+      <tr><td>10/28</td><td class="pnl-minus">−14.5pips</td><td><strong>+0.3pips</strong></td><td>−15.7pips</td><td>162分</td></tr>
+      <tr><td>10/27</td><td class="pnl-minus">−3.6pips</td><td><strong>+0.9pips</strong></td><td>−5.0pips</td><td>6分</td></tr>
+      <tr><td>10/19</td><td class="pnl-minus">−13.1pips</td><td><strong>+1.6pips</strong></td><td>−13.5pips</td><td>96分</td></tr>
+      <tr><td>10/16</td><td class="pnl-minus">−11.0pips</td><td><strong>+1.7pips</strong></td><td>−12.2pips</td><td>30分</td></tr>
+      <tr><td>10/27</td><td class="pnl-minus">−10.4pips</td><td><strong>+3.0pips</strong></td><td>−13.6pips</td><td>7分</td></tr>
+      <tr><td>10/23</td><td class="pnl-minus">−16.9pips</td><td class="pnl-plus"><strong>+22.1pips</strong></td><td>−17.0pips</td><td>63分</td></tr>
+    </table>
+    </div>
+
+    <p><strong>7件中6件が、最大でも+3.0pipsしか伸びていません。</strong>入った瞬間から含み損になり、そのまま決済されています。</p>
+
+    <p>対して<strong>勝った13件の最大含み益は平均+11.3pips</strong>でした。いちばん伸びたのは+31.3pipsです。</p>
+
+    <div class="verdict-box">
+      <h4>入った直後の数pipsで、ほぼ決まっている</h4>
+      <p>勝ちと負けを分けているのは「我慢できたかどうか」ではありませんでした。<strong>入って数分のうちに+3pipsも伸びないトレードは、そのまま沈んでいます。</strong></p>
+      <p>記事④で同じことを「4件の観察なので、まだ仮説」と書きました。今回はそれと重ならない20件で、同じ形が出ています。</p>
+    </div>
+
+    <h2 id="exception">たった1件の例外が教えてくれること</h2>
+
+    <p>7件のうち1件だけ、形が違います。10月23日のトレードです。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ 10/23：+22.1pipsまで伸びてから、−16.9pipsで終わった</div>
+      売りで入って、一度は+22.1pipsの含み益になりました。そこから戻されて、最終的に−16.9pipsの損切りです。
+      <strong>この1件だけは「伸びなかった」のではなく「伸びたのに取れなかった」</strong>。
+    </div>
+
+    <p>この違いは重要です。もし「+3pips伸びなければ切る」というルールを作っても、<strong>この回は救えません</strong>。+22pipsまで伸びているので、ルールは「継続」と判定します。</p>
+
+    <p>つまり負けには<strong>2種類ある</strong>ということです。</p>
+
+    <ul>
+      <li><strong>伸びずに沈む負け（6件）</strong>：早く手放せば傷が浅い</li>
+      <li><strong>伸びてから戻される負け（1件）</strong>：利確か、追従する損切りの問題</li>
+    </ul>
+
+    <p>前者は入口の問題、後者は出口の問題で、対処法が違います。6対1なので<strong>まず前者に手を打つのが先</strong>ですが、後者を忘れると+22pipsを何度も取り逃します。</p>
+
+    <h2 id="flip">損切りの「最適値」がまた逆になった</h2>
+
+    <p>最大逆行を全件記録してあるので、「もし機械的に損切りを入れていたら」を後から計算できます。</p>
+
+    <div class="table-wrap">
+    <table class="trade-table">
+      <tr><th>損切り幅</th><th>20件の合計</th><th>切られる件数</th></tr>
+      <tr><td><strong>−8pips</strong></td><td class="pnl-plus"><strong>+36.7pips</strong></td><td>7件</td></tr>
+      <tr><td>−10pips</td><td class="pnl-plus">+22.7pips</td><td>7件</td></tr>
+      <tr><td>−12pips</td><td class="pnl-plus">+10.0pips</td><td>6件</td></tr>
+      <tr><td>−15pips</td><td class="pnl-plus">+2.5pips</td><td>3件</td></tr>
+      <tr><td>−18pips以上</td><td>+16.5pips</td><td>0件</td></tr>
+      <tr><td>実際（待った）</td><td>+16.5pips</td><td>—</td></tr>
+    </table>
+    </div>
+
+    <p>今回の20件では<strong>−8pipsが最良</strong>です。浅く切るほど良い。</p>
+
+    <p>ところが記事④では、<strong>まったく逆の結論</strong>が出ていました。</p>
+
+    <div class="verdict-box">
+      <h4>記事④（30件時点）では「−25pipsが最良」だった</h4>
+      <p>30件のときは−20pipsで+6.7pips、−25pipsで+82.3pips。<strong>深く置くほど良いという形</strong>でした。</p>
+      <p>今回の20件では−8pipsで+36.7pips、−18pips以上だと+16.5pips。<strong>浅く置くほど良い</strong>。完全に反転しています。</p>
+    </div>
+
+    <p>理由ははっきりしています。<a href="#core">前の章</a>のとおり、今回の負けは「伸びずに沈む」形だったからです。伸びないなら、浅く切るほど傷が浅い。逆に記事④の時期は「沈んでから戻る」勝ちが多く、浅い損切りはその勝ちを殺していました。</p>
+
+    <p><strong>相場の形が変われば、最適な損切り幅も変わります。</strong>記事④で「この手の最適化はサンプルが増えるたびにひっくり返る」と書きましたが、自分で実証してしまいました。</p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠️ だから損切り幅は「過去の最適値」から決めてはいけない</div>
+      30件で−25pips、次の20件で−8pips。どちらも「そのサンプルでの最適値」でしかありません。
+      次の20件でまた変わります。<strong>決め方を変えるなら、後から計算した最適値ではなく、
+      «入って伸びなければ手放す» のような、相場の形に依存しない条件のほうが筋がいい</strong>と考えています。
+    </div>
+
+    <h2 id="howmae">最大逆行をどうやって測ったか</h2>
+
+    <p>これまでの記録では、最大逆行をチャートを見て拾っていました。今回は<strong>1分足のデータから機械的に計算</strong>しています。</p>
+
+    <ol>
+      <li>各トレードの<strong>約定時刻から決済時刻まで</strong>の1分足を取り出す</li>
+      <li>その期間の<strong>高値の最大・安値の最小</strong>を求める</li>
+      <li>建値との差を最大逆行・最大含み益とする</li>
+    </ol>
+
+    <p>20件で平均470本、最も長いもので470分ぶんの足を見ています。目視では拾いきれない精度です。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 検証のついでに、自分の検証環境のバグが見つかった</div>
+      使っていたヒストリカルデータの時刻変換が、<strong>米国の夏時間の期間だけ1時間ずれて</strong>いました。
+      約定値が1分足のレンジに収まるかで検証したところ、補正前は18件中1件しか収まらず（最大42pipsのズレ）、
+      1時間ずらすと17件が収まりました（平均1.1pips）。
+      データの3分の2がこの期間に当たるため、<strong>過去の時間帯別の検証はやり直しが必要</strong>です。
+      自分の取引記録を照合に使うと、こういうものが見つかります。
+    </div>
+
+    <h2 id="excluded">ルールを守れなかった6件を分けた</h2>
+
+    <p>同じ期間に、<strong>ルール外で入った取引が6件</strong>ありました。上の20件には含めていません。</p>
+
+    <p>判定は記憶ではなく、<strong>通知の記録と突き合わせて</strong>行いました。自作の監視スクリプトが条件を満たしたときに通知を出しているので、そのログと約定時刻・方向を照合しています。</p>
+
+    <div class="table-wrap">
+    <table class="trade-table">
+      <tr><th>日付</th><th>結果</th><th>外した理由</th></tr>
+      <tr><td>10/15</td><td class="pnl-plus">+5.0pips</td><td>通知が出ていない</td></tr>
+      <tr><td>10/16</td><td class="pnl-plus">+6.3pips</td><td>通知が出ていない</td></tr>
+      <tr><td>10/19</td><td class="pnl-plus">+6.2pips</td><td>通知が出ていない</td></tr>
+      <tr><td>10/20</td><td class="pnl-plus">+0.3pips</td><td><strong>通知は「売り」なのに買いで入った</strong></td></tr>
+      <tr><td>10/28</td><td class="pnl-plus">+0.1pips</td><td>通知が出ていない</td></tr>
+      <tr><td>10/28</td><td class="pnl-minus">−10.6pips</td><td>通知が出ていない</td></tr>
+    </table>
+    </div>
+
+    <p>この6件は<strong>5勝1敗・+229円</strong>でした。<strong>ルールを守った20件（65.0%）より成績が良い</strong>という、書きにくい結果です。</p>
+
+    <p>ただし6件では何も言えません。勝った5件のうち4件は+6.3pips以下の小さい勝ちで、1件の大きい負け（−10.6pips）がもう1回出れば簡単に逆転します。</p>
+
+    <div class="callout info">
+      <div class="callout-title">💡 成行で入った取引を、全部ルール外にはしなかった</div>
+      今回は成行で入ったものが6件ありますが、そのうち3件は<strong>通知と同じ方向・ほぼ同じ価格</strong>でした。
+      通知を見たときにはもう逆指値の位置まで来ていたので、成行で追いかけた形です。これは執行の仕方が違うだけなので、
+      ルール内として扱いました。外したのは<strong>通知そのものが無い5件と、通知と逆方向に入った1件</strong>です。
+    </div>
+
+    <h2 id="account">口座全体は−2,213円</h2>
+
+    <p>ここまではルール適用分の話です。口座全体の数字も出します。</p>
+
+    <div class="table-wrap">
+    <table class="trade-table">
+      <tr><th>区分</th><th>件数</th><th>実現損益</th></tr>
+      <tr><td>ルール適用分</td><td>20件</td><td class="pnl-plus">+464円</td></tr>
+      <tr><td>ルール外（上の6件）</td><td>6件</td><td class="pnl-plus">+229円</td></tr>
+      <tr><td>それ以外</td><td>22件</td><td class="pnl-minus">−2,906円</td></tr>
+      <tr><td><strong>2026年10月の合計</strong></td><td><strong>48件</strong></td><td class="pnl-minus"><strong>−2,213円</strong></td></tr>
+    </table>
+    </div>
+
+    <p>10月は口座全体でマイナスです。ルールで取った20件はプラスですが、<strong>それ以外の22件で−2,906円を失っています</strong>。</p>
+
+    <p>記事④では「約定件数が356件→152件に減って損失も縮んだ」と書きました。10月は48件（96約定）とさらに減っていますが、<strong>ルール外で負ける構造は変わっていません</strong>。</p>
+
+    <h2 id="honest">正直に書いておくこと</h2>
+
+    <h3>通算はまだマイナスです</h3>
+    <p>新ルール57件で<strong>−1,283円・−29.0pips</strong>。36勝21敗（勝率63.2%）で勝率は高いのに、通算は負けています。</p>
+
+    <h3>+464円は小さすぎます</h3>
+    <p>20トレードで464円。1トレードあたり23円です。時間をかけた割に、これで何かを証明できる金額ではありません。</p>
+
+    <h3>「伸びなければ切る」はまだ試していません</h3>
+    <p>今回見つけた傾向は、<strong>後から計算した結果</strong>です。実際に「入って◯分で+◯pips伸びなければ切る」というルールで運用したわけではありません。次にやるのはその検証です。</p>
+
+    <h3>最大逆行の計算には誤差があります</h3>
+    <p>約定値は証券会社のレート、1分足は別のデータ提供元です。両者には数pipsの差があります（照合した18件で平均1.1pips）。<strong>最大逆行の数字は、1〜2pips程度の誤差を含みます。</strong></p>
+
+    <h3>ロットは固定していません</h3>
+    <p>3,100通貨から3,500通貨のあいだで動かしています。本来はリスク管理として固定すべきところです。</p>
+
+    <div class="summary-box">
+      <h3 id="summary">まとめ</h3>
+      <ul>
+        <li>対象期間は<strong>2026年10月12日〜28日・20トレード</strong>（ルール適用分）。+464円／+16.5pips／13勝7敗。</li>
+        <li>前回からPFが1.031→1.206に改善。ただし<strong>勝ちは小さくなっており（+11.95→+7.44pips）、負けがそれ以上に縮んだ（−18.54→−11.46pips）</strong>のが理由。</li>
+        <li><strong>負けた7件のうち6件は、最大含み益が+3.0pips以下。</strong>入った直後から一度も伸びていない。勝ち13件の平均は+11.3pips。</li>
+        <li>例外は1件（+22.1pipsまで伸びてから−16.9pips）。<strong>負けには「伸びない負け」と「伸びてから戻される負け」の2種類ある。</strong></li>
+        <li>損切り幅の最適値は<strong>今回−8pips</strong>。記事④の30件では−25pipsだった。<strong>完全に反転している。</strong></li>
+        <li>最大逆行は1分足から機械的に算出。その過程で自分の検証環境の時刻バグ（夏時間で1時間ズレ）が見つかった。</li>
+        <li>同じ期間のルール外6件は5勝1敗・+229円で、<strong>ルールを守った分より成績が良い</strong>。ただし6件では何も言えない。</li>
+        <li>口座全体は48件で<strong>−2,213円</strong>。ルール外の22件で−2,906円を失っている。</li>
+        <li>新ルール通算57件は<strong>−1,283円</strong>。まだマイナス。</li>
+      </ul>
+    </div>
+
+    <p>次回（⑥）は、<strong>「入って伸びなければ切る」を実際のルールにして運用した結果</strong>を書きます。何分で何pipsを基準にするかは、これから決めます。後から計算した最適値ではなく、事前に決めた条件で何が起きるかを見たいからです。</p>
+
+  </div>
+
+  <a href="../fx-losscut/" class="related-article">
+    <div class="related-article-text">
+      <div class="related-article-label">関連記事</div>
+      <div class="related-article-title">FXの強制ロスカットは何円で発動するか｜証拠金維持率の計算</div>
+    </div>
+    <span class="related-article-arrow">›</span>
+  </a>
+
+  <a href="../../fx-calc/" class="tool-cta">
+    <div class="tool-cta-left">
+      <div class="tool-cta-label">無料ツール</div>
+      <div class="tool-cta-title">FX計算ツール</div>
+      <div class="tool-cta-sub">必要証拠金・1pipsあたりの損益・証拠金維持率・適正ロットを計算できます</div>
+    </div>
+    <div class="tool-cta-arrow">›</div>
+  </a>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-brand">Money<span>Tools</span></div><p>資産形成に役立つ無料計算ツール</p></div>
+      <div class="footer-links">
+        <div><h4>ツール</h4><ul>
+            <li><a href="../../investment-sim/">積立投資シミュレーター</a></li>
+            <li><a href="../../position-calc/">ポジションサイズ計算ツール</a></li>
+            <li><a href="../../oco-calc/">OCO注文計算ツール</a></li>
+            <li><a href="../../profit-calc/">株式損益計算ツール</a></li>
+            <li><a href="../../nanpin-calc/">ナンピン計算ツール</a></li>
+            <li><a href="../../fx-calc/">FX計算ツール</a></li>
+            <li><a href="../../ideco-calc/">iDeCo節税額シミュレーター</a></li>
+            <li><a href="../../volume-calc/">出来高・売買代金チェック</a></li>
+            <li><a href="../../unrealized-calc/">保有株の評価損益</a></li>
+            <li><a href="../../yutai-calc/">株主優待利回り計算</a></li>
+            <li><a href="../../dividend-calc/">配当金計算ツール</a></li>
+          </ul></div>
+        <div><h4>情報</h4><ul>
+          <li><a href="../../privacy/">プライバシーポリシー</a></li>
+          <li><a href="../../disclaimer/">免責事項</a></li>
+          <li><a href="../../about/">運営者情報</a></li>
+          <li><a href="../../contact/">お問い合わせ</a></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">※ 本記事は個人の取引記録であり、投資成果を保証するものではありません。FXはレバレッジにより元本を超える損失が生じる可能性があります。投資判断はご自身の責任でお願いします。</div>
+    <div class="footer-bottom"><p>&copy; 2026 MoneyTools. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="../../js/nav.js"></script>
+</body>
+</html>
