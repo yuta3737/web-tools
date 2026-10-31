@@ -706,8 +706,8 @@
         <input type="number" class="num-input" id="num-monthly" value="30000" min="1000" max="500000" step="1000" aria-label="毎月の積立額（円）">
         <span class="num-unit">円</span>
       </div>
-      <input type="range" id="range-monthly" min="1000" max="200000" step="1000" value="30000" aria-label="毎月の積立額のスライダー">
-      <div class="range-hints"><span>1,000円</span><span>20万円</span></div>
+      <input type="range" id="range-monthly" min="1000" max="500000" step="1000" value="30000" aria-label="毎月の積立額のスライダー">
+      <div class="range-hints"><span>1,000円</span><span>50万円</span></div>
     </div>
 
     <!-- 年利 -->
@@ -717,8 +717,8 @@
         <input type="number" class="num-input" id="num-rate" value="5" min="0.1" max="30" step="0.1" aria-label="想定利回り（年率％）">
         <span class="num-unit">%</span>
       </div>
-      <input type="range" id="range-rate" min="0.1" max="15" step="0.1" value="5" aria-label="想定利回りのスライダー">
-      <div class="range-hints"><span>0.1%</span><span>15%</span></div>
+      <input type="range" id="range-rate" min="0.1" max="30" step="0.1" value="5" aria-label="想定利回りのスライダー">
+      <div class="range-hints"><span>0.1%</span><span>30%</span></div>
     </div>
 
     <!-- 運用期間 -->
@@ -728,8 +728,8 @@
         <input type="number" class="num-input" id="num-years" value="20" min="1" max="60" step="1" aria-label="積立期間（年）">
         <span class="num-unit">年</span>
       </div>
-      <input type="range" id="range-years" min="1" max="50" step="1" value="20" aria-label="積立期間のスライダー">
-      <div class="range-hints"><span>1年</span><span>50年</span></div>
+      <input type="range" id="range-years" min="1" max="60" step="1" value="20" aria-label="積立期間のスライダー">
+      <div class="range-hints"><span>1年</span><span>60年</span></div>
     </div>
 
     <button class="calc-btn" id="calc-btn">
@@ -990,7 +990,10 @@
   }
 
   function formatMan(yen) {
-    if (yen >= 100_000_000) return (yen / 100_000_000).toFixed(1) + '億円';
+    // 上限いっぱい（月50万・年30%・60年）だと1,300兆円規模になり、
+    // 億止まりだと「13155976.4億円」と読めなくなるので兆まで用意する
+    if (yen >= 1_0000_0000_0000) return (yen / 1_0000_0000_0000).toLocaleString('ja-JP', {maximumFractionDigits: 1}) + '兆円';
+    if (yen >= 100_000_000) return (yen / 100_000_000).toLocaleString('ja-JP', {maximumFractionDigits: 1}) + '億円';
     if (yen >= 10_000) return Math.round(yen / 10_000).toLocaleString() + '万円';
     return yen.toLocaleString() + '円';
   }
@@ -1047,11 +1050,30 @@
   });
 
   // ===== Run simulation =====
+  // 入力値を input の min/max の範囲に収める。
+  // HTML の max は送信時のバリデーションでしかなく、手入力は素通りする。
+  // 年数に極端な値（例: 999999999999）を入れられると calcInvestment が
+  // years*12 回ループしてブラウザごと固まるため、JS側でも必ずクランプする。
+  function clamp(el, fallback, isInt) {
+    const raw = isInt ? parseInt(el.value, 10) : parseFloat(el.value);
+    const min = parseFloat(el.min), max = parseFloat(el.max);
+    let v = isNaN(raw) ? fallback : raw;
+    if (!isNaN(min)) v = Math.max(v, min);
+    if (!isNaN(max)) v = Math.min(v, max);
+    // 範囲外だった場合は表示も直して、計算結果と入力欄を一致させる
+    if (String(v) !== el.value) { el.value = v; inputs_sync(el, v); }
+    return v;
+  }
+  // クランプで値を直したとき、対になっているスライダーも合わせる
+  function inputs_sync(numEl, v) {
+    Object.values(inputs).forEach(({ range, num }) => { if (num === numEl) range.value = v; });
+  }
+
   function runSimulation() {
-    const initial = parseInt(inputs.initial.num.value)    || 0;
-    const monthly = parseInt(inputs.monthly.num.value)    || 0;
-    const rate    = parseFloat(inputs.rate.num.value)     || 0;
-    const years   = parseInt(inputs.years.num.value)      || 0;
+    const initial = clamp(inputs.initial.num, 0, true);
+    const monthly = clamp(inputs.monthly.num, 0, true);
+    const rate    = clamp(inputs.rate.num,    0, false);
+    const years   = clamp(inputs.years.num,   1, true);
 
     const result = calcInvestment(monthly, rate, years, initial);
 
