@@ -148,6 +148,9 @@
       padding: 12px 16px; font-size: 13px; font-weight: 700;
       color: var(--gray-800); margin: 10px 0; border-radius: 0 8px 8px 0; line-height: 1.8;
     }
+    /* 狭い画面で表がはみ出さないよう、親側で横スクロールを受ける */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 10px 0; }
+    .table-wrap .info-table { margin: 0; }
     .info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
     .info-table th {
       background: var(--gray-50); padding: 9px 12px; text-align: left;
@@ -479,24 +482,24 @@
   <div class="info-card">
     <h2>株以外でも使えます（FX・投資信託・仮想通貨）</h2>
     <p>平均単価の計算式は <strong>投資総額 ÷ 数量</strong> だけなので、数える単位が何であっても同じです。このナンピン計算機は入力欄を「株数」と書いていますが、次のように読み替えればそのまま使えます。</p>
-    <table class="info-table">
+    <div class="table-wrap"><table class="info-table">
       <tr><th>対象</th><th>「株数」の欄に入れるもの</th><th>注意点</th></tr>
       <tr><td>株式</td><td>株数</td><td>そのまま</td></tr>
       <tr><td>FX</td><td>通貨数（またはロット数）</td><td>1ロットが何通貨かは業者によって違います（1万通貨が一般的、1,000通貨の業者もあります）。どちらで入れても平均単価は同じ結果になります</td></tr>
       <tr><td>投資信託</td><td>口数</td><td>基準価額は「1万口あたり」で表示されることが多いので、口数と価格の単位を揃えてください</td></tr>
       <tr><td>仮想通貨</td><td>数量（小数可）</td><td>そのまま</td></tr>
-    </table>
+    </table></div>
     <p>FXの買い下がりでも、追加購入のたびに平均単価が動く仕組みは株とまったく同じです。損益分岐点は「平均単価そのもの」になります。</p>
 
     <h2>買い下がりの前に決めておくこと</h2>
     <p>ナンピンは平均単価を下げられる一方で、<strong>投資額と含み損が同時に増える</strong>手法です。上の計算例のとおり、単価は値下がり幅の半分しか下がらないのに、投資額は2倍になります。</p>
     <p>下げ続ける銘柄で追加購入を繰り返すと資金を使い切り、本当に反発する場面で何もできなくなります。俗に<strong>ナンピン地獄</strong>と呼ばれる状態です。資金管理として、買い増す前に次の3つを数字で決めておいてください。</p>
-    <table class="info-table">
+    <div class="table-wrap"><table class="info-table">
       <tr><th>決めること</th><th>例</th></tr>
       <tr><td>買い増しの回数の上限</td><td>2回まで（3回目はやらない）</td></tr>
       <tr><td>1銘柄に使う資金の上限</td><td>口座残高の20%まで</td></tr>
       <tr><td>撤退ライン</td><td>平均単価から−10%で全部売る</td></tr>
-    </table>
+    </table></div>
     <p>このツールで買い増し後の平均単価＝損益分岐点を先に出しておくと、「いくらまで戻れば損失がゼロになるか」が数字で分かります。決める材料にしてください。</p>
   </div>
 

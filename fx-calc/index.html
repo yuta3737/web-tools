@@ -152,6 +152,9 @@
       font-size: 13px; font-weight: 800; color: var(--gray-700); margin: 20px 0 8px;
     }
     .info-card p { font-size: 13px; color: var(--gray-700); line-height: 1.9; margin: 0 0 10px; }
+    /* 狭い画面で表がはみ出さないよう、親側で横スクロールを受ける */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 10px 0; }
+    .table-wrap .info-table { margin: 0; }
     .info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
     .info-table th {
       background: var(--gray-50); padding: 9px 12px; text-align: left;
@@ -494,11 +497,11 @@
     <h2>pips計算の基本</h2>
     <p>pipsは値動きの単位です。<strong>通貨ペアによって1pipsの大きさが違う</strong>ため、同じ「10pips動いた」でも金額が変わります。</p>
 
-    <table class="info-table">
+    <div class="table-wrap"><table class="info-table">
       <tr><th>通貨ペア</th><th>1pips</th><th>10,000通貨なら</th></tr>
       <tr><td>クロス円（米ドル/円など）</td><td>0.01円</td><td>100円</td></tr>
       <tr><td>ドルストレート（ユーロ/米ドルなど）</td><td>0.0001ドル</td><td>1ドル（円換算は為替レート次第）</td></tr>
-    </table>
+    </table></div>
 
     <p>クロス円のpips計算は暗算できます。</p>
     <div class="formula">1pipsあたりの損益（円） ＝ 通貨数 ÷ 100</div>
@@ -513,12 +516,12 @@
     <h2>証拠金シミュレーション：いくらから始められるか</h2>
     <p>「FXは少額から始められる」と言われますが、<strong>必要証拠金だけ用意しても足りません</strong>。必要証拠金ちょうどだと維持率100%で建てることになり、1pips逆行した時点でロスカットへ向かって進み始めます。</p>
 
-    <table class="info-table">
+    <div class="table-wrap"><table class="info-table">
       <tr><th>取引数量</th><th>必要証拠金（25倍・1ドル157円）</th><th>1pipsの損益</th></tr>
       <tr><td>1,000通貨</td><td>6,280円</td><td>10円</td></tr>
       <tr><td>3,400通貨</td><td>21,352円</td><td>34円</td></tr>
       <tr><td>10,000通貨（1Lot）</td><td>62,800円</td><td>100円</td></tr>
-    </table>
+    </table></div>
 
     <p>この証拠金計算は「建てられるかどうか」の最低ラインです。実際には<strong>どこまで逆行に耐えられるか</strong>から逆算します。</p>
 

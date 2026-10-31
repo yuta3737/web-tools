@@ -561,9 +561,16 @@ img { max-width: 100%; }
 }
 
 /* ===== Responsive ===== */
-@media (max-width: 640px) {
+
+/* ヘッダーナビは13項目あり、収まるのは 820px から。
+   640px で切り替えていたため 641〜819px の範囲（iPad縦・小型ノート）で
+   全ページ横スクロールが出ていた。2026-10-31 に 840px へ引き上げ。 */
+@media (max-width: 840px) {
   .header-nav { display: none; }
   .hamburger { display: flex; }
+}
+
+@media (max-width: 640px) {
   .hero { padding: 48px 20px 56px; }
   .tools-grid { grid-template-columns: 1fr; }
   .footer-links { gap: 24px; }

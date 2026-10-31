@@ -144,6 +144,9 @@
       padding: 12px 16px; font-size: 13px; font-weight: 700;
       color: var(--gray-800); margin: 10px 0; border-radius: 0 8px 8px 0; line-height: 1.8;
     }
+    /* 狭い画面で表がはみ出さないよう、親側で横スクロールを受ける */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 10px 0; }
+    .table-wrap .info-table { margin: 0; }
     .info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
     .info-table th {
       background: var(--gray-50); padding: 9px 12px; text-align: left;
@@ -468,25 +471,25 @@
     <h2>1銘柄ずつ見ると、判断を誤ります</h2>
     <p>証券会社のアプリは銘柄ごとの損益を縦に並べて表示します。これだけを見ていると、<strong>赤字の銘柄にばかり目が行って、全体では勝っていることに気づけません</strong>。逆に、1つの大きな含み益に隠れて、他の4銘柄がじわじわ負けていることにも気づけません。</p>
     <p>たとえば次のような保有状況を考えます。</p>
-    <table class="info-table">
+    <div class="table-wrap"><table class="info-table">
       <tr><th>銘柄</th><th>取得金額</th><th>評価額</th><th>含み損益</th><th>損益率</th></tr>
       <tr><td>A</td><td>200,000円</td><td>260,000円</td><td>+60,000円</td><td>+30.0%</td></tr>
       <tr><td>B</td><td>150,000円</td><td>138,000円</td><td>−12,000円</td><td>−8.0%</td></tr>
       <tr><td>C</td><td>300,000円</td><td>279,000円</td><td>−21,000円</td><td>−7.0%</td></tr>
       <tr><td>D</td><td>100,000円</td><td>91,000円</td><td>−9,000円</td><td>−9.0%</td></tr>
       <tr><th>合計</th><th>750,000円</th><th>768,000円</th><th>+18,000円</th><th>+2.4%</th></tr>
-    </table>
+    </table></div>
     <p>4銘柄のうち3銘柄が含み損で、見た目には負けているように感じます。しかし<strong>合計では+18,000円のプラス</strong>です。このとき「3つも負けているから損切りしよう」と動くと、全体のプラスを自分で削ることになります。</p>
     <p>逆のケースもあります。Aが+60,000円ではなく+200,000円だったとしたら、合計は+158,000円となり、B・C・Dの負けはほぼ見えなくなります。<strong>1銘柄の勝ちが他の失敗を覆い隠している状態</strong>で、これも合計だけ見ていると気づけません。だから<strong>金額は合計で、率は銘柄ごとに</strong>見る必要があります。</p>
 
     <h2>売る順番で手取りが変わります</h2>
     <p>複数の銘柄をまとめて見るべき実務上の理由がもう1つあります。<strong>損益通算</strong>です。</p>
     <p>株の利益には20.315%の税金がかかりますが、同じ年に出した損失と相殺できます。上の例で、含み益のAだけを売った場合と、Aと含み損のCを同じ年に売った場合を比べます。</p>
-    <table class="info-table">
+    <div class="table-wrap"><table class="info-table">
       <tr><th>売り方</th><th>確定損益</th><th>税金</th><th>手取り</th></tr>
       <tr><td>Aだけ売る</td><td>+60,000円</td><td>12,189円</td><td>47,811円</td></tr>
       <tr><td>AとCを同じ年に売る</td><td>+39,000円</td><td>7,922円</td><td>31,078円＋Cの元本</td></tr>
-    </table>
+    </table></div>
     <p>Cを一緒に売ると、課税対象が60,000円から39,000円に下がり、<strong>税金が4,267円減ります</strong>。どのみちCを手放すつもりなら、年をまたがずに同じ年に売ったほうが得だということです。</p>
     <p>これは<strong>全銘柄の含み損益を並べて見ないと判断できません</strong>。1銘柄ずつ眺めていると、「今年はいくら利益が確定していて、あといくら損失をぶつけられるか」が分からないためです。</p>
     <p>なお、損益通算は確定申告が必要な場合と、特定口座（源泉徴収あり）内で自動的に行われる場合があります。別々の証券会社にまたがる場合は確定申告が必要です。税額の詳細は<a href="../articles/tax-calculation/">株の税金の記事</a>にまとめています。</p>
@@ -497,14 +500,14 @@
 
     <h2>含み損は「戻すのに必要な上昇率」で見る</h2>
     <p>含み損は下落率が大きくなるほど、建値に戻すのに必要な上昇率が加速度的に大きくなります。</p>
-    <table class="info-table">
+    <div class="table-wrap"><table class="info-table">
       <tr><th>下落率</th><th>建値回復に必要な上昇率</th></tr>
       <tr><td>-10%</td><td>+11.1%</td></tr>
       <tr><td>-20%</td><td>+25.0%</td></tr>
       <tr><td>-30%</td><td>+42.9%</td></tr>
       <tr><td>-50%</td><td>+100.0%</td></tr>
       <tr><td>-70%</td><td>+233.3%</td></tr>
-    </table>
+    </table></div>
     <p><strong>半値になった株を取り戻すには、2倍にする必要があります。</strong>損切りが早いほうがいいと言われるのは、この非対称性があるからです。基準の決め方は<a href="../articles/stop-loss/">損切りの記事</a>にまとめています。</p>
 
     <h2>よくある質問</h2>

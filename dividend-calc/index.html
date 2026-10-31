@@ -307,6 +307,9 @@
   </style>
   <style>
     .hint { font-size: 11.5px; color: var(--gray-500); margin-top: 6px; line-height: 1.6; }
+    /* 狭い画面で表がはみ出さないよう、親側で横スクロールを受ける */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 10px 0; }
+    .table-wrap .info-table { margin: 0; }
     .info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
     .info-table th { background: var(--gray-50); padding: 9px 12px; text-align: left;
       font-weight: 700; color: var(--gray-600); font-size: 11px; border-bottom: 1px solid var(--gray-200); }
@@ -574,14 +577,14 @@
 
     <h3>計算例</h3>
     <p>株価1,500円の銘柄を100株（投資金額15万円）、1株あたり年間配当45円のケースです。</p>
-    <table class="info-table">
+    <div class="table-wrap"><table class="info-table">
       <tr><th>項目</th><th>計算</th><th>結果</th></tr>
       <tr><td>年間の配当（税引前）</td><td>45円 × 100株</td><td><strong>4,500円</strong></td></tr>
       <tr><td>税金</td><td>4,500円 × 20.315%</td><td>914円</td></tr>
       <tr><td>年間の配当（税引後）</td><td>4,500円 − 914円</td><td><strong>3,586円</strong></td></tr>
       <tr><td>配当利回り（税引前）</td><td>4,500円 ÷ 150,000円</td><td>3.00%</td></tr>
       <tr><td>配当利回り（税引後）</td><td>3,586円 ÷ 150,000円</td><td><strong>2.39%</strong></td></tr>
-    </table>
+    </table></div>
     <p>税引前の利回り3.00%が、手元では<strong>2.39%</strong>になります。この0.61%の差が、配当狙いの投資では効いてきます。</p>
 
     <h2>配当にかかる税金は20.315%</h2>

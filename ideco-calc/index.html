@@ -137,6 +137,9 @@
       padding: 12px 16px; font-size: 13px; font-weight: 700;
       color: var(--gray-800); margin: 10px 0; border-radius: 0 8px 8px 0; line-height: 1.8;
     }
+    /* 狭い画面で表がはみ出さないよう、親側で横スクロールを受ける */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 10px 0; }
+    .table-wrap .info-table { margin: 0; }
     .info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
     .info-table th {
       background: var(--gray-50); padding: 9px 12px; text-align: left;
@@ -410,23 +413,23 @@
       <li><strong>金融機関ごとに違う分</strong> … 運営管理機関手数料。<strong>0円の金融機関もあれば、月450円前後かかるところもある</strong></li>
     </ul>
     <p>この差が節税額にどう効くかを、掛金別に計算すると次のようになります。</p>
-    <table class="info-table">
+    <div class="table-wrap"><table class="info-table">
       <tr><th>掛金</th><th>年の節税額<br>（税率15%の場合）</th><th>手数料0円の<br>金融機関</th><th>月450円かかる<br>金融機関</th></tr>
       <tr><td>5,000円/月</td><td>9,000円</td><td>6,948円</td><td><strong>1,548円</strong></td></tr>
       <tr><td>23,000円/月</td><td>41,400円</td><td>39,348円</td><td>33,948円</td></tr>
-    </table>
+    </table></div>
     <p><strong>掛金が小さいほど、手数料の影響が致命的になります。</strong>掛金5,000円・税率15%の人が運営管理機関手数料450円の金融機関を選ぶと、年9,000円の節税が<strong>実質1,548円まで減ります</strong>。60歳まで引き出せない制約を受け入れる見返りとしては割に合いません。</p>
     <p>一方、掛金が上限に近く税率も高い人なら、手数料の差は誤差の範囲です。<strong>掛金が小さい人ほど、金融機関選びを慎重にすべき</strong>ということになります。</p>
 
     <h2>受け取るときには税金がかかります</h2>
     <p>iDeCoは「非課税」と説明されることがありますが、正確ではありません。<strong>課税が先送りされているだけ</strong>で、受け取るときに課税対象になります。</p>
     <p>受け取り方は3通りで、適用される控除が変わります。</p>
-    <table class="info-table">
+    <div class="table-wrap"><table class="info-table">
       <tr><th>受け取り方</th><th>扱い</th><th>使える控除</th></tr>
       <tr><td>一時金（一括）</td><td>退職所得</td><td>退職所得控除</td></tr>
       <tr><td>年金（分割）</td><td>雑所得</td><td>公的年金等控除</td></tr>
       <tr><td>併用</td><td>両方</td><td>両方</td></tr>
-    </table>
+    </table></div>
     <p>多くの場合は控除の枠に収まって実際の税負担は小さくなりますが、<strong>注意が必要なのは会社から退職金が出る人</strong>です。退職所得控除は勤続年数で決まる1つの枠で、<strong>会社の退職金とiDeCoの一時金が同じ枠を奪い合います</strong>。退職金だけで枠を使い切る人は、iDeCoの一時金に課税される可能性があります。</p>
     <p>この場合は、受け取る年をずらす・年金形式で分割して受け取るといった調整で負担を抑えられます。<strong>積み立てるときの節税額（上のツールが出している金額）だけで判断せず、出口まで含めて考える必要がある</strong>ということです。</p>
     <p>なお、NISAには出口課税がありません。どちらを先に使うべきかは<a href="../articles/nisa-vs-ideco/">NISAとiDeCoの比較記事</a>にまとめています。</p>

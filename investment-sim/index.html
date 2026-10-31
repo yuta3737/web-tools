@@ -516,6 +516,9 @@
     }
     .explain {
       max-width: 760px;
+      /* 親(.results-area)は flex column。auto マージンがあると stretch が効かず、
+         子が内容幅まで広がって 375px 幅で 11px はみ出していた。width:100% で抑える */
+      width: 100%;
       margin: 44px auto 0;
       padding: 0 4px;
     }
@@ -550,6 +553,10 @@
     .result-cta { margin-top: 24px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 20px 24px; }
     .result-cta-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 4px; }
     .result-cta-note { font-size: 13px; line-height: 1.8; color: var(--gray-500); margin-bottom: 16px; }
+    /* 狭い画面で表がはみ出さないよう、親側で横スクロールを受ける
+       （320px では info-table が 62px はみ出していた） */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 10px 0; }
+    .table-wrap .info-table { margin: 0; }
     .info-table { width: 100%; min-width: 0; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
     .info-table th { background: var(--gray-50); padding: 9px 12px; text-align: left; font-weight: 700; color: var(--gray-700); border-bottom: 1px solid var(--gray-200); }
     .info-table td { padding: 9px 12px; border-bottom: 1px solid var(--gray-100); color: var(--gray-700); }
@@ -851,13 +858,13 @@
     <h2>積立額・利回り・期間、どれを動かすのが一番効くか</h2>
     <p>将来の金額を増やしたいとき、動かせるものは3つしかありません。<strong>毎月いくら積むか・何%で回るか・何年続けるか</strong>です。どれが一番効くかは、実際に計算すると順位がはっきりします。</p>
     <p>基準を「月3万円・年利5%・20年」とすると、20年後は<strong>約1,233万円</strong>（元本720万円）です。ここから1つずつ条件を変えます。</p>
-    <table class="info-table">
+    <div class="table-wrap"><table class="info-table">
       <tr><th>変えるもの</th><th>20年後</th><th>基準との差</th></tr>
       <tr><td>基準（月3万・5%・20年）</td><td>1,233万円</td><td>—</td></tr>
       <tr><td>積立額を月4万に（+33%）</td><td>1,644万円</td><td>+33.3%</td></tr>
       <tr><td>利回りを6%に（+1ポイント）</td><td>1,386万円</td><td>+12.4%</td></tr>
       <tr><td><strong>期間を25年に（+5年）</strong></td><td><strong>1,787万円</strong></td><td><strong>+44.9%</strong></td></tr>
-    </table>
+    </table></div>
     <p>注目すべきは<strong>利回りが一番効かない</strong>ことです。年利を5%から6%に上げるのは、商品選びとしてはかなり大きな違いですが、結果は+12.4%にしかなりません。しかも<strong>高い利回りを狙うほど、下振れの幅も大きくなります</strong>。</p>
     <p>対して<strong>期間を5年延ばすだけで+44.9%</strong>です。積立額を33%増やすより効きます。追加のお金も、リスクを取る判断も要りません。<strong>「早く始める」が最も確実な手段である</strong>というのは、この計算から出てくる結論です。</p>
     <p>裏を返すと、<strong>続けられない金額で始めるのが一番まずい</strong>ということでもあります。月5万円を3年で止めるより、月2万円を20年続けるほうが最終的な金額は大きくなります。</p>
@@ -865,11 +872,11 @@
     <h2>同じ平均リターンでも、順番で結果が変わります</h2>
     <p>上のシミュレーションは毎年同じ利回りで計算していますが、実際の相場は上下します。そして<strong>積立の場合、同じ平均リターンでも「どの順番で起きたか」で結果が変わります</strong>。</p>
     <p>3年間・月3万円を積み立てて、年ごとのリターンが「+20% / −10% / +5%」だった場合と、同じ3つが逆順「+5% / −10% / +20%」で来た場合を比べます。</p>
-    <table class="info-table">
+    <div class="table-wrap"><table class="info-table">
       <tr><th>リターンの順番</th><th>3年後の残高</th></tr>
       <tr><td>+20% → −10% → +5%（最初に良い）</td><td>1,105,361円</td></tr>
       <tr><td>+5% → −10% → +20%（最後に良い）</td><td><strong>1,220,580円</strong></td></tr>
-    </table>
+    </table></div>
     <p>平均リターンは同じなのに、<strong>11万円以上の差</strong>が出ます。しかも<strong>最初に下がって後から上がったほうが有利</strong>です。</p>
     <p>理由は、積立では<strong>後になるほど元本が大きい</strong>からです。残高が大きい後半に高いリターンが来るほうが、金額としては大きく効きます。逆に、序盤の下落は残高が小さいうちに起きるため損失額が小さく、その安い価格でその後も買い続けられます。</p>
     <p><strong>積み立てている期間の下落は、必ずしも悪いことではありません。</strong>ただしこれは積立を止めなかった場合の話で、下落中に積立を停止すると安く買える分を取り逃がします。</p>

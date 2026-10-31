@@ -141,6 +141,9 @@
       padding: 12px 16px; font-size: 13px; font-weight: 700;
       color: var(--gray-800); margin: 10px 0; border-radius: 0 8px 8px 0; line-height: 1.8;
     }
+    /* 狭い画面で表がはみ出さないよう、親側で横スクロールを受ける */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 10px 0; }
+    .table-wrap .info-table { margin: 0; }
     .info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
     .info-table th {
       background: var(--gray-50); padding: 9px 12px; text-align: left;
@@ -403,13 +406,13 @@
     <h2>出来高が薄いと、手数料より大きく損をします</h2>
     <p>出来高を気にする理由は「約定しないと困るから」だけではありません。<strong>約定はするが、思った値段より不利な価格で成立する</strong>ことのほうが多く、しかもこちらのほうが金額は大きくなります。</p>
     <p>株価2,000円・1日の出来高50万株の銘柄で、1万株（出来高の2%）を成行で買う場面を考えます。板に並んでいる売り注文が1円刻みで数百株ずつだとすると、1万株を埋めるには2,000円では足りず、2,001円・2,002円…と上の板まで食い上がります。</p>
-    <table class="info-table">
+    <div class="table-wrap"><table class="info-table">
       <tr><th>項目</th><th>金額</th></tr>
       <tr><td>想定どおり2,000円で買えた場合</td><td>20,000,000円</td></tr>
       <tr><td>平均2,003円で約定した場合</td><td>20,030,000円</td></tr>
       <tr><td><strong>差額（スリッページ）</strong></td><td><strong>30,000円</strong></td></tr>
       <tr><td>参考：同じ金額の売買手数料</td><td>0〜1,000円程度</td></tr>
-    </table>
+    </table></div>
     <p><strong>たった3円のズレで、手数料の30倍のコストが発生します。</strong>しかも売るときにも同じことが起きるため、往復では6万円です。手数料0円の証券会社を選ぶことより、<strong>滑らない銘柄を選ぶことのほうが効果が大きい</strong>のはこのためです。</p>
     <p>この「食い上がる量」は、自分の注文が出来高に占める割合で決まります。上のツールが出している<strong>出来高に占める割合</strong>は、そのための数字です。目安として<strong>1%を超えたら要注意、5%を超えると自分の注文で値段が動きます</strong>。</p>
 
